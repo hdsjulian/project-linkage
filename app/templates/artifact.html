@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>This is Artifact {{artifact_id}}!</h1>
+    <div><p>This artifact has had <b>{{ handover_count }}</b> handovers</p></div>
+    {% if editable %}
+    	<div><p><a href="/register/{{artifact_id}}/{{access_hash}}">Add Handover?</a></p></div>
+    {%endif%}
+{% endblock %}
