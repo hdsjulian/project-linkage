@@ -49,7 +49,7 @@ def register(artifact_id, artifact_hash):
 		return redirect(url_for('index'))
 	if form.validate_on_submit():
 		print("foobla")
-		user = User.get_or_create_user(form.email.data)
+		user = User.get_or_create_user(form.email.data, form.name.data)
 		predecessor = Handover.query.join(Artifact).filter(Artifact.id==Handover.artifact_id).order_by(Handover.id.desc()).limit(1)
 		if form.text.data != "":
 			media = Media(type=MediaType.text)
@@ -61,7 +61,8 @@ def register(artifact_id, artifact_hash):
 		handover = Handover(artifact_id=artifact_id,predecessor_id = predecessor[0].id, lat = form.lat.data, lon = form.lon.data, user_id = user.id)
 		handover.media_id = media.id
 		db.session.add(handover)
-		db.session.commit()			
+		db.session.commit()
+		print (handover.id)
 		return redirect(url_for('handover', handover_id = handover.id))
 	else: 
 		print("doesn't validate")
@@ -74,7 +75,10 @@ def handover(handover_id, handover_hash = None):
 	form = UpdateForm()
 	handover = Handover.query.get(handover_id)
 	user = User.query.get(handover.user_id)
-	text = Text.query.join(Media).filter(Media.id == Text.media_id).join(Handover).filter(Media.id == Handover.media_id).filter(Handover.id == 17).limit(1)
+	text = Text.query.join(Media).filter(Media.id == Text.media_id).join(Handover).filter(Media.id == Handover.media_id).filter(Handover.id == handover_id).limit(1)
+	handover_count = Handover.query.filter(Handover.artifact_id==handover.artifact_id).count()
+	print("text")
+	print (text[0].text)
 	if handover == None: 
 		return redirect(url_for('index'))
 	if handover_hash is not None and handover.access_hash == handover_hash:
@@ -89,7 +93,6 @@ def handover(handover_id, handover_hash = None):
 		if handover.media_id != None:
 			media = Media.query.get(handover.media_id)
 		db.session.commit()
-	return redirect(url_for('index'))	
-	#return render_template('handover.html',title = "Show Handover", handover = handover, artifact_id = artifact_id, handover_count = handover_count, access_hash=artifact_hash)
+	return render_template('handover.html',title = "Show Handover", handover = handover, text=text[0], username = user.name, email = user.email, artifact_id = handover.artifact_id, handover_count = handover_count)
 
 

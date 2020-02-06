@@ -12,6 +12,7 @@ class MediaType(enum.Enum):
 
 class User(db.Model): 
 	id = db.Column(db.Integer, primary_key=True)
+	name=db.Column(db.String(128), index=True)
 	email = db.Column(db.String(128), index=True)
 	access_hash = db.Column(db.String(32), default=uuid.uuid4().hex)
 	handovers = db.relationship('Handover', backref='recipient')
@@ -19,12 +20,18 @@ class User(db.Model):
 		self.email=email
 
 	@classmethod
-	def get_or_create_user(cls, email):
+	def get_or_create_user(cls, email, name):
 		user = db.session.query(User).filter_by(email=email).first()
 		if user: 
+			print ("found")
 			return user
 		else: 
 			user = User(email)
+			print ('email ')
+			print (user.email)
+			print ('name ')
+			print(name)
+			user.name=name
 			db.session.add(user)
 			db.session.commit()
 			return user

@@ -1,34 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>New Handover</h1>
-    <form action="/register/{{artifact_id}}/{{access_hash}}" method="post" novalidate>
-        
-        {{form.lat}}
-        {{form.long}}
-        {{ form.csrf_token }}
-        <p>
-            {{ form.name.label }}<br>
-            {{ form.name(size=32) }}<br>
-            {% for error in form.name.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=32) }}<br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
+ <div class="container"></div>
+  <h1>Handover {{handover.id}}</h1>
+  	<div class="col-sm-3">
+  		<div class="row bg-primary text-white">
+  			<h3> Date: {{handover.date.strftime('%d.%m.%Y %H:%M')}}</h3>
+  		</div>
+  		<div class="row">
+  			<h3> Location: <a href="https://maps.google.com/?q={{handover.lat}},{{handover.lon}}">{{handover.lat|round(2)}}..., {{handover.lon|round(2)}}...</a></h3>
+  		</div>
+  		<div class="row bg-primary text-white">
+  			<h3>User: {{username}}</h3>
+  		</div>
+  		<div class="row">
+  			<h3>Email: {{email}}</h3>
+  		</div>
+  		<div class="row bg-primary text-white">
+  			<h3>Handover Text:</h3>
+  		</div>
+  		<div>
+  			<p>{{text.text}}</p>
+  		</div>
+  	</div>
 
-        <p>{{ form.text.label }}</p>
-        <p>{{ form.text() }} </p>
-
-        <p>{{ form.submit() }}</p>
-        
-
-    </form>
-
+</div>
     	
 {% endblock %}
