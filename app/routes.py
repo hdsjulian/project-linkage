@@ -50,7 +50,8 @@ def register(artifact_id, artifact_hash):
 	if form.validate_on_submit():
 		print("foobla")
 		user = User.get_or_create_user(form.email.data, form.name.data)
-		predecessor = Handover.query.join(Artifact).filter(Artifact.id==Handover.artifact_id).order_by(Handover.id.desc()).limit(1)
+		predecessor = Handover.query.join(Artifact).filter(Artifact.id==Handover.artifact_id).filter(Artifact.id==artifact.id).order_by(Handover.id.desc()).limit(1).one_or_none()
+		if 
 		if form.text.data != "":
 			media = Media(type=MediaType.text)
 			db.session.add(media)
