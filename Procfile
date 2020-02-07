@@ -1,3 +1,3 @@
 web: gunicorn app:app
-web: gunicorn run:chainoftrust
+web: gunicorn chainoftrust:app
 heroku ps:scale web=1
