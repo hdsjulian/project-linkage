@@ -51,7 +51,10 @@ def register(artifact_id, artifact_hash):
 		print("foobla")
 		user = User.get_or_create_user(form.email.data, form.name.data)
 		predecessor = Handover.query.join(Artifact).filter(Artifact.id==Handover.artifact_id).filter(Artifact.id==artifact.id).order_by(Handover.id.desc()).limit(1).one_or_none()
-		if 
+		if predecessor != None:
+			predecessor_id = predecessor.id
+		else: 
+			predecessor_id = None
 		if form.text.data != "":
 			media = Media(type=MediaType.text)
 			db.session.add(media)
@@ -59,7 +62,7 @@ def register(artifact_id, artifact_hash):
 			text = Text(media_id = media.id, text = form.text.data)
 			db.session.add(text)
 			db.session.commit()
-		handover = Handover(artifact_id=artifact_id,predecessor_id = predecessor[0].id, lat = form.lat.data, lon = form.lon.data, user_id = user.id)
+		handover = Handover(artifact_id=artifact_id,predecessor_id = predecessor_id, lat = form.lat.data, lon = form.lon.data, user_id = user.id)
 		handover.media_id = media.id
 		db.session.add(handover)
 		db.session.commit()
