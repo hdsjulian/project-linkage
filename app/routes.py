@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from app import app 
 from flask_login import current_user, login_user
 from app.models import User, Artifact, Handover, Media, Text, MediaType
@@ -36,19 +36,19 @@ def artifact(artifact_id, artifact_hash=0):
 @app.route('/register/<artifact_id>/<artifact_hash>', methods=['GET','POST'])
 def register(artifact_id, artifact_hash):
 	artifact = Artifact.query.get(artifact_id)
-	form = RegisterForm()
+	form = RegisterForm(request.form)
+	print (request.method)
 	if form.is_submitted():
 		print ("submitted")
 		print (form.email.data)
-	if form.validate():
+	if form.validate_on_submit():
 		print ("valid")
 	else: 
 		print(form.errors)
 	if artifact_id is None or artifact.access_hash != artifact_hash:
 		flash("invalid artifact id and access hash combination")
 		return redirect(url_for('index'))
-	if form.validate_on_submit():
-		print("foobla")
+	if request.method == 'POST'and form.validate_on_submit():
 		user = User.get_or_create_user(form.email.data, form.name.data)
 		predecessor = Handover.query.join(Artifact).filter(Artifact.id==Handover.artifact_id).filter(Artifact.id==artifact.id).order_by(Handover.id.desc()).limit(1).one_or_none()
 		if predecessor != None:
@@ -66,10 +66,7 @@ def register(artifact_id, artifact_hash):
 		handover.media_id = media.id
 		db.session.add(handover)
 		db.session.commit()
-		print (handover.id)
 		return redirect(url_for('handover', handover_id = handover.id))
-	else: 
-		print("doesn't validate")
 	handover_count = Handover.query.join(Artifact).filter(Artifact.id==Handover.artifact_id).count()
 	return render_template('register.html',title = "Register Handover", form=form, artifact_id = artifact_id, handover_count = handover_count, access_hash=artifact_hash)
 	
@@ -87,9 +84,9 @@ def handover(handover_id, handover_hash = None):
 		return redirect(url_for('index'))
 	if handover_hash is not None and handover.access_hash == handover_hash:
 		editable = True
-		form.email = user.email 
-		form.text = text.text
-		form.name = user.name
+		form.email.data = user.email 
+		form.text.data = text[0].text
+		form.name.data = user.name
 	else: 
 		editable = False
 	if form.validate_on_submit():
@@ -97,6 +94,6 @@ def handover(handover_id, handover_hash = None):
 		if handover.media_id != None:
 			media = Media.query.get(handover.media_id)
 		db.session.commit()
-	return render_template('handover.html',title = "Show Handover", handover = handover, text=text[0], username = user.name, email = user.email, artifact_id = handover.artifact_id, handover_count = handover_count)
+	return render_template('handover.html',title = "Show Handover", form = form, editable = editable, handover = handover, text=text[0], username = user.name, email = user.email, artifact_id = handover.artifact_id, handover_count = handover_count)
 
 

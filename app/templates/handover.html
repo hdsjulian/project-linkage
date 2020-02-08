@@ -1,9 +1,13 @@
 {% extends "base.html" %}
-
-{% block content %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block app_content %}
  <div class="container"></div>
   <h1>Handover {{handover.id}}</h1>
+  {%if editable == False%}
   	<div class="col-sm-3">
+  		<div class="row">
+  			<h3> <a href="/handover/{{handover.id}}/{{handover.access_hash}}">Edit</a></h3>
+  		</div>
   		<div class="row bg-primary text-white">
   			<h3> Date: {{handover.date.strftime('%d.%m.%Y %H:%M')}}</h3>
   		</div>
@@ -23,6 +27,11 @@
   			<p>{{text.text}}</p>
   		</div>
   	</div>
+  	{%else%}
+  	<div class="col-md-4">
+        {{ wtf.quick_form(form) }}
+     </div>
+     {%endif%}
 
 </div>
     	

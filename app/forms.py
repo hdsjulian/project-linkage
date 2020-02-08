@@ -12,7 +12,7 @@ class RegisterForm(FlaskForm):
 
 class UpdateForm(FlaskForm):
     name = StringField('Please enter a name (not necessary)')
-    email = StringField('Enter your e-mail-address (necessary)', validators=[DataRequired()])
+    email = StringField('Enter your e-mail-address (necessary)', validators=[DataRequired()], default="email")
     text = TextAreaField('Write something about your handover. Or save it for later.')
     lat = HiddenField('lat', validators=[DataRequired()], default=10)
     lon = HiddenField('lon', validators=[DataRequired()], default=10)
