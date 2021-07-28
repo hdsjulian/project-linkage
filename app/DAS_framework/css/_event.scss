@@ -1,0 +1,18 @@
+// EVENT ##
+.teaser--event {
+	--module-background-color: #{$brand--bright};
+	background-color: var(--module-background-color);
+	padding: $u;
+	margin: $u 0;
+	display: block;
+	.teaser__excerpt.teaser__excerpt {
+		dl {
+			margin-block: 0 $u/2;
+		}
+	}
+	.teaser {
+		&__heading {
+			text-transform: none;
+		}
+	}
+}

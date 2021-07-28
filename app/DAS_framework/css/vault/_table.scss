@@ -1,0 +1,50 @@
+// TABLE ###
+
+.table {
+	width: auto;
+	margin-bottom: $u;
+	th, td {
+		padding: $u/2;
+		text-align: left;
+		vertical-align: top;
+		box-shadow: 0 0 0 1px $white;
+		@include transition;
+	}
+	th {
+		font-weight: 600;
+	}
+	tr {
+		@include transition;
+		background-color: $offwhite;
+		&:hover {
+			td {
+				background-color: $cyan--light;
+			}
+			background-color: $cyan--vivid;
+		}
+	}
+	thead {
+		th, td {
+			border-bottom: 2px solid $cyan--dark;
+			box-shadow: 0 0 0 1px $white;
+			background-color: none;
+		}
+		tr {
+			background-color: $cyan--vivid;
+		}
+	}
+	tbody {
+	}
+	tfoot {
+	}
+	&--zebra {
+		tr {
+			&:nth-child(even) {
+				background-color: $glossy;
+			}
+			&:hover {
+				background-color: $cyan--vivid;
+			}
+		}
+	}
+}

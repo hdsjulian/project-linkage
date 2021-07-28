@@ -1,0 +1,26 @@
+// CHILDREN ###########
+
+.children {
+	grid-column: span 2;
+	@extend .flex;
+	flex-flow: row nowrap;
+	> * {
+		flex: 0 1 auto;
+	}
+//	@extend .grid;
+//	display: grid;
+//	grid-template-columns: repeat(3, 1fr);
+//	@include mq(medium) {
+//		grid-template-columns: repeat(6, 1fr);
+//	}
+	z-index: z(up);
+	margin-bottom: 0;
+	@include mq(huge) {
+		grid-column: span 4;
+	}
+
+}
+.siblings{
+	@extend .children;
+	grid-template-columns: repeat(4, 1fr);
+}

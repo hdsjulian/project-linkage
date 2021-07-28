@@ -1,0 +1,61 @@
+// TABLE ###
+
+%table {
+	width: 100%;
+	max-width: 100%;
+	margin: $u * 2 0;
+	overflow: auto;
+	&:hover {
+		cursor: crosshair;
+	}
+	th,
+	td {
+		padding: $u;
+		text-align: left;
+		vertical-align: top;
+		box-shadow: 0 0 0 1px $white;
+		@include transition;
+		word-break: break-all;
+	}
+	th {
+		font-family: $font-family-brand;
+	}
+	tr {
+		@include transition;
+		&:hover {
+			td {
+				background-color: $brand--light;
+			}
+			th {
+				background-color: $brand--mute;
+			}
+			background-color: $white;
+		}
+	}
+	thead {
+		th,
+		td {
+			border-bottom: 2px solid $brand--dark;
+			box-shadow: 0 0 0 1px $white;
+			background-color: none;
+		}
+		tr {
+			background-color: $brand--light;
+		}
+	}
+	tbody {
+	}
+	tfoot {
+		th,
+		td {
+			border-top: 2px solid $brand--dark;
+			box-shadow: 0 0 0 1px $white;
+			background-color: none;
+		}
+	}
+}
+
+table,
+.table {
+	@extend %table;
+}

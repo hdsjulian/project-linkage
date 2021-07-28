@@ -1,0 +1,113 @@
+.hero {
+	--module-background-color: #{$brand--light};
+	padding-block: $u * 2 $u;
+	&:first-child {
+		margin-block-start: 0;
+	}
+	position: relative;
+	&:after {
+		content: "";
+		pointer-events: none;
+		position: absolute;
+		z-index: z(up);
+		top: 0;
+		right: $u * 2;
+		bottom: $u * 4;
+		width: $u * 4;
+		background-image: linear-gradient(to right, #{$transparent-white}, var(--module-background-color));
+	}
+
+	&__list {
+		@extend %list--reset;
+		@extend %scrollbox--x;
+		@extend %flex;
+		--flex-gap: #{$u};
+		margin-block-end: $u;
+		padding-block-end: $u;
+		//	box-shadow: $border-size/-1 0 0 0 $brand--mute;
+	}
+	&__item {
+		display: grid;
+		border-block-end: $u solid var(--module-background-color);
+		.teaser {
+			&__heading {
+				font-size: $fs2;
+				@extend %light;
+				@include mq(medium) {
+					font-size: $fs3;
+				}
+			}
+			margin-block-start: 0;
+		}
+
+		&:first-child {
+			.teaser {
+				&__heading {
+					@include mq(medium) {
+						font-size: $fs5;
+					}
+				}
+			}
+			.teaser,
+			[class*="teaser--"] {
+				max-width: $box-width * $sqrt2 * $sqrt2;
+			}
+		}
+	}
+	.teaser,
+	[class*="teaser--"] {
+		grid-template-areas:
+			"inner"
+			"tag";
+		grid-template-rows: 1fr auto;
+		max-width: $box-width * $sqrt2;
+		--module-background-color: #{$white};
+		margin: 0;
+		height: 100%;
+		&:hover {
+			--module-background-color: #{$brand--light};
+		}
+	}
+	.teaser {
+		&__inner {
+			grid-template-columns: 1fr $sqrt2 * 1fr;
+			grid-template-areas:
+				"kicker kicker"
+				"heading heading"
+				"location location"
+				"time author"
+				"excerpt excerpt";
+		}
+	}
+	.has-figure {
+		.teaser {
+			&__excerpt {
+				padding-block-end: $u;
+			}
+			&__figure {
+			}
+			&__inner {
+				align-items: start;
+				grid-template-columns: 0.5fr 0.5fr $sqrt2 * 1fr;
+				grid-template-areas:
+					"location location location"
+					"kicker kicker kicker"
+					"heading heading heading"
+					"time author author"
+					"figure figure excerpt";
+			}
+		}
+		&.teaser--promo {
+			.teaser {
+				&__inner {
+					align-items: start;
+					grid-template-columns: 1fr;
+					grid-template-areas:
+						"figure"
+						"excerpt"
+						"heading";
+				}
+			}
+		}
+	}
+}

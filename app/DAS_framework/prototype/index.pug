@@ -1,0 +1,36 @@
+include include/__include.pug
+doctype html
+html(lang='en' class='')
+	head
+		include include/_head.pug
+	body(class='page--index')
+		include ../svg/svg.html
+		.page__outer
+			.page__inner
+				include include/_page-header.pug  
+				main.page-main
+					nav.map(style="background-size: cover; background-image:url('https://upload.wikimedia.org/wikipedia/commons/f/fb/Paris%2C_France_%28satellite_view%29.jpg');")
+						figure#map
+					article.article
+						section#coin.coin
+							h2 Coin №123
+							dl
+								dt Travels
+									dd 6
+								dt Currently held by
+									dd Erica
+								dt Received from
+									dd Anna
+								dt Handed over on
+									dd 2021-08-31 14:56:17
+								dt at Lon:Lat
+									dd 55.458:25.873
+							+paging('', 'Previous', 'Afterwards')
+
+						section#about.about
+							h1 About project linkage
+							p
+								+text-gen(2, "s", true)
+							p
+								+text-gen(3, "s", true)
+							a(href="#coin") Coin

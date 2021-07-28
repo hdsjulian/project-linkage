@@ -1,0 +1,15 @@
+.article {
+	position: fixed;
+	z-index: z(fixed);
+	inset: $u $u $u auto;
+	inline-size: $line-width;
+	padding: $u * 1.5;
+	overflow: auto;
+	background-color: $egg;
+	> section {
+		display: none;
+		&:target {
+			display: block;
+		}
+	}
+}

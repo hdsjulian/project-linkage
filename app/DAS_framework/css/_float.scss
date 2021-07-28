@@ -1,0 +1,85 @@
+@include mq(medium) {
+	.left,
+	.right,
+	.float--left,
+	.float--right {
+		margin: $u/4 $u $u/2;
+	}
+	.left,
+	.float--left {
+		float: left;
+		margin-left: 0;
+	}
+	.right,
+	.float--right {
+		float: right;
+		margin-right: 0;
+	}
+}
+
+.clear {
+	clear: both;
+}
+
+.full {
+	min-width: 100%;
+	width: 100%;
+	max-width: 100%;
+	clear: both;
+}
+
+@include mq(medium) {
+	.sqrt2-major {
+		width: 100% * $sqrt2-major; // 6/12
+	}
+	.sqrt2-minor {
+		width: 100% * $sqrt2-minor; // 6/12
+	}
+	.phi-major {
+		width: 100% * $phi-major; // 6/12
+	}
+	.phi-minor {
+		width: 100% * $phi-minor; // 6/12
+	}
+	.half {
+		width: $w--6; // 6/12
+	}
+	.third {
+		width: $w--3; // 4/12
+	}
+	.quarter,
+	.fourth {
+		width: $w--fourth; // 3/12
+	}
+	.fifth {
+		width: $w--fifth;
+	}
+	.sixth {
+		width: $w--sixth; // 2/12
+	}
+	.seventh {
+		width: $w--seventh;
+	}
+	.eighth {
+		width: $w--eighth;
+	}
+	.ninth {
+		width: $w--ninth;
+	}
+	.tenth {
+		width: $w--tenth;
+	}
+	.eleventh {
+		width: $w--eleventh;
+	}
+	.twelvth,
+	twelfth {
+		width: $w--twelvth; // 1/12
+	}
+	.threequarter {
+		width: $w--threefourth; // 9/12
+	}
+	.twothird {
+		width: $w--twothird; // 8/12
+	}
+}

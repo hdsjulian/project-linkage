@@ -1,0 +1,36 @@
+// PERSON ##
+.person {
+	--module-background-color: #{$brand--bright};
+	background-color: var(--module-background-color);
+	--grid-gap: 0;
+	padding: $u;
+	margin: $u 0;
+	.teaser {
+		&__heading {
+			@include hyphens(none);
+			@include ellipsis-multiline(3, 1, 1.2);
+		}
+		&__inner {
+			dd {
+				font-size: $fs-2;
+			}
+			grid-template-areas:
+				"kicker"
+				"heading"
+				"figure"
+				"excerpt";
+			grid-template-columns: 1fr;
+			grid-template-rows: auto 1fr auto auto;
+		}
+		&__figure {
+			$s: $box-width;
+			max-height: $s;
+			> img {
+				max-width: $s;
+				max-height: $s * $sqrt2-major;
+				object-fit: cover;
+				object-position: left $phi-minor * 100%;
+			}
+		}
+	}
+}

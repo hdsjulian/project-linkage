@@ -1,0 +1,148 @@
+	// LIST ###
+
+
+.text {
+	ol, ul {
+		margin-bottom: $u;
+		max-width: $line-width;
+		li {
+			margin-bottom: $u/4;
+			list-style: disc inside;
+		//	$p: $u;
+		//	text-indent: $p/-1;
+		//	padding-left: $p;
+		}
+	}
+	// ORDERED LIST #
+	ol {
+		li {
+			list-style: decimal inside;
+		}
+	}
+}
+
+//.list {
+//	&--columns {
+//		columns: $column-width/2.5 3;
+//	//	column-rule: 1px solid $bright;
+//		column-fill: balance;
+//		column-gap: $u*2;
+//		li {
+//			display: table; // to fix safari ios
+//			margin-bottom: $u;
+//			.kicker {
+//				display: block;
+//				margin-bottom: 0;
+//				font-size: $fs-1;
+//				color: $body-color;
+//			}
+//			a {
+//				display: block;
+//			}
+//		}
+//	}
+//	&--flex {
+//		*:hover > & {
+//			a {
+//				box-shadow: 0 0 0 1px $brand--color;
+//			}
+//		}
+//		display: flex;
+//		flex-flow: row wrap;
+//		font-size: $fs-1;
+//		li {
+//			padding: $u/8;
+//			flex: 1 1 percentage(1/3);
+//			text-align: center;
+//		}
+//		a {
+//			display: grid;
+//			place-content: center;
+//			@include hyphens(none);
+//			background-color: $white;
+//			color: $grey;
+//			box-shadow: 0 0 0 1px $body-background-color;
+//			border-radius: $radius;
+//			padding: $u/4;
+//			height: 100%;
+//			width: 100%;
+//			&:hover {
+//				background-color: $brand--color;
+//				box-shadow: 0 0 0 1px $black;
+//				color: $white;
+//			}
+//		}
+//		span {
+//			display: block;
+//			line-height: 1.2;
+//		}
+//	}
+//}
+//.list--link {
+//	@extend .list--flex;
+//	a {
+//		@extend .cta;
+//	}
+//}
+//
+
+//	dl {
+//		display: flex;
+//		flex-flow: row wrap;
+//		max-width: $line-width;
+//	}
+//	dt, dd {
+//		flex: 1 1 percentage(1/2);
+//	}
+//	dt {
+//		padding-right: 0;
+//	}
+//	dd {
+//		flex-basis: percentage(1/2);
+//	}
+//	li, dt, dd {
+//		margin-bottom: .5em;
+//	}
+//	dt:after {
+//		content: ':';
+//	}
+
+
+
+
+// DEFINITION LIST #
+
+$bc: $black;
+dl {
+//	max-width: $line-width;
+	display: grid;
+	grid-template-columns: .5fr 1fr;
+	grid-gap: $u/4;
+	margin: 0;
+	address {
+		margin: 0;
+	}
+}
+dt {
+	@extend h5;
+//	@include hyphens(none);
+//	font-weight: 600;
+//	border-top: 1px solid $bc;
+}
+dd {
+	//font-style: italic;
+	&:last-of-type {
+//		border-top: 1px solid $bc;
+
+	}
+}
+dt, dd {
+//	padding: $u/4 $u/4 $u/4 0;
+		//border-bottom: 1px solid $bc;
+		&:last-of-type {
+//			border-top: 1px solid $bc;
+	//		border-bottom: 0;
+	}
+}
+
+

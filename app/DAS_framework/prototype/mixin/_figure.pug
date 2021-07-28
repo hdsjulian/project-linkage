@@ -1,0 +1,5 @@
+mixin figure(classname,svg_url,caption, imgbg)
+		figure(class='figure--'+classname)
+			img(src=svg_url class=imgbg)
+			if caption
+				figcaption= caption

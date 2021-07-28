@@ -1,0 +1,86 @@
+figure {
+	position: relative;
+	background-color: var(--module-background-color);
+	max-width: $line-width;
+	margin-block: $u * 2;
+	&:first-child {
+		.wp-block-column & {
+			margin-block-start: 0;
+		}
+	}
+
+	.widget_media_image & {
+		width: auto !important;
+		max-width: 100%;
+		img {
+			width: auto;
+			max-width: 100%;
+		}
+	}
+	&.is-type-video,
+	&.wp-block-table,
+	&.wp-block-gallery {
+		max-width: none;
+		width: 100%;
+	}
+	iframe {
+		width: 100%;
+	}
+	.copyright {
+		@include transition;
+		$s: $u * 1.5;
+		text-align: left;
+		user-select: none;
+		font-size: $fs-2;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: auto;
+		opacity: 1;
+		color: $transparent;
+		padding: 0 $u * 4 0 $u / 2;
+		font-family: $font-family-brand;
+		overflow: hidden;
+		white-space: nowrap;
+		transform-origin: top left;
+		transform: rotate(0.75turn) translateX(-100%) translateY($u * $sqrt2 * 0);
+		&:before {
+			@include transition;
+			display: inline-block;
+			padding: 0;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			height: $s;
+			width: $s;
+			line-height: $s;
+			content: "©";
+			z-index: z(up);
+			color: $white;
+			background-color: $white;
+			color: $brand--dark;
+			text-align: center;
+			transform: rotate(-0.75turn);
+			transform-origin: center;
+			box-shadow: 0 0 0 2px var(--module-background-color);
+		}
+		&:hover {
+			background-color: $brand--bright;
+			color: $brand--dark;
+			&:before {
+				opacity: 0;
+			}
+		}
+	}
+	img {
+		width: 100%;
+	}
+}
+figcaption {
+	font-size: $fs-1;
+	background-color: $brand--bright;
+	p {
+		padding: $u;
+	}
+}

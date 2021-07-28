@@ -1,0 +1,68 @@
+%scroll-snap-mandatory {
+	scroll-snap-type: y mandatory;
+	scroll-padding: var(--headerHeight);
+}
+%scroll-snap-proximity {
+	scroll-snap-type: y proximity;
+	scroll-padding: var(--headerHeight);
+}
+
+%scroll-snap {
+	scroll-snap-align: start;
+	.is-safari & {
+		// removing the automatic padding invoked by the fixed header
+		scroll-snap-margin: calc(-1 * var(--headerHeight));
+	}
+}
+
+// SCROLLBAR #####
+$w: 16px;
+$track: $brand--light;
+$thumb: $brand--color;
+
+$box-track: $track;
+$box-thumb: $thumb;
+
+$thumbradius: 0; //$w/2;
+$thumbborder: $border-size;
+
+// WEBKIT
+::-webkit-scrollbar {
+	width: auto;
+	@include notouch {
+		width: $w;
+	}
+}
+::-webkit-scrollbar-track {
+	background-color: $track;
+}
+::-webkit-scrollbar-thumb {
+	color: $track;
+	background-color: $thumb;
+	border: $thumbborder solid;
+	border-radius: $thumbradius;
+	@include notouch {
+		width: $w;
+	}
+}
+
+.has-scrollbar {
+	// MOZILLA
+	scrollbar-color: $box-thumb $box-track;
+	@include notouch {
+		scrollbar-width: auto; //thin || none MOZ
+	}
+	//WEBKIT
+	&::-webkit-scrollbar-track {
+		background-color: $box-track;
+	}
+	&::-webkit-scrollbar-thumb {
+		color: $box-track;
+		background-color: $box-thumb;
+		border: $thumbborder solid;
+		border-radius: $thumbradius;
+		@include notouch {
+			width: $w;
+		}
+	}
+}

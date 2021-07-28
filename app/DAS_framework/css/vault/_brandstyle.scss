@@ -1,0 +1,162 @@
+$c-dark: $stone--dark;
+$c-light: $stone--bright;
+
+// SECTION ##
+
+
+.page-styleguide {
+	.section {
+		&--logo {
+			.grid {
+				grid-template-columns: repeat(4, 1fr);
+			}
+		}
+	}
+
+
+	.action {
+		@extend %boxed;
+		display: flex;
+		align-items: center;
+		gap: $u/2;
+		margin: $u*2 0;
+		padding: $u/2;
+		background-color: $c-light;
+		color: $stone--grey;
+		h3 {
+			font-size: $fs1;
+			margin: 0;
+			padding: 0;
+		}
+		.is-inactive {
+			opacity: 0;
+			pointer-events: none;
+		}
+	}
+
+
+	.box {
+		margin-bottom: $u*2;
+	}
+	.hide-off .swatch.void {padding: 0;}
+	.list-color {
+		display: flex;
+		.swatch {
+			@extend %boxed;
+			flex:1 0 auto;
+			&.half {
+				flex-grow: .5;
+			}
+			&.double {
+				flex-grow: 2;
+			}
+			overflow: hidden;
+			position: relative;
+			min-height: ($site-width - $u*4) / 9;
+			$p: $u/2;
+			color: $c-light;
+			padding: $p;
+			span {
+				opacity: 1;
+				position: absolute;
+				z-index: 0;
+				display: inline-block;
+				padding: 0 $p;
+				@include transition;
+				left: $p;
+				right: $p;
+				text-align: left;
+				bottom: $p;
+				width: auto;
+				font-size: $fs-2;
+
+			}
+	//		&:nth-child(2n) {
+	//			span {
+	//				bottom: auto;
+	//				top:	$p;
+	//			}
+	//		}
+	//		&:nth-child(3n) {
+	//			span {
+	//				right: auto;
+	//				left: 	$p;
+	//				text-align: right;
+	//			}
+	//		}
+	//		&:nth-child(4n) {
+	//			span {
+	//				bottom: auto;
+	//				top: calc(50% - #{$fs-2});
+	//			}
+	//		}
+			&.is-name {
+				span {
+					opacity: 0;
+				}
+			}
+			&:hover{
+				span {
+					opacity: 1;
+				}
+			}
+		}
+		&--swatch {
+			.hide-off:not(:hover) & {
+				.swatch:not(.is-on) {
+					opacity: 0;
+					padding: 0;
+				}
+			}
+			.swatch {
+				&:not(.void) {
+					cursor: cell;
+				}
+				@include transition;
+				transition-duration: 		.8s;
+				transition-delay: 			.4s;
+				&.is-on {
+					flex-grow: 99999;
+					transition-duration: 		.4s;
+					transition-delay: 			0s;
+				}
+				span {
+					font-size: $fs-3;
+				}
+			}
+		}
+		&--brand {
+			.swatch {
+				span {
+					opacity: 1;
+				}
+			}
+		}
+		&--grey {
+			.swatch {
+				span {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	.figure {
+		$p: $u*2;
+		@extend %boxed;
+		padding: $p $p 0 $p;
+		&--logo {
+			&:first-child {
+				grid-column: span 4;
+			}
+			img {
+				object-fit: contain;
+			}
+			figcaption {
+				margin: $p $p/-1 0;
+				background-color: $c-light;
+				color: $c-dark;
+			}
+		}
+	}
+}

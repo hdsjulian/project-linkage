@@ -1,0 +1,23 @@
+.content {
+	h1, h2, h3, h4, h5, h6 {
+		margin-top: $u*2;
+	}
+	figure {
+		position: relative;
+		margin-bottom: $u;
+	}
+	figcaption {
+		position: relative;
+		cite {
+			position: absolute;
+			top: -1.6em;
+			right: 0;// $u/8;
+			padding: 0 $u/4;
+			background-color: $dun;
+			color: $egg;
+		}
+	}
+	a {
+		box-shadow: 0 .2em $body-background-color, 0 calc(.2em + 1px);
+	}
+}

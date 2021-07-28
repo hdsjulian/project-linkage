@@ -1,0 +1,9 @@
+mixin paging(classname, prevtext, nexttext, prevurl, nexturl)
+	nav.paging(class= classname)
+		ul.paging__list
+			li.previous
+				a(href= prevurl)
+					!= prevtext
+			li.next
+				a(href= nexturl)
+					!= nexttext

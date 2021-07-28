@@ -1,0 +1,65 @@
+.share {
+	grid-area: share;
+	position: sticky;
+	top: 0;
+	bottom: 0;
+	padding-top: $page-border - $u/4;
+	z-index: z(fixed)-1;
+	padding: $u 0 0;
+	box-shadow: none;
+	@include mq(medium) {
+		top: auto;
+	//	z-index: z(fixed)+1;
+		padding: $u 0;
+		box-shadow: 0 1px $bright;
+		//background-color: $body-background-color;
+	//	top: var(--headerHeight);
+		align-self: end;
+	}
+	@include mq(large) {
+	//	background-color: transparent;
+		//box-shadow: none;
+		display: flex;
+		//padding: 0;
+		justify-content: flex-end;
+	}
+@include notouch {
+		.whatsapp {
+			display: none;
+		}
+	}
+	&-list {
+		display: flex;
+		flex-flow: row wrap;
+		padding: 0;
+		@include mq(large) {
+		//	background-color: $accent--color;
+		}
+	}
+	$s: $u*1.5;
+	&-item {
+		background-color: $link-color;
+		@include transition(background-color);
+		&:hover, &:focus {
+			background-color: $link-color-hover;
+		}
+	//	box-shadow: 1px 1px $body-background-color, 1px 1px $body-background-color inset;
+		box-shadow: 0 0 0 1px $body-background-color inset;
+				margin: 0;
+		padding: $u/2;
+		display: grid;
+		place-content: center;
+		border-radius: $radius;
+	}
+	a {
+		color: $white;
+		display: block;
+		line-height: 0;
+	}
+	svg {
+		width: $s;
+		height: $s;
+		object-fit: contain;
+	}
+
+}

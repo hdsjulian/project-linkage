@@ -1,0 +1,143 @@
+[class*="tree__item"] {
+	@extend %nav__item;
+	box-shadow: 0 -1px 0 0 $fade--brand;
+	text-transform: none;
+	--before-opacity: 0;
+	--before-left: 0;
+	a {
+		font-size: $fs1;
+		--before-line-height: #{$fs1 + $u * 2};
+		@include mq(medium) {
+			font-size: $fs0;
+			--before-line-height: #{$fs0 + $u * 2};
+		}
+		padding: $u/2 $u * 2;
+		@include hyphens(none);
+		position: relative;
+		@extend %treelinkbefore;
+		@extend %normal--inverse;
+		color: inherit;
+		&:hover {
+			--before-opacity: 1;
+			background-color: fade-out($white, $alpha);
+			//	color: $white;
+			box-shadow: 0 -1px 0 0 $brand--color inset, 0 -1px 0 0 $brand--color;
+		}
+	}
+	display: none;
+	&.tree__item--primary {
+		display: block;
+		> a {
+			--before-line-height: #{$fs0 + $u * 3.75};
+			padding-block: $u * 1.25;
+			@extend %uppercase;
+			@extend %bold--inverse;
+		}
+	}
+	&.is-current {
+		display: block;
+		> [class*="tree__list"] {
+			display: block;
+			> [class*="tree__item"] {
+				display: block;
+			}
+		}
+	}
+}
+.tree {
+	&__list {
+		&--tertiary {
+			[class*="tree__item"] {
+				a {
+					padding-inline-start: $u * 3;
+				}
+			}
+		}
+		&--secondary {
+			> .is-current {
+				> a {
+					@extend %bold--inverse;
+				}
+			}
+		}
+		&--primary {
+			--before: "➔";
+			margin: 0 $u * -2;
+		}
+	}
+	&__item {
+		&--primary {
+			margin: 0;
+			&.is-current {
+				--before-opacity: 1;
+				> a {
+					@extend %ultra--inverse;
+				}
+			}
+			> a {
+				background-color: $brand--mute;
+				color: $brand--light;
+				@include mq(medium) {
+					@include hidden;
+				}
+			}
+		}
+		&--secondary,
+		&--tertiary {
+			&.is-current {
+				--before-opacity: 1;
+				background-color: $fade--light;
+				color: $brand--night;
+				li {
+					color: $brand--night;
+					&.is-current {
+					}
+				}
+				li ul {
+				}
+				li li {
+					--before-left: #{$u * 2};
+					a {
+						padding-inline-start: $u * 4;
+					}
+					&.is-current {
+					}
+				}
+				> a {
+					@extend %bold--inverse;
+					&:before {
+						padding-block-start: 0;
+					}
+				}
+			}
+		}
+		&--secondary {
+		}
+		&--tertiary {
+			--before-left: #{$u};
+
+			a {
+			}
+		}
+	}
+}
+
+%treelinkbefore {
+	text-decoration: none;
+	&:before {
+		opacity: var(--before-opacity);
+		@include transition;
+		transition-property: opacity;
+		content: "";
+		content: var(--before);
+		color: currentColor;
+		position: absolute;
+		left: var(--before-left);
+		top: 0;
+		bottom: 0;
+		width: $u * 1.5;
+		letter-spacing: -5px;
+		line-height: var(--before-line-height);
+		text-align: center;
+	}
+}

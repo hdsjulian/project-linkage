@@ -1,0 +1,4 @@
+https://google-webfonts-helper.herokuapp.com/fonts/pt-serif?subsets=latin
+https://everythingfonts.com/ttf-to-woff2
+https://djr.com/woff/
+https://wakamaifondue.com/

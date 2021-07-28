@@ -1,0 +1,111 @@
+mixin teaser(context, kicker, heading, time, author, tag, src, location)
+	.teaser
+		a.teaser__inner(href="prototype__" + context +".html" title=heading)
+			figure.teaser__figure
+				if src
+					img(src=src alt=heading)
+				else
+					img(src="//source.unsplash.com/collection/141706/600x424/?random" + i alt=heading) 
+			if time
+				time.teaser__time!=time
+			if location
+				span.teaser__location!=location
+			if author
+				span.teaser__author!=author
+			if kicker
+				h4.teaser__kicker!=kicker
+			else
+				h4.teaser__kicker
+					+text-gen(Math.floor(Math.random() * (10 - 30)+30), "c")
+			if heading
+				h3.teaser__heading!=heading
+			else
+				h3.teaser__heading
+					+text-gen(Math.floor(Math.random() * (20 - 60)+60), "c")
+			p.teaser__excerpt 
+				+text-gen(Math.floor(Math.random() * (100 - 380)+380), "c", true)
+		if tag
+			ul.teaser__tag
+				each val in tag
+					li
+						a(href="prototype__tag.html" title="Mehr Beiträge zum Thema")
+							span!=val
+
+
+mixin teaser--children(context, kicker, heading, time, author, tag, src)
+	article.teaser
+		a.teaser__inner(href="prototype__" + context +".html" title=heading)
+			figure.teaser__figure
+				if src
+					img(src=src alt=heading)
+				else
+					img(src="http://picsum.photos/500?random=" alt=heading)
+
+			.teaser__copy
+				if time
+					time.teaser__time!=time
+				span.kicker!= kicker
+				h2.teaser__heading!= heading
+		.teaser__children
+			ol.list--columns
+				li
+					a(href="prototype__post.html")
+						span.kicker kicker
+						| Headline
+				li
+					a(href="prototype__post.html")
+						span.kicker kicker
+						| Headline
+				li
+					a(href="prototype__post.html")
+						span.kicker kicker
+						| Headline
+				li
+					a(href="prototype__post.html")
+						span.kicker kicker
+						| Headline
+				li
+					a(href="prototype__post.html")
+						span.kicker kicker
+						| Headline
+				li
+					a(href="prototype__post.html")
+						span.kicker kicker
+						| Headline
+
+
+mixin teaser--community(context, kicker, heading, time, author, excerpt)
+	article.teaser
+		a.teaser__inner(href="prototype__" + context +".html" title=heading)
+			.teaser__copy
+				if time
+					time.teaser__time!=time
+				if kicker
+					span.teaser__kicker!= kicker
+				h2.teaser__heading!= heading
+				if author
+					.teaser__author
+						img(src="//picsum.photos/id/1027/200" alt=author)
+						!= author
+				if excerpt
+					p.teaser__excerpt!= excerpt
+
+
+mixin teaser--showcase(context, kicker, heading, time, author, tag, src)
+	article.teaser
+		a.teaser__inner(href="prototype__" + context +".html" title=heading)
+			figure.teaser__figure
+				if src
+					img(src=src alt=heading)
+				else
+					img(src="//picsum.photos/500?random=" + i alt=heading)
+			.teaser__copy
+				if time
+					time.teaser__time!=time
+				if kicker
+					span.teaser__kicker!= kicker
+				h2.teaser__heading!= heading
+				if author
+					.teaser__author
+						img(src="//picsum.photos/id/1027/200" alt=author)
+						!= author

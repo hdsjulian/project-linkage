@@ -1,0 +1,467 @@
+// GOLDEN RATIO
+$phi: (1 + sqrt(5))/2;
+$phi-minor: 1 - 1 / $phi;
+$phi-major: 1 / $phi;
+// SQRT 2
+$sqrt2: sqrt(2);
+$sqrt2-minor: 1 - 1 / $sqrt2;
+$sqrt2-major: 1 / $sqrt2;
+// LAYOUT BASIC ###########
+
+$unit: 1rem;
+$u: $unit;
+$gridcolumngap: $u;
+$gridrowgap: $u;
+$flexgrid: 12;
+$f: $flexgrid;
+$w--1: percentage(1 / $f);
+$w--2: percentage(2 / $f);
+$w--3: percentage(3 / $f);
+$w--4: percentage(4 / $f);
+$w--5: percentage(5 / $f);
+$w--6: percentage(6 / $f);
+$w--7: percentage(7 / $f);
+$w--8: percentage(8 / $f);
+$w--9: percentage(9 / $f);
+$w--10: percentage(10 / $f);
+$w--11: percentage(11 / $f);
+$w--12: percentage(12 / $f);
+$w--full: $w--12;
+$w--all: $w--full;
+$w--threefourth: percentage(3/4);
+$w--twothird: percentage(2/3);
+$w--half: $w--6;
+$w--third: $w--4;
+$w--fourth: $w--3;
+$w--fifth: percentage(1/5);
+$w--sixth: $w--2;
+$w--seventh: percentage(1/7);
+$w--eighth: percentage(1/8);
+$w--ninth: percentage(1/9);
+$w--tenth: percentage(1/10);
+$w--eleventh: percentage(1/10);
+$w--twelfth: $w--1;
+$w--twelvth: $w--1;
+
+// DIMENSIONS ###########
+$site-width: 125rem;
+
+$line-width: 42ch; // https://caniuse.com/#feat=ch-unit
+
+$line-height: 1 + $sqrt2-major;
+$page-border: $u;
+
+// MEDIAQUERY BREAKPOINT DEFINITION ###########
+$medium_width: 885px;
+$medium_height: 299px;
+
+$large_width: 1256px;
+$large_height: 0px;
+
+$huge_width: 1500px;
+$huge_height: 0px;
+
+$giant_width: 1921px;
+$giant_height: 0px;
+
+@import "scss-helper/mediaquery";
+
+$box-width: px2rem($medium_width) / 3;
+
+$column-width: $line-width * $sqrt2;
+
+// RESPONSIVE FONT SIZE
+
+:root {
+	--root-font-size: 90%;
+	@include mq(medium) {
+		--root-font-size: 95%;
+	}
+	@include mq(large) {
+		--root-font-size: 100.01%;
+	}
+	@include mq(huge) {
+		--root-font-size: 102%;
+	}
+	@include mq(giant) {
+		--root-font-size: 104%;
+	}
+}
+
+// COLOR ###########
+
+// GREYSCALE COLOR ########### https://uxdesign.cc/my-struggle-with-colors-part-ii-ed71bff6302a
+$greyscale_h: 0;
+$greyscale_s: 0%;
+$white: hsl($greyscale_h, $greyscale_s, 100%);
+$offwhite: hsl($greyscale_h, $greyscale_s, 96%);
+$egg: $offwhite;
+$glossy: hsl($greyscale_h, $greyscale_s, 89%);
+$bright: hsl($greyscale_h, $greyscale_s, 78%);
+$light: hsl($greyscale_h, $greyscale_s, 67%);
+$gloomy: hsl($greyscale_h, $greyscale_s, 56%);
+$grey: hsl($greyscale_h, $greyscale_s, 46%);
+$gray: $grey;
+$dun: hsl($greyscale_h, $greyscale_s, 36%);
+$dark: hsl($greyscale_h, $greyscale_s, 27%);
+$night: hsl($greyscale_h, $greyscale_s, 18%);
+$offblack: hsl($greyscale_h, $greyscale_s, 9%);
+$pitch: $offblack;
+$black: hsl($greyscale_h, $greyscale_s, 0%);
+
+//BRAND COLOR
+
+$brand-h: 194;
+$brand-s: 92%;
+$brand-l: 49%;
+:root {
+	--page-background-blur: url("/wp-content/themes/bak2021/DAS_framework/image/page-background/1-blur.jpg");
+	--page-background: url("/wp-content/themes/bak2021/DAS_framework/image/page-background/1.jpg");
+	--symbol--white: url("/wp-content/themes/bak2021/DAS_framework/image/logo/logogram--bak-white.svg");
+	--symbol--color: url("/wp-content/themes/bak2021/DAS_framework/image/logo/logogram--bak.svg");
+}
+
+:root {
+	--brand-h: #{$brand-h};
+	--brand-s: #{$brand-s};
+	--brand-l: #{$brand-l};
+	--overlay--color: hsla(#{var(--brand-h)}, #{var(--brand-s)}, #{var(--brand-l)}, 0.07);
+	--brand--color: hsl(#{var(--brand-h)}, #{var(--brand-s)}, #{var(--brand-l)});
+	--fade--brand: hsla(#{var(--brand-h)}, #{var(--brand-s)}, #{var(--brand-l)}, #{$sqrt2-minor});
+	--brand--bright: hsl(#{var(--brand-h)}, #{var(--brand-s)}, 96%);
+	--brand--light: hsl(#{var(--brand-h)}, calc(#{var(--brand-s)} * #{$sqrt2-major}), 96%);
+	--fade--light: hsla(#{var(--brand-h)}, calc(#{var(--brand-s)} * #{$sqrt2-major}), 96%, #{$sqrt2-major});
+	--brand--dark: hsl(#{var(--brand-h)}, #{var(--brand-s)}, 29%);
+	--fade--dark: hsla(#{var(--brand-h)}, #{var(--brand-s)}, 29%, #{$sqrt2-minor});
+	--brand--night: hsl(#{var(--brand-h)}, calc(#{var(--brand-s)} * #{$sqrt2-major}), 8%);
+	--brand--mute: hsl(
+		#{var(--brand-h)},
+		calc(#{var(--brand-s)} * #{$sqrt2-major}),
+		calc(#{var(--brand-l)} * #{$sqrt2-minor})
+	);
+	--fade--mute: hsla(
+		#{var(--brand-h)},
+		calc(#{var(--brand-s)} * #{$sqrt2-major}),
+		calc(#{var(--brand-l)} * #{$sqrt2-minor}),
+		#{$sqrt2-minor}
+	);
+}
+
+$brand--color: var(--brand--color);
+$fade--brand: var(--fade--brand);
+$brand--bright: var(--brand--bright);
+$brand--light: var(--brand--light);
+$fade--light: var(--fade--light);
+$brand--dark: var(--brand--dark);
+$fade--dark: var(--fade--dark);
+$brand--night: var(--brand--night);
+$brand--mute: var(--brand--mute);
+$fade--mute: var(--fade--mute);
+
+$accent-h: 0;
+$accent-s: 0%;
+$accent-l: 0%;
+
+$accent--color: hsl($accent-h, $accent-s, $accent-l);
+$accent-color: $accent--color;
+
+// Socialweb Colors
+$rss_color: hsl(33, 100%, 60%);
+$google_color: hsl(217, 89%, 61%);
+$pinterest_color: hsl(358, 70%, 47%);
+$youtube_color: hsl(358, 79%, 45%);
+$twitter_color: hsl(203, 89%, 53%);
+$facebook_color: hsl(214, 89%, 52%);
+$linkedin_color: hsl(201, 100%, 35%);
+$whatsapp_color: hsl(151, 100%, 45%);
+$instagram_color: hsl(325, 50%, 50%);
+
+// HELPER COLOR ###########
+$debug_color: rebeccapurple;
+$admin_color: rebeccapurple;
+$transparent-black: hsla(0, 0%, 0%, 0);
+$transparent-white: hsla(0, 0%, 100%, 0);
+$transparent: $transparent-white;
+$sepia_h: 38;
+
+// TRAFFIC LIGHT COLOR
+$positive-color: hsl(120, 50%, 50%);
+$negative-color: hsl(0, 50%, 50%);
+$mediocre-color: hsl(60, 50%, 50%);
+$neutral-color: $mediocre-color;
+$muted-color: $gloomy;
+
+// HIGHLIGHT COLOR
+//$highlight-background-color: hsl(45,	90%,	80%);
+$highlight-background-color: hsl(#{var(--brand-h)}, 100%, 82%);
+$highlight-color: hsl(#{var(--brand-h)}, 30%, 30%);
+
+// ASSIGN COLOR ###########
+$body-color: $brand--night;
+$body-background-color: $white;
+$header-background: $body-background-color;
+$link-color: $brand--color;
+$link-color-hover: $brand--dark;
+$link-color-visited: none;
+$link-color-active: $link-color;
+$icon-color: $link-color;
+$cta-color: $link-color;
+$cta-color-hover: $link-color-hover;
+
+//ins del
+$ins-color: $body-color;
+$del-color: $negative_color;
+// Selection colors
+$use-selection-colors: true;
+$selection-background-color: $highlight-background-color;
+$selection-color: $highlight-color;
+$tap-highlight-color: $transparent;
+$placeholder-color: $grey;
+
+$list--color: ("white", $white), ("offwhite", $offwhite), ("egg", $egg), ("glossy", $glossy), ("bright", $bright),
+	("light", $light), ("gloomy", $gloomy), ("grey", $grey), ("gray", $gray), ("dun", $dun), ("dark", $dark),
+	("night", $night), ("offblack", $offblack), ("pitch", $pitch), ("black", $black), ("positive", $positive_color),
+	("mediocre", $mediocre_color), ("negative", $negative_color), ("neutral", $neutral_color), ("cta", $cta_color),
+	("admin", $admin_color), ("rss", $rss_color), ("google", $google_color), ("pinterest", $pinterest_color),
+	("youtube", $youtube_color), ("twitter", $twitter_color), ("facebook", $facebook_color), ("linkedin", $linkedin_color),
+	("whatsapp", $whatsapp_color), ("instagram", $instagram_color), ("brand", $brand--color),
+	("brand--dark", $brand--dark), ("brand--light", $brand--light);
+
+// GEOMETRY
+
+$radius: $u/4;
+$angle: -2deg;
+$alpha: 0.9;
+$border-size: 2px;
+:root {
+	--alpha: #{$alpha};
+}
+
+// FILTER
+
+$filter: saturate(0) contrast(0.8);
+
+// TRANSITION and ANIMATION
+
+$duration: 1s * $sqrt2-minor;
+$transition-duration: $duration;
+//$easing: cubic-bezier(0.2, 0, 0.6, 1);
+$easing: cubic-bezier(0, 0, $sqrt2-major, $sqrt2-minor);
+$timing-function: $easing;
+$transition-timing-function: $timing-function;
+
+// LANGUAGE ###########
+
+$language: //all languages the site will have l10n for. will be used for quotation marks
+	en //
+	//de-at
+	//de-ch
+	//de
+	//de-li
+	//de-lu
+	//fr
+	//fr-li
+	//fr-lu
+	//fr-ch ;
+;
+
+// @FONTFACE  ###########
+
+:root {
+	--webkit-font-smoothing: subpixel-antialiased;
+	--moz-osx-font-smoothing: auto;
+}
+
+// ASSIGN FONT ###########
+
+$font-cursive: "Lucida Handwriting";
+$font-serif: "Georgia";
+$font-sans: "Arial";
+$font-monospace: "Monaco";
+
+$font-family-monospace: $font-monospace, monospace;
+$font-family-serif: $font-serif, serif;
+$font-family-sans: $font-sans, sans-serif;
+$font-family-cursive: $font-cursive cursive;
+
+$font-family-body: "Rubik", $font-family-sans;
+$font-family-heading: $font-family-body;
+
+$font-family-nav: $font-family-heading;
+$font-family-input: $font-family-heading;
+$font-family-brand: $font-family-heading;
+
+// VARIABLE FONT VALUES
+
+$min-weight: 100;
+$max-weight: 900;
+
+$inverse-correction: -50;
+
+$thin-weight: 100;
+$ultralight-weight: 200;
+$light-weight: 280;
+$normal-weight: 350;
+$semibold-weight: 500;
+$bold-weight: 600;
+$ultra-weight: 900;
+
+$thin-weight--inverse: $thin-weight + $inverse-correction;
+$ultralight-weight--inverse: $thin-weight + $inverse-correction;
+$light-weight--inverse: $thin-weight + $inverse-correction;
+$normal-weight--inverse: $normal-weight + $inverse-correction;
+$semibold-weight--inverse: $bold-weight + $inverse-correction;
+$bold-weight--inverse: $bold-weight + $inverse-correction;
+$ultra-weight--inverse: $ultra-weight + $inverse-correction;
+
+%thin {
+	--weight: #{$thin-weight};
+}
+%thin--inverse {
+	--weight: #{$thin-weight--inverse};
+}
+%ultralight {
+	--weight: #{$ultralight-weight};
+}
+%ultralight--inverse {
+	--weight: #{$ultralight-weight--inverse};
+}
+%light {
+	--weight: #{$light-weight};
+}
+%light--inverse {
+	--weight: #{$light-weight--inverse};
+}
+%normal,
+%regular,
+%basic {
+	font-style: normal;
+	--weight: #{$normal-weight};
+}
+%normal--inverse {
+	--weight: #{$normal-weight--inverse};
+	@include font-smoothing(legacy);
+}
+%semibold {
+	--weight: #{$semibold-weight};
+}
+%semibold--inverse {
+	--weight: #{$semibold-weight--inverse};
+}
+%bold {
+	//	font-weight: normal;
+	--weight: #{$bold-weight};
+}
+%bold--inverse {
+	--weight: #{$bold-weight--inverse};
+}
+%ultra {
+	--weight: #{$ultra-weight};
+}
+%ultra--inverse {
+	--weight: #{$ultra-weight--inverse};
+}
+%italic {
+	font-style: italic;
+}
+%italic-not {
+	font-style: normal;
+}
+%spaced {
+	letter-spacing: 0.05ch !important;
+}
+
+:root {
+	//check https://wakamaifondue.com/
+	--weight: #{$normal-weight};
+	--aalt: "aalt" off;
+	--c2sc: "c2sc" off;
+	--case: "case" off;
+	--cpsp: "cpsp" off;
+	--cswh: "cswh" off;
+	--dlig: "dlig" off;
+	--dnom: "dnom" off;
+	--frac: "frac" off;
+	--hist: "hist" off;
+	--lnum: "lnum" on;
+	--kern: "kern" on;
+	--liga: "liga" on;
+	--nalt: "nalt" off;
+	--numr: "numr" off;
+	--onum: "onum" off;
+	--ordn: "ordn" off;
+	--pnum: "pnum" off;
+	--salt: "salt" off;
+	--sinf: "sinf" off;
+	--smcp: "smcp" off;
+	--ss01: "ss01" on;
+	--ss02: "ss02" off;
+	--ss03: "ss03" off;
+	--ss04: "ss04" off;
+	--ss05: "ss05" off;
+	--ss06: "ss06" off;
+	--subs: "subs" off;
+	--sups: "sups" off;
+	--swsh: "swsh" off;
+	--titl: "titl" off;
+	--tnum: "tnum" on;
+	--zero: "zero" off;
+}
+* {
+	font-weight: var(--weight);
+	font-variation-settings: "wght" var(--weight);
+	font-feature-settings: var(--aalt), var(--c2sc), var(--case), var(--cpsp), var(--cswh), var(--dlig), var(--dnom),
+		var(--frac), var(--hist), var(--lnum), var(--kern), var(--liga), var(--nalt), var(--numr), var(--onum), var(--ordn),
+		var(--pnum), var(--salt), var(--sinf), var(--smcp), var(--ss01), var(--ss02), var(--ss03), var(--ss04), var(--ss05),
+		var(--ss06), var(--subs), var(--sups), var(--swsh), var(--titl), var(--tnum), var(--zero);
+}
+
+// FONT SIZE ###########
+
+$fs-5: px2rem(6);
+$fs-4: px2rem(8);
+$fs-3: px2rem(10);
+$fs-2: px2rem(12);
+$fs-1: px2rem(14);
+$fs0: px2rem(16);
+$fs1: px2rem(18);
+$fs2: px2rem(20);
+$fs3: px2rem(22);
+$fs4: px2rem(24);
+$fs5: px2rem(32);
+$fs6: px2rem(48);
+
+$font-sizes: (
+	"fs-3": $fs-3,
+	"fs-2": $fs-2,
+	"fs-1": $fs-1,
+	"fs0": $fs0,
+	"fs1": $fs1,
+	"fs2": $fs2,
+	"fs3": $fs3,
+	"fs4": $fs4,
+	"fs5": $fs5,
+	"fs6": $fs6,
+);
+
+//@for $n from -3 through 6 {
+//	.fs#{$n} {
+//		font-size: map-get($font-sizes, fs0);
+//			@if $n >= 1 {
+//				font-size: map-get($font-sizes, fs1);
+//			}
+//		@include mq(medium) {
+//			@if $n >= 2 {
+//				font-size: map-get($font-sizes, fs2);
+//			}
+//		}
+//		@include mq(large) {
+//			@if $n >= 4 {
+//				font-size: map-get($font-sizes, fs4);
+//			}
+//		}
+//		@include mq(huge) {
+//			font-size: map-get($font-sizes, fs#{$n});
+//		}
+//	}
+//}

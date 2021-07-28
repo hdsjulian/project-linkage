@@ -1,0 +1,165 @@
+// LIST ###
+
+%list {
+	margin-block-end: $u;
+	counter-reset: counter--li;
+	padding-block-start: $u;
+	padding-block-end: $u;
+	margin-inline-start: 0;
+	margin-inline-end: 0;
+	//	&--flex {
+	//		*:hover > & {
+	//			a {
+	//				box-shadow: 0 0 0 1px $brand--color;
+	//			}
+	//		}
+	//		display: flex;
+	//		flex-flow: row wrap;
+	//		font-size: $fs-1;
+	//		li {
+	//			padding: $u/8;
+	//			flex: 1 1 percentage(1/3);
+	//			text-align: center;
+	//		}
+	//		a {
+	//			display: grid;
+	//			place-content: center;
+	//			@include hyphens(none);
+	//			background-color: $white;
+	//			color: $grey;
+	//			box-shadow: 0 0 0 1px $body-background-color;
+	//			border-radius: $radius;
+	//			padding: $u/4;
+	//			height: 100%;
+	//			width: 100%;
+	//			&:hover {
+	//				background-color: $brand--color;
+	//				box-shadow: 0 0 0 1px $black;
+	//				color: $white;
+	//			}
+	//		}
+	//		span {
+	//			display: block;
+	//			line-height: 1.2;
+	//		}
+	//	}
+
+	background-color: $brand--light;
+}
+
+%list__item {
+	//	list-style: "—" inside;
+	@extend %italic;
+	em,
+	i {
+		@extend %normal;
+	}
+	max-width: $line-width;
+	margin-block-end: $border-size;
+	padding: $u/2;
+	padding-inline-start: 4ch;
+	--text-indent: -3ch;
+	text-indent: var(--text-indent);
+	background-color: $brand--light;
+	&:not(:last-child) {
+		box-shadow: 0 $border-size 0 0 $white;
+	}
+
+	&:before {
+		content: "—";
+		display: inline-block;
+		font-family: $font-family-brand;
+		min-width: 2ch;
+		margin-right: $u;
+		text-align: right;
+		color: $brand--dark;
+		@extend %bold;
+		@extend %italic-not;
+	}
+	&--ordered {
+		list-style: none;
+		counter-increment: counter--li;
+		&:before {
+			content: "0" counter(counter--li);
+		}
+		&:nth-child(n + 10):before {
+			content: counter(counter--li);
+		}
+	}
+}
+
+// DEFINITION LIST #
+
+%definition {
+	@extend %grid;
+	--grid-gap: #{$border-size};
+	align-items: stretch;
+	grid-template-columns: auto 1fr;
+	margin: $u * 2 0;
+	background-color: $egg;
+	address {
+		margin: 0;
+	}
+	dt,
+	dd {
+		padding: $u/4 $u/2 0;
+		background-color: $white;
+	}
+	dt {
+		text-align: left;
+		text-align: right;
+		font-family: $font-family-brand;
+	}
+	dd {
+		@extend %bold;
+	}
+}
+
+dl {
+	@extend %definition;
+}
+
+// tags
+
+//%list--flex {
+//	@extend %flex;
+//	flex-direction: row-reverse;
+//	--flex-gap: #{$border-size};
+//	li {
+//		flex: 0 1 auto;
+//		padding: 0;
+//		margin: 0;
+//		padding: 0;
+//		margin: 0;
+//		font-size: $fs-2;
+//		display: flex;
+//		align-items: center;
+//		justify-content: center;
+//		background-color: $cta-color;
+//		font-family: $font-family-brand;
+//		@extend %uppercase;
+//	}
+//	a {
+//		display: block;
+//		padding: $u/4 $u/2;
+//		color: var(--color--emphasis);
+//	}
+//}
+//
+//%list--reset {
+//	margin: 0;
+//	padding: 0;
+//	background-color: unset;
+//	li {
+//		margin: 0;
+//		padding: 0;
+//		text-indent: 0;
+//		@extend %normal;
+//		@extend %italic-not;
+//		&:before,
+//		&:after {
+//			content: unset;
+//		}
+//	}
+//}
+//

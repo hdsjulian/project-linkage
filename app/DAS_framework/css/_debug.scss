@@ -1,0 +1,159 @@
+
+// DEBUG HELPER ###########
+
+%debugflag {
+	padding: 2px;
+	background-color: $debug_color;
+	color: $white;
+	text-align: center;
+	font-size: $fs-2;
+	outline: 1px solid $white;
+	line-height: 1
+}
+
+:root {
+	--viewport: 'small';
+	@include mq(medium) {
+		--viewport: 'medium';
+	}
+	@include mq(large) {
+		--viewport: 'large';
+	}
+	@include mq(huge) {
+		--viewport: 'huge';
+	}
+	@include mq(giant) {
+		--viewport: 'giant';
+	}
+}
+
+
+.debug, .admin-bar, .logged-in {
+	.page__outer:after {
+		@extend %debugflag;
+		content: var(--viewport);
+		position: fixed;
+		z-index: z(debug);
+		bottom: 0;
+		left: 0;
+	}
+}
+
+//	$debugflex_a_color: 	hsla(300, 100%, 100%, 	0);
+//	$debugflex_b_color: 	hsla(300, 100%, 96%, 	.2);
+//	$debugflex_c_color: 	hsla(310, 100%, 94%, 	.2);
+//	$debugflex_d_color: 	hsla(320, 100%, 92%, 	.2);
+//	$debugflex_x_color: 	hsla(300, 100%, 100%, 	1);
+//
+
+
+$adminBarHeight: 32px;
+	.admin-bar {
+		#wpadminbar {
+			opacity: .9;
+			z-index: z(debug);
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+
+
+//	.admin-bar .flex:after, .debug .flex:after {
+//		content:'';
+//		pointer-events: none;
+//		position: absolute;
+//		top: 0;
+//		right: 0;
+//		bottom: 0;
+//		left: 0;
+//		z-index: 99;
+//		$v: $u/4;
+//		mix-blend-mode: multiply;
+//
+//		background-image: repeating-linear-gradient(90deg,
+//
+//		$debugflex_x_color 0, $debugflex_x_color 1px	,
+//		$debugflex_d_color 0, $debugflex_d_color #{$v}  ,
+//		$debugflex_c_color 0, $debugflex_c_color #{$v*2},
+//		$debugflex_b_color 0, $debugflex_b_color #{$v*3},
+//
+//		$debugflex_a_color 0, $debugflex_a_color calc(#{$w--half} - 1px		),
+//		$debugflex_c_color 0, $debugflex_c_color calc(#{$w--half} + 1px 	),
+//
+//		$debugflex_a_color 0, $debugflex_a_color calc(#{$w--full} - #{$v*3}),
+//		$debugflex_b_color 0, $debugflex_b_color calc(#{$w--full} - #{$v*2}),
+//		$debugflex_c_color 0, $debugflex_c_color calc(#{$w--full} - #{$v}	),
+//		$debugflex_d_color 0, $debugflex_c_color calc(#{$w--full} - 1px	),
+//		$debugflex_c_color 0, $debugflex_c_color calc(#{$w--full}  	)
+//		)
+//		;
+//		@include mq(medium) {
+//			background-image: repeating-linear-gradient(90deg,
+//
+//			$debugflex_x_color 0, $debugflex_x_color 1px	,
+//			$debugflex_d_color 0, $debugflex_d_color #{$v}  ,
+//			$debugflex_c_color 0, $debugflex_c_color #{$v*2},
+//			$debugflex_b_color 0, $debugflex_b_color #{$v*3},
+//
+//			$debugflex_a_color 0, $debugflex_a_color calc(#{$w--half} - #{$v*3}	),
+//			$debugflex_b_color 0, $debugflex_b_color calc(#{$w--half} - #{$v*2}	),
+//			$debugflex_c_color 0, $debugflex_c_color calc(#{$w--half} - #{$v}	),
+//			$debugflex_d_color 0, $debugflex_d_color calc(#{$w--half} - 1px		),
+//			$debugflex_x_color 0, $debugflex_x_color calc(#{$w--half} + 1px 	),
+//			$debugflex_d_color 0, $debugflex_d_color calc(#{$w--half} + #{$v}	),
+//			$debugflex_c_color 0, $debugflex_c_color calc(#{$w--half} + #{$v*2}	),
+//			$debugflex_b_color 0, $debugflex_b_color calc(#{$w--half} + #{$v*3}	),
+//
+//			$debugflex_a_color 0, $debugflex_a_color calc(#{$w--full} - #{$v*3}),
+//			$debugflex_b_color 0, $debugflex_b_color calc(#{$w--full} - #{$v*2}),
+//			$debugflex_c_color 0, $debugflex_c_color calc(#{$w--full} - #{$v}	),
+//			$debugflex_d_color 0, $debugflex_d_color calc(#{$w--full} - 1px	),
+//			$debugflex_x_color 0, $debugflex_x_color calc(#{$w--full}  	)
+//
+//			)
+//			;
+//		}
+//		@include mq(large) {
+//			background-image: repeating-linear-gradient(90deg,
+//
+//			$debugflex_x_color 0, $debugflex_x_color 1px	,
+//			$debugflex_d_color 0, $debugflex_d_color #{$v}  ,
+//			$debugflex_c_color 0, $debugflex_c_color #{$v*2},
+//			$debugflex_b_color 0, $debugflex_b_color #{$v*3},
+//
+//			$debugflex_a_color 0, $debugflex_a_color calc(#{$w--1} - #{$v*3}	),
+//			$debugflex_b_color 0, $debugflex_b_color calc(#{$w--1} - #{$v*2}	),
+//			$debugflex_c_color 0, $debugflex_c_color calc(#{$w--1} - #{$v}	),
+//			$debugflex_d_color 0, $debugflex_d_color calc(#{$w--1} - 1px		),
+//			$debugflex_x_color 0, $debugflex_x_color calc(#{$w--1} + 1px 	),
+//			$debugflex_d_color 0, $debugflex_d_color calc(#{$w--1} + #{$v}	),
+//			$debugflex_c_color 0, $debugflex_c_color calc(#{$w--1} + #{$v*2}	),
+//			$debugflex_b_color 0, $debugflex_b_color calc(#{$w--1} + #{$v*3}	),
+//
+//			$debugflex_a_color 0, $debugflex_a_color calc(#{$w--2} - #{$v*3}),
+//			$debugflex_b_color 0, $debugflex_b_color calc(#{$w--2} - #{$v*2}),
+//			$debugflex_c_color 0, $debugflex_c_color calc(#{$w--2} - #{$v}	),
+//			$debugflex_d_color 0, $debugflex_d_color calc(#{$w--2} - 1px		),
+//			$debugflex_x_color 0, $debugflex_x_color calc(#{$w--2}  	)
+//			)
+//			;
+//		}
+//	}
+
+
+//	.admin-bar .page__outer *, .debug .page__outer * {
+//	//	outline: 1px dashed $debug_color;
+//		 &[class]:hover {
+//		//		outline: 2px solid $debug_color;
+//			 &:before {
+//				@extend %debugflag;
+//				position: fixed;
+//				z-index: z(fixed);
+//				bottom: 0;
+//				right: 0;
+//			 	content: attr(class);
+//				}
+//		}
+//	}
+

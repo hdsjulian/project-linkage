@@ -1,0 +1,163 @@
+
+
+@media print { //use cm not mm and a lot of for safari
+
+	h1, h2, h3, h4, h5, h6 { page-break-after:avoid;
+	     page-break-inside:avoid; }
+	img { page-break-inside:avoid;
+	     page-break-after:avoid; }
+	blockquote, table, pre, object, video, audio, embed, iframe , .responsive-video-container{ page-break-inside:avoid; }
+	ul, ol, dl  { page-break-inside:avoid; }
+	p {
+    orphans: 3;
+    widows: 3;
+    max-width: 13cm;
+  }
+
+	// theme specifics
+	.page__header, .membership__promo, .membership__promo.no-subscription, .page__sidebar, .comment-respond, .entry__footer, .breadcrumb, .page__footer-nav, #cookie-notice, .cleanslate	{
+		display: none !important;
+	}
+	.page__outer, .page__inner {
+		padding: 0;
+		margin: 0;
+	}
+	html, body, body a, .entry__content a {
+		font-size: 9pt !important;
+		line-height: 12pt !important;
+	}
+	body {
+		margin: 0;
+		padding: 0;
+		background: white none;
+		color: black;
+		text-shadow: none;
+		-webkit-font-smoothing: none;
+	}
+	hr {
+		display: block;
+		width: 100%;
+		margin: 0.5cm auto;
+		border-bottom: 1px solid black;
+		.entry-content & {
+			&:after {
+				background: none;
+			}
+		}
+	}
+	* {
+		transition: none;
+		color: black !important;
+	}
+	cite, small, .small {
+		font-size: 6pt !important;
+	}
+	h1 {
+		font-size: 14pt;
+	}
+	h2 {
+		font-size: 12pt;
+	}
+	h3 {
+		font-size: 10pt;
+	}
+	h4, h5, h6 {
+		font-size: 9pt;
+		font-weight: bold;
+	}
+	.entry__header {
+    width: 100%;
+		margin-left: 0;
+	}
+	blockquote, .blockquote {
+		border-top: none;
+		border-right: none;
+		border-left: 0.05cm solid black;
+		border-bottom: none;
+		box-shadow: none!important;
+		margin-left: 0.4cm !important;
+		padding: 0 0 0 0.4cm !important;
+		page-break-inside:avoid;
+	}
+	body a, body a:link, .entry__content a {
+		font-size: inherit !important;
+		line-height: inherit !important;
+		border-bottom: none;
+		}
+	.entry__content {
+		width: 100%;
+		margin-left: 0;
+		figure {
+			max-width: 5cm;
+			float: left;
+			margin: 0.4cm 0.4cm 0.4cm 0;
+			&.full {
+				max-width: none;
+				width: 100%;
+				float: none;
+			}
+		}
+		a {
+			&:after{
+				content: ' ' attr(href) ' ';
+				font-weight:normal;
+				font-family: $font-family-monospace;
+				word-break: break-all;
+				color: black;
+				font-size: .8em;
+			}
+		}
+		.responsive-video-container, .wp-video {
+			padding-bottom: 0 !important;
+			margin-bottom: 1em;
+			&:before{
+				content: 'Ein Video wurde für den Druck entfernt';
+				display: block;
+				font-size: 9pt;
+				font-weight:normal;
+				font-family: $font-family-monospace;
+			}
+		}
+		.video-url {
+			display: block;
+			font-size: 9pt;
+			line-height: 1;
+			font-weight:normal;
+			font-style: normal;
+			font-family: $font-family-monospace;
+
+		}
+	}
+	.page__comment {
+		width: auto;
+		margin: 0;
+		padding: 0;
+		max-width: none;
+	}
+	.entry-content-info-box {
+    max-width: 13cm;
+    width: 13cm;
+		padding: 0.4cm !important;
+		border: 0.05cm solid black !important;
+		page-break-inside:avoid;
+		font-size: 9pt !important;
+	}
+	.has-paywall:after {
+		content: '… Volltext exklusiv … uebermedien.de/abo …'
+	}
+	.page__inner:before, .page__inner:after {
+		content: url('/wp-content/themes/uebermedien/images/logo-print.svg');
+		display: block;
+		margin-bottom: 0.4cm;
+	}
+}
+
+@page
+{
+  size: auto;   /* auto is the initial value */
+  /* this affects the margin in the printer settings */
+  margin: 20mm 30mm 30mm 40mm;
+}
+
+
+

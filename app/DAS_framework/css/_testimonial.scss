@@ -1,0 +1,26 @@
+.testimonial {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	> * {
+		flex-basis: percentage(1/10);
+	}
+	&:last-child {
+		flex-direction: row-reverse;
+		text-align: right;
+	}
+	figure {
+		flex-grow: 1;
+	}
+	blockquote {
+		flex-grow: 3;
+		font-size: $fs0;
+		@include mq(medium) {
+			font-size: $fs1;
+		}
+		@include mq(large) {
+			font-size: $fs2;
+		}
+		padding: $u;
+	}
+}

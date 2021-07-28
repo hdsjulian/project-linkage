@@ -1,0 +1,24 @@
+// COMPANY ##
+.teaser--country {
+	figcaption .copyright {
+		display: none;
+	}
+	> .teaser__inner .teaser__figure {
+		$s: $u * 4;
+		height: $s;
+		width: $s * $sqrt2;
+		display: flex;
+		flex-direction: column-reverse;
+		img {
+			padding: $border-size;
+			max-width: $s * $sqrt2;
+			max-height: $s;
+			width: auto;
+			height: auto;
+			object-fit: contain;
+			object-position: center;
+			background-color: $egg;
+			border: $border-size solid $egg;
+		}
+	}
+}

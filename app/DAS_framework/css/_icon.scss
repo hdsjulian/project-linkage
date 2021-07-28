@@ -1,0 +1,23 @@
+// ICON ###
+
+%icon {
+	display: inline-block;
+	vertical-align: baseline;
+	--icon-size: #{$u * 2};
+	height: var(--icon-size);
+	width: var(--icon-size);
+	color: var(--icon-color);
+}
+
+.icon,
+[class*="icon--"] {
+	@extend %icon;
+	svg {
+		height: 100%;
+		width: 100%;
+	}
+}
+
+:root {
+	--icon-color: #{$grey};
+}

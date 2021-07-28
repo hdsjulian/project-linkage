@@ -1,0 +1,13 @@
+// INTERVIEW ###########
+
+.interview {
+	display: contents;
+	&__question {
+		@extend h2;
+		@include hyphens(none);
+		align-self: stretch;
+	}
+	&__answer {
+
+	}
+}

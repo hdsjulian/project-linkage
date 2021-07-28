@@ -1,0 +1,70 @@
+// PAGING ###
+
+.paging {
+	padding: $u 0;
+	&__list {
+		@extend %flex;
+	}
+	li {
+		flex: 1 1 40%;
+	}
+	a {
+		@extend .cta;
+		max-width: none;
+		min-width: 0;
+		width: 100%;
+	}
+
+	.next {
+		text-align: end;
+	}
+
+	//	.previous {
+	//		a {
+	//			flex-direction: row-reverse;
+	//			&:after {
+	//				content: unset;
+	//			}
+	//			&:before {
+	//				content: "";
+	//				background-image: url("../image/icon/icon--w.svg");
+	//			}
+	//		}
+	//	}
+	//	.next {
+	//		a {
+	//			&:after {
+	//				content: unset;
+	//			}
+	//			&:before {
+	//				content: "";
+	//			}
+	//			padding-inline-start: 0;
+	//			&:before {
+	//				background-image: url("../image/icon/icon--e.svg");
+	//			}
+	//		}
+	//	}
+}
+
+//.page-numbers {
+//	@extend .cta;
+//	color: $white;
+//	padding-left: $u/4;
+//	padding-right: $u/4;
+//	&:visited {
+//		color: $white;
+//	}
+//	&.current, &.current:hover {
+//		background-color: $black;
+//		pointer-events: none;
+//	}
+//	&.dots {
+//		background-color: transparent;
+//		color: transparent;
+//		background-image: url('../../../images/logo-ornament.svg');
+//		background-size: contain;
+//		background-repeat: no-repeat;
+//		background-position: center;
+//	}
+//}

@@ -1,0 +1,58 @@
+%cta {
+	user-select: none;
+	display: inline-block;
+	//	flex-direction: row nowrap;
+	//	gap: $u;
+	//	align-items: stretch;
+	///	> * {
+	///		flex: 0 0 auto;
+	///	}
+	padding-inline: $u;
+	position: relative;
+	max-width: $line-width;
+	font-size: $fs0;
+	@extend %italic-not;
+	@extend %bold--inverse;
+	@include hyphens(none);
+	margin-block: $u/2;
+	margin-inline-start: 0;
+	margin-inline-end: $u;
+	text-align: inherit;
+	@include transition;
+	cursor: pointer;
+	border: none;
+	vertical-align: middle;
+	font-family: $font-family-brand;
+	@extend %uppercase;
+	@extend %emphasis;
+	cursor: pointer;
+	background-color: $link-color;
+	color: $brand--light;
+	&:hover {
+		background-color: $link-color-hover;
+		color: $brand--light;
+	}
+	&:focus {
+		background-color: $brand--light;
+		color: $brand--mute;
+	}
+	[class*="icon"] {
+		$s: $u * 2;
+		width: $s;
+		height: $s;
+		//	max-width: $s;
+		//	max-height: $s;
+		display: inline-table;
+		vertical-align: middle;
+		svg {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	&[disabled] {
+		background-color: $bright;
+	}
+}
+.cta {
+	@extend %cta;
+}

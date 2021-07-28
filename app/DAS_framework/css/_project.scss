@@ -1,0 +1,58 @@
+// PROJECT ##
+
+.teaser--project {
+	.teaser {
+		&__heading {
+			text-transform: none;
+		}
+		&__time {
+			text-align: end;
+			color: $body-color;
+		}
+		&__location {
+			a {
+				display: inline-block;
+				background-color: $link-color;
+				color: $brand--bright;
+				padding: $u/8 $u/4;
+				@extend %bold--inverse;
+				&:hover {
+					background-color: $link-color-hover;
+				}
+				&:empty {
+					display: none;
+				}
+			}
+		}
+	}
+	grid-template-rows: repeat(4, auto) 1fr;
+	grid-template-columns: auto auto;
+	grid-template-areas:
+		"location time"
+		"kicker kicker"
+		"heading heading"
+		"excerpt excerpt";
+}
+
+.project {
+	&__list {
+		@extend %flex;
+		flex-flow: row wrap;
+		--flex-gap: #{$u/2};
+		> * {
+			flex: 1 1 40%;
+			a {
+				display: block;
+				height: 100%;
+				font-size: $fs-2;
+				font-family: $font-family-brand;
+				padding: $u/2;
+				background-color: $brand--color;
+				color: $brand--bright;
+				&:hover {
+					background-color: $brand--dark;
+				}
+			}
+		}
+	}
+}

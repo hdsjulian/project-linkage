@@ -1,0 +1,86 @@
+.login-button.cleanslate.login-button.cleanslate {
+	@extend .cta;
+	background-color: $brand--dark !important;
+	text-transform: none !important;
+	box-shadow: none !important;
+	text-align: right !important;
+	border: 1px solid $white !important;
+	font-size: $fs-1 !important;
+	@extend %bold--inverse;
+	@extend %spaced;
+	span {
+		//	display: none !important;
+	}
+	img {
+		//	margin-right: $u/4 !important;
+	}
+	&:hover {
+		background-color: $black !important;
+	}
+}
+
+//.steady__login--hide {
+//	opacity: 0;
+//	transition-property: background-color;
+//}
+//.steady__login-button--restyle {
+//	transition-property: background-color;
+//}
+
+#scroll_to_steady_paywall:target:empty {
+	display: block;
+	padding-top: 10em;
+}
+
+#steady-paywall-overlay-container-content,
+#steady-paywall-overlay-gradient-container {
+	@include mq(huge) {
+		margin: 0 $u * -1 !important; // for pushed out .entry-content-info-box
+	}
+	@include mq(giant) {
+		margin: 0 $u * -3 !important; // for pushed out .entry-content-info-box
+	}
+}
+#steady-paywall-overlay-cta-button {
+	--cta-button-background-color: #{$cta-color} !important;
+	--cta-button-background-color-darken: #{$cta-color-hover} !important;
+	--cta-button-background-color-alpha-03: transparent !important;
+	--cta-button-background-color-darken-alpha-03: transparent !important;
+}
+
+#steady-paywall-overlay-sticky-container#steady-paywall-overlay-sticky-container {
+	display: flex !important;
+	flex-flow: column nowrap;
+	top: 10rem !important;
+	* {
+		//	font-family: $font-family-small !important;
+	}
+}
+#steady-paywall-overlay-title,
+#steady-paywall-overlay-subtitle {
+	order: -1;
+}
+#steady-paywall-overlay-sign-in-container {
+	order: 0;
+}
+#steady-paywall-overlay-cta-button,
+#steady-paywall-overlay-steady-link {
+	order: 1;
+	margin: 0 auto;
+}
+#steady-paywall-overlay-sticky-container-bottom-spacer {
+	order: 2;
+}
+
+#steady-paywall-overlay-sign-in-link#steady-paywall-overlay-sign-in-link#steady-paywall-overlay-sign-in-link {
+	background-color: $cta-color !important;
+	transition: all $duration $easing !important;
+	position: relative !important;
+	z-index: z(up) !important;
+	box-shadow: 0.3em 0 $white !important;
+	&:hover {
+		background-color: $cta-color-hover !important;
+	}
+	color: $white !important;
+	padding: $u/4 !important;
+}
