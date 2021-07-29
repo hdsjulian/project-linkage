@@ -20,17 +20,11 @@ def login():
     	return redirect(url_for('index'))
     login_user(user)
     return redirect(url_for('index'))
-@app.route('/artifact/<artifact_id>')
-@app.route('/artifact/<artifact_id>/<artifact_hash>')
-def artifact(artifact_id, artifact_hash=0):
-	artifact = Artifact.query.get(artifact_id)
-	handover_count = Handover.query.join(Artifact).filter(Artifact.id==Handover.artifact_id).count()
-	if artifact_id is not None and artifact.access_hash == artifact_hash:
-		editable = True
-	else: 
-		editable = False
-
-	return render_template('artifact.html', artifact_id = artifact_id,  access_hash=artifact_hash, handover_count=handover_count, editable=editable)
+@app.route('/coin/<coin_id>')
+@app.route('/coin/<coin_id>/<coin_hash>')
+def artifact(coin_id=0, coin_hash=False):
+	coin = Artifact.query.get(coin_id)
+	return coin
 
 
 @app.route('/register/<artifact_id>/<artifact_hash>', methods=['GET','POST'])
