@@ -7,3 +7,4 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1,
     accessToken: 'your.mapbox.access.token'
 }).addTo(mymap);
+
