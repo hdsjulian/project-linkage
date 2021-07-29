@@ -7,9 +7,6 @@ $hook-width: $hook-height;
 	inset: 0 auto auto 0;
 	z-index: z(modal);
 	&-toggle {
-		input {
-			opacity: 0;
-		}
 		#menu-toggle:checked {
 			~ .menu-toggle__object {
 				pointer-events: all;
