@@ -13,6 +13,9 @@ html(lang='en' class='')
 						figure#map 
 							h1.center map goes here
 					article.article
+						header.article__header
+							.figure.logo
+								img(src="../image/logo/project-linkage.svg")
 						section#contact.contact
 							h2 Contact
 						section#legal.legal
@@ -37,7 +40,6 @@ html(lang='en' class='')
 							+paging('', 'Previous', 'Afterwards')
 
 						section#about.about
-							h1 About project linkage
 							p
 								+text-gen(2, "s", true)
 							p

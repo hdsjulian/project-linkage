@@ -28,11 +28,11 @@
 	@extend %uppercase;
 	@extend %emphasis;
 	cursor: pointer;
-	background-color: $link-color;
-	color: $brand--light;
+	background-color: $cta-background-color;
+	color: $cta-color;
 	&:hover {
-		background-color: $link-color-hover;
-		color: $brand--light;
+		background-color: $cta-background-color-hover;
+		color: $cta-color-hover;
 	}
 	&:focus {
 		background-color: $brand--light;

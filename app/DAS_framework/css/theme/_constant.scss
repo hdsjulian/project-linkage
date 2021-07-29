@@ -112,15 +112,9 @@ $black: hsl($greyscale_h, $greyscale_s, 0%);
 
 //BRAND COLOR
 
-$brand-h: 194;
-$brand-s: 92%;
-$brand-l: 49%;
-:root {
-	--page-background-blur: url("/wp-content/themes/bak2021/DAS_framework/image/page-background/1-blur.jpg");
-	--page-background: url("/wp-content/themes/bak2021/DAS_framework/image/page-background/1.jpg");
-	--symbol--white: url("/wp-content/themes/bak2021/DAS_framework/image/logo/logogram--bak-white.svg");
-	--symbol--color: url("/wp-content/themes/bak2021/DAS_framework/image/logo/logogram--bak.svg");
-}
+$brand-h: 45;
+$brand-s: 95%;
+$brand-l: 66%;
 
 :root {
 	--brand-h: #{$brand-h};
@@ -132,8 +126,8 @@ $brand-l: 49%;
 	--brand--bright: hsl(#{var(--brand-h)}, #{var(--brand-s)}, 96%);
 	--brand--light: hsl(#{var(--brand-h)}, calc(#{var(--brand-s)} * #{$sqrt2-major}), 96%);
 	--fade--light: hsla(#{var(--brand-h)}, calc(#{var(--brand-s)} * #{$sqrt2-major}), 96%, #{$sqrt2-major});
-	--brand--dark: hsl(#{var(--brand-h)}, #{var(--brand-s)}, 29%);
-	--fade--dark: hsla(#{var(--brand-h)}, #{var(--brand-s)}, 29%, #{$sqrt2-minor});
+	--brand--dark: hsl(#{var(--brand-h)}, #{var(--brand-s)}, 44%);
+	--fade--dark: hsla(#{var(--brand-h)}, #{var(--brand-s)}, 44%, #{$sqrt2-minor});
 	--brand--night: hsl(#{var(--brand-h)}, calc(#{var(--brand-s)} * #{$sqrt2-major}), 8%);
 	--brand--mute: hsl(
 		#{var(--brand-h)},
@@ -198,16 +192,18 @@ $highlight-background-color: hsl(#{var(--brand-h)}, 100%, 82%);
 $highlight-color: hsl(#{var(--brand-h)}, 30%, 30%);
 
 // ASSIGN COLOR ###########
-$body-color: $brand--night;
+$body-color: $dun;
 $body-background-color: $white;
 $header-background: $body-background-color;
-$link-color: $brand--color;
-$link-color-hover: $brand--dark;
+$link-color: $brand--dark;
+$link-color-hover: $brand--color;
 $link-color-visited: none;
 $link-color-active: $link-color;
 $icon-color: $link-color;
-$cta-color: $link-color;
-$cta-color-hover: $link-color-hover;
+$cta-color: $brand--color;
+$cta-color-hover: $brand--light;
+$cta-background-color: $body-color;
+$cta-background-color-hover: $brand--dark;
 
 //ins del
 $ins-color: $body-color;

@@ -382,24 +382,17 @@ template {
 }
 
 :root {
-  --page-background-blur: url("/wp-content/themes/bak2021/DAS_framework/image/page-background/1-blur.jpg");
-  --page-background: url("/wp-content/themes/bak2021/DAS_framework/image/page-background/1.jpg");
-  --symbol--white: url("/wp-content/themes/bak2021/DAS_framework/image/logo/logogram--bak-white.svg");
-  --symbol--color: url("/wp-content/themes/bak2021/DAS_framework/image/logo/logogram--bak.svg");
-}
-
-:root {
-  --brand-h: 194;
-  --brand-s: 92%;
-  --brand-l: 49%;
+  --brand-h: 45;
+  --brand-s: 95%;
+  --brand-l: 66%;
   --overlay--color: hsla(var(--brand-h), var(--brand-s), var(--brand-l), 0.07);
   --brand--color: hsl(var(--brand-h), var(--brand-s), var(--brand-l));
   --fade--brand: hsla(var(--brand-h), var(--brand-s), var(--brand-l), 0.2928932188);
   --brand--bright: hsl(var(--brand-h), var(--brand-s), 96%);
   --brand--light: hsl(var(--brand-h), calc(var(--brand-s) * 0.7071067812), 96%);
   --fade--light: hsla(var(--brand-h), calc(var(--brand-s) * 0.7071067812), 96%, 0.7071067812);
-  --brand--dark: hsl(var(--brand-h), var(--brand-s), 29%);
-  --fade--dark: hsla(var(--brand-h), var(--brand-s), 29%, 0.2928932188);
+  --brand--dark: hsl(var(--brand-h), var(--brand-s), 44%);
+  --fade--dark: hsla(var(--brand-h), var(--brand-s), 44%, 0.2928932188);
   --brand--night: hsl(var(--brand-h), calc(var(--brand-s) * 0.7071067812), 8%);
   --brand--mute: hsl(
   	var(--brand-h),
@@ -1636,8 +1629,8 @@ abbr[title],
   vertical-align: middle;
   font-family: "Rubik", "Arial", sans-serif;
   cursor: pointer;
-  background-color: var(--brand--color);
-  color: var(--brand--light);
+  background-color: #5c5c5c;
+  color: var(--brand--color);
 }
 .cta:hover {
   background-color: var(--brand--dark);
@@ -1701,7 +1694,7 @@ html {
 }
 
 body {
-  color: var(--brand--night);
+  color: #5c5c5c;
   background-color: white;
   font-family: "Rubik", "Arial", sans-serif;
   font-size: 100%;
@@ -1825,7 +1818,7 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--brand--color);
+  color: var(--brand--dark);
   cursor: pointer;
   transition: all 1s ease;
   -webkit-backface-visibility: hidden;
@@ -1833,15 +1826,15 @@ a {
 }
 @media (any-hover: hover) {
   a:hover {
-    color: var(--brand--dark);
+    color: var(--brand--color);
   }
 }
 a:active {
-  color: var(--brand--color);
+  color: var(--brand--dark);
   outline: none;
 }
 a:focus {
-  color: var(--brand--color);
+  color: var(--brand--dark);
   outline: none;
 }
 
@@ -2073,8 +2066,8 @@ button {
   vertical-align: middle;
   font-family: "Rubik", "Arial", sans-serif;
   cursor: pointer;
-  background-color: var(--brand--color);
-  color: var(--brand--light);
+  background-color: #5c5c5c;
+  color: var(--brand--color);
   padding: 0 0 0 4rem;
   box-shadow: none;
   width: auto;
@@ -2129,8 +2122,8 @@ button[disabled] {
   vertical-align: middle;
   font-family: "Rubik", "Arial", sans-serif;
   cursor: pointer;
-  background-color: var(--brand--color);
-  color: var(--brand--light);
+  background-color: #5c5c5c;
+  color: var(--brand--color);
   background-color: var(--brand--color);
 }
 [type=submit]:hover {
@@ -2183,8 +2176,8 @@ button[disabled] {
   vertical-align: middle;
   font-family: "Rubik", "Arial", sans-serif;
   cursor: pointer;
-  background-color: var(--brand--color);
-  color: var(--brand--light);
+  background-color: #5c5c5c;
+  color: var(--brand--color);
   background-color: #bfbf40;
 }
 [type=reset]:hover {
@@ -2423,7 +2416,7 @@ pre {
 
 /* Allow line wrapping of 'pre' */
 ins {
-  color: var(--brand--night);
+  color: #5c5c5c;
 }
 
 h1,
@@ -2516,7 +2509,7 @@ strike {
 }
 
 ins {
-  color: var(--brand--night);
+  color: #5c5c5c;
   text-decoration: underline;
 }
 
@@ -2736,11 +2729,11 @@ dl dt {
 }
 .nav--main {
   padding: 3rem 4rem 1rem 0.5rem;
-  color: var(--brand--color);
+  color: var(--brand--dark);
 }
 
 .is-current {
-  color: var(--brand--night);
+  color: #5c5c5c;
 }
 
 [class*=text-column] {
@@ -2819,7 +2812,7 @@ dl dt {
   padding: 0 0.5rem;
   line-height: 1;
   text-align: center;
-  --icon-color: var(--brand--night);
+  --icon-color: #5c5c5c;
 }
 .search__submit[type=submit]:after {
   content: unset;
@@ -2866,8 +2859,8 @@ dl dt {
   vertical-align: middle;
   font-family: "Rubik", "Arial", sans-serif;
   cursor: pointer;
-  background-color: var(--brand--color);
-  color: var(--brand--light);
+  background-color: #5c5c5c;
+  color: var(--brand--color);
   max-width: none;
   min-width: 0;
   width: 100%;
@@ -2902,6 +2895,7 @@ dl dt {
   position: fixed;
   z-index: 0;
   inset: 0;
+  background-color: #5c5c5c;
 }
 
 .error,
@@ -2953,6 +2947,10 @@ dl dt {
 }
 .article > section#about ~ #about, .article > section:target ~ #about {
   display: none;
+}
+.article__header {
+  -webkit-margin-after: 1rem;
+          margin-block-end: 1rem;
 }
 
 @media print {
