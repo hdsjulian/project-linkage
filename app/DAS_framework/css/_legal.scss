@@ -2,10 +2,6 @@
 
 // LEGAL ###
 .legal {
-	padding: $page-border $page-border/2;
-	@include mq(medium) {
-		padding-left: calc(#{$gridcolumngap/3} + #{percentage(1/3)});
-	}
 	small {
 		display: block;
 		counter-reset: h2;

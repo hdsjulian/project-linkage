@@ -2903,14 +2903,6 @@ dl dt {
   color: #bf4040;
 }
 
-.legal {
-  padding: 1rem 0.5rem;
-}
-@media (min-width: 0) and (min-height: 0) {
-  .legal {
-    padding-left: calc(0.3333333333rem + 33.3333333333%);
-  }
-}
 .legal small {
   display: block;
   counter-reset: h2;
