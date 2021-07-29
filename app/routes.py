@@ -24,7 +24,7 @@ def login():
 @app.route('/coin/<coin_id>/<coin_hash>')
 def artifact(coin_id=0, coin_hash=False):
 	coin = Artifact.query.get(coin_id)
-	return coin
+	return coin.coin_id
 
 
 @app.route('/register/<artifact_id>/<artifact_hash>', methods=['GET','POST'])
