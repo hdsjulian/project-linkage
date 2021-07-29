@@ -1,3 +1,5 @@
+@use "use" as *;
+
 .search {
 	&__form {
 		position: relative;
@@ -26,19 +28,15 @@
 		padding: 0 $u/2;
 		line-height: 1;
 		text-align: center;
-		--icon-color: #{$white};
-		@extend %background-blur;
-		background-color: $brand--dark;
-		@include mq(medium) {
-			background-color: $brand--color;
-		}
+		--icon-color: #{$body-color};
+
 		&:after {
 			content: unset;
 		}
 	}
 	&__score {
 		padding: $u/2;
-		font-size: $fs-3;
+		@extend %fs-3;
 		background: $brand--light;
 		color: $brand--dark;
 		font-family: $font-family-brand;

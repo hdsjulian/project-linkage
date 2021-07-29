@@ -1,8 +1,0 @@
-@each $color in $list--color {
-	.background-color-#{nth($color,1)} {
-		background-color: nth($color,2);
-	}
-	.color-#{nth($color,1)} {
-		color: nth($color,2);
-	}
-}

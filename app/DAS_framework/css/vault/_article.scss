@@ -95,7 +95,7 @@
 			right: $u/2;
 			z-index: z(up);
 			padding: $u * $sqrt2-minor $u * $sqrt2-major;
-			font-size: $fs-2;
+			@extend %fs-2;
 			text-align: right;
 			background-color: $white;
 		}

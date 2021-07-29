@@ -1,0 +1,55 @@
+@use "../helper" as *;
+@use "../theme" as *;
+
+.uppercase,
+.brand {
+	@extend %uppercase;
+}
+.touch {
+	@include touch {
+		&-not {
+			display: none !important;
+		}
+	}
+	@include notouch {
+		&-only {
+			display: none !important;
+		}
+	}
+}
+
+.ally,
+.a11y,
+.is-hidden,
+.visually-hidden,
+.hidden {
+	@extend %a11y;
+}
+p abbr[title],
+p .acronym {
+	font-size: 0.98em;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	text-decoration-color: $light;
+}
+
+%paintwhite {
+	-ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(invert=1)";
+	filter: saturate(0) contrast(0) brightness(0) invert(100%);
+}
+
+%paintblack {
+	filter: saturate(0) contrast(0) brightness(0);
+}
+
+.a11y,
+.is-hidden {
+	@include hidden;
+}
+abbr[title],
+.acronym {
+	font-size: 0.95em;
+}
+.uppercase {
+	@extend %uppercase;
+}

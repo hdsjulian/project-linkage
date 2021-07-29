@@ -11,7 +11,7 @@ $steps: 20;
 	@extend %emphasis;
 	@include hyphens();
 	border: none;
-	font-size: $fs0;
+	@extend %fs0;
 	font-family: $font-family-brand;
 	@extend %bold;
 	padding: 0;

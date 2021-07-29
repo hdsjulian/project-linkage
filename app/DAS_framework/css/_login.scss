@@ -53,7 +53,7 @@
 			a {
 				background-color: transparent;
 				@extend %normal--inverse;
-				font-size: $fs-1;
+				@extend %fs-1;
 				text-align: right;
 			}
 		}

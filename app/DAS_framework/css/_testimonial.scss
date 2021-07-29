@@ -14,12 +14,12 @@
 	}
 	blockquote {
 		flex-grow: 3;
-		font-size: $fs0;
+		@extend %fs0;
 		@include mq(medium) {
-			font-size: $fs1;
+			@extend %fs1;
 		}
 		@include mq(large) {
-			font-size: $fs2;
+			@extend %fs2;
 		}
 		padding: $u;
 	}

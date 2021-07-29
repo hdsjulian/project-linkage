@@ -1,9 +1,12 @@
+@use "sass:math";
+@use "../helper" as *;
+
 // GOLDEN RATIO
-$phi: (1 + sqrt(5))/2;
+$phi: (1 + math.sqrt(5))/2;
 $phi-minor: 1 - 1 / $phi;
 $phi-major: 1 / $phi;
 // SQRT 2
-$sqrt2: sqrt(2);
+$sqrt2: math.sqrt(2);
 $sqrt2-minor: 1 - 1 / $sqrt2;
 $sqrt2-major: 1 / $sqrt2;
 // LAYOUT BASIC ###########
@@ -63,8 +66,6 @@ $huge_height: 0px;
 
 $giant_width: 1921px;
 $giant_height: 0px;
-
-@import "scss-helper/mediaquery";
 
 $box-width: px2rem($medium_width) / 3;
 
@@ -232,7 +233,7 @@ $list--color: ("white", $white), ("offwhite", $offwhite), ("egg", $egg), ("gloss
 $radius: $u/4;
 $angle: -2deg;
 $alpha: 0.9;
-$border-size: 2px;
+$stroke: 2px;
 :root {
 	--alpha: #{$alpha};
 }
@@ -243,10 +244,9 @@ $filter: saturate(0) contrast(0.8);
 
 // TRANSITION and ANIMATION
 
-$duration: 1s * $sqrt2-minor;
+$duration: 1s;
 $transition-duration: $duration;
-//$easing: cubic-bezier(0.2, 0, 0.6, 1);
-$easing: cubic-bezier(0, 0, $sqrt2-major, $sqrt2-minor);
+$easing: cubic-bezier(0.2, 0, 0.6, 1);
 $timing-function: $easing;
 $transition-timing-function: $timing-function;
 
@@ -332,9 +332,7 @@ $ultra-weight--inverse: $ultra-weight + $inverse-correction;
 %light--inverse {
 	--weight: #{$light-weight--inverse};
 }
-%normal,
-%regular,
-%basic {
+%normal {
 	font-style: normal;
 	--weight: #{$normal-weight};
 }
@@ -368,7 +366,30 @@ $ultra-weight--inverse: $ultra-weight + $inverse-correction;
 	font-style: normal;
 }
 %spaced {
-	letter-spacing: 0.05ch !important;
+	letter-spacing: 0.05ch;
+}
+%uppercase {
+	text-transform: uppercase;
+	@extend %spaced;
+}
+%emphasis {
+	background-color: $brand--dark;
+	@include mq(medium) {
+		background-color: $brand--color;
+	}
+	color: var(--color--emphasis);
+	@include font-smoothing(legacy);
+}
+%a11y {
+	@include hidden;
+}
+%horizontal-rule {
+	background-color: $black;
+	display: block;
+	clear: both;
+	height: $stroke;
+	padding: 0;
+	margin: $u * 4 $u * -2;
 }
 
 :root {
@@ -418,50 +439,64 @@ $ultra-weight--inverse: $ultra-weight + $inverse-correction;
 
 // FONT SIZE ###########
 
-$fs-5: px2rem(6);
-$fs-4: px2rem(8);
-$fs-3: px2rem(10);
-$fs-2: px2rem(12);
-$fs-1: px2rem(14);
-$fs0: px2rem(16);
-$fs1: px2rem(18);
-$fs2: px2rem(20);
-$fs3: px2rem(22);
-$fs4: px2rem(24);
-$fs5: px2rem(32);
-$fs6: px2rem(48);
+$fs-min: -5;
+$fs-max: 6;
 
-$font-sizes: (
-	"fs-3": $fs-3,
-	"fs-2": $fs-2,
-	"fs-1": $fs-1,
-	"fs0": $fs0,
-	"fs1": $fs1,
-	"fs2": $fs2,
-	"fs3": $fs3,
-	"fs4": $fs4,
-	"fs5": $fs5,
-	"fs6": $fs6,
+$font-size: (
+	"-5": px2rem(6),
+	"-4": px2rem(8),
+	"-3": px2rem(10),
+	"-2": px2rem(12),
+	"-1": px2rem(14),
+	"0": px2rem(16),
+	"1": px2rem(18),
+	"2": px2rem(20),
+	"3": px2rem(22),
+	"4": px2rem(24),
+	"5": px2rem(32),
+	"6": px2rem(48),
 );
+
+$fs-5: map-get($font-size, "-5");
+$fs-4: map-get($font-size, "-4");
+$fs-3: map-get($font-size, "-3");
+$fs-2: map-get($font-size, "-2");
+$fs-1: map-get($font-size, "-1");
+$fs0: map-get($font-size, "0");
+$fs1: map-get($font-size, "1");
+$fs2: map-get($font-size, "2");
+$fs3: map-get($font-size, "3");
+$fs4: map-get($font-size, "4");
+$fs5: map-get($font-size, "5");
+$fs6: map-get($font-size, "6");
+
+@for $n from $fs-min through $fs-max {
+	%fs#{$n} {
+		font-size: map-get($font-size, #{$n});
+	}
+	.fs#{$n} {
+		@extend %fs#{$n};
+	}
+}
 
 //@for $n from -3 through 6 {
 //	.fs#{$n} {
-//		font-size: map-get($font-sizes, fs0);
+//		font-size: map.get($font-size, fs0);
 //			@if $n >= 1 {
-//				font-size: map-get($font-sizes, fs1);
+//				font-size: map.get($font-size, fs1);
 //			}
 //		@include mq(medium) {
 //			@if $n >= 2 {
-//				font-size: map-get($font-sizes, fs2);
+//				font-size: map.get($font-size, fs2);
 //			}
 //		}
 //		@include mq(large) {
 //			@if $n >= 4 {
-//				font-size: map-get($font-sizes, fs4);
+//				font-size: map.get($font-size, fs4);
 //			}
 //		}
 //		@include mq(huge) {
-//			font-size: map-get($font-sizes, fs#{$n});
+//			font-size: map.get($font-size, fs#{$n});
 //		}
 //	}
 //}

@@ -1,4 +1,6 @@
-%cta {
+@use "use" as *;
+
+@mixin cta {
 	user-select: none;
 	display: inline-block;
 	//	flex-direction: row nowrap;
@@ -10,7 +12,7 @@
 	padding-inline: $u;
 	position: relative;
 	max-width: $line-width;
-	font-size: $fs0;
+	@extend %fs0;
 	@extend %italic-not;
 	@extend %bold--inverse;
 	@include hyphens(none);
@@ -54,5 +56,5 @@
 	}
 }
 .cta {
-	@extend %cta;
+	@include cta;
 }

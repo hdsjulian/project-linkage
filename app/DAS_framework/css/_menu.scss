@@ -1,3 +1,5 @@
+@use "use" as *;
+
 $hook-height: $u * 3;
 $hook-width: $hook-height;
 .menu {

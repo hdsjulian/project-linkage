@@ -49,7 +49,7 @@
 		--moz-osx-font-smoothing: auto;
 	}
 }
-@mixin transition($property: all) {
+@mixin transition($property: all, $duration: 1s, $easing: ease) {
 	transition: $property $duration $easing;
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden; // prevent some flicker in chrome

@@ -1,3 +1,5 @@
+@use "use" as *;
+
 // LIST ###
 
 %list {
@@ -15,7 +17,7 @@
 	//		}
 	//		display: flex;
 	//		flex-flow: row wrap;
-	//		font-size: $fs-1;
+	//		@extend %fs-1;
 	//		li {
 	//			padding: $u/8;
 	//			flex: 1 1 percentage(1/3);
@@ -55,14 +57,14 @@
 		@extend %normal;
 	}
 	max-width: $line-width;
-	margin-block-end: $border-size;
+	margin-block-end: $stroke;
 	padding: $u/2;
 	padding-inline-start: 4ch;
 	--text-indent: -3ch;
 	text-indent: var(--text-indent);
 	background-color: $brand--light;
 	&:not(:last-child) {
-		box-shadow: 0 $border-size 0 0 $white;
+		box-shadow: 0 $stroke 0 0 $white;
 	}
 
 	&:before {
@@ -90,9 +92,9 @@
 
 // DEFINITION LIST #
 
-%definition {
+@mixin definition {
 	@extend %grid;
-	--grid-gap: #{$border-size};
+	--grid-gap: #{$stroke};
 	align-items: stretch;
 	grid-template-columns: auto 1fr;
 	margin: $u * 2 0;
@@ -116,7 +118,7 @@
 }
 
 dl {
-	@extend %definition;
+	@include definition;
 }
 
 // tags
@@ -131,7 +133,7 @@ dl {
 //		margin: 0;
 //		padding: 0;
 //		margin: 0;
-//		font-size: $fs-2;
+//		@extend %fs-2;
 //		display: flex;
 //		align-items: center;
 //		justify-content: center;

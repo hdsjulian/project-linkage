@@ -52,7 +52,7 @@
 				}
 			}
 			&__count {
-				font-size: $fs-2;
+				@extend %fs-2;
 				font-family: $font-family-brand;
 				@extend %uppercase;
 			}

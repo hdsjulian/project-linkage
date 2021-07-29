@@ -1,7 +1,7 @@
 //* TEASER */
 %meta {
 	margin: 0;
-	font-size: $fs-2;
+	@extend %fs-2;
 	font-family: $font-family-brand;
 	@extend %bold;
 	@extend %uppercase;
@@ -127,8 +127,8 @@
 		}
 	}
 	&__download {
-		@extend %cta;
-		font-size: $fs-2;
+		@include cta;
+		@extend %fs-2;
 		justify-self: start;
 		&.teaser__download.teaser__download[href$="pdf"]:after {
 			background-image: url("../image/icon/icon--pdf.svg");
@@ -165,7 +165,7 @@
 	&__excerpt {
 		grid-area: excerpt;
 		color: $body-color;
-		font-size: $fs-1;
+		@extend %fs-1;
 	}
 	&__tag {
 		grid-area: tag;

@@ -3,7 +3,6 @@ $c-light: $stone--bright;
 
 // SECTION ##
 
-
 .page-styleguide {
 	.section {
 		&--logo {
@@ -13,18 +12,17 @@ $c-light: $stone--bright;
 		}
 	}
 
-
 	.action {
 		@extend %boxed;
 		display: flex;
 		align-items: center;
 		gap: $u/2;
-		margin: $u*2 0;
+		margin: $u * 2 0;
 		padding: $u/2;
 		background-color: $c-light;
 		color: $stone--grey;
 		h3 {
-			font-size: $fs1;
+			@extend %fs1;
 			margin: 0;
 			padding: 0;
 		}
@@ -34,25 +32,26 @@ $c-light: $stone--bright;
 		}
 	}
 
-
 	.box {
-		margin-bottom: $u*2;
+		margin-bottom: $u * 2;
 	}
-	.hide-off .swatch.void {padding: 0;}
+	.hide-off .swatch.void {
+		padding: 0;
+	}
 	.list-color {
 		display: flex;
 		.swatch {
 			@extend %boxed;
-			flex:1 0 auto;
+			flex: 1 0 auto;
 			&.half {
-				flex-grow: .5;
+				flex-grow: 0.5;
 			}
 			&.double {
 				flex-grow: 2;
 			}
 			overflow: hidden;
 			position: relative;
-			min-height: ($site-width - $u*4) / 9;
+			min-height: ($site-width - $u * 4) / 9;
 			$p: $u/2;
 			color: $c-light;
 			padding: $p;
@@ -68,34 +67,33 @@ $c-light: $stone--bright;
 				text-align: left;
 				bottom: $p;
 				width: auto;
-				font-size: $fs-2;
-
+				@extend %fs-2;
 			}
-	//		&:nth-child(2n) {
-	//			span {
-	//				bottom: auto;
-	//				top:	$p;
-	//			}
-	//		}
-	//		&:nth-child(3n) {
-	//			span {
-	//				right: auto;
-	//				left: 	$p;
-	//				text-align: right;
-	//			}
-	//		}
-	//		&:nth-child(4n) {
-	//			span {
-	//				bottom: auto;
-	//				top: calc(50% - #{$fs-2});
-	//			}
-	//		}
+			//		&:nth-child(2n) {
+			//			span {
+			//				bottom: auto;
+			//				top:	$p;
+			//			}
+			//		}
+			//		&:nth-child(3n) {
+			//			span {
+			//				right: auto;
+			//				left: 	$p;
+			//				text-align: right;
+			//			}
+			//		}
+			//		&:nth-child(4n) {
+			//			span {
+			//				bottom: auto;
+			//				top: calc(50% - #{$fs-2});
+			//			}
+			//		}
 			&.is-name {
 				span {
 					opacity: 0;
 				}
 			}
-			&:hover{
+			&:hover {
 				span {
 					opacity: 1;
 				}
@@ -113,15 +111,15 @@ $c-light: $stone--bright;
 					cursor: cell;
 				}
 				@include transition;
-				transition-duration: 		.8s;
-				transition-delay: 			.4s;
+				transition-duration: 0.8s;
+				transition-delay: 0.4s;
 				&.is-on {
 					flex-grow: 99999;
-					transition-duration: 		.4s;
-					transition-delay: 			0s;
+					transition-duration: 0.4s;
+					transition-delay: 0s;
 				}
 				span {
-					font-size: $fs-3;
+					@extend %fs-3;
 				}
 			}
 		}
@@ -142,7 +140,7 @@ $c-light: $stone--bright;
 	}
 
 	.figure {
-		$p: $u*2;
+		$p: $u * 2;
 		@extend %boxed;
 		padding: $p $p 0 $p;
 		&--logo {

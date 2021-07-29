@@ -1,4 +1,8 @@
-// TOPIC ##
+@use "use" as *;
+
+$steps: 6;
+
+// TEXT ##
 .text {
 }
 
@@ -19,7 +23,6 @@
 	}
 }
 
-$steps: 6;
 @include mq(medium) {
 	@for $n from 1 through $steps {
 		%text-column--#{$n},

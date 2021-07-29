@@ -26,9 +26,9 @@
 	&__title {
 		grid-area: title;
 		margin: $u/2 0;
-		font-size: $fs3;
+		@extend %fs3;
 		@include mq(large) {
-			font-size: $fs4;
+			@extend %fs4;
 			line-height: 1.1;
 		}
 		$font-family: $font-family-heading;
@@ -117,7 +117,7 @@
 	}
 	cite {
 		position: static;
-		font-size: $fs-2;
+		@extend %fs-2;
 		@extend %normal;
 		background: none;
 

@@ -5,7 +5,7 @@
 	box-shadow: none !important;
 	text-align: right !important;
 	border: 1px solid $white !important;
-	font-size: $fs-1 !important;
+	@extend %fs-1 !important;
 	@extend %bold--inverse;
 	@extend %spaced;
 	span {

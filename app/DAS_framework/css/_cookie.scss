@@ -2,7 +2,7 @@
 	@include hyphens(none);
 }
 a._brlbs-btn-cookie-preference.borlabs-cookie-preference {
-	@extend %cta;
+	@include cta;
 	text-decoration: none;
 	margin-inline: $u * 2;
 	padding-inline-start: $u;

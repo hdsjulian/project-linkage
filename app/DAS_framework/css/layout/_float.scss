@@ -1,3 +1,6 @@
+@use "../helper" as *;
+@use "../theme" as *;
+
 @include mq(medium) {
 	.left,
 	.right,

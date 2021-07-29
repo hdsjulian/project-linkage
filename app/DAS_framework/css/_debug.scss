@@ -1,3 +1,4 @@
+@use "use" as *;
 
 // DEBUG HELPER ###########
 
@@ -6,29 +7,30 @@
 	background-color: $debug_color;
 	color: $white;
 	text-align: center;
-	font-size: $fs-2;
+	@extend %fs-2;
 	outline: 1px solid $white;
-	line-height: 1
+	line-height: 1;
 }
 
 :root {
-	--viewport: 'small';
+	--viewport: "small";
 	@include mq(medium) {
-		--viewport: 'medium';
+		--viewport: "medium";
 	}
 	@include mq(large) {
-		--viewport: 'large';
+		--viewport: "large";
 	}
 	@include mq(huge) {
-		--viewport: 'huge';
+		--viewport: "huge";
 	}
 	@include mq(giant) {
-		--viewport: 'giant';
+		--viewport: "giant";
 	}
 }
 
-
-.debug, .admin-bar, .logged-in {
+.debug,
+.admin-bar,
+.logged-in {
 	.page__outer:after {
 		@extend %debugflag;
 		content: var(--viewport);
@@ -46,18 +48,16 @@
 //	$debugflex_x_color: 	hsla(300, 100%, 100%, 	1);
 //
 
-
 $adminBarHeight: 32px;
-	.admin-bar {
-		#wpadminbar {
-			opacity: .9;
-			z-index: z(debug);
-			&:hover {
-				opacity: 1;
-			}
+.admin-bar {
+	#wpadminbar {
+		opacity: 0.9;
+		z-index: z(debug);
+		&:hover {
+			opacity: 1;
 		}
 	}
-
+}
 
 //	.admin-bar .flex:after, .debug .flex:after {
 //		content:'';
@@ -141,7 +141,6 @@ $adminBarHeight: 32px;
 //		}
 //	}
 
-
 //	.admin-bar .page__outer *, .debug .page__outer * {
 //	//	outline: 1px dashed $debug_color;
 //		 &[class]:hover {
@@ -156,4 +155,3 @@ $adminBarHeight: 32px;
 //				}
 //		}
 //	}
-

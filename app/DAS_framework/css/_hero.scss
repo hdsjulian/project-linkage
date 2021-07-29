@@ -31,10 +31,10 @@
 		border-block-end: $u solid var(--module-background-color);
 		.teaser {
 			&__heading {
-				font-size: $fs2;
+				@extend %fs2;
 				@extend %light;
 				@include mq(medium) {
-					font-size: $fs3;
+					@extend %fs3;
 				}
 			}
 			margin-block-start: 0;
@@ -44,7 +44,7 @@
 			.teaser {
 				&__heading {
 					@include mq(medium) {
-						font-size: $fs5;
+						@extend %fs5;
 					}
 				}
 			}

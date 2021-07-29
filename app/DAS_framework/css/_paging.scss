@@ -1,3 +1,6 @@
+@use "use" as *;
+@use "cta" as *;
+
 // PAGING ###
 
 .paging {
@@ -9,7 +12,7 @@
 		flex: 1 1 40%;
 	}
 	a {
-		@extend .cta;
+		@include cta;
 		max-width: none;
 		min-width: 0;
 		width: 100%;

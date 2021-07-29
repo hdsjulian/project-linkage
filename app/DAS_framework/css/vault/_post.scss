@@ -2,7 +2,7 @@
 
 .post {
 	&__content {
-		padding-top: $u*3;
+		padding-top: $u * 3;
 		@extend .page__content;
 		grid-template-columns: 1fr 1fr;
 		grid-template-areas:
@@ -15,8 +15,7 @@
 			"disrupt1 disrupt1"
 			"context context"
 			"disrupt3 disrupt2"
-			"disrupt5 disrupt4"
-			;
+			"disrupt5 disrupt4";
 
 		@include mq(medium) {
 			grid-template-columns: 1fr 1fr 1fr;
@@ -30,36 +29,30 @@
 				". copy copy"
 				"disrupt2 copy copy"
 				"share context context"
-				"disrupt5 disrupt4 disrupt3"
-			;
+				"disrupt5 disrupt4 disrupt3";
 		}
 
-
-
-	//	@include mq(large) {
-	//		grid-template-areas:
-	//			"time header header"
-	//			"tag header header"
-	//			"author copy copy"
-	//			". copy copy"
-	//			"disrupt1 copy copy"
-	//			". copy copy"
-	//			". copy copy"
-	//			"disrupt5 copy copy"
-	//			"share context context"
-	//			"disrupt4 disrupt3 disrupt2"
-	//		;
-	//	}
-
+		//	@include mq(large) {
+		//		grid-template-areas:
+		//			"time header header"
+		//			"tag header header"
+		//			"author copy copy"
+		//			". copy copy"
+		//			"disrupt1 copy copy"
+		//			". copy copy"
+		//			". copy copy"
+		//			"disrupt5 copy copy"
+		//			"share context context"
+		//			"disrupt4 disrupt3 disrupt2"
+		//		;
+		//	}
 
 		blockquote {
 			margin: 0 $u 1em 0;
 			padding: $u;
 			font-style: italic;
-			font-size: $fs1;
+			@extend %fs1;
 		}
-
-
 	}
 	&__header {
 		grid-area: header;
@@ -68,7 +61,6 @@
 		}
 		h1 {
 		}
-
 	}
 	&__heading {
 		margin-top: 0;
@@ -78,7 +70,7 @@
 	&__kicker {
 		display: block;
 		margin-bottom: $u;
-		font-size: $fs1;
+		@extend %fs1;
 		line-height: inherit;
 	}
 	&__intro {
@@ -94,9 +86,19 @@
 		> p:first-of-type {
 			font-weight: 600;
 		}
-		h1, h2, h3, h4, h5, h6, dd, dt, li, small ,figcaption, figure {
-		//	max-width: $line_width;
-
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		dd,
+		dt,
+		li,
+		small,
+		figcaption,
+		figure {
+			//	max-width: $line_width;
 		}
 	}
 
@@ -116,7 +118,6 @@
 			//top: 0;
 			//padding-top: $u/2;
 			//z-index: z(fixed)-1;
-
 		}
 	}
 	&__aside-heading {
@@ -142,15 +143,12 @@
 			display: grid;
 			grid-gap: $u;
 			grid-template-columns: 1fr 5fr;
-			grid-template-areas:
-				'img name'
-				;
+			grid-template-areas: "img name";
 			@include mq(medium) {
 				grid-template-columns: 2fr 1fr;
 				grid-template-areas:
-					'name img'
-					'description description'
-					;
+					"name img"
+					"description description";
 			}
 			overflow: hidden;
 			img {
@@ -169,7 +167,7 @@
 		}
 		&-description {
 			grid-area: description;
-			font-size: $fs-1;
+			@extend %fs-1;
 			color: $body-color;
 			display: none;
 			@include mq(medium) {

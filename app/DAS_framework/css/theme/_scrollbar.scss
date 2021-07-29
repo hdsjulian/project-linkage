@@ -1,3 +1,6 @@
+@use "../helper" as *;
+@use "constant" as *;
+
 %scroll-snap-mandatory {
 	scroll-snap-type: y mandatory;
 	scroll-padding: var(--headerHeight);
@@ -24,7 +27,7 @@ $box-track: $track;
 $box-thumb: $thumb;
 
 $thumbradius: 0; //$w/2;
-$thumbborder: $border-size;
+$thumbborder: $stroke;
 
 // WEBKIT
 ::-webkit-scrollbar {

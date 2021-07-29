@@ -1,3 +1,5 @@
+@use "use" as *;
+
 %nav__item {
 	font-family: $font-family-nav;
 	a:link,
@@ -22,7 +24,7 @@
 
 .nav {
 	&--main {
-		font-size: $fs3;
+		@extend %fs3;
 		padding: $u * 3 $u * 4 $u $u/2;
 		color: $link-color;
 	}

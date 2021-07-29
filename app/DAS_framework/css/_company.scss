@@ -6,13 +6,13 @@
 	margin: $u 0;
 	&.has-figure {
 		.teaser__heading {
-			font-size: $fs-2;
+			@extend %fs-2;
 			@extend %normal;
 		}
 	}
 	> .teaser__inner {
 		dd {
-			font-size: $fs-2;
+			@extend %fs-2;
 		}
 		.teaser {
 			&__heading {

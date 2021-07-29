@@ -1,4 +1,7 @@
 // ELEMENTS #########
+@use "sass:math";
+@use "use" as *;
+@use "cta" as *;
 
 *,
 *:before,
@@ -232,7 +235,7 @@ $quotemark-size: $fs6 * 3;
 	margin-inline: 0;
 	margin-block: $u * 2;
 	padding-block: $u * 4;
-	font-size: $fs0;
+	@extend %fs0;
 	--module-background-color: #{$brand--mute};
 	color: $white;
 	@extend %normal--inverse;
@@ -269,7 +272,7 @@ blockquote > p:last-of-type {
 cite {
 	display: block;
 	text-align: right;
-	font-size: $fs-1;
+	@extend %fs-1;
 	@extend %bold--inverse;
 	@extend %italic-not;
 	font-family: $font-family-brand;
@@ -396,20 +399,20 @@ textarea {
 	}
 }
 button {
-	@extend %cta;
+	@include cta;
 	padding: 0 0 0 $u * 4;
 	box-shadow: none;
 	width: auto;
 }
 
 [type="submit"] {
-	@extend %cta;
+	@include cta;
 	@extend %bold--inverse;
 	background-color: $cta-color;
 }
 
 [type="reset"] {
-	@extend %cta;
+	@include cta;
 	@extend %normal--inverse;
 	background-color: $neutral-color;
 }
@@ -661,14 +664,14 @@ h3 {
 	}
 }
 h1 {
-	font-size: $fs5;
+	@extend %fs5;
 }
 h2 {
-	font-size: $fs4;
+	@extend %fs4;
 	@extend %normal;
 }
 h3 {
-	font-size: $fs1;
+	@extend %fs1;
 }
 h3,
 h4,
@@ -680,13 +683,13 @@ h6 {
 h4,
 h5,
 h6 {
-	font-size: $fs0;
+	@extend %fs0;
 	margin-block-end: $u/2;
 }
 h5 {
 }
 h6 {
-	font-size: $fs-2;
+	@extend %fs-2;
 }
 
 h3,
@@ -712,7 +715,7 @@ hr {
 }
 small {
 	display: block;
-	font-size: $fs-1;
+	@extend %fs-1;
 }
 code {
 	font-family: monospace;

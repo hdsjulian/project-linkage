@@ -21,7 +21,7 @@
 		@extend %flex;
 		--flex-gap: #{$u/2};
 		min-height: $u * 2;
-		font-size: $fs-1;
+		@extend %fs-1;
 		max-width: calc(100% - #{$hook-width});
 		@include mq(medium) {
 			max-width: none;

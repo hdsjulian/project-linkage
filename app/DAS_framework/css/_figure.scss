@@ -31,7 +31,7 @@ figure {
 		$s: $u * 1.5;
 		text-align: left;
 		user-select: none;
-		font-size: $fs-2;
+		@extend %fs-2;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -78,7 +78,7 @@ figure {
 	}
 }
 figcaption {
-	font-size: $fs-1;
+	@extend %fs-1;
 	background-color: $brand--bright;
 	p {
 		padding: $u;

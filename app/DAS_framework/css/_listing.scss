@@ -189,7 +189,7 @@
 							"excerpt excerpt excerpt";
 					}
 					&__heading {
-						font-size: $fs5;
+						@extend %fs5;
 						--weight: #{$light-weight};
 					}
 					&__figure {
@@ -204,7 +204,7 @@
 						margin-block-end: 0;
 					}
 					&__excerpt {
-						font-size: $fs0;
+						@extend %fs0;
 					}
 				}
 			}
