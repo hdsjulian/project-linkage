@@ -4,10 +4,12 @@ handover = {
     'date': 12516136125,
     'lat': '42.216136',
     'lon': '21.25161',
-    'from': 4
-    'to': 6
-    'text': "We really like each other"
-    'predecessor': 16
+    'from':  4,
+    'to': 6,
+    'text': "We really like each other",
+    'predecessor': 16,
+    'travels': 6,
+    'successor': 23,
 }
 
 coin = {
