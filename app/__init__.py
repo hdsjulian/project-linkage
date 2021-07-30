@@ -7,7 +7,7 @@ from flask_wtf.csrf import CsrfProtect
 
 csrf = CsrfProtect()
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='DAS_framework/prototype/')
 app.config.from_object(Config)
 app.debug = True
 db = SQLAlchemy(app)
