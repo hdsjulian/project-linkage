@@ -24,7 +24,7 @@ def login():
 @app.route('/coin/<artifact_id>/<artifact_hash>')
 def artifact(artifact_id=0, artifact_hash=False):
 	artifact = Artifact.query.get(artifact_id)
-	return artifact.artifact_id
+	return artifact.id
 
 @app.route('/.well-known/acme-challenge/<challenge>')
 def letsencrypt_check(challenge):
