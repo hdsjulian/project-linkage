@@ -20,11 +20,19 @@ def login():
     	return redirect(url_for('index'))
     login_user(user)
     return redirect(url_for('index'))
-@app.route('/coin/<coin_id>')
-@app.route('/coin/<coin_id>/<coin_hash>')
-def artifact(coin_id=0, coin_hash=False):
-	coin = Artifact.query.get(coin_id)
-	return coin.coin_id
+@app.route('/coin/<artifact_id>')
+@app.route('/coin/<artifact_id>/<artifact_hash>')
+def artifact(artifact_id=0, artifact_hash=False):
+	artifact = Artifact.query.get(artifact_id)
+	return artifact.artifact_id
+
+@app.route('/.well-known/acme-challenge/<challenge>')
+def letsencrypt_check(challenge):
+    challenge_response = {
+        "<challenge_token>":"<challenge_response>",
+        "<challenge_token>":"<challenge_response>"
+    }
+    return Response(challenge_response[challenge], mimetype='text/plain')
 
 
 @app.route('/register/<artifact_id>/<artifact_hash>', methods=['GET','POST'])
