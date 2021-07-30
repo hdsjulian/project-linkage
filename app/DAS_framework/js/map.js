@@ -7,5 +7,4 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoicHJvamVjdGxpbmthZ2UiLCJhIjoiY2tycGk0ejA2MmQ1cTJucnZiZTRsOXZlYyJ9.YkeSvM4CDDlz9dHlkc7Zuw'
 }).addTo(mymap);
-console.log('fosdo');
-
+document.querySelector('#mapid').style.height = window.innerHeight+'px';
