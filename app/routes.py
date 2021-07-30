@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, jsonify
 from app import app 
 from flask_login import current_user, login_user
 from app.models import User, Artifact, Handover, Media, Text, MediaType
