@@ -2898,6 +2898,10 @@ dl dt {
   background-color: #5c5c5c;
 }
 
+#map {
+  min-height: 100vh;
+}
+
 .error,
 .is-error {
   color: #bf4040;
