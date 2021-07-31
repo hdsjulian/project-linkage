@@ -2993,6 +2993,10 @@ dl dt {
 }
 
 #map {
+  background-color: whitesmoke;
+  background-image: url("../image/map/background.svg");
+  background-repeat: space;
+  background-size: 5%;
   min-block-size: 61.803398875vh;
 }
 @media (min-width: 885px) and (min-height: 299px) {
