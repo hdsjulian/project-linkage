@@ -14,7 +14,7 @@
 	background-color: $egg;
 	background-image: url("../image/map/background.svg");
 	background-repeat: space;
-	background-size: 5%;
+	background-size: 7%;
 	min-block-size: $phi-major * 100vh;
 	@include mq(medium) {
 		min-block-size: 100vh;
