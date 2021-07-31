@@ -16,6 +16,14 @@ $hook-width: $hook-height;
 			}
 			~ .menu-toggle__hook {
 				color: $black;
+				.icon {
+					&--close {
+						opacity: 1;
+					}
+					&--menu {
+						opacity: 0;
+					}
+				}
 				&:after {
 					pointer-events: all;
 					content: "";
@@ -29,6 +37,11 @@ $hook-width: $hook-height;
 		&__hook {
 			cursor: pointer;
 			pointer-events: all;
+			.icon {
+				&--close {
+					opacity: 0;
+				}
+			}
 			&-icon {
 				position: fixed;
 				z-index: z(fixed) + 1;
@@ -41,6 +54,7 @@ $hook-width: $hook-height;
 				padding: $u * 2.5;
 				display: grid;
 				place-content: center;
+				grid-template-areas: "stack";
 				font-size: $u;
 				line-height: 0;
 				background-color: $brand--night;
@@ -49,6 +63,9 @@ $hook-width: $hook-height;
 					color: $brand--color;
 					width: $hook-height;
 					height: $hook-height;
+					@include transition(opacity, $duration/2, $easing);
+					transition-delay: $duration/2;
+					grid-area: stack;
 				}
 			}
 		}
