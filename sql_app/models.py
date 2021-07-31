@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, Text
 from sqlalchemy.orm import relationship
-us
+
 class User(Base):
     __tablename__ = "users"
 
@@ -16,7 +16,7 @@ class Coin(Base):
     id = Column(Integer, primary_key=True, index=True)
     hash = Column(String, unique=True)
     handovers = relationship("Handover", back_populates="coin")
-    
+
 class Handover(Base):
     __tablename__ = "handovers"
     id = Column(Integer, primary_key=True, index=True)
