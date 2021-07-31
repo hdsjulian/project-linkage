@@ -32,7 +32,10 @@ $hook-width: $hook-height;
 			&-icon {
 				position: fixed;
 				z-index: z(fixed) + 1;
-				inset: $u auto auto $u;
+				inset: 0 auto auto 0;
+				@include mq(medium) {
+					inset: $u auto auto $u;
+				}
 				width: $hook-width;
 				height: $hook-height;
 				padding: $u * 2.5;
@@ -40,10 +43,10 @@ $hook-width: $hook-height;
 				place-content: center;
 				font-size: $u;
 				line-height: 0;
-				background-color: $egg;
+				background-color: $brand--night;
 				cursor: pointer;
 				svg {
-					color: $dun;
+					color: $brand--color;
 					width: $hook-height;
 					height: $hook-height;
 				}
@@ -56,7 +59,10 @@ $hook-width: $hook-height;
 			transition-timing-function: $easing;
 			position: fixed;
 			z-index: z(fixed);
-			inset: $u auto $u $u;
+			inset: 0 auto auto 0;
+			@include mq(medium) {
+				inset: $u auto auto $u;
+			}
 			overflow-y: auto;
 			padding: 4 * $u $u $u $u;
 			pointer-events: none;

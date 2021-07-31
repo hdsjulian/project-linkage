@@ -9,5 +9,8 @@
 }
 
 #map {
-	min-height: 100vh;
+	min-height: $phi-major * 100vh;
+	@include mq(medium) {
+		min-height: 100vh;
+	}
 }

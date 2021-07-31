@@ -3,9 +3,15 @@
 .article {
 	position: fixed;
 	z-index: z(fixed);
-	inset: $u $u $u auto;
-	inline-size: $line-width;
+	inset: $phi-major * 100vh 0 0 0;
+	@include mq(medium) {
+		inset: $u $u $u auto;
+		inline-size: $line-width;
+	}
 	padding: $u * 1.5;
+	@include mq(medium) {
+		padding-block-start: 0;
+	}
 	overflow: auto;
 	background-color: $egg;
 	> section {
@@ -19,6 +25,16 @@
 		}
 	}
 	&__header {
-		margin-block-end: $u;
+		position: fixed;
+		inset: 0 0 auto auto;
+		max-inline-size: $line-width/2;
+		block-size: $u * 5;
+		padding: $u;
+		background-color: $egg;
+		@include mq(medium) {
+			position: sticky;
+			inset-block: 0;
+			padding-inline: 0;
+		}
 	}
 }

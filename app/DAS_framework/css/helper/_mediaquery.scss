@@ -1,38 +1,45 @@
-@charset "UTF-8";
+@use "breakpoint" as *;
+
 // BREAKPOINTS
 
-$medium_width: 0 !default;
-$large_width: 0 !default;
-$huge_width: 0 !default;
-$giant_width: 0 !default;
+//$medium_width: 0 !default;
+//$large_width: 0 !default;
+//$huge_width: 0 !default;
+//$giant_width: 0 !default;
+//
+//$medium_height: 0 !default;
+//$large_height: 0 !default;
+//$huge_height: 0 !default;
+//$giant_height: 0 !default;
 
-$medium_height: 0 !default;
-$large_height: 0 !default;
-$huge_height: 0 !default;
-$giant_height: 0 !default;
-
-@mixin notouch{
-	@media (any-hover: hover) { @content; }
+@mixin notouch {
+	@media (any-hover: hover) {
+		@content;
+	}
 }
-@mixin touch{
-	@media (any-hover: none) { @content; }
+@mixin touch {
+	@media (any-hover: none) {
+		@content;
+	}
 }
 
-@mixin mqcustom($point, $constraint:min-width){
-	@media ($constraint: $point) { @content; }
+@mixin mqcustom($point, $constraint: min-width) {
+	@media ($constraint: $point) {
+		@content;
+	}
 }
 
 $breakwidths: (
-	"medium"  : $medium_width,
-	"large" : $large_width,
-	"huge"  : $huge_width,
-	"giant"  : $giant_width
+	"medium": $medium_width,
+	"large": $large_width,
+	"huge": $huge_width,
+	"giant": $giant_width,
 );
 $breakheights: (
-	"medium"  : $medium_height,
-	"large" : $large_height,
-	"huge"  : $huge_height,
-	"giant"  : $giant_height
+	"medium": $medium_height,
+	"large": $large_height,
+	"huge": $huge_height,
+	"giant": $giant_height,
 );
 $default-mediaquery: root;
 $current-mediaquery: $default-mediaquery;
@@ -59,4 +66,3 @@ $current-mediaquery: $default-mediaquery;
 		@warn "Invalid mediaquery `#{$mediaquery}`.";
 	}
 }
-

@@ -54,19 +54,6 @@ $line-width: 42ch; // https://caniuse.com/#feat=ch-unit
 $line-height: 1 + $sqrt2-major;
 $page-border: $u;
 
-// MEDIAQUERY BREAKPOINT DEFINITION ###########
-$medium_width: 885px;
-$medium_height: 299px;
-
-$large_width: 1256px;
-$large_height: 0px;
-
-$huge_width: 1500px;
-$huge_height: 0px;
-
-$giant_width: 1921px;
-$giant_height: 0px;
-
 $box-width: px2rem($medium_width) / 3;
 
 $column-width: $line-width * $sqrt2;

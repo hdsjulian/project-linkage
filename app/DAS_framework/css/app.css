@@ -360,22 +360,22 @@ template {
 :root {
   --root-font-size: 90%;
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   :root {
     --root-font-size: 95%;
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   :root {
     --root-font-size: 100.01%;
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1500px) and (min-height: 0px) {
   :root {
     --root-font-size: 102%;
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1921px) and (min-height: 0px) {
   :root {
     --root-font-size: 104%;
   }
@@ -421,7 +421,11 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.form legend,
+.wpcf7 legend,
+.form label,
+.wpcf7 label {
   --weight: 280;
 }
 
@@ -439,7 +443,11 @@ blockquote, [type=reset] {
 dl dd, h3,
 h4,
 h5,
-h6, strong, b {
+h6, strong, b,
+.form legend,
+.wpcf7 legend,
+.form label,
+.wpcf7 label {
   --weight: 600;
 }
 
@@ -460,7 +468,11 @@ h2,
 h3,
 h4,
 h5,
-h6, .cta, .uppercase,
+h6,
+.form legend,
+.wpcf7 legend,
+.form label,
+.wpcf7 label, .cta, .uppercase,
 .brand {
   letter-spacing: 0.05ch;
 }
@@ -470,7 +482,11 @@ h2,
 h3,
 h4,
 h5,
-h6, .cta, .uppercase,
+h6,
+.form legend,
+.wpcf7 legend,
+.form label,
+.wpcf7 label, .cta, .uppercase,
 .brand {
   text-transform: uppercase;
 }
@@ -481,7 +497,7 @@ h6, .cta, .uppercase,
   --webkit-font-smoothing: antialiased;
   --moz-osx-font-smoothing: grayscale;
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .paging a, button, [type=submit], [type=reset], .cta {
     background-color: var(--brand--color);
   }
@@ -567,7 +583,7 @@ h6, .cta, .uppercase,
 .legal small li,
 .legal small dd,
 .legal small dt,
-.legal small address, h6, .fs-2 {
+.legal small address, h6, .form label, .wpcf7 label, .fs-2 {
   font-size: 0.75rem;
 }
 
@@ -582,7 +598,11 @@ cite, small, .fs-1 {
 .legal small h5,
 .legal small h6, .paging a, blockquote, button, [type=submit], [type=reset], h4,
 h5,
-h6, .cta, .fs0 {
+h6,
+.form legend,
+.wpcf7 legend,
+.form label,
+.wpcf7 label, .cta, .fs0 {
   font-size: 1rem;
 }
 
@@ -679,7 +699,7 @@ body {
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .left,
 .right,
 .float--left,
@@ -710,7 +730,7 @@ body {
   clear: both;
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .sqrt2-major {
     width: 70.7106781187%;
   }
@@ -971,7 +991,7 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--1 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--1 {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -980,7 +1000,7 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--2 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--2 {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -989,7 +1009,7 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--3 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--3 {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -998,7 +1018,7 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--4 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--4 {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -1007,7 +1027,7 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--5 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--5 {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -1016,12 +1036,12 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--6 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .grid--6 {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--6 {
     grid-template-columns: repeat(6, 1fr);
   }
@@ -1030,12 +1050,12 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--7 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .grid--7 {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--7 {
     grid-template-columns: repeat(7, 1fr);
   }
@@ -1044,12 +1064,12 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--8 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .grid--8 {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--8 {
     grid-template-columns: repeat(8, 1fr);
   }
@@ -1058,12 +1078,12 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--9 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .grid--9 {
     grid-template-columns: repeat(5, 1fr);
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--9 {
     grid-template-columns: repeat(9, 1fr);
   }
@@ -1072,12 +1092,12 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--10 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .grid--10 {
     grid-template-columns: repeat(5, 1fr);
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--10 {
     grid-template-columns: repeat(10, 1fr);
   }
@@ -1086,12 +1106,12 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--11 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .grid--11 {
     grid-template-columns: repeat(6, 1fr);
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--11 {
     grid-template-columns: repeat(11, 1fr);
   }
@@ -1100,12 +1120,12 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
 .grid--12 {
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .grid--12 {
     grid-template-columns: repeat(6, 1fr);
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   .grid--12 {
     grid-template-columns: repeat(12, 1fr);
   }
@@ -1122,145 +1142,145 @@ dl, .grid, .grid--12, .grid--11, .grid--10, .grid--9, .grid--8, .grid--7, .grid-
   grid-column: 1/-1;
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--1 {
     grid-column: span 1;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--1 {
     grid-row: span 1;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--2 {
     grid-column: span 2;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--2 {
     grid-row: span 2;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--3 {
     grid-column: span 3;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--3 {
     grid-row: span 3;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--4 {
     grid-column: span 4;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--4 {
     grid-row: span 4;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--5 {
     grid-column: span 5;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--5 {
     grid-row: span 5;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--6 {
     grid-column: span 6;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--6 {
     grid-row: span 6;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--7 {
     grid-column: span 7;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--7 {
     grid-row: span 7;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--8 {
     grid-column: span 8;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--8 {
     grid-row: span 8;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--9 {
     grid-column: span 9;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--9 {
     grid-row: span 9;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--10 {
     grid-column: span 10;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--10 {
     grid-row: span 10;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--11 {
     grid-column: span 11;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--11 {
     grid-row: span 11;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .colspan--12 {
     grid-column: span 12;
   }
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .rowspan--12 {
     grid-row: span 12;
   }
@@ -2424,7 +2444,11 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+.form legend,
+.wpcf7 legend,
+h6,
+.form label,
+.wpcf7 label {
   font-family: "Rubik", "Arial", sans-serif;
   max-width: 42ch;
   margin: 2rem 0 1rem 0;
@@ -2448,12 +2472,16 @@ h2:first-child,
 h3:first-child,
 h4:first-child,
 h5:first-child,
-h6:first-child {
+.form legend:first-child,
+.wpcf7 legend:first-child,
+h6:first-child,
+.form label:first-child,
+.wpcf7 label:first-child {
   -webkit-margin-before: 0;
           margin-block-start: 0;
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   h1,
 h2,
 h3 {
@@ -2467,7 +2495,11 @@ h3 {
 
 h4,
 h5,
-h6 {
+.form legend,
+.wpcf7 legend,
+h6,
+.form label,
+.wpcf7 label {
   -webkit-margin-after: 0.5rem;
           margin-block-end: 0.5rem;
 }
@@ -2475,7 +2507,11 @@ h6 {
 h3 + h2,
 h4 + h2,
 h5 + h2,
-h6 + h2 {
+.form legend + h2,
+.wpcf7 legend + h2,
+h6 + h2,
+.form label + h2,
+.wpcf7 label + h2 {
   -webkit-margin-before: 0;
           margin-block-start: 0;
 }
@@ -2570,7 +2606,11 @@ h2,
 h3,
 h4,
 h5,
+.form legend,
+.wpcf7 legend,
 h6,
+.form label,
+.wpcf7 label,
 iframe,
 video,
 embed,
@@ -2637,6 +2677,46 @@ dl dt {
   text-align: right;
   font-family: "Rubik", "Arial", sans-serif;
 }
+.wpcf7, .form {
+  margin: 1rem 0;
+}
+.wpcf7 fieldset, .form fieldset {
+  background-color: var(--brand--light);
+  margin: 1rem 0;
+  padding: 2rem;
+}
+.wpcf7 legend, .form legend {
+  background-color: var(--brand--light);
+  padding: 1rem 2rem;
+  -webkit-margin-start: auto;
+          margin-inline-start: auto;
+  -webkit-margin-end: -2rem;
+          margin-inline-end: -2rem;
+}
+.wpcf7 label, .form label {
+  margin: 2rem 0;
+}
+.wpcf7 input ~ span, .form input ~ span {
+  padding-left: 1rem;
+}
+.wpcf7 input:invalid, .form input:invalid {
+  color: #bf4040;
+}
+.wpcf7 input:invalid ~ span, .form input:invalid ~ span {
+  color: #bf4040;
+}
+.wpcf7 input:disabled, .form input:disabled {
+  color: #8f8f8f;
+}
+.wpcf7 input:disabled ~ span, .form input:disabled ~ span {
+  color: #8f8f8f;
+}
+.wpcf7 input:required ~ span:after, .form input:required ~ span:after {
+  content: "✷";
+  position: relative;
+  top: -0.4em;
+}
+
 .page__outer {
   position: relative;
 }
@@ -2681,7 +2761,7 @@ dl dt {
 .menu-toggle__hook-icon {
   position: fixed;
   z-index: 401;
-  inset: 1rem auto auto 1rem;
+  inset: 0 auto auto 0;
   width: 3rem;
   height: 3rem;
   padding: 2.5rem;
@@ -2689,11 +2769,16 @@ dl dt {
   place-content: center;
   font-size: 1rem;
   line-height: 0;
-  background-color: whitesmoke;
+  background-color: var(--brand--night);
   cursor: pointer;
 }
+@media (min-width: 885px) and (min-height: 299px) {
+  .menu-toggle__hook-icon {
+    inset: 1rem auto auto 1rem;
+  }
+}
 .menu-toggle__hook-icon svg {
-  color: #5c5c5c;
+  color: var(--brand--color);
   width: 3rem;
   height: 3rem;
 }
@@ -2704,12 +2789,17 @@ dl dt {
   transition-timing-function: cubic-bezier(0.2, 0, 0.6, 1);
   position: fixed;
   z-index: 400;
-  inset: 1rem auto 1rem 1rem;
+  inset: 0 auto auto 0;
   overflow-y: auto;
   padding: 4rem 1rem 1rem 1rem;
   pointer-events: none;
   opacity: 0;
   background-color: whitesmoke;
+}
+@media (min-width: 885px) and (min-height: 299px) {
+  .menu-toggle__object {
+    inset: 1rem auto auto 1rem;
+  }
 }
 
 [class*=nav__item] {
@@ -2748,7 +2838,7 @@ dl dt {
           column-width: 14ch;
 }
 
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   .text-column--1 {
     -webkit-column-count: 1;
        -moz-column-count: 1;
@@ -2899,7 +2989,12 @@ dl dt {
 }
 
 #map {
-  min-height: 100vh;
+  min-height: 61.803398875vh;
+}
+@media (min-width: 885px) and (min-height: 299px) {
+  #map {
+    min-height: 100vh;
+  }
 }
 
 .error,
@@ -2929,11 +3024,22 @@ dl dt {
 .article {
   position: fixed;
   z-index: 400;
-  inset: 1rem 1rem 1rem auto;
-  inline-size: 42ch;
+  inset: 61.803398875vh 0 0 0;
   padding: 1.5rem;
   overflow: auto;
   background-color: whitesmoke;
+}
+@media (min-width: 885px) and (min-height: 299px) {
+  .article {
+    inset: 1rem 1rem 1rem auto;
+    inline-size: 42ch;
+  }
+}
+@media (min-width: 885px) and (min-height: 299px) {
+  .article {
+    -webkit-padding-before: 0;
+            padding-block-start: 0;
+  }
 }
 .article > section {
   display: none;
@@ -2945,8 +3051,20 @@ dl dt {
   display: none;
 }
 .article__header {
-  -webkit-margin-after: 1rem;
-          margin-block-end: 1rem;
+  position: fixed;
+  inset: 0 0 auto auto;
+  max-inline-size: 21ch;
+  block-size: 5rem;
+  padding: 1rem;
+  background-color: whitesmoke;
+}
+@media (min-width: 885px) and (min-height: 299px) {
+  .article__header {
+    position: -webkit-sticky;
+    position: sticky;
+    inset-block: 0;
+    padding-inline: 0;
+  }
 }
 
 @media print {
@@ -3109,22 +3227,22 @@ body a:link {
 :root {
   --viewport: "small";
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 885px) and (min-height: 299px) {
   :root {
     --viewport: "medium";
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1256px) and (min-height: 0px) {
   :root {
     --viewport: "large";
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1500px) and (min-height: 0px) {
   :root {
     --viewport: "huge";
   }
 }
-@media (min-width: 0) and (min-height: 0) {
+@media (min-width: 1921px) and (min-height: 0px) {
   :root {
     --viewport: "giant";
   }
