@@ -2981,19 +2981,23 @@ dl dt {
 }
 
 .map {
-  max-width: none;
-  position: fixed;
-  z-index: 0;
-  inset: 0;
+  max-inline-size: none;
   background-color: #5c5c5c;
+}
+@media (min-width: 885px) and (min-height: 299px) {
+  .map {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+  }
 }
 
 #map {
-  min-height: 61.803398875vh;
+  min-block-size: 61.803398875vh;
 }
 @media (min-width: 885px) and (min-height: 299px) {
   #map {
-    min-height: 100vh;
+    min-block-size: 100vh;
   }
 }
 
@@ -3022,16 +3026,15 @@ dl dt {
 }
 
 .article {
-  position: fixed;
-  z-index: 400;
-  inset: 61.803398875vh 0 0 0;
   padding: 1.5rem;
   overflow: auto;
   background-color: whitesmoke;
 }
 @media (min-width: 885px) and (min-height: 299px) {
   .article {
-    inset: 1rem 1rem 1rem auto;
+    position: fixed;
+    inset: 1rem 1rem auto auto;
+    max-block-size: calc(100vh - 3rem);
     inline-size: 42ch;
   }
 }
@@ -3052,6 +3055,7 @@ dl dt {
 }
 .article__header {
   position: fixed;
+  z-index: 400;
   inset: 0 0 auto auto;
   max-inline-size: 21ch;
   block-size: 5rem;

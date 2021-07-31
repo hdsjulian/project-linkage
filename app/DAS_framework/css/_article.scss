@@ -1,11 +1,10 @@
 @use "use" as *;
 
 .article {
-	position: fixed;
-	z-index: z(fixed);
-	inset: $phi-major * 100vh 0 0 0;
 	@include mq(medium) {
-		inset: $u $u $u auto;
+		position: fixed;
+		inset: $u $u auto auto;
+		max-block-size: calc(100vh - #{$u * 3});
 		inline-size: $line-width;
 	}
 	padding: $u * 1.5;
@@ -26,6 +25,7 @@
 	}
 	&__header {
 		position: fixed;
+		z-index: z(fixed);
 		inset: 0 0 auto auto;
 		max-inline-size: $line-width/2;
 		block-size: $u * 5;
