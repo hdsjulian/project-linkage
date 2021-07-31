@@ -27,7 +27,9 @@
 		position: fixed;
 		z-index: z(fixed);
 		inset: 0 0 auto auto;
-		max-inline-size: $line-width/2;
+		.logo {
+			inline-size: $line-width/2;
+		}
 		block-size: $u * 5;
 		padding: $u;
 		background-color: $egg;

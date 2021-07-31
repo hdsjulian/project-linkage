@@ -3057,10 +3057,12 @@ dl dt {
   position: fixed;
   z-index: 400;
   inset: 0 0 auto auto;
-  max-inline-size: 21ch;
   block-size: 5rem;
   padding: 1rem;
   background-color: whitesmoke;
+}
+.article__header .logo {
+  inline-size: 21ch;
 }
 @media (min-width: 885px) and (min-height: 299px) {
   .article__header {
