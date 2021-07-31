@@ -3,12 +3,12 @@
 // .foo {	z-index: z(fixed); }
 $z-layers: (
 	"debug": 9999999999999,
-	"modal": 500,
-	"fixed": 400,
-	"sticky": 300,
+	"modal": 1500,
+	"fixed": 1400,
+	"sticky": 1300,
 	// because steady insists
-	"flyout": 200,
-	"up": 100,
+	"flyout": 1200,
+	"up": 1001,
 	"default": 0,
 	"behind": -100,
 );
