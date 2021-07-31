@@ -188,9 +188,9 @@ $link-color-visited: none;
 $link-color-active: $link-color;
 $icon-color: $link-color;
 $cta-color: $brand--color;
-$cta-color-hover: $brand--light;
-$cta-background-color: $body-color;
-$cta-background-color-hover: $brand--dark;
+$cta-color-hover: $brand--night;
+$cta-background-color: $brand--night;
+$cta-background-color-hover: $brand--color;
 
 //ins del
 $ins-color: $body-color;
