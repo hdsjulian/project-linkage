@@ -24,8 +24,11 @@ class Handover(Base):
     lon = Column(Float)
     text = Column(Text)
     timestamp = Column(int, index=True, default = datetime.utcnow)
-    predecessor = relationship("Handover", backref="predecessor")
-    giver_id = relationship("User", back_populates="giver")
-    recipient_id = relationship("User", back_populates="recipient")
+    #predecessor = relationship("Handover", backref="predecessor")
+    predecessor_id = Column(Integer, ForeignKey("handovers.id")
+    owner_id = Column (Integer, ForeignKey("users.id"))
+    giver_id = Column (Integer, ForeignKey("users.id"))
+    giver = relationship("User", back_populates="hadovers_given")
+    recipient = relationship("User", back_populates="handovers_received")
     
 
