@@ -1,6 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, Text
 from sqlalchemy.orm import relationship
-
+from database import Base
+from datetime import datetime
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
@@ -8,7 +9,7 @@ class User(Base):
     hashed_password = Column(String)
     name = Column(String)
     recipient = relationship("Handover", back_populates="recipient")
-    giver = relationship("Handover", back_population="giver")
+    giver = relationship("Handover", back_populates="giver")
 
 class Coin(Base):
     __tablename__ = "coins"
@@ -23,8 +24,7 @@ class Handover(Base):
     lon = Column(Float)
     text = Column(Text)
     timestamp = Column(Integer, index=True, default = datetime.utcnow)
-    #predecessor = relationship("Handover", backref="predecessor")
-    predecessor_id = Column(Integer, ForeignKey("handovers.id")
+    predecessor_id = Column(Integer, ForeignKey("handovers.id"))
     recipient_id = Column (Integer, ForeignKey("users.id"))
     giver_id = Column (Integer, ForeignKey("users.id"))
     giver = relationship("User", back_populates="hadovers_given")
