@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 import crud, models, schemas
 from database import SessionLocal, engine
 
-#models.Base.metadata.create_all(bind=engine)
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 def get_db():
@@ -32,10 +32,18 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def read_coin(coin_id: int, db: Session=Depends(get_db)):
     db_coin = crud.get_coin(db, coin_id=coin_id)
     if db_coin is None:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="Coin not found")
     return db_coin
 
 @app.get("/coins/", response_model=List[schemas.Coin])
 def read_coins(skip: int = 0, limit: int = 120, db: Session = Depends(get_db)):
     coins = crud.get_coins(db, skip=skip, limit=limit)
     return coins
+
+@app.get("/handovers/{handover_id}")
+def read_handover(handover_id: int, db: Session=Depends(get_db)):
+    db_handover = crud.get)handover(db, handover_id=handover_id)
+    if db_handover is None:
+        raise HTTPException(status_code=404, detail="Handover not found")
+    return db_handover
+
