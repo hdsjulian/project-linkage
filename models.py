@@ -8,9 +8,7 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     name = Column(String)
-    handovers_received = relationship("Handover", back_populates="recipient")
-    handovers_given = relationship("Handover", back_populates="giver")
-
+    
 class Coin(Base):
     __tablename__ = "coins"
     id = Column(Integer, primary_key=True, index=True)
