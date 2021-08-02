@@ -21,3 +21,9 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+@app.get("/coins/{coin_id}", response_model=schemas.Coin)
+def read_coin(coin_id: int, db: Session=Depends(get_db)):
+    db_coin = crud.get_coin(db, coin_id=coin_id)
+    if db_coin is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return db_coin

@@ -25,6 +25,9 @@ def create_user(db: Session, user: schemas.UserCreate):
 def get_coins(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Coin).offset(skip).limit(limit).all()
 
+def get_coin(db: Session, coin_id: int):
+    return db.query(models.Coin).filter(models.Coin.id == coin_id).first()
+
 
 """ def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
     db_item = models.Item(**item.dict(), owner_id=user_id)
