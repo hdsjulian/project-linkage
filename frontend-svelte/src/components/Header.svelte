@@ -5,9 +5,8 @@
 
       <label class="menu-toggle__hook" for="menu-toggle">
         <div class="menu-toggle__hook-icon">
-          <svg class="icon--menu">
-            <use xlink:href="#menu" />
-          </svg>
+          <svg class="icon--menu"><use xlink:href="#menu" /></svg>
+          <svg class="icon--close"><use xlink:href="#close" /></svg>
         </div>
       </label>
 
