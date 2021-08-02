@@ -2,7 +2,7 @@
   <div class="page-menu menu">
     <div class="menu-toggle">
       <input class="visually-hidden" id="menu-toggle" type="checkbox" />
-      
+
       <label class="menu-toggle__hook" for="menu-toggle">
         <div class="menu-toggle__hook-icon">
           <svg class="icon--menu">
@@ -14,7 +14,6 @@
       <div class="menu-toggle__object" id="menu">
         <!--include _page-search.pug -->
         <nav class="nav--main">
-
           <ol class="nav__list">
             <li class="nav__item"><a href="#about">About</a></li>
             <li class="nav__item"><a href="#coin">Coins</a></li>
@@ -29,12 +28,12 @@
   </div>
 
   <script>
-    var navigating = document.getElementsByClassName("nav__item");
+    var navigating = document.getElementsByClassName("nav__item")
     var hidemenu = function () {
-      document.getElementById("menu-toggle").checked = false;
-    };
+      document.getElementById("menu-toggle").checked = false
+    }
     for (var i = 0; i < navigating.length; i++) {
-      navigating[i].addEventListener("click", hidemenu, false);
+      navigating[i].addEventListener("click", hidemenu, false)
     }
   </script>
 </header>
