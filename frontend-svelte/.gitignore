@@ -1,2 +1,4 @@
 node_modules
 public/build
+public/app.css
+public/app.css.map
