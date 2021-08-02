@@ -1,9 +1,9 @@
 <script>
   // import Button from "./Button.svelte";
+
   import Article from "./components/Article.svelte"
   import BurgerSvg from "./components/Burger.svg.svelte"
   import Header from "./components/Header.svelte"
-  import Map from "./components/Map.svelte"
 
   import About from "./sections/About.svelte"
   import Coin from "./sections/Coin.svelte"
@@ -20,8 +20,6 @@
   <div class="page__outer">
     <div class="page__inner">
       <main class="page-main">
-        <Map />
-
         <Article>
           <section class="contact" id="contact">
             <Contact />
