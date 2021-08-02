@@ -2,8 +2,9 @@
   "name": "project-linkage-001",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
-    "build:css": "yarn sass ../app/DAS_framework/css/app.scss public/app.css",
+    "build": "run-p build:*",
+    "build:css": "yarn sass ../app/DAS_framework/css/app.scss public/build/app.css",
+    "build:js": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
     "check": "yarn prettier -c ."
@@ -11,6 +12,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
     "prettier-plugin-svelte": "^2.3.1",
     "rollup": "^2.55.1",
