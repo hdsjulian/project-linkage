@@ -48,3 +48,7 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
         raise HTTPException(status_code=404, detail="Handover not found")
     return db_handover
 
+@app.get("/handovers/", response_model=List[schemas.Handover])
+def read_handovers(db: Session=Depends(get_db)):
+    handovers = crud.get_handovers(db)
+    return handovers
