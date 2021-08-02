@@ -1,0 +1,16 @@
+.cookie-box {
+	@include hyphens(none);
+}
+a._brlbs-btn-cookie-preference.borlabs-cookie-preference {
+	@include cta;
+	text-decoration: none;
+	margin-inline: $u * 2;
+	padding-inline-start: $u;
+	padding-inline-end: 0;
+	padding-block: 0;
+	background-color: $mediocre-color !important;
+	color: $white !important;
+	&:hover {
+		color: $white !important;
+	}
+}

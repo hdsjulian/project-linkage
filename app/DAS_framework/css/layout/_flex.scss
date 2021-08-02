@@ -1,0 +1,278 @@
+@use "../helper" as *;
+@use "../theme" as *;
+
+%flex {
+	//--flex-gap: #{$u/2} 1.5ch #{$u/2} 0;
+	--flex-gap: #{$u};
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: var(--flex-gap);
+	> * {
+		flex-grow: 0;
+		flex-shrink: 0;
+		flex-basis: auto;
+		//	padding: var(--flex-gap);
+		&:first-child {
+			//			padding-inline-start: 0;
+		}
+		&:last-child {
+			///		padding-inline-end: 0;
+		}
+	}
+}
+
+.flex {
+	@extend %flex;
+}
+
+//$steps: 12;
+//@for $n from 1 through $steps {
+//	.flex--#{$n} {
+//		@extend .flex;
+//		//margin: 0 $flexgap/-2;
+//		flex-wrap: wrap;
+//		> * {
+//			flex-grow: 0;
+//			flex-shrink: 0;
+//			flex-basis: percentage(1/2);
+//			@include mq(medium) {
+//				//		@if $n == 2 {
+//				//			flex-basis: percentage(1/2);
+//				//		}
+//				//		@if $n == 3 {
+//				//			flex-basis: percentage(1/3);
+//				//		}
+//				@if $n >= 4 {
+//					$m: ceil($n/2);
+//					flex-basis: percentage(1 / $m);
+//				}
+//			}
+//			@include mq(large) {
+//				flex-basis: percentage(1 / $n);
+//			}
+//		}
+//	}
+//}
+//
+//.flex--auto {
+//	@extend .flex;
+//	flex-wrap: wrap;
+//	flex-basis: auto;
+//}
+//
+//*[class*="flex"] > *[class^="flex"] {
+//	padding: 0;
+//}
+
+//.f-- {
+//	&auto, &12, &11, &10, &9, &8, &7, &6, &5, &4, &3, &2, &1 {
+//		padding: $u/2;
+//		&.flex {
+//			padding: 0;
+//		}
+//	}
+//}
+//
+//// *[class*="f--"] {
+//// 	padding: $u/2;
+////	&.flex {
+////		padding: 0;
+////	}
+////}
+////
+//
+//
+//
+//.f--auto {
+//	&:not(.flex), &.flex > * {
+//		flex-basis: auto;
+//	}
+//}
+//.f--grow {
+//	&:not(.flex), &.flex > * {
+//		flex-grow: 1;
+//	}
+//}
+//.f--shrink {
+//	&:not(.flex), &.flex > * {
+//		flex-shrink: 1;
+//	}
+//}
+//
+//.b-- { // space _b_efore
+//	@include mq(large){
+//		@for $i from 1 through ($flexgrid - 1) {
+//			&#{$i} {
+//				margin-left: percentage( $i / $flexgrid);
+//			}
+//		}
+//	}
+//}
+//
+//
+//.a-- { // space _a_fter
+//	@include mq(large){
+//		@for $i from 1 through ($flexgrid - 1) {
+//			&#{$i} {
+//				margin-right: percentage( $i / $flexgrid);
+//			}
+//		}
+//	}
+//}
+//
+//@include mq(medium){
+//	.f--6, .f--5, .f--4, .f--3, .f--2, .f--1 {
+//		flex-basis: $w--half;
+//	}
+//}
+//
+//$steps: 6;
+//@include mq(large){
+//	@for $n from 1 through $steps { //Unit based space _u_p and _d_own
+//		.u--#{$n} {
+//			margin-top: $n*$u*2;
+//		}
+//		.d--#{$n} {
+//			margin-bottom: $n*$u*2;
+//		}
+//	}
+//}
+//
+//
+//$steps: 12;
+//@for $n from 1 through $steps {
+//	.q--#{$n} {
+//		width: 50%;
+//		height: 50%;
+//		@include mq(medium){ // Unit based s_q_uare sizes eg for icons
+//			width: $n*$u;
+//			height: $n*$u;
+//		}
+//	}
+//}
+//
+//
+//@include mq(large){
+//	@for $n from 1 through $flexgrid { // intuitive sizing for nested items
+//		$ratio: ($n / $flexgrid);
+//		.f--#{$n} {
+//			flex-basis: percentage( $ratio);
+//			@for $nn from 1 through $flexgrid { // A LOT OF REDUNDANCY IN CSS DUE TO THE MIN() NEEDS WORK OR LINTING
+//				$ratioo: ($nn / $n);
+//				 .a--#{$nn} {
+//					margin-right: min(100%, percentage( $ratioo ));
+//				}
+//				 .b--#{$nn} {
+//					margin-left: min(100%, percentage( $ratioo ));
+//				}
+//				 .f--#{$nn} {
+//					flex-basis: min(100%, percentage( $ratioo ));
+//				}
+//			}
+//		}
+//	}
+//}
+//
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+.grow {
+	flex-grow: 1;
+}
+.shrink {
+	flex-shrink: 1;
+}
+.flex--nowrap {
+	flex-wrap: nowrap;
+}
+.flex--wrap {
+	flex-wrap: wrap;
+}
+.flex--column {
+	flex-direction: column;
+	align-items: stretch;
+}
+.flex--column-reverse {
+	flex-direction: column-reverse;
+}
+.flex--row {
+	flex-direction: row;
+}
+.flex--row-reverse {
+	flex-direction: row-reverse;
+}
+.justify-around {
+	justify-content: space-around;
+}
+.justify-evenly {
+	justify-content: space-evenly;
+}
+.justify-between {
+	justify-content: space-between;
+}
+
+.justify-center {
+	justify-content: center;
+}
+.justify-start {
+	justify-content: flex-start;
+}
+.justify-end {
+	justify-content: flex-end;
+}
+.align-content-start {
+	align-content: flex-start;
+}
+.align-content-end {
+	align-content: flex-end;
+}
+.align-content-baseline {
+	align-content: baseline;
+}
+.align-content-center {
+	align-content: center;
+}
+.align-content-stretch {
+	align-content: stretch;
+}
+
+.align-start {
+	align-items: flex-start;
+}
+.align-end {
+	align-items: flex-end;
+}
+.align-baseline {
+	align-items: baseline;
+}
+.align-center {
+	align-items: center;
+}
+.align-stretch {
+	align-items: stretch;
+}
+.align-self-start {
+	align-self: start;
+	align-self: flex-start;
+}
+.align-self-center {
+	align-self: center;
+}
+.align-self-end {
+	align-self: end;
+	align-self: flex-end;
+}
+.justify-self-start {
+	justify-self: start;
+	justify-self: flex-start;
+}
+.justify-self-center {
+	justify-self: center;
+}
+.justify-self-end {
+	justify-self: end;
+	justify-self: flex-end;
+}

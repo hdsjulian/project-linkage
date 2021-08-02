@@ -1,0 +1,22 @@
+@use "use" as *;
+
+.map {
+	max-inline-size: none;
+	@include mq(medium) {
+		position: fixed;
+		z-index: 0;
+		inset: 0;
+	}
+	background-color: $dun;
+}
+
+#map {
+	background-color: $egg;
+	background-image: url("../image/map/background.svg");
+	background-repeat: space;
+	background-size: 7%;
+	min-block-size: $phi-major * 100vh;
+	@include mq(medium) {
+		min-block-size: 100vh;
+	}
+}

@@ -1,0 +1,44 @@
+@use "use" as *;
+
+.search {
+	&__form {
+		position: relative;
+		label {
+			margin: 0;
+		}
+	}
+	&__field[type="search"] {
+		line-height: 1;
+		margin: 0;
+		border: none;
+		width: 10vw;
+		min-width: 20ch;
+		&:focus {
+			min-width: 30ch;
+			outline: none;
+		}
+	}
+	&__submit[type="submit"] {
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		margin: 0;
+		padding: 0 $u/2;
+		line-height: 1;
+		text-align: center;
+		--icon-color: #{$body-color};
+
+		&:after {
+			content: unset;
+		}
+	}
+	&__score {
+		padding: $u/2;
+		@extend %fs-3;
+		background: $brand--light;
+		color: $brand--dark;
+		font-family: $font-family-brand;
+	}
+}

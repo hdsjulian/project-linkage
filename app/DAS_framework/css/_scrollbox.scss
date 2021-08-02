@@ -1,0 +1,44 @@
+%scrollbox,
+%scrollbox--x,
+%scrollbox--y {
+	@extend .has-scrollbar;
+	flex-wrap: nowrap;
+}
+%scrollbox {
+	overflow: scroll;
+}
+%scrollbox--x {
+	padding: 0;
+	overflow-x: scroll;
+	scroll-snap-type: x mandatory;
+	> * {
+		scroll-snap-align: start;
+	}
+	@include mqcustom($medium-width, "max-width") {
+		> * {
+			flex-basis: percentage(1 / sqrt(2));
+		}
+	}
+}
+%scrollbox--y {
+	$w: 16px * 2;
+	overflow-y: scroll;
+	@include notouch {
+		scrollbar-width: $w;
+	}
+	&::-webkit-scrollbar-thumb {
+		@include notouch {
+			width: $w;
+		}
+	}
+}
+
+.scrollbox {
+	@extend %scrollbox;
+}
+.scrollbox--x {
+	@extend %scrollbox--x;
+}
+.scrollbox {
+	@extend %scrollbox--y;
+}

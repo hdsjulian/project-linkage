@@ -1,0 +1,20 @@
+.page-menu.menu
+	.menu-toggle
+		input#menu-toggle.visually-hidden(type="checkbox")
+		label.menu-toggle__hook(for="menu-toggle")
+			.menu-toggle__hook-icon
+				svg.icon--menu
+					use(xlink:href="#menu") 
+				svg.icon--close
+					use(xlink:href="#close") 
+		#menu.menu-toggle__object
+			//include _page-search.pug 
+			include _nav.pug
+script.
+	var navigating = document.getElementsByClassName("nav__item");
+	var hidemenu = function() {
+		document.getElementById("menu-toggle").checked = false;
+	};
+	for (var i = 0; i < navigating.length; i++) {
+		navigating[i].addEventListener('click', hidemenu, false);
+	}

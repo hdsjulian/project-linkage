@@ -1,0 +1,13 @@
+mixin path(current, parent0, parent1)
+	nav.path
+		ol.path__list
+			li.path__item
+				a(href="/") Start
+			if parent0
+				li.path__item
+					a(href="#")!=parent0
+			if parent1
+				li.path__item
+					a(href="#")!=parent1
+			li.path__item--current
+				span!=current

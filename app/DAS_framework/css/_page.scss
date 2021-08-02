@@ -1,0 +1,22 @@
+@use "use" as *;
+
+// PAGE ##
+
+.page {
+	&__outer {
+		position: relative;
+	}
+	&__inner {
+		position: relative;
+	}
+	&-main {
+	}
+	&-footer {
+		position: fixed;
+		z-index: z(fixed);
+		inset: auto auto 0 $u;
+		margin: auto;
+		padding: $u;
+		background-color: $white;
+	}
+}

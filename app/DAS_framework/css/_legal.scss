@@ -1,0 +1,38 @@
+@use "use" as *;
+
+// LEGAL ###
+.legal {
+	small {
+		display: block;
+		counter-reset: h2;
+		* {
+			max-width: $line-width;
+		}
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			@extend %fs0;
+		}
+		p,
+		li,
+		dd,
+		dt,
+		address {
+			@extend %fs-2;
+		}
+		h2 {
+			counter-reset: h3;
+			&:before {
+				counter-increment: h2;
+				content: counter(h2) ". ";
+			}
+		}
+		h3:before {
+			counter-increment: h3;
+			content: counter(h2) "." counter(h3, lower-alpha) " ";
+		}
+	}
+}

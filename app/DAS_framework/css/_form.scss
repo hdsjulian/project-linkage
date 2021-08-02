@@ -1,0 +1,61 @@
+@use "use" as *;
+@use "element" as *;
+
+// FORM ########
+
+%form {
+	margin: $u 0;
+	fieldset {
+		background-color: $brand--light;
+		margin: $u 0;
+		padding: $u * 2;
+	}
+	legend {
+		@extend h5;
+		background-color: $brand--light;
+		padding: $u $u * 2;
+		margin-inline-start: auto;
+		margin-inline-end: $u * -2;
+	}
+	label {
+		margin: $u * 2 0;
+		@extend h6;
+	}
+	&__sort {
+		margin-inline-end: auto;
+	}
+	input {
+		~ span {
+			padding-left: $u;
+		}
+		&:invalid {
+			color: $negative-color;
+			~ span {
+				color: $negative-color;
+			}
+		}
+		&:disabled {
+			color: $muted-color;
+			~ span {
+				color: $muted-color;
+			}
+		}
+		&:required {
+			~ span {
+				&:after {
+					content: "✷";
+					position: relative;
+					top: -0.4em;
+				}
+			}
+		}
+	}
+}
+
+.form {
+	@extend %form;
+}
+
+.wpcf7 {
+	@extend %form;
+}

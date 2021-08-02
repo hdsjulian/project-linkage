@@ -1,0 +1,7 @@
+@use "use" as *;
+
+//* ERROR
+.error,
+.is-error {
+	color: $negative-color;
+}

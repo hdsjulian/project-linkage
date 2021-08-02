@@ -1,0 +1,103 @@
+.path {
+	grid-area: path;
+	position: sticky;
+	top: -1px;
+	z-index: z(sticky);
+	@include transition();
+
+	@extend %disappear;
+	.is-scrolled--target & {
+		opacity: 0;
+		pointer-events: none;
+		&:hover {
+			opacity: 0;
+		}
+	}
+	@extend %emphasis;
+	@extend %blur;
+	padding-block: $u/2;
+
+	&__list {
+		@extend %flex;
+		--flex-gap: #{$u/2};
+		min-height: $u * 2;
+		@extend %fs-1;
+		max-width: calc(100% - #{$hook-width});
+		@include mq(medium) {
+			max-width: none;
+		}
+	}
+	&__item {
+		&:first-child,
+		&:nth-last-child(2) {
+			display: block;
+		}
+		display: none;
+		@include mq(medium) {
+			display: block;
+		}
+		&--current {
+			display: none;
+			@include mq(medium) {
+				display: block;
+				@include transition;
+				.is-scroll--start &,
+				.is-scrolling--down & {
+					//@extend %a11y;
+					opacity: 0;
+					pointer-events: none;
+				}
+				span {
+					display: inline-block;
+				}
+			}
+		}
+	}
+}
+
+[class*="path__item"] {
+	@extend %nav__item;
+	color: var(--color--emphasis);
+
+	line-height: $line-height * 1rem;
+
+	a {
+		color: inherit;
+	}
+	&:first-child {
+		$height: $u * 2.3;
+		a {
+			color: transparent;
+			font-size: 0.000001px;
+			display: block;
+			height: $height;
+			width: $height * 2;
+		}
+		position: relative;
+		&:before {
+			pointer-events: none;
+			position: absolute;
+			font-size: 1rem;
+			@extend %icon;
+			content: "";
+			background-image: var(--symbol--white);
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: left center;
+			--icon-size: #{$height};
+			width: calc(var(--icon-size) * 2);
+		}
+	}
+	&:not(:first-child) {
+		> *:before {
+			content: "➔";
+			padding-right: $u/2;
+		}
+	}
+}
+.is-scrolled--target #page:target .path {
+	opacity: 1;
+	&:hover {
+		opacity: 1;
+	}
+}

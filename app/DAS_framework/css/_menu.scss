@@ -1,0 +1,90 @@
+@use "use" as *;
+
+$hook-height: $u * 3;
+$hook-width: $hook-height;
+.menu {
+	position: fixed;
+	inset: 0 auto auto 0;
+	z-index: z(modal);
+	&-toggle {
+		#menu-toggle:checked {
+			~ .menu-toggle__object {
+				pointer-events: all;
+				opacity: 1;
+				transition-duration: $duration;
+				transition-delay: 0;
+			}
+			~ .menu-toggle__hook {
+				color: $black;
+				.icon {
+					&--close {
+						opacity: 1;
+					}
+					&--menu {
+						opacity: 0;
+					}
+				}
+				&:after {
+					pointer-events: all;
+					content: "";
+					position: fixed;
+					z-index: z(fixed) -1;
+					inset: 0;
+					background-color: fade-out($dun, 1-$alpha);
+				}
+			}
+		}
+		&__hook {
+			cursor: pointer;
+			pointer-events: all;
+			.icon {
+				&--close {
+					opacity: 0;
+				}
+			}
+			&-icon {
+				position: fixed;
+				z-index: z(fixed) + 1;
+				inset: 0 auto auto 0;
+				@include mq(medium) {
+					inset: $u auto auto $u;
+				}
+				width: $hook-width;
+				height: $hook-height;
+				padding: $u * 2.5;
+				display: grid;
+				place-content: center;
+				grid-template-areas: "stack";
+				font-size: $u;
+				line-height: 0;
+				background-color: $brand--night;
+				cursor: pointer;
+				svg {
+					color: $brand--color;
+					width: $hook-height;
+					height: $hook-height;
+					@include transition(opacity, $duration/2, $easing);
+					transition-delay: $duration/2;
+					grid-area: stack;
+				}
+			}
+		}
+		&__object {
+			transition-property: opacity;
+			transition-duration: $duration;
+			transition-delay: 0;
+			transition-timing-function: $easing;
+			position: fixed;
+			z-index: z(fixed);
+			inset: 0 auto auto 0;
+			@include mq(medium) {
+				inset: $u auto auto $u;
+			}
+			overflow-y: auto;
+			padding: 4 * $u $u $u $u;
+			pointer-events: none;
+			opacity: 0;
+			background-color: $egg;
+		}
+	}
+}

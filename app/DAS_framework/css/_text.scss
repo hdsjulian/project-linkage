@@ -1,0 +1,33 @@
+@use "use" as *;
+
+$steps: 6;
+
+// TEXT ##
+.text {
+}
+
+%text-column {
+	column-gap: $u * 2;
+	column-fill: balance;
+	column-width: $line-width/3;
+	//	column-rule: 1px dashed $body-color;
+}
+
+[class*="text-column"] {
+	@extend %text-column;
+}
+
+@for $n from 1 through $steps {
+	%text-column#{$n} {
+		@extend %text-column;
+	}
+}
+
+@include mq(medium) {
+	@for $n from 1 through $steps {
+		%text-column--#{$n},
+		.text-column--#{$n} {
+			column-count: #{$n};
+		}
+	}
+}

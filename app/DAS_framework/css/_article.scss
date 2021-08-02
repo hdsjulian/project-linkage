@@ -1,0 +1,42 @@
+@use "use" as *;
+
+.article {
+	@include mq(medium) {
+		position: fixed;
+		inset: $u $u auto auto;
+		max-block-size: calc(100vh - #{$u * 3});
+		inline-size: $line-width;
+	}
+	padding: $u * 1.5;
+	@include mq(medium) {
+		padding-block-start: 0;
+	}
+	overflow: auto;
+	background-color: $egg;
+	> section {
+		display: none;
+		&#about,
+		&:target {
+			display: block;
+			~ #about {
+				display: none;
+			}
+		}
+	}
+	&__header {
+		position: fixed;
+		z-index: z(fixed);
+		inset: 0 0 auto auto;
+		.logo {
+			inline-size: $line-width/2;
+		}
+		block-size: $u * 5;
+		padding: $u;
+		background-color: $egg;
+		@include mq(medium) {
+			position: sticky;
+			inset-block: 0;
+			padding-inline: 0;
+		}
+	}
+}

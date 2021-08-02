@@ -1,0 +1,70 @@
+#login {
+	white-space: nowrap;
+	&:hover {
+		> a {
+			background-color: $brand--dark;
+		}
+		.login {
+			&__flyout {
+				display: flex;
+			}
+		}
+	}
+}
+.login {
+	position: relative;
+	display: contents;
+	@include mq(large) {
+		display: block;
+	}
+	> a {
+		display: contents;
+		@include mq(large) {
+			display: block;
+		}
+		height: $u;
+		line-height: 1.5;
+		div {
+			display: none;
+			@include mq(large) {
+				display: block;
+			}
+		}
+	}
+	li {
+		background-color: $brand--dark;
+		@include mq(large) {
+			margin-bottom: $u/4;
+			background-color: transparent;
+		}
+	}
+	&__flyout {
+		display: flex;
+		flex-flow: row-reverse wrap;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: $u/4;
+		> div {
+			display: contents;
+		}
+		li {
+			flex: 0 1 percentage(1/4);
+			margin-right: 0;
+			a {
+				background-color: transparent;
+				@extend %normal--inverse;
+				@extend %fs-1;
+				text-align: right;
+			}
+		}
+		@include mq(large) {
+			display: none;
+			position: absolute;
+			top: $u;
+			border-top: 2px solid $white;
+			right: 0;
+			padding: $u/2;
+			background-color: $brand--color;
+		}
+	}
+}

@@ -1,0 +1,68 @@
+@use "breakpoint" as *;
+
+// BREAKPOINTS
+
+//$medium_width: 0 !default;
+//$large_width: 0 !default;
+//$huge_width: 0 !default;
+//$giant_width: 0 !default;
+//
+//$medium_height: 0 !default;
+//$large_height: 0 !default;
+//$huge_height: 0 !default;
+//$giant_height: 0 !default;
+
+@mixin notouch {
+	@media (any-hover: hover) {
+		@content;
+	}
+}
+@mixin touch {
+	@media (any-hover: none) {
+		@content;
+	}
+}
+
+@mixin mqcustom($point, $constraint: min-width) {
+	@media ($constraint: $point) {
+		@content;
+	}
+}
+
+$breakwidths: (
+	"medium": $medium_width,
+	"large": $large_width,
+	"huge": $huge_width,
+	"giant": $giant_width,
+);
+$breakheights: (
+	"medium": $medium_height,
+	"large": $large_height,
+	"huge": $huge_height,
+	"giant": $giant_height,
+);
+$default-mediaquery: root;
+$current-mediaquery: $default-mediaquery;
+@mixin mq($mediaquery) {
+	// Get the width from the keyword `$mediaquery`
+	// Or `null` if the keyword doesn't exist in `$mediaquerys` map
+	$width: map-get($breakwidths, $mediaquery);
+	$height: map-get($breakheights, $mediaquery);
+	// If `$mediaquery` exists as a key in `$mediaquerys`
+	@if $width != null and $height != null {
+		// Update `$current-mediaquery`
+		$current-mediaquery: $mediaquery !global;
+		// Open a media query block
+		@media (min-width: $width) and (min-height: $height) {
+			// Let the user dump content
+			@content;
+		}
+		// Then reset `$current-mediaquery` to `$default-mediaquery` (root)
+		$current-mediaquery: $default-mediaquery !global;
+	}
+	// If `$mediaquery` doesn't exist in `$mediaquerys`,
+	// Warn the user and do nothing
+	@else {
+		@warn "Invalid mediaquery `#{$mediaquery}`.";
+	}
+}

@@ -1,0 +1,66 @@
+@use "../helper" as *;
+@use "../theme" as *;
+
+%grid {
+	display: grid;
+	--grid-gap: #{$u};
+	grid-gap: var(--grid-gap);
+	align-items: start;
+}
+
+.grid {
+	@extend %grid;
+}
+
+$steps: 12;
+@for $n from 1 through $steps {
+	.grid--#{$n} {
+		@extend .grid;
+		grid-template-columns: repeat(1, 1fr);
+		@include mq(medium) {
+			@if $n == 6 {
+				grid-template-columns: repeat(3, 1fr);
+			}
+			@if $n >= 7 {
+				$m: ceil($n/2);
+				grid-template-columns: repeat($m, 1fr);
+			}
+		}
+		@include mq(large) {
+			grid-template-columns: repeat(#{$n}, 1fr);
+		}
+	}
+}
+
+.gap--0 {
+	gap: 0;
+	grid-gap: 0;
+	grid-column-gap: 0;
+	grid-row-gap: 0;
+}
+
+.colspan--all {
+	grid-column: 1 / -1;
+}
+
+$steps: 12;
+@for $n from 1 through $steps {
+	.colspan--#{$n} {
+		@include mq(medium) {
+			grid-column: span #{$n};
+		}
+	}
+	.rowspan--#{$n} {
+		@include mq(medium) {
+			grid-row: span #{$n};
+		}
+	}
+}
+
+.stack {
+	display: grid;
+	grid-template-areas: "stacked";
+	> * {
+		grid-area: stacked;
+	}
+}

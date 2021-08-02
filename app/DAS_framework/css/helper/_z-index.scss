@@ -1,0 +1,21 @@
+// z-index mapping
+// usage:
+// .foo {	z-index: z(fixed); }
+$z-layers: (
+	"debug": 9999999999999,
+	"modal": 1500,
+	"fixed": 1400,
+	"sticky": 1300,
+	// because steady insists
+	"flyout": 1200,
+	"up": 1001,
+	"default": 0,
+	"behind": -100,
+);
+@function z($layer: "default") {
+	@if map-has-key($z-layers, $layer) {
+		@return map-get($z-layers, $layer);
+	}
+	@warn "No z-index found in $z-layers map for `#{$layer}`. Property omitted.";
+	@return null;
+}

@@ -1,0 +1,39 @@
+@use "use" as *;
+
+%nav__item {
+	font-family: $font-family-nav;
+	a:link,
+	a:visited,
+	a:focus,
+	a:hover,
+	a:active {
+		color: inherit;
+	}
+}
+
+[class*="nav__list"] {
+	@extend %flex;
+	flex-flow: column nowrap;
+	> * {
+	}
+}
+
+[class*="nav__item"] {
+	@extend %nav__item;
+}
+
+.nav {
+	&--main {
+		@extend %fs3;
+		padding: $u * 3 $u * 4 $u $u/2;
+		color: $link-color;
+	}
+}
+
+.is-current {
+	@extend %is-current;
+}
+
+%is-current {
+	color: $body-color;
+}
