@@ -26,7 +26,6 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
-    handovers: List[Handover]
     class Config: 
         orm_mode = True
 
