@@ -21,7 +21,7 @@ class Handover(Base):
     lat = Column(Float)
     lon = Column(Float)
     text = Column(Text)
-    coin_id = Column(Integer, ForeignKey('coin.id')
+    coin_id = Column(Integer, ForeignKey('coin.id'))
     timestamp = Column(Integer, index=True, default = datetime.utcnow)
     predecessor_id = Column(Integer, ForeignKey("handovers.id"))
     recipient_id = Column (Integer, ForeignKey("users.id"))
