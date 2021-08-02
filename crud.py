@@ -37,9 +37,12 @@ def get_handovers_by_user(db:Session, user_id: int):
     return db.query(models.Handover).filter(models.Handover.recipient_id == user_id).all()
 
 def get_handovers(db: Session):
-    result = db.query(models.Handover).group_by(models.Handover.coin_id).having(func.max(models.Handover.timestamp))
+    #result = db.query(models.Handover.id, ).group_by(models.Handover.coin_id).having(func.max(models.Handover.timestamp))
+    result = db.query(models.Handover).distinct(models.Handover.coin_id)
     print(result)
     return result
+
+ 
 
 """ def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
     db_item = models.Item(**item.dict(), owner_id=user_id)
