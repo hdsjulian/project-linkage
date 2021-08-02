@@ -26,6 +26,6 @@ class Handover(Base):
     predecessor_id = Column(Integer, ForeignKey("handovers.id"))
     recipient_id = Column (Integer, ForeignKey("users.id"))
     giver_id = Column (Integer, ForeignKey("users.id"))
-    predecessor = relationship('Handover', remote_side=[id], backref='successor')
+    predecessor = relationship('Handover', backref=backref('successor', remote_side=id))
      
 
