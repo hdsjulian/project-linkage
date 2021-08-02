@@ -1,5 +1,6 @@
 <script>
   // import Button from "./Button.svelte";
+  import AsyncExample from "./components/AsyncExample.svelte"
 
   import Article from "./components/Article.svelte"
   import BurgerSvg from "./components/Burger.svg.svelte"
@@ -42,6 +43,7 @@
           </section>
 
           <section class="about" id="about">
+            <AsyncExample />
             <About />
           </section>
         </Article>
