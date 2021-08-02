@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 import models, schemas
-from sqlalchemy import distinct, desc
+from sqlalchemy import distinct, desc, func
 
 def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
@@ -37,7 +37,7 @@ def get_handovers_by_user(db:Session, user_id: int):
     return db.query(models.Handover).filter(models.Handover.recipient_id == user_id).all()
 
 def get_handovers(db: Session):
-    result = db.query(models.Handover).group_by(models.Handover.coin_id).order_by(desc(models.Handover.id))
+    result = db.query(models.Handover).group_by(models.Handover.coin_id).having(func.max(models.Handover.timestamp))
     print(result)
     return result
 
