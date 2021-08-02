@@ -15,6 +15,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
 @app.get("/users/{user_id}", response_model=schemas.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
     db_user = crud.get_user(db, user_id=user_id)
@@ -42,7 +43,7 @@ def read_coins(skip: int = 0, limit: int = 120, db: Session = Depends(get_db)):
 
 @app.get("/handovers/{handover_id}")
 def read_handover(handover_id: int, db: Session=Depends(get_db)):
-    db_handover = crud.get)handover(db, handover_id=handover_id)
+    db_handover = crud.get_handover(db, handover_id=handover_id)
     if db_handover is None:
         raise HTTPException(status_code=404, detail="Handover not found")
     return db_handover
