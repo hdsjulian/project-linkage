@@ -38,8 +38,7 @@ def get_handovers_by_user(db:Session, user_id: int):
 
 def get_handovers(db: Session):
     #result = db.query(models.Handover.id, ).group_by(models.Handover.coin_id).having(func.max(models.Handover.timestamp))
-    result = db.query(models.Handover).distinct(models.Handover.coin_id)
-    print(result)
+    result = db.query(models.Handover).all()
     return result
 
  
