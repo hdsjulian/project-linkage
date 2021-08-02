@@ -2,10 +2,14 @@
   "printWidth": 80,
   "tabWidth": 2,
   "useTabs": false,
-  "semi": true,
+  "semi": false,
   "singleQuote": false,
-  "trailingComma": "none",
+  "trailingComma": "es5",
   "bracketSpacing": true,
   "jsxBracketSameLine": true,
-  "fluid": false
+  "svelteSortOrder": "options-styles-scripts-markup",
+  "svelteStrictMode": false,
+  "svelteBracketNewLine": false,
+  "svelteAllowShorthand": true,
+  "svelteIndentScriptAndStyle": true
 }
