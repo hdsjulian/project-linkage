@@ -41,6 +41,12 @@ def read_coins(skip: int = 0, limit: int = 120, db: Session = Depends(get_db)):
     coins = crud.get_coins(db, skip=skip, limit=limit)
     return coins
 
+@app.get("/coins/{coin_id}/handovers/", response_model=List[schemas.Handover])
+def get_handovers_for_coin(coin_id: int, db: Session=Depends(get_db)):
+    print(coin_id)
+    handovers = crud.get_handovers_by_coin(db, coin_id)
+    return handovers
+
 @app.get("/handovers/{handover_id}")
 def read_handover(handover_id: int, db: Session=Depends(get_db)):
     db_handover = crud.get_handover(db, handover_id=handover_id)
