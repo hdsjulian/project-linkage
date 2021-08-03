@@ -31,8 +31,7 @@ class User(UserBase):
     id: int
     class Config: 
         orm_mode = True
-class UserInDb(User):
-    password: str
+
 
 
 class CoinBase(BaseModel):
