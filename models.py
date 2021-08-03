@@ -8,7 +8,10 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     name = Column(String)
-    
+    giver = relationship('Handover', foreign_keys='Handover.giver_id', backref='payer')
+    receiver = relationship('Handover', foreign_keys='Handover.recipient_id', backref='receiver')
+
+     
 class Coin(Base):
     __tablename__ = "coins"
     id = Column(Integer, primary_key=True, index=True)
@@ -27,5 +30,5 @@ class Handover(Base):
     recipient_id = Column (Integer, ForeignKey("users.id"))
     giver_id = Column (Integer, ForeignKey("users.id"))
     predecessor = relationship('Handover', backref=backref('successor', remote_side=id))
-     
+
 

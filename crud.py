@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, aliased
 import models, schemas
 from sqlalchemy import distinct, desc, func
 
@@ -35,7 +35,11 @@ def get_coin(db: Session, coin_id: int):
     return db.query(models.Coin).filter(models.Coin.id == coin_id).first()
 
 def get_handover(db: Session, handover_id: int):
-    return db.query(models.Handover).filter(models.Handover.id == handover_id).first()
+    #user1 = aliased(models.User, name="user1")
+    #user2 = aliased(models.User, name="user2")
+    #result = db.query(models.Handover, user1.name, user2.name).join(user1, user1.id == models.Handover.giver_id).join(user2, user2.id == models.Handover.recipient_id).filter(models.Handover.id == handover_id).all()
+    result = db.query(models.Handover).filter(models.Handover.id == handover_id).first()
+    return result
 
 def get_handovers_by_coin(db:Session, coin_id: int, skip: int=0, limit: int=100):
     return db.query(models.Handover).filter(models.Handover.coin_id == coin_id).offset(skip).limit(limit).all()
@@ -46,7 +50,6 @@ def get_handovers_by_user(db:Session, user_id: int):
 def get_handovers(db: Session):
     subquery = db.query(func.max(models.Handover.id)).group_by(models.Handover.coin_id)
     result = db.query(models.Handover).filter(models.Handover.id.in_(subquery))
-    
     print (result)
     return result.all()
 

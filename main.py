@@ -52,7 +52,14 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
     db_handover = crud.get_handover(db, handover_id=handover_id)
     if db_handover is None:
         raise HTTPException(status_code=404, detail="Handover not found")
-    return db_handover
+    print(db_handover.recipient_id)
+    print("--------------")
+    db_recipient = crud.get_user(db, user_id=db_handover.recipient_id)
+    if db_handover.giver_id is not None:
+        db_giver = crud.get_user(db, user_id=db_handover.giver_id)
+    else: 
+        db_giver = None
+    return schemas.HandoverReturn(handover=db_handover, recipient=db_recipient, giver=db_giver)
 
 @app.get("/handovers/", response_model=List[schemas.Handover])
 def read_handovers(db: Session=Depends(get_db)):
