@@ -31,6 +31,9 @@ class User(UserBase):
     id: int
     class Config: 
         orm_mode = True
+class UserInDb(User):
+    password: str
+
 
 class CoinBase(BaseModel):
     hash: str
@@ -47,4 +50,12 @@ class Coin(CoinBase):
 class HandoverReturn(BaseModel):
     handover: Handover
     giver: Optional[User] = None
-    receiver: Optional[User]=None
+    recipient: Optional[User]=None
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: Optional[str] = None  
