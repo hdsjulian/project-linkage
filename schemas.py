@@ -7,15 +7,16 @@ class HandoverBase(BaseModel):
     lon: float
     text: str
     timestamp: int
+    predecessor_id: Optional[int] = None
+    recipient_id: int
+    giver_id: int
+    coin_id: int
 
 class HandoverCreate(HandoverBase): 
     pass
 
 class Handover(HandoverBase): 
     id: int
-    predecessor_id: Optional[int] = None
-    recipient_id: int
-    giver_id: int
     class Config:
         orm_mode = True
 
