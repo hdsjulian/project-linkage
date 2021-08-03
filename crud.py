@@ -21,6 +21,13 @@ def create_user(db: Session, user: schemas.UserCreate):
     db.refresh(db_user)
     return db_user
 
+def update_user(db: Session, user:schemas.User):
+    db.update(user)
+    db.commit()
+    db.refresh(user)
+    return user
+
+
 def get_coins(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Coin).offset(skip).limit(limit).all()
 
@@ -37,9 +44,23 @@ def get_handovers_by_user(db:Session, user_id: int):
     return db.query(models.Handover).filter(models.Handover.recipient_id == user_id).all()
 
 def get_handovers(db: Session):
-    #result = db.query(models.Handover.id, ).group_by(models.Handover.coin_id).having(func.max(models.Handover.timestamp))
-    result = db.query(models.Handover).all()
+    result = db.query(models.Handover).filter(models.Handover.id).in_((models.Handover.id).filter(func.max(models.Handover.id)).group_by(models.Handover.coin_id))
     return result
+
+def create_handover(db: Session, handover: schemas.HandoverCreate):
+    db_handover = models.Handover(text=handover.text, predecessor_id=handover.predecessor_id, recipient_id=handover.recipient_id, giver_id = handover.giver_id, lat=handover.lat, lon=handover.lon, timestamp = handover.timestamp, coin_id=handover.coin_id)
+    db.add(db_handover)
+    db.commit()
+    db.refresh(db_handover)
+    return db_handover
+
+def update_handover(db:Session, handover:schemas.Handover):
+    db.update(handover)
+    db.commit()
+    db.refresh(handover)
+    return handover
+
+
 
  
 
