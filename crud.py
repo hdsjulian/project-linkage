@@ -33,7 +33,6 @@ def update_user(db: Session, user:schemas.User):
     db.refresh(user)
     return user
 
-
 def get_coins(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Coin).offset(skip).limit(limit).all()
 
