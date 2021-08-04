@@ -40,6 +40,9 @@ def get_coins(db: Session, skip: int = 0, limit: int = 100):
 def get_coin(db: Session, coin_id: int):
     return db.query(models.Coin).filter(models.Coin.id == coin_id).first()
 
+def get_coin_by_hash(db: Session, hash: str):
+    return db.query(models.Coin).filter(models.Coin.hash == hash).first()
+
 def get_handover(db: Session, handover_id: int):
     #user1 = aliased(models.User, name="user1")
     #user2 = aliased(models.User, name="user2")

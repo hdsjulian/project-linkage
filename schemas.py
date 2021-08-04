@@ -1,6 +1,20 @@
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
+from sqlalchemy.sql.expression import text
+from sqlalchemy.sql.selectable import TextAsFrom
+
+class ArticleBase(BaseModel):
+    headline: str
+    text: str
+    author_id: int
+
+class Article(ArticleBase):
+    id: int
+    class Config:
+        orm_mode = True
+
+
 
 class HandoverBase(BaseModel):
     lat: float
@@ -32,25 +46,30 @@ class User(UserBase):
     class Config: 
         orm_mode = True
 
-
-
 class CoinBase(BaseModel):
-    hash: str
-
+    travels: Optional[int] = 0
+    
 class CoinCreate(CoinBase):
-    pass
+    hash: str
 
 class Coin(CoinBase):
     id: int
-
     class Config:
         orm_mode = True
 
-class HandoverReturn(BaseModel):
-    handover: Handover
-    giver: Optional[User] = None
-    recipient: Optional[User]=None
+class CoinVerify(Coin):
+    hash: str
 
+class HandoverReturn(Handover):
+    giver: Optional[User] = None
+    recipient:  Optional[User]=None
+    coin: Optional[Coin] = None
+
+class HandoverHandoverReturn(BaseModel):
+    handover: HandoverReturn
+
+class HandoverData(BaseModel):
+    data: HandoverHandoverReturn
 
 class Token(BaseModel):
     access_token: str

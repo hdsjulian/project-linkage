@@ -16,6 +16,7 @@ class Coin(Base):
     __tablename__ = "coins"
     id = Column(Integer, primary_key=True, index=True)
     hash = Column(String, unique=True)
+    travels = Column(Integer)
     handovers = relationship('Handover', backref='coin')
 
 class Handover(Base):
