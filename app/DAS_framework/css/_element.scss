@@ -2,6 +2,8 @@
 @use "sass:math";
 @use "use" as *;
 @use "cta" as *;
+@use "theme" as *;
+@use "theme/scrollbar" as *;
 
 *,
 *:before,
@@ -22,8 +24,8 @@ body {
 	padding: 0;
 	scroll-behavior: smooth;
 	-webkit-overflow-scrolling: auto;
-	@extend %scroll-snap-proximity;
-	//@extend %scroll-snap-mandatory;
+	@include scroll-snap-proximity;
+	//@include scroll-snap-mandatory;
 }
 
 body {
@@ -49,7 +51,7 @@ body {
 	font-family: $font-family-body;
 	//	font-variant-ligatures: no-common-ligatures;
 	font-size: 100%;
-	@extend %normal;
+	@include normal;
 	line-height: $line-height;
 	@include hyphens();
 	-webkit-text-size-adjust: 100%; // prevent ios from adjusting
@@ -230,40 +232,40 @@ q {
 }
 
 $quotemark-size: $fs6 * 3;
-%blockquote {
+@mixin blockquote {
 	//max-width: $line-width;
 	margin-inline: 0;
 	margin-block: $u * 2;
 	padding-block: $u * 4;
-	@extend %fs0;
+	font-size: $fs0;
 	--module-background-color: #{$brand--mute};
 	color: $white;
-	@extend %normal--inverse;
-	@extend %italic;
+	@include normal--inverse;
+	@include italic;
 }
-%blockquotequotemark {
+@mixin blockquotequotemark {
 	display: inline-block;
 	font-family: $font-family-brand;
 	line-height: 0;
-	@extend %italic-not;
-	@extend %bold--inverse;
+	@include italic-not;
+	@include bold--inverse;
 	color: $brand--color;
 	font-size: $quotemark-size;
 	vertical-align: baseline;
 }
 blockquote {
-	@extend %blockquote;
+	@include blockquote;
 }
 blockquote > p:first-of-type {
 	@include localized-quotation-marks($language, true, false);
 	&:before {
-		@extend %blockquotequotemark;
+		@include blockquotequotemark;
 	}
 }
 blockquote > p:last-of-type {
 	@include localized-quotation-marks($language, false, true);
 	&:after {
-		@extend %blockquotequotemark;
+		@include blockquotequotemark;
 		font-size: $quotemark-size * $sqrt2-major;
 		color: $brand--dark;
 		vertical-align: middle;
@@ -272,9 +274,9 @@ blockquote > p:last-of-type {
 cite {
 	display: block;
 	text-align: right;
-	@extend %fs-1;
-	@extend %bold--inverse;
-	@extend %italic-not;
+	font-size: $fs-1;
+	@include bold--inverse;
+	@include italic-not;
 	font-family: $font-family-brand;
 }
 // ==========================================================
@@ -376,15 +378,8 @@ textarea {
 [type="button"],
 button {
 	appearance: none;
-	//	margin: 0 0 $u/2;
-	//	display: inline-block;
-	//	border: none;
 	line-height: $line-height;
 	cursor: pointer;
-	//	border-radius: 0;
-	//	background-color: $cta-color;
-	//	color: var(--color--emphasis);
-	//	font-family: $font-family-input;
 }
 textarea {
 	@include transition;
@@ -400,21 +395,17 @@ textarea {
 }
 button {
 	@include cta;
-	padding: 0 0 0 $u * 4;
 	box-shadow: none;
 	width: auto;
 }
 
 [type="submit"] {
-	@include cta;
-	@extend %bold--inverse;
-	background-color: $cta-color;
+	@include bold--inverse;
+	width: 100%;
 }
 
 [type="reset"] {
-	@include cta;
-	@extend %normal--inverse;
-	background-color: $neutral-color;
+	@include normal--inverse;
 }
 
 select {
@@ -570,7 +561,7 @@ $table-zebra: $egg;
 th {
 	background-color: $brand--dark;
 	color: $white;
-	@extend %bold--inverse;
+	@include bold--inverse;
 }
 tr:nth-child(2n + 1) td {
 	background-color: $table-zebra;
@@ -646,8 +637,8 @@ h4,
 h5,
 h6 {
 	font-family: $font-family-heading;
-	@extend %uppercase;
-	@extend %light;
+	@include uppercase;
+	@include light;
 	max-width: $line-width;
 	margin: $u * 2 0 $u * 1 0;
 	&:first-child {
@@ -664,32 +655,32 @@ h3 {
 	}
 }
 h1 {
-	@extend %fs5;
+	font-size: $fs5;
 }
 h2 {
-	@extend %fs4;
-	@extend %normal;
+	font-size: $fs4;
+	@include normal;
 }
 h3 {
-	@extend %fs1;
+	font-size: $fs1;
 }
 h3,
 h4,
 h5,
 h6 {
-	@extend %bold;
+	@include bold;
 }
 
 h4,
 h5,
 h6 {
-	@extend %fs0;
+	font-size: $fs0;
 	margin-block-end: $u/2;
 }
 h5 {
 }
 h6 {
-	@extend %fs-2;
+	font-size: $fs-2;
 }
 
 h3,
@@ -715,7 +706,7 @@ hr {
 }
 small {
 	display: block;
-	@extend %fs-1;
+	font-size: $fs-1;
 }
 code {
 	font-family: monospace;
@@ -743,17 +734,17 @@ strike {
 	@extend del;
 }
 strong {
-	@extend %bold;
+	@include bold;
 }
 em {
-	@extend %italic;
+	@include italic;
 }
 address {
 	margin-bottom: $u;
-	@extend %normal;
+	@include normal;
 }
 time {
-	@extend %normal;
+	@include normal;
 }
 
 // DETAILS and SUMMARY ##################

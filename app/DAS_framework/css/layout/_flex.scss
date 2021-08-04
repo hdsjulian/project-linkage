@@ -1,7 +1,7 @@
 @use "../helper" as *;
 @use "../theme" as *;
 
-%flex {
+@mixin flex {
 	//--flex-gap: #{$u/2} 1.5ch #{$u/2} 0;
 	--flex-gap: #{$u};
 	display: flex;
@@ -23,7 +23,7 @@
 }
 
 .flex {
-	@extend %flex;
+	@include flex;
 }
 
 //$steps: 12;

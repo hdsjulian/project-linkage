@@ -34,11 +34,11 @@
 }
 
 .scrollbox {
-	@extend %scrollbox;
+	@include scrollbox;
 }
 .scrollbox--x {
-	@extend %scrollbox--x;
+	@include scrollbox--x;
 }
 .scrollbox {
-	@extend %scrollbox--y;
+	@include scrollbox--y;
 }

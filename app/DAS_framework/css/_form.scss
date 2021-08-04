@@ -3,19 +3,19 @@
 
 // FORM ########
 
-%form {
+@mixin form {
 	margin: $u 0;
 	fieldset {
-		background-color: $brand--light;
+		background-color: $brand--color;
 		margin: $u 0;
-		padding: $u * 2;
+		padding: $u;
 	}
 	legend {
 		@extend h5;
-		background-color: $brand--light;
-		padding: $u $u * 2;
-		margin-inline-start: auto;
-		margin-inline-end: $u * -2;
+		background-color: $brand--color;
+		padding: $u $u * 1;
+		margin-inline-end: auto;
+		margin-inline-start: $u * -1;
 	}
 	label {
 		margin: $u * 2 0;
@@ -53,9 +53,9 @@
 }
 
 .form {
-	@extend %form;
+	@include form;
 }
 
 .wpcf7 {
-	@extend %form;
+	@include form;
 }

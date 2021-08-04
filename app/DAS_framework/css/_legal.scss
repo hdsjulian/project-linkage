@@ -14,14 +14,14 @@
 		h4,
 		h5,
 		h6 {
-			@extend %fs0;
+			font-size: $fs0;
 		}
 		p,
 		li,
 		dd,
 		dt,
 		address {
-			@extend %fs-2;
+			font-size: $fs-2;
 		}
 		h2 {
 			counter-reset: h3;

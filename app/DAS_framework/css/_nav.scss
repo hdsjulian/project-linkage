@@ -1,6 +1,6 @@
 @use "use" as *;
 
-%nav__item {
+@mixin nav__item {
 	font-family: $font-family-nav;
 	a:link,
 	a:visited,
@@ -11,29 +11,29 @@
 	}
 }
 
+@mixin is-current {
+	color: $body-color;
+}
+
 [class*="nav__list"] {
-	@extend %flex;
+	@include flex;
 	flex-flow: column nowrap;
 	> * {
 	}
 }
 
 [class*="nav__item"] {
-	@extend %nav__item;
+	@include nav__item;
 }
 
 .nav {
 	&--main {
-		@extend %fs3;
+		font-size: $fs3;
 		padding: $u * 3 $u * 4 $u $u/2;
 		color: $link-color;
 	}
 }
 
 .is-current {
-	@extend %is-current;
-}
-
-%is-current {
-	color: $body-color;
+	@include is-current;
 }

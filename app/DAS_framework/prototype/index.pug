@@ -1,4 +1,4 @@
-include include/__include.pug
+include mixin/__mixin
 doctype html
 html(lang='en' class='')
 	head
@@ -19,6 +19,26 @@ html(lang='en' class='')
 									img(src="../image/logo/project-linkage.svg")
 						section#contact.contact
 							h1 Contact
+						section#handover.handover
+							h1 Coin №123
+							form.form
+								fieldset
+									legend New Handover 
+									p
+										+text-gen(2, "s", true)
+									label
+										span Name
+										input(type="text" placeholder="Your name")
+									label
+										span E-Mail
+										input(type="email" placeholder="@")
+									label
+										span Latitude
+										input(type="number" placeholder="00,00000")
+									label
+										span Longitude
+										input(type="number" placeholder="00,00000")
+									button(type="submit") Continue
 						section#legal.legal
 							h1 Legal Notice
 							small
@@ -75,4 +95,4 @@ html(lang='en' class='')
 								+text-gen(2, "s", true)
 							p
 								+text-gen(3, "s", true)
-							a(href="#coin") Coin
+							a.cta(href="#coin") Coin

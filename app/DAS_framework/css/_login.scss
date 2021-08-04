@@ -52,8 +52,8 @@
 			margin-right: 0;
 			a {
 				background-color: transparent;
-				@extend %normal--inverse;
-				@extend %fs-1;
+				@include normal--inverse;
+				font-size: $fs-1;
 				text-align: right;
 			}
 		}

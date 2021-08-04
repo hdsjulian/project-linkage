@@ -2,12 +2,12 @@
 
 // DEBUG HELPER ###########
 
-%debugflag {
+@mixin debugflag {
 	padding: 2px;
 	background-color: $debug_color;
 	color: $white;
 	text-align: center;
-	@extend %fs-2;
+	font-size: $fs-2;
 	outline: 1px solid $white;
 	line-height: 1;
 }
@@ -32,7 +32,7 @@
 .admin-bar,
 .logged-in {
 	.page__outer:after {
-		@extend %debugflag;
+		@include debugflag;
 		content: var(--viewport);
 		position: fixed;
 		z-index: z(debug);
@@ -146,7 +146,7 @@ $adminBarHeight: 32px;
 //		 &[class]:hover {
 //		//		outline: 2px solid $debug_color;
 //			 &:before {
-//				@extend %debugflag;
+//				@include debugflag;
 //				position: fixed;
 //				z-index: z(fixed);
 //				bottom: 0;
