@@ -3,6 +3,8 @@ from typing import List, Optional
 from pydantic import BaseModel, ValidationError
 from sqlalchemy.sql.expression import text
 from sqlalchemy.sql.selectable import TextAsFrom
+from fastapi_camelcase import CamelModel
+
 
 class ArticleBase(BaseModel):
     headline: str
@@ -14,9 +16,7 @@ class Article(ArticleBase):
     class Config:
         orm_mode = True
 
-
-
-class HandoverBase(BaseModel):
+class HandoverBase(CamelModel):
     lat: float
     lon: float
     text: str
@@ -65,10 +65,10 @@ class HandoverReturn(Handover):
     recipient:  Optional[User]=None
     coin: Optional[Coin] = None
 
-class HandoverHandoverReturn(BaseModel):
+class HandoverHandoverReturn(CamelModel):
     handover: HandoverReturn
 
-class HandoverData(BaseModel):
+class HandoverData(CamelModel):
     data: HandoverHandoverReturn
 
 class Token(BaseModel):
