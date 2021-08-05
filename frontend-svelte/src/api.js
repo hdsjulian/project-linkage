@@ -1,6 +1,5 @@
 import axios from "axios"
-
-const API_URL = "http://localhost:3000"
+import { API_URL } from "./constants"
 
 export default {
   get: (resource) => axios.get(`${API_URL}${resource}`).then((res) => res.data),
