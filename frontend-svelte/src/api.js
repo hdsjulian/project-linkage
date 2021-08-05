@@ -1,12 +1,10 @@
+import axios from "axios"
+
 const API_URL = "http://localhost:3000"
 
 export default {
-  get: (resource) => fetch(`${API_URL}${resource}`).then((res) => res.json()),
+  get: (resource) => axios.get(`${API_URL}${resource}`).then((res) => res.data),
 
   post: (resource, body) =>
-    fetch(`${API_URL}${resource}`, {
-      method: "post",
-      body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => res.json()),
+    axios.post(`${API_URL}${resource}`, { body }).then((res) => res.data),
 }
