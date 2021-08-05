@@ -12,8 +12,8 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
 app.mount('/api', api_app)
-app.mount('/', StaticFiles(directory="frontend-svelte/public", html=True), name="static")
 app.mount('/build', StaticFiles(directory="frontend-svelte/public/build", html=True), name="build")
+app.mount('/', StaticFiles(directory="frontend-svelte/public", html=True), name="static")
 
 
 def get_db():
