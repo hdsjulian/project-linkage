@@ -2,12 +2,12 @@
   "name": "project-linkage-001",
   "version": "1.0.0",
   "scripts": {
-    "build": "run-p build:*",
-    "build:css": "yarn sass ../app/DAS_framework/css/app.scss public/build/app.css",
-    "build:js": "rollup -c",
-    "dev": "run-p dev:*",
-    "dev:api": "yarn json-server --watch db.json",
-    "dev:frontend": "rollup -c -w",
+    "build": "yarn run-p build:*",
+    "build:css": "yarn sass app/DAS_framework/css/app.scss public/build/app.css",
+    "build:js": "cd frontend-svelte; rollup -c",
+    "dev": "yarn run-p dev:*",
+    "dev:api": "yarn json-server --watch frontend-svelte/db.json",
+    "dev:frontend": "cd frontend-svelte; rollup -c -w",
     "start": "sirv public --no-clear",
     "check": "yarn prettier -c ."
   },
