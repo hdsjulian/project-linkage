@@ -2616,6 +2616,9 @@ dl dd {
 .page__inner {
   position: relative;
 }
+.page-main:target .article__close {
+  display: none;
+}
 .page-footer {
   position: fixed;
   z-index: 1400;
@@ -3080,18 +3083,18 @@ dl dd {
 }
 @media (min-width: 885px) and (min-height: 299px) {
   .article {
-    -webkit-padding-before: 0;
-            padding-block-start: 0;
+    padding-block: 0;
   }
 }
 .article > section {
   display: none;
 }
-.article > section#about, .article > section:target {
+.article > section:target {
   display: block;
 }
-.article > section#about ~ #about, .article > section:target ~ #about {
-  display: none;
+.article__close {
+  position: absolute;
+  inset: 1.25rem -0.5rem auto auto;
 }
 .article__header {
   position: fixed;

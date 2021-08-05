@@ -8,15 +8,17 @@ html(lang='en' class='')
 		.page__outer
 			.page__inner
 				include include/_page-header.pug  
-				main.page-main
+				main.page-main#main
 					nav.map
 						figure#map
 					article.article
 						header.article__header
 							h1.a11y Project Linkage
 							.figure.logo
-								a(href="#map") 
+								a.logo__link(href="#main") 
 									img(src="../image/logo/project-linkage.svg")
+									svg.icon--close.article__close
+										use(xlink:href="#close") 
 						section#contact.contact
 							h1 Contact
 						section#handover.handover

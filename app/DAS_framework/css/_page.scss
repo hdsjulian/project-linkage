@@ -10,6 +10,11 @@
 		position: relative;
 	}
 	&-main {
+		&:target {
+			.article__close {
+				display: none;
+			}
+		}
 	}
 	&-footer {
 		position: fixed;

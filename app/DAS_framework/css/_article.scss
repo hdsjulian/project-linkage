@@ -9,19 +9,23 @@
 	}
 	padding: $u * 1.5;
 	@include mq(medium) {
-		padding-block-start: 0;
+		padding-block: 0;
 	}
 	overflow: auto;
 	background-color: $egg;
 	> section {
 		display: none;
-		&#about,
+		//&#about,
 		&:target {
 			display: block;
 			~ #about {
-				display: none;
+				//		display: none;
 			}
 		}
+	}
+	&__close {
+		position: absolute;
+		inset: $u * 1.25 $u/-2 auto auto;
 	}
 	&__header {
 		position: fixed;
