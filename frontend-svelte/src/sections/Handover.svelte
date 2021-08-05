@@ -13,20 +13,16 @@
     <dt>For coin</dt>
     <dd>{handover.coin.id}</dd>
     <dt>Given from</dt>
-    <dd>Erica</dd>
+    <dd>{handover.giver.name}</dd>
     <dt>Given to</dt>
-    <dd>Anna</dd>
+    <dd>{handover.recipient.name}</dd>
     <dt>Handed over on</dt>
     <dd>2021-08-31 14:56:17</dd>
     <dt>at Lon:Lat</dt>
-    <dd>55.458:25.873</dd>
+    <dd>{handover.lat}:{handover.lon}</dd>
     <dt>What they had to say to each other</dt>
     <dd>
-      This is an experiment about trust. We have been friends from age six. We
-      trust each other and love each other and will be there for each other
-      however long our life will go, in whatever situation we are. We were
-      bridesmaids at our weddings and we will be buried together in the same
-      grave because besties
+      {handover.text}
     </dd>
   </dl>
 {:catch error}
