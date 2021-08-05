@@ -16,7 +16,6 @@
         We trust each other and love each other and will be there for each other 
         however long our life will go, in whatever situation we are. 
         We were bridesmaids at our weddings and we will be buried together in the same grave because besties </dd>
-    </dd>
 
   </dl>
   
