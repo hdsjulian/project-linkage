@@ -12,6 +12,7 @@
   import Legal from "./sections/Legal.svelte"
   import Privacy from "./sections/Privacy.svelte"
   import Profile from "./sections/Profile.svelte"
+  import Handover from "./sections/Handover.svelte"
 </script>
 
 <main>
