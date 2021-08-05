@@ -1,3 +1,1 @@
-web: gunicorn app:app
-web: gunicorn chainoftrust:app
-heroku ps:scale web=1
+web: gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app
