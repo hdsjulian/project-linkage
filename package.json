@@ -8,7 +8,7 @@
     "dev": "yarn run-p dev:*",
     "dev:api": "yarn json-server --watch frontend-svelte/db.json",
     "dev:frontend": "cd frontend-svelte; rollup -c -w",
-    "start": "sirv public --no-clear",
+    "start": "cd frontend-svelte; sirv public --no-clear",
     "check": "yarn prettier -c ."
   },
   "engines": {
