@@ -16,6 +16,7 @@
           <ol class="nav__list">
             <li class="nav__item"><a href="#about">About</a></li>
             <li class="nav__item"><a href="#coin">Coins</a></li>
+            <li class="nav__item"><a href="#handover">Handovers</a></li>
             <li class="nav__item"><a href="#profile">Profile</a></li>
             <li class="nav__item"><a href="#contact">Contact</a></li>
             <li class="nav__item"><a href="#legal">Legal</a></li>
