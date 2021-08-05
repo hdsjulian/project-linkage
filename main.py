@@ -9,8 +9,8 @@ from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="My API")
-api_app=FastAPI(title="blah")
+app = FastAPI(title="Main App")
+api_app=FastAPI(title="Api App")
 app.mount('/api', api_app)
 app.mount('/', StaticFiles(directory="frontend-svelte/public", html=True), name="static")
 
