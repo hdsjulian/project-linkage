@@ -1,11 +1,11 @@
 <script>
   import api from "../api"
 
-  let getPosts = api.list("/posts")
+  let getPosts = api.get("/posts")
 
   const addPost = async () => {
     await api.post("/posts", { title, author })
-    getPosts = api.list("/posts") // triggers refresh
+    getPosts = api.get("/posts") // triggers refresh
   }
 
   // declare form values

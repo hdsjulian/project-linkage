@@ -8,12 +8,17 @@
     "dev": "yarn run-p dev:*",
     "dev:api": "yarn json-server --watch frontend-svelte/db.json",
     "dev:frontend": "cd frontend-svelte; rollup -c -w",
-    "start": "sirv public --no-clear",
-    "check": "yarn prettier -c ."
+    "start": "cd frontend-svelte; sirv public --no-clear",
+    "check": "yarn prettier -c frontend-svelte"
+  },
+  "engines": {
+    "node": "14.16.0",
+    "yarn": "1.22.10"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-replace": "^3.0.0",
     "json-server": "^0.16.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
@@ -27,6 +32,7 @@
     "svelte": "^3.41.0"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "sirv-cli": "^1.0.12"
   }
 }
