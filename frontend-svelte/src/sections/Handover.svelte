@@ -1,8 +1,21 @@
-<dl>
+<script>
+    import api from "../api"
+  
+    let getHandover = api.list("/handover/1")
+  
+    // declare form values
+    
+  
+    // set default values
+    title = `Random  ${Math.floor(Math.random() * 10000)}`
+    author = "Tom"
+  </script>
+  
+  <dl>
     <dt>Handover number</dt>
-    <dd>6</dd>
+    <dd>{handover.id}</dd>
     <dt>For coin</dt>
-    <dd>2</dd>
+    <dd>{handover.coin.id}</dd>
     <dt>Given from</dt>
     <dd>Erica</dd>
     <dt>Given to</dt>

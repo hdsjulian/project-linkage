@@ -1,15 +1,14 @@
 <p>
-  It is a long established fact that a reader will be distracted by the readable
-  content of a page when looking at its layout. The point of using Lorem Ipsum
-  is that it has a more-or-less normal distribution of letters, as opposed to
-  using Content here, content here, making it look like readable English.
+  Project linkage is an experiment about human trust. 
 </p>
 <p>
-  Many desktop publishing packages and web page editors now use Lorem Ipsum as
-  their default model text, and a search for lorem ipsum will uncover many web
-  sites still in their infancy. Various versions have evolved over the years,
-  sometimes by accident, sometimes on purpose. It is a long established fact
-  that a reader will be distracted by the readable content of a page when
-  looking at its layout.
+  A number of initial participants received coins with an individual QR code on the back. They have five basic tasks:
+</p>
+<p>Hand this coin to a person they trust</p>
+<p>Have a conversation about their mutual relationship</p>
+<p>Scan the QR code and document the handover</p>   
+<p>Write a short text about their conversation for everyone to read</p> 
+<p>Request that the receiving person repeats these five steps </p>  
+<p>Thus, we create chains based on human trust. And tell our stories.   
 </p>
 <a href="#coin">Coin</a>

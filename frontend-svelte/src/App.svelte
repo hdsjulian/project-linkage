@@ -42,7 +42,9 @@
           <section class="coin" id="coin">
             <Coin />
           </section>
-
+          <section class="handover" id="handover">
+            <Handover />
+          </section>
           <section class="about" id="about">
             <AsyncExample />
             <About />
