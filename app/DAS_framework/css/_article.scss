@@ -15,11 +15,11 @@
 	background-color: $egg;
 	> section {
 		display: none;
-		//&#about,
+		&#about,
 		&:target {
 			display: block;
 			~ #about {
-				//		display: none;
+				display: none;
 			}
 		}
 	}

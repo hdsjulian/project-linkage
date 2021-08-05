@@ -2616,6 +2616,7 @@ dl dd {
 .page__inner {
   position: relative;
 }
+.page-main:target #about,
 .page-main:target .article__close {
   display: none;
 }
@@ -3089,8 +3090,11 @@ dl dd {
 .article > section {
   display: none;
 }
-.article > section:target {
+.article > section#about, .article > section:target {
   display: block;
+}
+.article > section#about ~ #about, .article > section:target ~ #about {
+  display: none;
 }
 .article__close {
   position: absolute;
