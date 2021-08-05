@@ -6,4 +6,9 @@ export default {
 
   post: (resource, body) =>
     axios.post(`${API_URL}${resource}`, { body }).then((res) => res.data),
+
+  update: (resource, body) =>
+    axios.patch(`${API_URL}${resource}`, body).then((res) => res.data),
+
+  delete: (resource) => axios.delete(`${API_URL}${resource}`),
 }
