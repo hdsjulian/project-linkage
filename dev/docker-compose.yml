@@ -1,0 +1,19 @@
+version: "3.1"
+
+services:
+  db:
+    image: postgres:12.4-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: "linkage"
+      POSTGRES_USER: "linkage"
+      POSTGRES_DB: "linkage_dev"
+    command: ["postgres", "-c", "log_statement=all"]
+
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
