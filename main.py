@@ -2,6 +2,7 @@ from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
+from starlette.responses import RedirectResponse
 from sqlalchemy.orm import Session
 import crud, models, schemas
 from database import SessionLocal, engine
@@ -10,7 +11,13 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-app.mount("/frontend/", StaticFiles(directory="./frontend-svelte/public"), name="index")
+app.mount("/frontend", StaticFiles(directory="frontend-svelte/public", html=True), name="frontend")
+app.mount("/build", StaticFiles(directory="frontend-svelte/public/build"), name="build")
+
+
+@app.get('/')
+async def frontend():
+    return RedirectResponse(url='frontend')
 
 def get_db():
     db = SessionLocal()
