@@ -11,6 +11,10 @@
     "start": "sirv public --no-clear",
     "check": "yarn prettier -c ."
   },
+  "engines": {
+    "node": "14.16.0",
+    "yarn": "1.22.10"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
