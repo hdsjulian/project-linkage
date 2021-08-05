@@ -2620,6 +2620,9 @@ dl dd {
 .page-main:target .article__close {
   display: none;
 }
+.page-main:target #map {
+  min-block-size: 100vh;
+}
 .page-footer {
   position: fixed;
   z-index: 1400;
@@ -3098,7 +3101,12 @@ dl dd {
 }
 .article__close {
   position: absolute;
-  inset: 1.25rem -0.5rem auto auto;
+  inset: 1.25rem 0.5rem auto auto;
+}
+@media (min-width: 885px) and (min-height: 299px) {
+  .article__close {
+    inset-inline-end: -0.5rem;
+  }
 }
 .article__header {
   position: fixed;
@@ -3110,6 +3118,8 @@ dl dd {
 }
 .article__header .logo {
   inline-size: 21ch;
+  -webkit-margin-end: 2rem;
+          margin-inline-end: 2rem;
 }
 @media (min-width: 885px) and (min-height: 299px) {
   .article__header {

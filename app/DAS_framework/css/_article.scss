@@ -25,7 +25,10 @@
 	}
 	&__close {
 		position: absolute;
-		inset: $u * 1.25 $u/-2 auto auto;
+		inset: $u * 1.25 $u/2 auto auto;
+		@include mq(medium) {
+			inset-inline-end: $u/-2;
+		}
 	}
 	&__header {
 		position: fixed;
@@ -33,6 +36,7 @@
 		inset: 0 0 auto auto;
 		.logo {
 			inline-size: $line-width/2;
+			margin-inline-end: $u * 2;
 		}
 		block-size: $u * 5;
 		padding: $u;
