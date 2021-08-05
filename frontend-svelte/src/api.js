@@ -1,13 +1,14 @@
-const API_URL = "http://localhost:3000"
+import axios from "axios"
+import { API_URL } from "./constants"
 
 export default {
-  list: (resource) => fetch(`${API_URL}${resource}`).then((res) => res.json()),
+  get: (resource) => axios.get(`${API_URL}${resource}`).then((res) => res.data),
 
   post: (resource, body) =>
-    fetch(`${API_URL}${resource}`, {
-      method: "post",
-      body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => res.json()),
-  
+    axios.post(`${API_URL}${resource}`, { body }).then((res) => res.data),
+
+  update: (resource, body) =>
+    axios.patch(`${API_URL}${resource}`, body).then((res) => res.data),
+
+  delete: (resource) => axios.delete(`${API_URL}${resource}`),
 }
