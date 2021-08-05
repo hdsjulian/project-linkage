@@ -13,11 +13,11 @@ app = FastAPI()
 
 #app.mount("/frontend", StaticFiles(directory="frontend-svelte/public", html=True), name="frontend")
 #app.mount("/build", StaticFiles(directory="frontend-svelte/public/build"), name="build")
-
+"""
 @app.get('/')
 async def frontend():
     return RedirectResponse(url='frontend')
-
+"""
 def get_db():
     db = SessionLocal()
     try:
