@@ -12,7 +12,7 @@ print("------------------------------")
 print(SQLALCHEMY_DATABASE_URL)
 print("------------------------------")
 print("------------------------------")
-print("------------------------------")
+print("-----------------------------")
 sys.stdout.flush()
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
 
