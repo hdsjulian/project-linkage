@@ -5,7 +5,7 @@
 	z-index: z(sticky);
 	@include transition();
 
-	@extend %disappear;
+	@include disappear;
 	.is-scrolled--target & {
 		opacity: 0;
 		pointer-events: none;
@@ -13,15 +13,15 @@
 			opacity: 0;
 		}
 	}
-	@extend %emphasis;
-	@extend %blur;
+	@include emphasis;
+	@include blur;
 	padding-block: $u/2;
 
 	&__list {
-		@extend %flex;
+		@include flex;
 		--flex-gap: #{$u/2};
 		min-height: $u * 2;
-		@extend %fs-1;
+		font-size: $fs-1;
 		max-width: calc(100% - #{$hook-width});
 		@include mq(medium) {
 			max-width: none;
@@ -43,7 +43,7 @@
 				@include transition;
 				.is-scroll--start &,
 				.is-scrolling--down & {
-					//@extend %a11y;
+					//include a11y;
 					opacity: 0;
 					pointer-events: none;
 				}
@@ -56,7 +56,7 @@
 }
 
 [class*="path__item"] {
-	@extend %nav__item;
+	@include nav__item;
 	color: var(--color--emphasis);
 
 	line-height: $line-height * 1rem;
@@ -78,7 +78,7 @@
 			pointer-events: none;
 			position: absolute;
 			font-size: 1rem;
-			@extend %icon;
+			@include icon;
 			content: "";
 			background-image: var(--symbol--white);
 			background-size: contain;

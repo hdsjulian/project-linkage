@@ -3,7 +3,7 @@
 
 .uppercase,
 .brand {
-	@extend %uppercase;
+	@include uppercase;
 }
 .touch {
 	@include touch {
@@ -23,7 +23,7 @@
 .is-hidden,
 .visually-hidden,
 .hidden {
-	@extend %a11y;
+	@include a11y;
 }
 p abbr[title],
 p .acronym {
@@ -51,5 +51,5 @@ abbr[title],
 	font-size: 0.95em;
 }
 .uppercase {
-	@extend %uppercase;
+	@include uppercase;
 }

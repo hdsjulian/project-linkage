@@ -297,65 +297,64 @@ $semibold-weight--inverse: $bold-weight + $inverse-correction;
 $bold-weight--inverse: $bold-weight + $inverse-correction;
 $ultra-weight--inverse: $ultra-weight + $inverse-correction;
 
-%thin {
+@mixin thin {
 	--weight: #{$thin-weight};
 }
-%thin--inverse {
+@mixin thin--inverse {
 	--weight: #{$thin-weight--inverse};
 }
-%ultralight {
+@mixin ultralight {
 	--weight: #{$ultralight-weight};
 }
-%ultralight--inverse {
+@mixin ultralight--inverse {
 	--weight: #{$ultralight-weight--inverse};
 }
-%light {
+@mixin light {
 	--weight: #{$light-weight};
 }
-%light--inverse {
+@mixin light--inverse {
 	--weight: #{$light-weight--inverse};
 }
-%normal {
+@mixin normal {
 	font-style: normal;
 	--weight: #{$normal-weight};
 }
-%normal--inverse {
+@mixin normal--inverse {
 	--weight: #{$normal-weight--inverse};
 	@include font-smoothing(legacy);
 }
-%semibold {
+@mixin semibold {
 	--weight: #{$semibold-weight};
 }
-%semibold--inverse {
+@mixin semibold--inverse {
 	--weight: #{$semibold-weight--inverse};
 }
-%bold {
-	//	font-weight: normal;
+@mixin bold {
 	--weight: #{$bold-weight};
 }
-%bold--inverse {
+@mixin bold--inverse {
 	--weight: #{$bold-weight--inverse};
 }
-%ultra {
+@mixin ultra {
 	--weight: #{$ultra-weight};
 }
-%ultra--inverse {
+@mixin ultra--inverse {
 	--weight: #{$ultra-weight--inverse};
 }
-%italic {
+@mixin italic {
 	font-style: italic;
 }
-%italic-not {
+@mixin italic-not {
 	font-style: normal;
 }
-%spaced {
+@mixin spaced {
 	letter-spacing: 0.05ch;
 }
-%uppercase {
+@mixin uppercase {
 	text-transform: uppercase;
-	@extend %spaced;
+	@include spaced;
 }
-%emphasis {
+@mixin emphasis {
 	background-color: $brand--dark;
 	@include mq(medium) {
 		background-color: $brand--color;
@@ -363,10 +362,10 @@ $ultra-weight--inverse: $ultra-weight + $inverse-correction;
 	color: var(--color--emphasis);
 	@include font-smoothing(legacy);
 }
-%a11y {
+@mixin a11y {
 	@include hidden;
 }
-%horizontal-rule {
+@mixin horizontal-rule {
 	background-color: $black;
 	display: block;
 	clear: both;
@@ -452,15 +451,6 @@ $fs3: map-get($font-size, "3");
 $fs4: map-get($font-size, "4");
 $fs5: map-get($font-size, "5");
 $fs6: map-get($font-size, "6");
-
-@for $n from $fs-min through $fs-max {
-	%fs#{$n} {
-		font-size: map-get($font-size, #{$n});
-	}
-	.fs#{$n} {
-		@extend %fs#{$n};
-	}
-}
 
 //@for $n from -3 through 6 {
 //	.fs#{$n} {

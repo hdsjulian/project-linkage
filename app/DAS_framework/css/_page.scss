@@ -10,6 +10,15 @@
 		position: relative;
 	}
 	&-main {
+		&:target {
+			#about,
+			.article__close {
+				display: none;
+			}
+			#map {
+				min-block-size: 100vh;
+			}
+		}
 	}
 	&-footer {
 		position: fixed;

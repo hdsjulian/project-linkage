@@ -6,7 +6,7 @@ $steps: 6;
 .text {
 }
 
-%text-column {
+@mixin text-column {
 	column-gap: $u * 2;
 	column-fill: balance;
 	column-width: $line-width/3;
@@ -14,18 +14,17 @@ $steps: 6;
 }
 
 [class*="text-column"] {
-	@extend %text-column;
+	@include text-column;
 }
 
 @for $n from 1 through $steps {
-	%text-column#{$n} {
-		@extend %text-column;
+	.text-column#{$n} {
+		@include text-column;
 	}
 }
 
 @include mq(medium) {
 	@for $n from 1 through $steps {
-		%text-column--#{$n},
 		.text-column--#{$n} {
 			column-count: #{$n};
 		}

@@ -9,7 +9,7 @@
 	}
 	padding: $u * 1.5;
 	@include mq(medium) {
-		padding-block-start: 0;
+		padding-block: 0;
 	}
 	overflow: auto;
 	background-color: $egg;
@@ -21,6 +21,16 @@
 			~ #about {
 				display: none;
 			}
+		}
+	}
+	&__close {
+		transition: none;
+		position: absolute;
+		z-index: z(modal);
+		inset: calc(#{$phi-major} * 100vh + #{$u * 1.65}) $u/2 auto auto;
+		@include mq(medium) {
+			position: absolute;
+			inset: $u * 1.25 $u auto auto;
 		}
 	}
 	&__header {

@@ -3,18 +3,12 @@
 @mixin cta {
 	user-select: none;
 	display: inline-block;
-	//	flex-direction: row nowrap;
-	//	gap: $u;
-	//	align-items: stretch;
-	///	> * {
-	///		flex: 0 0 auto;
-	///	}
 	padding-inline: $u;
 	position: relative;
 	max-width: $line-width;
-	@extend %fs0;
-	@extend %italic-not;
-	@extend %bold--inverse;
+	font-size: $fs0;
+	@include italic-not;
+	@include bold--inverse;
 	@include hyphens(none);
 	margin-block: $u/2;
 	margin-inline-start: 0;
@@ -25,8 +19,7 @@
 	border: none;
 	vertical-align: middle;
 	font-family: $font-family-brand;
-	@extend %uppercase;
-	@extend %emphasis;
+	@include uppercase;
 	cursor: pointer;
 	background-color: $cta-background-color;
 	color: $cta-color;
@@ -55,6 +48,7 @@
 		background-color: $bright;
 	}
 }
+
 .cta {
 	@include cta;
 }

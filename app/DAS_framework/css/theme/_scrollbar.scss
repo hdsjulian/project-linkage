@@ -1,16 +1,16 @@
 @use "../helper" as *;
 @use "constant" as *;
 
-%scroll-snap-mandatory {
+@mixin scroll-snap-mandatory {
 	scroll-snap-type: y mandatory;
 	scroll-padding: var(--headerHeight);
 }
-%scroll-snap-proximity {
+@mixin scroll-snap-proximity {
 	scroll-snap-type: y proximity;
 	scroll-padding: var(--headerHeight);
 }
 
-%scroll-snap {
+@mixin scroll-snap {
 	scroll-snap-align: start;
 	.is-safari & {
 		// removing the automatic padding invoked by the fixed header

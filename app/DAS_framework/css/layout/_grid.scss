@@ -1,7 +1,7 @@
 @use "../helper" as *;
 @use "../theme" as *;
 
-%grid {
+@mixin grid {
 	display: grid;
 	--grid-gap: #{$u};
 	grid-gap: var(--grid-gap);
@@ -9,7 +9,7 @@
 }
 
 .grid {
-	@extend %grid;
+	@include grid;
 }
 
 $steps: 12;
