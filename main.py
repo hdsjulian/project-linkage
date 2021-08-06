@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import RedirectResponse
 from sqlalchemy.orm import Session
@@ -22,7 +22,12 @@ def get_db():
         yield db
     finally:
         db.close()
-
+@app.route("/{full_path:path}")
+async def catch_all(request: Request, full_path: str):
+    print("full_path: "+full_path)
+    return templates.TemplateResponse("index.html", {"request": request})
+        
+        
 @api_app.get("/users/{user_id}", response_model=schemas.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
     db_user = crud.get_user(db, user_id=user_id)
