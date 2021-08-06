@@ -1,7 +1,20 @@
+<script>
+  import { url } from "@roxi/routify"
+
+  let checked = false
+
+  const toggleMenu = () => (checked = !checked)
+</script>
+
 <header class="page-header" id="page-header">
   <div class="page-menu menu">
     <div class="menu-toggle">
-      <input class="visually-hidden" id="menu-toggle" type="checkbox" />
+      <input
+        on:click={toggleMenu}
+        class="visually-hidden"
+        id="menu-toggle"
+        type="checkbox"
+        {checked} />
 
       <label class="menu-toggle__hook" for="menu-toggle">
         <div class="menu-toggle__hook-icon">
@@ -14,26 +27,30 @@
         <!--include _page-search.pug -->
         <nav class="nav--main">
           <ol class="nav__list">
-            <li class="nav__item"><a href="#about">About</a></li>
-            <li class="nav__item"><a href="#coin">Coins</a></li>
-            <li class="nav__item"><a href="#handover">Handovers</a></li>
-            <li class="nav__item"><a href="#profile">Profile</a></li>
-            <li class="nav__item"><a href="#contact">Contact</a></li>
-            <li class="nav__item"><a href="#legal">Legal</a></li>
-            <li class="nav__item"><a href="#privacy">Privacy </a></li>
+            <li class="nav__item">
+              <a on:click={toggleMenu} use:$url href="/">About</a>
+            </li>
+            <li class="nav__item">
+              <a on:click={toggleMenu} use:$url href="/coin">Coins</a>
+            </li>
+            <li class="nav__item">
+              <a on:click={toggleMenu} use:$url href="/handover">Handovers</a>
+            </li>
+            <li class="nav__item">
+              <a on:click={toggleMenu} use:$url href="/profile">Profile</a>
+            </li>
+            <li class="nav__item">
+              <a on:click={toggleMenu} use:$url href="/contact">Contact</a>
+            </li>
+            <li class="nav__item">
+              <a on:click={toggleMenu} use:$url href="/legal">Legal</a>
+            </li>
+            <li class="nav__item">
+              <a on:click={toggleMenu} use:$url href="/privacy">Privacy </a>
+            </li>
           </ol>
         </nav>
       </div>
     </div>
   </div>
-
-  <script>
-    var navigating = document.getElementsByClassName("nav__item")
-    var hidemenu = function () {
-      document.getElementById("menu-toggle").checked = false
-    }
-    for (var i = 0; i < navigating.length; i++) {
-      navigating[i].addEventListener("click", hidemenu, false)
-    }
-  </script>
 </header>
