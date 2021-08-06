@@ -23,7 +23,9 @@ def get_db():
     finally:
         db.close()
 @app.get("/{full_path:path}")
-async def read_index():
+async def read_index(request: Request, full_path: str):
+    print("Foobar")
+    print(full_path)
     return FileResponse('index.html')
         
         
