@@ -2492,6 +2492,57 @@ iframe {
     opacity: 1;
   }
 }
+ul,
+ol {
+  -webkit-margin-after: 1rem;
+          margin-block-end: 1rem;
+  counter-reset: counter--li;
+  -webkit-padding-before: 1rem;
+          padding-block-start: 1rem;
+  -webkit-padding-after: 1rem;
+          padding-block-end: 1rem;
+  -webkit-margin-start: 0;
+          margin-inline-start: 0;
+  -webkit-margin-end: 0;
+          margin-inline-end: 0;
+  background-color: var(--brand--light);
+}
+
+li {
+  max-width: 42ch;
+  -webkit-margin-after: 2px;
+          margin-block-end: 2px;
+  padding: 0.5rem;
+  -webkit-padding-start: 4ch;
+          padding-inline-start: 4ch;
+  --text-indent: -3ch;
+  text-indent: var(--text-indent);
+  background-color: var(--brand--color);
+}
+li:not(:last-child) {
+  box-shadow: 0 2px 0 0 whitesmoke;
+}
+li:before {
+  content: "—";
+  display: inline-block;
+  font-family: "Rubik", "Arial", sans-serif;
+  min-width: 2ch;
+  margin-right: 1rem;
+  text-align: right;
+  color: var(--brand--dark);
+  --weight: 600;
+}
+ol li {
+  list-style: none;
+  counter-increment: counter--li;
+}
+ol li:before {
+  content: "0" counter(counter--li);
+}
+ol li:nth-child(n+10):before {
+  content: counter(counter--li);
+}
+
 dl {
   display: grid;
   --grid-gap: 1rem;
@@ -2513,13 +2564,44 @@ dl dd {
   padding: 0.25rem 0.5rem 0;
   background-color: white;
 }
+dl dt.fullwidth,
+dl dd.fullwidth {
+  grid-column: 1/3;
+}
 dl dt {
-  text-align: left;
-  text-align: right;
+  text-align: end;
   font-family: "Rubik", "Arial", sans-serif;
+}
+dl dt.fullwidth {
+  padding-block: 2rem 0;
+  text-align: start;
+  --weight: 600;
 }
 dl dd {
   --weight: 600;
+}
+dl dd.fullwidth {
+  font-style: normal;
+  --weight: 350;
+  font-style: italic;
+}
+
+.paging__list, [class*=nav__list] {
+  margin: 0;
+  padding: 0;
+  background-color: unset;
+}
+.paging__list li, [class*=nav__list] li {
+  background-color: inherit;
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  font-style: normal;
+  --weight: 350;
+  font-style: normal;
+}
+.paging__list li:before, [class*=nav__list] li:before, .paging__list li:after, [class*=nav__list] li:after {
+  content: unset;
 }
 
 .form {
@@ -2979,6 +3061,7 @@ dl dd {
   cursor: pointer;
   background-color: var(--brand--night);
   color: var(--brand--color);
+  margin: 0;
   max-width: none;
   min-width: 0;
   width: 100%;
@@ -3107,8 +3190,8 @@ dl dd {
 }
 @media (min-width: 885px) and (min-height: 299px) {
   .article__close {
-    position: absolute;
-    inset: 1.25rem 1rem auto auto;
+    position: fixed;
+    inset: 2.5rem 3.5rem auto auto;
   }
 }
 .article__header {

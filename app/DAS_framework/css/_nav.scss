@@ -1,4 +1,5 @@
 @use "use" as *;
+@use "list" as *;
 
 @mixin nav__item {
 	font-family: $font-family-nav;
@@ -16,6 +17,7 @@
 }
 
 [class*="nav__list"] {
+	@extend %list--reset;
 	@include flex;
 	flex-flow: column nowrap;
 	> * {

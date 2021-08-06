@@ -82,15 +82,19 @@ html(lang='en' class='')
 							h1 Coin №123
 							dl
 								dt Travels
-									dd 6
+								dd 6
 								dt Currently held by
-									dd Erica
+								dd Erica
 								dt Received from
-									dd Anna
+								dd Anna
 								dt Handed over on
-									dd 2021-08-31 14:56:17
+								dd 2021-08-31 14:56:17
 								dt at Lon:Lat
-									dd 55.458:25.873
+								dd 55.458:25.873
+								dt.fullwidth  What they had to say to each other:
+								dd.fullwidth
+									p
+										+text-gen(2, "s", true)
 							+paging('', 'Previous', 'Afterwards')
 
 						section#about.about
@@ -98,4 +102,16 @@ html(lang='en' class='')
 								+text-gen(2, "s", true)
 							p
 								+text-gen(3, "s", true)
+							ul
+								li list item
+								li list item
+							ol
+								li list item
+								li list item
+							h1 heading1
+							h2 heading2
+							h3 heading3
+							h4 heading4
+							h5 heading5
+							h6 heading6
 							a.cta(href="#coin") Coin
