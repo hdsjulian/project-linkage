@@ -22,7 +22,7 @@ def get_db():
         yield db
     finally:
         db.close()
-@app.route("/{full_path:path}")
+@app.get("/{full_path:path}")
 async def read_index():
     return FileResponse('index.html')
         
