@@ -1,11 +1,12 @@
 from typing import List
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
-from starlette.responses import RedirectResponse
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 import crud, models, schemas
 from database import SessionLocal, engine
+import sys
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -13,7 +14,10 @@ app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
 app.mount('/api', api_app)
 app.mount('/build', StaticFiles(directory="frontend-svelte/public/build", html=True), name="build")
-app.mount('/', StaticFiles(directory="frontend-svelte/public", html=True), name="static")
+app.mount('/js', StaticFiles(directory="frontend-svelte/public/js", html=True), name="js")
+app.mount('/image', StaticFiles(directory="frontend-svelte/public/image", html=True), name="image")
+app.mount('/font', StaticFiles(directory="frontend-svelte/public/font", html=True), name="font")
+
 
 
 @app.route("/{full_path:path}")
@@ -27,7 +31,14 @@ def get_db():
         yield db
     finally:
         db.close()
-
+@app.get("/{full_path:path}")
+async def read_index(request: Request, full_path: str):
+    print("Foobar")
+    print(full_path)
+    sys.stdout.flush()
+    return FileResponse('frontend-svelte/public/index.html')
+        
+        
 @api_app.get("/users/{user_id}", response_model=schemas.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
     db_user = crud.get_user(db, user_id=user_id)
