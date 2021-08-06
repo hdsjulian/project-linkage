@@ -1,7 +1,7 @@
 <script>
   import api from "../api"
 
-  let getHandover = api.list("/handovers/1")
+  let getHandover = api.get("/handovers/1")
 </script>
 
 {#await getHandover}
