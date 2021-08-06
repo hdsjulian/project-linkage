@@ -16,6 +16,11 @@ app.mount('/build', StaticFiles(directory="frontend-svelte/public/build", html=T
 app.mount('/', StaticFiles(directory="frontend-svelte/public", html=True), name="static")
 
 
+@app.route("/{full_path:path}")
+async def catch_all(request: Request, full_path: str):
+    print("full_path: "+full_path)
+    return templates.TemplateResponse("index.html", {"request": request})
+
 def get_db():
     db = SessionLocal()
     try:
