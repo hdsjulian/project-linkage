@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
-from starlette.responses import RedirectResponse
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 import crud, models, schemas
 from database import SessionLocal, engine
@@ -14,7 +14,7 @@ app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
 app.mount('/api', api_app)
 app.mount('/build', StaticFiles(directory="frontend-svelte/public/build", html=True), name="build")
-app.mount('/', StaticFiles(directory="frontend-svelte/public", html=True), name="static")
+
 
 
 def get_db():
