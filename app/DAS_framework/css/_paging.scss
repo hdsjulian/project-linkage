@@ -1,5 +1,6 @@
 @use "use" as *;
 @use "cta" as *;
+@use "list" as *;
 
 // PAGING ###
 
@@ -7,12 +8,14 @@
 	padding: $u 0;
 	&__list {
 		@include flex;
+		@extend %list--reset;
 	}
 	li {
 		flex: 1 1 40%;
 	}
 	a {
 		@include cta;
+		margin: 0;
 		max-width: none;
 		min-width: 0;
 		width: 100%;

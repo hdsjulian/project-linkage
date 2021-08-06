@@ -29,8 +29,8 @@
 		z-index: z(modal);
 		inset: calc(#{$phi-major} * 100vh + #{$u * 1.65}) $u/2 auto auto;
 		@include mq(medium) {
-			position: absolute;
-			inset: $u * 1.25 $u auto auto;
+			position: fixed;
+			inset: $u * 2.5 $u * 3.5 auto auto;
 		}
 	}
 	&__header {
