@@ -23,9 +23,8 @@ def get_db():
     finally:
         db.close()
 @app.route("/{full_path:path}")
-async def catch_all(request: Request, full_path: str):
-    print("full_path: "+full_path)
-    return templates.TemplateResponse("index.html", {"request": request})
+async def read_index():
+    return FileResponse('index.html')
         
         
 @api_app.get("/users/{user_id}", response_model=schemas.User)
