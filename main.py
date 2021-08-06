@@ -6,6 +6,7 @@ from starlette.responses import RedirectResponse
 from sqlalchemy.orm import Session
 import crud, models, schemas
 from database import SessionLocal, engine
+import sys
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -26,7 +27,8 @@ def get_db():
 async def read_index(request: Request, full_path: str):
     print("Foobar")
     print(full_path)
-    return FileResponse('index.html')
+    sys.stdout.flush()
+    return FileResponse('frontend-svelte/public/index.html')
         
         
 @api_app.get("/users/{user_id}", response_model=schemas.User)
