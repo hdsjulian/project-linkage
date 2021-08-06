@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "yarn run-p build:*",
-    "build:css": "yarn sass app/DAS_framework/css/app.scss public/build/app.css",
+    "build:css": "yarn sass app/DAS_framework/css/app.scss frontend-svelte/public/build/app.css",
     "build:js": "cd frontend-svelte; rollup -c",
     "dev": "yarn run-p dev:*",
     "dev:api": "yarn json-server --watch frontend-svelte/db.json",
