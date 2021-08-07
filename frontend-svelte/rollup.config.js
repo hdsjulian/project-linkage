@@ -49,7 +49,7 @@ export default {
       },
     }),
     replace({
-      "process.env.IS_PROD": production,
+      "process.env.API_URL": process.env.API_URL,
     }),
     // we'll extract any component CSS out into
     // a separate file - better for performance
