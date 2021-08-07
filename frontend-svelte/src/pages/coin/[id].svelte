@@ -16,12 +16,9 @@ import api from "../../api";
     api.get(`/coins/${id}`).then((res) => { 
       console.log(res)
       console.log(res.data)
-      console.log.(res.data.coin)
       coin = res.data.coin
       console.log(coin)
-      console.log(coin.travels)
       handover = coin.handover
-      console.log(handover)
       recipient = handover.recipient
       giver = handover.giver
 
