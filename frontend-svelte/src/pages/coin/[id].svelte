@@ -11,13 +11,13 @@ import api from "../../api";
 
   $afterPageLoad(() => {
     id = parseInt($params.id, 10)
-    api.get('/coins/${id}').then(res) => { 
+    api.get('/coins/${id}').then((res) => { 
       coin = res.data.coin
       handover = coin.handover
       recipient = handover.recipient
       giver = handover.giver
 
-    }
+    })
     prevId = id > 1 ? id - 1 : 1
     nextId = id + 1
   })
