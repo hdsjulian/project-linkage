@@ -1,8 +1,7 @@
 include mixin/__mixin
 doctype html
 html(lang='en' class='')
-	head
-		include include/_head.pug
+	include include/_head.pug
 	body(class='page--index')
 		include ../svg/svg.html 
 		.page__outer
@@ -12,7 +11,7 @@ html(lang='en' class='')
 					nav.map
 						figure#map
 					article.article
-						header.article__header
+						header.article__header 
 							h1.a11y Project Linkage
 							.figure.logo
 								a.logo__link(href="#main") 
@@ -21,7 +20,7 @@ html(lang='en' class='')
 							svg.icon--close
 								use(xlink:href="#close") 
 						section#contact.contact
-							h1 Contact
+							h1 Contact 
 						section#handover.handover
 							h1 Coin №123
 							form.form
@@ -37,6 +36,9 @@ html(lang='en' class='')
 										input(type="email" placeholder="@")
 									label
 										span Latitude
+										input(type="number" placeholder="00.00000")
+									label
+										span Longitude
 										input(type="number" placeholder="00.00000")
 									label
 										span Longitude
