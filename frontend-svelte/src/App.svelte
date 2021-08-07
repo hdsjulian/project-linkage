@@ -14,7 +14,7 @@
       <main class="page-main">
         <Article>
           <Router {routes} />
-          <AsyncExample />
+          
         </Article>
       </main>
     </div>
