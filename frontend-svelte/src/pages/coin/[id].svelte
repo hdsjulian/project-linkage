@@ -11,7 +11,7 @@ import api from "../../api";
 
   $afterPageLoad(() => {
     id = parseInt($params.id, 10)
-    api.get('/api/coins/${id}').then(res) => { 
+    api.get('/coins/${id}').then(res) => { 
       coin = res.data.coin
       handover = coin.handover
       recipient = handover.recipient
