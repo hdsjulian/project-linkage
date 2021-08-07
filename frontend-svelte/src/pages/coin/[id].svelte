@@ -20,8 +20,6 @@ import api from "../../api";
     api.get(`/coins/${id}`).then((res) => { 
       coin = res.data.coin
       handover = coin.handover
-      recipient = handover.recipient
-      giver = handover.giver
       travels = coin.travels
       recipientName = recipient.name
       giverName = giver.name
