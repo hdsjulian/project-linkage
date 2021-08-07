@@ -5,7 +5,7 @@
   import api from "../../api"
 
   let hash
-  let coin_id
+  let coinId
   let travels
   let handoverId = 0
   let giverPassword = ""
@@ -36,7 +36,7 @@
 
     api.get(`/hash/${hash}`).then((res) => {
       console.log(res.data.coin)
-      coin_id = res.data.coin.id
+      coinId = res.data.coin.id
       travels = 1
 
       //coin = res.data.coin
@@ -110,40 +110,40 @@
       <legend>Handover Entry</legend>
 
       <p>
-        Now it's time to enter the name of the person <strong>
-          receiving the coin</strong>
-        , as well as their password and other data
+        Now it's time to enter the name of the person
+        <strong>receiving the coin</strong>, as well as their password and other
+        data
       </p>
 
       <label>
         <span>Receiving person's name</span>
-        <input type="text" placeholder="Your name" bind:value={recipientName} />
+        <input bind:value={recipientName} type="text" placeholder="Your name" />
       </label>
 
       <label>
         <span>Receiving person's e-mail address</span>
 
         <input
+          bind:value={recipientEmail}
           type="text"
-          placeholder="Your name"
-          bind:value={recipientEmail} />
+          placeholder="Your name" />
       </label>
 
       <label>
         <span>Receiving person's password</span>
 
         <input
+          bind:value={recipientPassword}
           type="password"
-          placeholder="Your name"
-          bind:value={recipientPassword} />
+          placeholder="Your name" />
       </label>
 
       <label>
         <span>Receiving person's password (again!)</span>
         <input
+          bind:value={recipientPassword2}
           type="password"
-          placeholder="Your name"
-          bind:value={recipientPassword2} />
+          placeholder="Your name" />
       </label>
     </fieldset>
 
