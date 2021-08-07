@@ -3,9 +3,8 @@
 import { dataset_dev } from "svelte/internal";
 import api from "../../api";
 
+  let id
   let coin
-
-  
   let prevId
   let nextId
 
