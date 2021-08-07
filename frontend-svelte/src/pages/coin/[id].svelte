@@ -27,7 +27,7 @@ import api from "../../api";
       giverName = giver.name
       lat = handover.lat
       lon = handover.lon
-
+      console.log(coin)
 
     })
     prevId = id > 1 ? id - 1 : 1
