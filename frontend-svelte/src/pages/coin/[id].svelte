@@ -8,20 +8,26 @@ import api from "../../api";
   let prevId
   let nextId
   let handover
-  let recipient
-  let giver
+  let recipientName
+  let giverName
+  let travels
+  let lat
+  let lon
+
 
   $afterPageLoad(() => {
     id = parseInt($params.id, 10)
     api.get(`/coins/${id}`).then((res) => { 
-      console.log(res)
-      console.log(res.data)
       coin = res.data.coin
-      console.log(coin)
-      console.log(coin.travels)
       handover = coin.handover
       recipient = handover.recipient
       giver = handover.giver
+      travels = coin.travels
+      recipientName = recipient.name
+      giverName = giver.name
+      lat = handover.lat
+      lon = handover.lon
+
 
     })
     prevId = id > 1 ? id - 1 : 1
@@ -33,15 +39,15 @@ ID: {id}
 
 <dl>
   <dt>Travels</dt>
-  <dd>{coin.travels}</dd>
+  <dd>{travels}</dd>
   <dt>Currently held by</dt>
-  <dd>{recipient.name}</dd>
+  <dd>{recipientName}</dd>
   <dt>Received from</dt>
-  <dd>Anna</dd>
+  <dd>{giverName}</dd>
   <dt>Handed over on</dt>
   <dd>2021-08-31 14:56:17</dd>
   <dt>at Lon:Lat</dt>
-  <dd>55.458:25.873</dd>
+  <dd>{lon}:{lat}</dd>
 </dl>
 
 <nav class="paging">
