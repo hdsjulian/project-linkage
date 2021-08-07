@@ -21,8 +21,8 @@ import api from "../../api";
       coin = res.data.coin
       handover = coin.handover
       travels = coin.travels
-      recipientName = recipient.name
-      giverName = giver.name
+      recipientName = handover.recipient.name
+      giverName = handover.giver.name
       lat = handover.lat
       lon = handover.lon
       console.log(coin)
