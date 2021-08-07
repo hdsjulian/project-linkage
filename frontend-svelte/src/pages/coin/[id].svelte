@@ -15,8 +15,13 @@ import api from "../../api";
     id = parseInt($params.id, 10)
     api.get(`/coins/${id}`).then((res) => { 
       console.log(res)
-      coin = res.data.data.coin
+      console.log(res.data)
+      console.log.(res.data.coin)
+      coin = res.data.coin
+      console.log(coin)
+      console.log(coin.travels)
       handover = coin.handover
+      console.log(handover)
       recipient = handover.recipient
       giver = handover.giver
 
