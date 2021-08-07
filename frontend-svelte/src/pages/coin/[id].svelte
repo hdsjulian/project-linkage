@@ -3,16 +3,18 @@
 import { dataset_dev } from "svelte/internal";
 import api from "../../api";
 
+  let id
   let coin
-
-  
   let prevId
   let nextId
+  let handover
+  let recipient
+  let giver
 
   $afterPageLoad(() => {
     id = parseInt($params.id, 10)
     api.get('/coins/${id}').then((res) => { 
-      coin = res.data.coin
+      coin = res
       handover = coin.handover
       recipient = handover.recipient
       giver = handover.giver
