@@ -18,6 +18,7 @@ import api from "../../api";
       console.log(res.data)
       coin = res.data.coin
       console.log(coin)
+      console.log(coin.travels)
       handover = coin.handover
       recipient = handover.recipient
       giver = handover.giver
