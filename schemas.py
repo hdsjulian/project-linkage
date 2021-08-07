@@ -71,6 +71,17 @@ class HandoverHandoverReturn(CamelModel):
 class HandoverData(CamelModel):
     data: HandoverHandoverReturn
 
+class CoinReturn(Coin):
+    handover: Optional[HandoverReturn]=None
+
+class CoinCoinReturn(CamelModel):
+    coin: CoinReturn
+
+class CoinData(CamelModel):
+    data: CoinCoinReturn
+
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str

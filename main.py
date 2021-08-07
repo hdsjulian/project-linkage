@@ -54,12 +54,17 @@ def verify_coin(hash: str, db: Session = Depends(get_db)):
     else: 
         return db_coin
 
-@api_app.get("/coins/{coin_id}", response_model=schemas.Coin)
+@api_app.get("/coins/{coin_id}", response_model=schemas.CoinData)
 def read_coin(coin_id: int, db: Session=Depends(get_db)):
     db_coin = crud.get_coin(db, coin_id=coin_id)
     if db_coin is None:
         raise HTTPException(status_code=404, detail="Coin not found")
-    return db_coin
+    db_handover = crud.get_handovers_by_coin(db, coin_id, limit=1)[0]
+    db_coin.handover=db_handover
+    db_coin.handover.coin=db_coin
+    db_coin.handover.recipient = crud.get_user(db, db_coin.handover.recipient_id)
+    db_coin.handover.giver = crud.get_user(db, db_coin.handover.giver_id)
+    return {'data': {'coin': db_coin}}
 
 @api_app.get("/coins/", response_model=List[schemas.Coin])
 def read_coins(skip: int = 0, limit: int = 120, db: Session = Depends(get_db)):

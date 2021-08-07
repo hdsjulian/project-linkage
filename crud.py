@@ -50,7 +50,7 @@ def get_handover(db: Session, handover_id: int):
     return result
 
 def get_handovers_by_coin(db:Session, coin_id: int, skip: int=0, limit: int=100):
-    return db.query(models.Handover).filter(models.Handover.coin_id == coin_id).offset(skip).limit(limit).all()
+    return db.query(models.Handover).filter(models.Handover.coin_id == coin_id).order_by(desc(models.Handover.id)).offset(skip).limit(limit).all()
 
 def get_handovers_by_user(db:Session, user_id: int):
     return db.query(models.Handover).filter(models.Handover.recipient_id == user_id).all()
