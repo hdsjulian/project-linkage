@@ -1,6 +1,7 @@
 <script>
   import { url, params, afterPageLoad } from "@roxi/routify"
   import Rules from "../rules.svelte"
+  import Paging from "../../components/Paging.svelte"
   import api from "../../api"
 
   let hash
@@ -103,12 +104,7 @@
       </label>
     </fieldset>
 
-    <nav class="paging">
-      <ul class="paging__list">
-        <li><button type="button" on:click={prevStep}>Previous</button></li>
-        <li><button type="button" on:click={nextStep}>Afterwards</button></li>
-      </ul>
-    </nav>
+    <Paging {prevStep} {nextStep} />
   {:else if step === 2}
     <fieldset>
       <legend>Handover Entry</legend>
@@ -151,17 +147,7 @@
       </label>
     </fieldset>
 
-    <nav class="paging">
-      <ul class="paging__list">
-        <li>
-          <button type="button" on:click={prevStep}>Previous</button>
-        </li>
-
-        <li>
-          <button type="button" on:click={nextStep}>Afterwards</button>
-        </li>
-      </ul>
-    </nav>
+    <Paging {prevStep} {nextStep} />
   {:else if step === 3}
     <fieldset>
       <legend>Handover Story</legend>
@@ -178,16 +164,6 @@
       </label>
     </fieldset>
 
-    <nav class="paging">
-      <ul class="paging__list">
-        <li>
-          <button type="button" on:click={prevStep}>Previous</button>
-        </li>
-
-        <li>
-          <button type="button" on:click={nextStep}>Afterwards</button>
-        </li>
-      </ul>
-    </nav>
+    <Paging {prevStep} {nextStep} />
   {/if}
 </form>
