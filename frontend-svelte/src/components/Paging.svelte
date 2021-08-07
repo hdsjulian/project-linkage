@@ -5,7 +5,10 @@
 
 <nav class="paging">
   <ul class="paging__list">
-    <li><button type="button" on:click={prevStep}>Previous</button></li>
-    <li><button type="button" on:click={nextStep}>Afterwards</button></li>
+    <li><button on:click={prevStep} type="button">Previous</button></li>
+
+    <li>
+      <button on:click={nextStep} type="button" class="next">Afterwards</button>
+    </li>
   </ul>
 </nav>
