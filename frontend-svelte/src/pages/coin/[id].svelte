@@ -7,6 +7,9 @@ import api from "../../api";
   let coin
   let prevId
   let nextId
+  let handover
+  let recipient
+  let giver
 
   $afterPageLoad(() => {
     id = parseInt($params.id, 10)
