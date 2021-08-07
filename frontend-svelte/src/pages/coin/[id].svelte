@@ -1,12 +1,23 @@
 <script>
   import { url, params, afterPageLoad } from "@roxi/routify"
+import { dataset_dev } from "svelte/internal";
+import api from "../../api";
 
-  let id
+  let coin
+
+  
   let prevId
   let nextId
 
   $afterPageLoad(() => {
     id = parseInt($params.id, 10)
+    api.get('/api/coins/${id}').then((res)) { 
+      coin = res.data.coin
+      handover = coin.handover
+      recipient = handover.recipient
+      giver = handover.giver
+
+    }
     prevId = id > 1 ? id - 1 : 1
     nextId = id + 1
   })
@@ -16,9 +27,9 @@ ID: {id}
 
 <dl>
   <dt>Travels</dt>
-  <dd>6</dd>
+  <dd>{coin.travels}</dd>
   <dt>Currently held by</dt>
-  <dd>Erica</dd>
+  <dd>{recipient.name}</dd>
   <dt>Received from</dt>
   <dd>Anna</dd>
   <dt>Handed over on</dt>
