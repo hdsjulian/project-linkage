@@ -13,6 +13,8 @@ import api from "../../api";
   let travels
   let lat
   let lon
+  let timestamp
+  let text
 
 
   $afterPageLoad(() => {
@@ -20,13 +22,15 @@ import api from "../../api";
     api.get(`/coins/${id}`).then((res) => { 
       coin = res.data.coin
       handover = coin.handover
+      text = handover.text
+      console.log(handover)
       travels = coin.travels
       recipientName = handover.recipient.name
-      giverName = handover.giver.name
+      giverName = handover.giver != null ? handover.giver.name : null
+      timestamp = new Date(handover.timestamp * 1000).toLocaleDateString("de-DE")
       lat = handover.lat
       lon = handover.lon
-      console.log(coin)
-
+      console.log(handover)
     })
     prevId = id > 1 ? id - 1 : 1
     nextId = id + 1
@@ -40,12 +44,18 @@ ID: {id}
   <dd>{travels}</dd>
   <dt>Currently held by</dt>
   <dd>{recipientName}</dd>
+  {#if giverName != null }
   <dt>Received from</dt>
   <dd>{giverName}</dd>
+  {/if}
   <dt>Handed over on</dt>
-  <dd>2021-08-31 14:56:17</dd>
+  <dd>{timestamp}</dd>
   <dt>at Lon:Lat</dt>
   <dd>{lon}:{lat}</dd>
+  {#if text != ""}
+  <dt class = "fullwidth">What they had to say to each other</dt>
+  <dd class = "fullwidth">{text}</dd>
+  {/if}
 </dl>
 
 <nav class="paging">

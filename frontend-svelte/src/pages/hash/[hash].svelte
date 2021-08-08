@@ -316,7 +316,7 @@
     <fieldset>
       <p>
         Thank you! You are now all set to hand over this coin to another person! 
-        This coin, by the way, carries the id {coin.id}. 
+        This coin, by the way, carries the id {coin.id} and you can see its path <a href="/coin/{coin.id}">here</a>. 
       </p>
 
     </fieldset>
@@ -343,7 +343,7 @@
     <fieldset>
       <p>
         Thank you! {recipientName} is now all set to hand over this coin to another person! 
-        This coin, by the way, carries the id {coin.id}. 
+        This coin, by the way, carries the id {coin.id} and you can see its path <a href="/coin/{coin.id}">here</a>. 
       </p>
 
     </fieldset>
