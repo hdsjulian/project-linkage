@@ -46,13 +46,13 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = crud.get_users(db, skip=skip, limit=limit)
     return users
 
-@api_app.get("/hash/{hash}", response_model=schemas.CoinVerify)
+@api_app.get("/hash/{hash}", response_model=schemas.CoinData)
 def verify_coin(hash: str, db: Session = Depends(get_db)):
     db_coin = crud.get_coin_by_hash(db, hash)
     if db_coin is None:
         raise HTTPException(status_code=404, detail="Coin not found")
     else: 
-        return db_coin
+        return {"data": {"coin": db_coin}}
 
 @api_app.get("/coins/{coin_id}", response_model=schemas.CoinData)
 def read_coin(coin_id: int, db: Session=Depends(get_db)):
