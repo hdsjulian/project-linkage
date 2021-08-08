@@ -23,7 +23,7 @@ class HandoverBase(CamelModel):
     timestamp: int
     predecessor_id: Optional[int] = None
     recipient_id: int
-    giver_id: int
+    giver_id: Optional[int] = None
     coin_id: int
     
 class HandoverCreate(HandoverBase): 
@@ -102,7 +102,7 @@ class EnterHandover(CamelModel):
     lon: float
     text: str
     giver_password: str
-    predecessor_id: Optional[str] = None
     recipient_password_again: str
+    predecessor_id: Optional[int] = None
     giver_id: Optional[int] = None
-    recipient_id: int
+    recipient_id: Optional[int] = None
