@@ -22,7 +22,7 @@ import api from "../../api";
     api.get(`/coins/${id}`).then((res) => { 
       coin = res.data.coin
       handover = coin.handover
-      text = handover.text
+      text = handover.text != null? handover.text : null
       console.log(handover)
       travels = coin.travels
       recipientName = handover.recipient.name
