@@ -15,12 +15,24 @@
   let step = 0
   let handoverText = "Your Story"
   let result 
-  let lat = 123
-  let lon = 123
+  let lat = 52.520815
+  let lon = 13.4094191
   let wrong_pass = false
   let password_match = true
   let coin
   let error_submitting = false
+  let error_position = false
+  function setLocation(position) {
+    lat = position.coords.latitude
+    lon = position.coords.longitude
+    console.log(lat)
+  }
+  function locationError(error) {
+    if (error.code == error.PERMISSION_DENIED) {
+      error_position = true
+    }
+  }
+
   const nextStep = () => {
     if (travels > 0) { 
       if (step == 1) { 
@@ -29,6 +41,7 @@
       else if (step == 2) {
         password_match = checkPasswordMatch()
         step +=1;
+        navigator.geolocation.getCurrentPosition(setLocation, locationError)
       }
       else if (step == 3) {
         if (submitHandover() != false) {
@@ -44,6 +57,11 @@
       console.log(step)
     }
     else { 
+      if (step == 0) {
+        navigator.geolocation.getCurrentPosition(setLocation, locationError)
+        console.log(lat)
+
+      }
       if (step == 1) {
         password_match = checkPasswordMatch()
         if (password_match == true) {
@@ -144,7 +162,11 @@
           on "continue"!
         </strong>
       </p>
-    <Rules />
+      <p>
+        <strong>IMPORTANT!</strong> - in the next step we will ask you to allow the browser to give us your location. <strong>Please say yes!</strong>
+      </p>
+
+      <Rules />
     {:else}
       <strong>Welcome!</strong>
 
@@ -170,6 +192,9 @@
           <a use:$url href="/contact">contact</a>
           us (we're working on a reset password function)!
         </p>
+        <p>
+          <strong>IMPORTANT!</strong> - in the next step we will ask you to allow the browser to give us your location. <strong>Please say yes!</strong>>
+        </p>
 
         <label>
           <span>Giving person's password</span>
@@ -193,8 +218,11 @@
           We promise you, that we will never ever publish your personal data _anywhere_! We might however use your e-mail-address to update you about what is going on with this coin. 
           If you don't want this: we're working hard on a detailed concept. Let us know what you think!
         </p>
+        {#if error_position == true}
+        <span class="error">Unfortunately you didn't allow us to set your location. We will automatically set it to Berlin</span>
+        {/if}
+         <label>
 
-        <label>
           <span>Original holder's name</span>
           <input bind:value={recipientName} type="text" placeholder="Your name" />
         </label>
@@ -242,7 +270,9 @@
           <strong>receiving the coin</strong>, as well as their password and other
           data
         </p>
-
+        {#if error_position == true}
+        <span class="error">Unfortunately you didn't allow us to set your location. We will automatically set it to Berlin</span>
+        {/if}
         <label>
           <span>Receiving person's name</span>
           <input bind:value={recipientName} type="text" placeholder="Your name" />

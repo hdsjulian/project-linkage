@@ -122,6 +122,7 @@ def read_coin(coin_id: int, db: Session=Depends(get_db)):
     db_coin.handover.coin=db_coin
     db_coin.handover.recipient = crud.get_user(db, db_coin.handover.recipient_id)
     db_coin.handover.giver = crud.get_user(db, db_coin.handover.giver_id)
+    
     return {'data': {'coin': db_coin}}
 
 @api_app.get("/coins/", response_model=List[schemas.Coin])
