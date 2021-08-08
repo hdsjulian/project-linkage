@@ -1,5 +1,5 @@
 <section class="about" id="about">
-  <p>Project linkage is an experiment about human trust.</p>
+  <h4>Project linkage is an experiment about human trust</h4>
   <p>
     A number of initial participants received coins with an individual QR code
     on the back. They have five basic tasks:

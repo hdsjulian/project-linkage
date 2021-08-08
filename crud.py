@@ -33,6 +33,10 @@ def update_user(db: Session, user:schemas.User):
     db.refresh(user)
     return user
 
+def check_user_password(db: Session, user_id: int, hashed_password: str):
+    db_user = db.query(models.User).filter(models.User.id == user_id, models.User.hashed_password == hashed_password)
+    return db_user
+
 def get_coins(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Coin).offset(skip).limit(limit).all()
 
@@ -43,9 +47,6 @@ def get_coin_by_hash(db: Session, hash: str):
     return db.query(models.Coin).filter(models.Coin.hash == hash).first()
 
 def get_handover(db: Session, handover_id: int):
-    #user1 = aliased(models.User, name="user1")
-    #user2 = aliased(models.User, name="user2")
-    #result = db.query(models.Handover, user1.name, user2.name).join(user1, user1.id == models.Handover.giver_id).join(user2, user2.id == models.Handover.recipient_id).filter(models.Handover.id == handover_id).all()
     result = db.query(models.Handover).filter(models.Handover.id == handover_id).first()
     return result
 

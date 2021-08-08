@@ -15,19 +15,50 @@
   let recipientPassword2 = ""
   let step = 0
   let handoverText = "Your Story"
+  let result 
+  let lat = 123
+  let lon = 123
 
   const nextStep = () => {
-    step += 1
+    if (step == 1) { 
+      checkPass()
+    }
+    else if (step == 3) {
+      submitHandover()
+    }
+    else {
+      step += 1
+    }
+    console.log(step)
   }
 
   const prevStep = () => {
     step -= 1
   }
 
-  const checkPass = () => {
-    console.log(giverPassword)
-    console.log(recipientName)
+  const checkPass = async () => {
+    console.log("Checking Pass")
+    result = await (api.post("/verify_user/", { "hash": hash, "password": giverPassword }))
+    console.log(result.is_verified)
+    if (result.is_verified == false) {
+    console.log("wrong hash or password")
+    }
+    else {
     step += 1
+    }
+  }
+  const submitHandover = async() => {
+    console.log("something")
+    result = await(api.post("/submit_handover/", {
+      "hash": hash, 
+      "giver_password": giverPassword, 
+      "recipient_password": recipientPassword,
+      "recipient_name": recipientName, 
+      "text": handoverText, 
+      "recipient_email": recipientEmail, 
+      "lat": lat, 
+      "lon": lon
+    }))
   }
 
   $afterPageLoad(() => {
@@ -165,5 +196,15 @@
     </fieldset>
 
     <Paging {prevStep} {nextStep} />
-  {/if}
+    {:else if step === 4}
+    <fieldset>
+      <p>
+        Now please tell us your story. It would be very nice of you if you could
+        allow the phone to retrieve your location data!
+      </p>
+
+    </fieldset>
+
+    <Paging {prevStep} {nextStep} />
+    {/if}
 </form>

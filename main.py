@@ -41,6 +41,27 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
 
+@api_app.post("/verify_user/")
+def check_user_password(verificationItem: schemas.HandoverVerification, db: Session = Depends(get_db)):
+    db_coin = crud.get_coin_by_hash(db, verificationItem.hash)
+    if (db_coin is None):
+        return {'is_verified': False}
+    handover = crud.get_handovers_by_coin(db, db_coin.id, limit = 1)
+    if (len(handover) == 0):
+        return {'is_verified': "No Handover found"}
+    db_user = crud.check_user_password(db = db, user_id = handover[0].recipient_id, hashed_password = verificationItem.password)
+    if (db_user is None):
+        return {'is_verified': False}
+    else:
+        return {'is_verified': True}
+
+@api_app.post("/submit_handover")
+def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depends(get_db)):
+    print(enterHandoverItem)
+    return {'is_saved': True }
+
+
+
 @api_app.get("/users/", response_model=List[schemas.User])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = crud.get_users(db, skip=skip, limit=limit)
@@ -73,7 +94,6 @@ def read_coins(skip: int = 0, limit: int = 120, db: Session = Depends(get_db)):
 
 @api_app.get("/coins/{coin_id}/handovers/", response_model=List[schemas.Handover])
 def get_handovers_for_coin(coin_id: int, db: Session=Depends(get_db)):
-    print(coin_id)
     handovers = crud.get_handovers_by_coin(db, coin_id)
     return handovers
 
