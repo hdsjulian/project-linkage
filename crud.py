@@ -20,8 +20,9 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
 def create_user(db: Session, user: schemas.UserCreate):
-    fake_hashed_password = user.password + "notreallyhashed"
-    db_user = models.User(email=user.email, name=user.name, hashed_password=fake_hashed_password)
+    fake_hashed_password = user["hashed_password"] + "notreallyhashed"
+    fake_hashed_password = user["hashed_password"]
+    db_user = models.User(email=user["email"], name=user["name"], hashed_password=fake_hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -34,7 +35,7 @@ def update_user(db: Session, user:schemas.User):
     return user
 
 def check_user_password(db: Session, user_id: int, hashed_password: str):
-    db_user = db.query(models.User).filter(models.User.id == user_id, models.User.hashed_password == hashed_password)
+    db_user = db.query(models.User).filter(models.User.id == user_id, models.User.hashed_password == hashed_password).first()
     return db_user
 
 def get_coins(db: Session, skip: int = 0, limit: int = 100):
@@ -63,7 +64,7 @@ def get_handovers(db: Session):
     return result.all()
 
 def create_handover(db: Session, handover: schemas.HandoverCreate):
-    db_handover = models.Handover(text=handover.text, predecessor_id=handover.predecessor_id, recipient_id=handover.recipient_id, giver_id = handover.giver_id, lat=handover.lat, lon=handover.lon, timestamp = handover.timestamp, coin_id=handover.coin_id)
+    db_handover = models.Handover(text=handover["text"], predecessor_id=handover["predecessor_id"], recipient_id=handover["recipient_id"], giver_id = handover["giver_id"], lat=handover["lat"], lon=handover["lon"], timestamp = handover["timestamp"], coin_id=handover["coin_id"])
     db.add(db_handover)
     db.commit()
     db.refresh(db_handover)

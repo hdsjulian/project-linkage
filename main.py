@@ -1,5 +1,6 @@
+from os import pread
 from typing import List
-
+from datetime import datetime
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -28,8 +29,6 @@ def get_db():
         db.close()
 @app.get("/{full_path:path}")
 async def read_index(request: Request, full_path: str):
-    print("Foobar")
-    print(full_path)
     sys.stdout.flush()
     return FileResponse('frontend-svelte/public/index.html')
         
@@ -57,8 +56,46 @@ def check_user_password(verificationItem: schemas.HandoverVerification, db: Sess
 
 @api_app.post("/submit_handover")
 def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depends(get_db)):
-    print(enterHandoverItem)
-    return {'is_saved': True }
+    db_coin = crud.get_coin_by_hash(db, enterHandoverItem.hash)
+    if (db_coin is None):
+        return {'is_verified': False}
+    last_handover = crud.get_handovers_by_coin(db, db_coin.id, limit=1)
+    if (len(last_handover)) == 0:
+        enterHandoverItem.predecessor_id = 0
+    else: 
+        enterHandoverItem.predecessor_id = last_handover[0].id
+    if (enterHandoverItem.predecessor_id > 0):
+        giver = crud.check_user_password(db=db, user_id = last_handover[0].recipient_id, hashed_password = enterHandoverItem.giver_password)
+        if (giver is None):
+            return {'is_verified': False}
+        else:
+            giver_id = giver.id
+    else: 
+        giver_id = 0 
+        
+    if (enterHandoverItem.recipient_password_again == enterHandoverItem.recipient_password):
+        user = {
+            "hashed_password": enterHandoverItem.recipient_password,
+            "email": enterHandoverItem.recipient_email,
+            "name": enterHandoverItem.recipient_name
+        }
+        db_user = crud.create_user(db, user)
+    else: 
+        return {'is_verified': "password mismatch"}
+    handover = {
+        "text": enterHandoverItem.text, 
+        "lat": enterHandoverItem.lat, 
+        "lon": enterHandoverItem.lon, 
+        "giver_id": giver_id,
+        "recipient_id": db_user.id,
+        "predecessor_id": enterHandoverItem.predecessor_id, 
+        "timestamp": int(datetime.timestamp(datetime.utcnow())),
+        "coin_id": db_coin.id
+    }
+    db_handover = crud.create_handover(db, handover)
+    db_coin.travels += 1
+    db.commit()
+    return {'is_saved': True, "handover_id": db_handover.id }  
 
 
 
