@@ -28,8 +28,8 @@ import api from "../../api";
       recipientName = handover.recipient.name
       giverName = handover.giver != null ? handover.giver.name : null
       timestamp = new Date(handover.timestamp * 1000).toLocaleDateString("de-DE")
-      lat = handover.lat
-      lon = handover.lon
+      lat = handover.lat.toFixed(4)
+      lon = handover.lon.toFixed(4)
       console.log(handover)
     })
     prevId = id > 1 ? id - 1 : 1
