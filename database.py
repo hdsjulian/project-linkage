@@ -6,18 +6,10 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 SQLALCHEMY_DATABASE_URL = os.environ.get('DATABASE_URI') or 'sqlite:///' + os.path.join(basedir, 'app.db')
-print("------------------------------")
-print("------------------------------")
-print("------------------------------")
-print(SQLALCHEMY_DATABASE_URL)
-print("------------------------------")
-print("------------------------------")
-print("-----------------------------")
-sys.stdout.flush()
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL
+    SQLALCHEMY_DATABASE_URL 
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

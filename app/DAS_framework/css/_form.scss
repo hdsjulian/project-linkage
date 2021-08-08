@@ -25,6 +25,7 @@
 		margin-inline-end: auto;
 	}
 	input {
+		text-transform: none;
 		~ span {
 			padding-left: $u;
 		}

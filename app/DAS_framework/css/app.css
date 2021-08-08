@@ -2627,6 +2627,9 @@ dl dd.fullwidth {
   -webkit-margin-end: auto;
           margin-inline-end: auto;
 }
+.form input {
+  text-transform: none;
+}
 .form input ~ span {
   padding-left: 1rem;
 }
@@ -2670,6 +2673,9 @@ dl dd.fullwidth {
 .wpcf7__sort {
   -webkit-margin-end: auto;
           margin-inline-end: auto;
+}
+.wpcf7 input {
+  text-transform: none;
 }
 .wpcf7 input ~ span {
   padding-left: 1rem;
