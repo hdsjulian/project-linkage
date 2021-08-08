@@ -23,7 +23,7 @@ class HandoverBase(CamelModel):
     timestamp: int
     predecessor_id: Optional[int] = None
     recipient_id: int
-    giver_id: int
+    giver_id: Optional[int] = None
     coin_id: int
     
 class HandoverCreate(HandoverBase): 
@@ -88,3 +88,21 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: Optional[str] = None  
+
+class HandoverVerification(BaseModel):
+    hash: str
+    password: str
+
+class EnterHandover(CamelModel):
+    recipient_name: str
+    recipient_password: str
+    recipient_email: str
+    hash: str
+    lat: float
+    lon: float
+    text: str
+    giver_password: str
+    recipient_password_again: str
+    predecessor_id: Optional[int] = None
+    giver_id: Optional[int] = None
+    recipient_id: Optional[int] = None
