@@ -102,5 +102,7 @@ class EnterHandover(CamelModel):
     lon: float
     text: str
     giver_password: str
-    predecessor_id: Optional[str] = 0
+    predecessor_id: Optional[str] = None
     recipient_password_again: str
+    giver_id: Optional[int] = None
+    recipient_id: int
