@@ -65,14 +65,17 @@
       if (step == 1) {
         password_match = checkPasswordMatch()
         if (password_match == true) {
-          handoverText = ""
-          if (submitHandover() != false) {
+          step+=1
+        }
+      }
+      else if (step ==2) {
+        if (submitHandover() != false) {
             step += 1
           }
-          else {
-            error_submitting = true
-          }
+        else {
+          error_submitting = true
         }
+
       }
       else { 
         step +=1
@@ -311,41 +314,54 @@
         <span class="error">Something went wrong - retry, reload or contact us if it persists</span>
       {/if}
 
-      <Paging {prevStep} {nextStep} />
+      
     {:else} 
     <fieldset>
       <p>
-        Thank you! You are now all set to hand over this coin to another person! 
-        This coin, by the way, carries the id {coin.id} and you can see its path <a href="/coin/{coin.id}">here</a>. 
+        Thank you! Now almost set to hand over this coin to another person! 
+        Please let the world know how you received this coin!
       </p>
-
-    </fieldset>
-    {/if}
-    
-  {:else if step === 3}
-    <fieldset>
-      <legend>Handover Story</legend>
-
-      <p>
-        Now please tell us your story. It would be very nice of you if you could
-        allow the phone to retrieve your location data!
-      </p>
-
       <label>
         <span>Your Story</span>
 
         <textarea bind:value={handoverText} />
       </label>
     </fieldset>
-
-    <Paging {prevStep} {nextStep} />
-    {:else if step === 4}
-    <fieldset>
-      <p>
-        Thank you! {recipientName} is now all set to hand over this coin to another person! 
-        This coin, by the way, carries the id {coin.id} and you can see its path <a href="/coin/{coin.id}">here</a>. 
-      </p>
-
-    </fieldset>
     {/if}
+    <Paging {prevStep} {nextStep} />
+  {:else if step === 3}
+    {#if travels > 0}
+      <fieldset>
+        <legend>Handover Story</legend>
+
+        <p>
+          Now please tell us your story. It would be very nice of you if you could
+          allow the phone to retrieve your location data!
+        </p>
+
+        <label>
+          <span>Your Story</span>
+
+          <textarea bind:value={handoverText} />
+        </label>
+      </fieldset>
+      <Paging {prevStep} {nextStep} />
+      {:else}
+      <fieldset>
+        <p>
+          Thank you! {recipientName} is now all set to hand over this coin to another person! 
+          This coin, by the way, carries the id {coin.id} and you can see its path <a href="/coin/{coin.id}">here</a>. 
+        </p>
+    
+      </fieldset>
+      {/if}
+  {:else if step === 4}
+  <fieldset>
+    <p>
+      Thank you! {recipientName} is now all set to hand over this coin to another person! 
+      This coin, by the way, carries the id {coin.id} and you can see its path <a href="/coin/{coin.id}">here</a>. 
+    </p>
+
+  </fieldset>
+  {/if}
 </form>
