@@ -61,17 +61,17 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
         return {'is_verified': False}
     last_handover = crud.get_handovers_by_coin(db, db_coin.id, limit=1)
     if (len(last_handover)) == 0:
-        enterHandoverItem.predecessor_id = 0
+        enterHandoverItem.predecessor_id = None
     else: 
         enterHandoverItem.predecessor_id = last_handover[0].id
-    if (enterHandoverItem.predecessor_id > 0):
+    if (enterHandoverItem.predecessor_id is not None):
         giver = crud.check_user_password(db=db, user_id = last_handover[0].recipient_id, hashed_password = enterHandoverItem.giver_password)
         if (giver is None):
             return {'is_verified': False}
         else:
             giver_id = giver.id
     else: 
-        giver_id = 0 
+        giver_id = None
         
     if (enterHandoverItem.recipient_password_again == enterHandoverItem.recipient_password):
         user = {
