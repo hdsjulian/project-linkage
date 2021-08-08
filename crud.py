@@ -20,8 +20,9 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
 def create_user(db: Session, user: schemas.UserCreate):
-    fake_hashed_password = user.password + "notreallyhashed"
-    db_user = models.User(email=user.email, name=user.name, hashed_password=fake_hashed_password)
+    fake_hashed_password = user["hashed_password"] + "notreallyhashed"
+    fake_hashed_password = user["hashed_password"]
+    db_user = models.User(email=user["email"], name=user["name"], hashed_password=fake_hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -33,6 +34,10 @@ def update_user(db: Session, user:schemas.User):
     db.refresh(user)
     return user
 
+def check_user_password(db: Session, user_id: int, hashed_password: str):
+    db_user = db.query(models.User).filter(models.User.id == user_id, models.User.hashed_password == hashed_password).first()
+    return db_user
+
 def get_coins(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Coin).offset(skip).limit(limit).all()
 
@@ -43,9 +48,6 @@ def get_coin_by_hash(db: Session, hash: str):
     return db.query(models.Coin).filter(models.Coin.hash == hash).first()
 
 def get_handover(db: Session, handover_id: int):
-    #user1 = aliased(models.User, name="user1")
-    #user2 = aliased(models.User, name="user2")
-    #result = db.query(models.Handover, user1.name, user2.name).join(user1, user1.id == models.Handover.giver_id).join(user2, user2.id == models.Handover.recipient_id).filter(models.Handover.id == handover_id).all()
     result = db.query(models.Handover).filter(models.Handover.id == handover_id).first()
     return result
 
@@ -62,7 +64,7 @@ def get_handovers(db: Session):
     return result.all()
 
 def create_handover(db: Session, handover: schemas.HandoverCreate):
-    db_handover = models.Handover(text=handover.text, predecessor_id=handover.predecessor_id, recipient_id=handover.recipient_id, giver_id = handover.giver_id, lat=handover.lat, lon=handover.lon, timestamp = handover.timestamp, coin_id=handover.coin_id)
+    db_handover = models.Handover(text=handover["text"], predecessor_id=handover["predecessor_id"], recipient_id=handover["recipient_id"], giver_id = handover["giver_id"], lat=handover["lat"], lon=handover["lon"], timestamp = handover["timestamp"], coin_id=handover["coin_id"])
     db.add(db_handover)
     db.commit()
     db.refresh(db_handover)

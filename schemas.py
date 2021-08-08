@@ -88,3 +88,19 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: Optional[str] = None  
+
+class HandoverVerification(BaseModel):
+    hash: str
+    password: str
+
+class EnterHandover(CamelModel):
+    recipient_name: str
+    recipient_password: str
+    recipient_email: str
+    hash: str
+    lat: float
+    lon: float
+    text: str
+    giver_password: str
+    predecessor_id: Optional[str] = 0
+    recipient_password_again: str
