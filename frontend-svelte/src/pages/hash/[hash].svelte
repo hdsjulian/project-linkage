@@ -5,31 +5,61 @@
   import api from "../../api"
 
   let hash
-  let coinId
   let travels
-  let handoverId = 0
+  let handover_id = 1
   let giverPassword = ""
   let recipientPassword = ""
   let recipientEmail = ""
   let recipientName = ""
-  let recipientPassword2 = ""
+  let recipientPasswordAgain = ""
   let step = 0
   let handoverText = "Your Story"
   let result 
   let lat = 123
   let lon = 123
-
+  let wrong_pass = false
+  let password_match = true
+  let coin
+  let error_submitting = false
   const nextStep = () => {
-    if (step == 1) { 
-      checkPass()
+    if (travels > 0) { 
+      if (step == 1) { 
+        checkPass()
+      }
+      else if (step == 2) {
+        password_match = checkPasswordMatch()
+        step +=1;
+      }
+      else if (step == 3) {
+        if (submitHandover() != false) {
+          step +=1
+        }
+        else {
+          error_submitting = true
+        }
+      }
+      else {
+        step += 1
+      }
+      console.log(step)
     }
-    else if (step == 3) {
-      submitHandover()
+    else { 
+      if (step == 1) {
+        password_match = checkPasswordMatch()
+        if (password_match == true) {
+          handoverText = ""
+          if (submitHandover() != false) {
+            step += 1
+          }
+          else {
+            error_submitting = true
+          }
+        }
+      }
+      else { 
+        step +=1
+      }
     }
-    else {
-      step += 1
-    }
-    console.log(step)
   }
 
   const prevStep = () => {
@@ -41,38 +71,56 @@
     result = await (api.post("/verify_user/", { "hash": hash, "password": giverPassword }))
     console.log(result.is_verified)
     if (result.is_verified == false) {
-    console.log("wrong hash or password")
+      console.log("blub:")
+      wrong_pass = true
     }
     else {
-    step += 1
+      wrong_pass = false
+      step += 1
     }
   }
+
   const submitHandover = async() => {
-    console.log("something")
     result = await(api.post("/submit_handover/", {
       "hash": hash, 
       "giver_password": giverPassword, 
       "recipient_password": recipientPassword,
+      "recipient_password_again": recipientPasswordAgain,
       "recipient_name": recipientName, 
       "text": handoverText, 
       "recipient_email": recipientEmail, 
       "lat": lat, 
       "lon": lon
     }))
+      if (result.is_saved == true) {
+        handover_id = result.handover_id
+        console.log(handover_id)
+        return handover_id
+      }
+      else {
+        return false
+      }
+    }
+  const checkPasswordMatch = () => {
+    if (recipientPassword == recipientPasswordAgain){
+      return true
+    }
+    else {
+        return false
+    }
+
   }
 
   $afterPageLoad(() => {
     console.log($params.hash)
     hash = $params.hash
-
     api.get(`/hash/${hash}`).then((res) => {
-      console.log(res.data.coin)
-      coinId = res.data.coin.id
-      travels = 1
-
-      //coin = res.data.coin
+      travels = res.data.coin.travels == null? 0: res.data.coin.travels
+      console.log(travels)
+      coin = res.data.coin
+    })
       //if there is a handover, get handover and display form. if not, just display form and display instructions
-      //if handover = coin.handover
+      
       //travels = coin.travels
 
       //   recipientName = handover.recipient.name
@@ -80,13 +128,12 @@
       //lat = handover.lat
       //lon = handover.lon
       //console.log(coin)
-    })
   })
 </script>
 
 <form class="form">
   {#if step === 0}
-    {#if handoverId === 0}
+    {#if travels == 0}
       <p>
         <strong>Welcome!</strong>
 
@@ -97,11 +144,8 @@
           on "continue"!
         </strong>
       </p>
-
-      <Rules />
-
-      <button on:click={nextStep}>Continue</button>
-    {:else if handoverId === 1}
+    <Rules />
+    {:else}
       <strong>Welcome!</strong>
 
       This coin has changed hands {travels} times so far!
@@ -111,74 +155,143 @@
         read the instructions again before you continue!
       </p>
 
-      Here goes index.svelte - lets see how we can include that.
+      <Rules /> 
     {/if}
+    <button on:click={nextStep}>Continue</button>
   {:else if step === 1}
-    <fieldset>
-      <legend>Giving Person's Password</legend>
+    {#if travels > 0}
+      <fieldset>
+        <legend>Giving Person's Password</legend>
 
-      <p>
-        Now please enter the <strong>giving person's</strong> secret - We need
-        to make sure that you didn't just find this coin somewhere. If you did,
-        or if you forgot your password, please
-        <a use:$url href="/contact">contact</a>
-        us (we're working on a reset password function)!
-      </p>
+        <p>
+          Now please enter the <strong>giving person's</strong> secret - We need
+          to make sure that you didn't just find this coin somewhere. If you did,
+          or if you forgot your password, please
+          <a use:$url href="/contact">contact</a>
+          us (we're working on a reset password function)!
+        </p>
 
-      <label>
-        <span>Giving person's password</span>
+        <label>
+          <span>Giving person's password</span>
 
-        <input
-          bind:value={giverPassword}
-          type="password"
-          placeholder="Your name" />
-      </label>
-    </fieldset>
+          <input
+            bind:value={giverPassword}
+            type="password"
+            placeholder="Your name" />
+        </label>
+        {#if wrong_pass === true}
+          <span class="error">Password is wrong! If you can't remember your password, please contact us!</span>
+        {/if}
+
+      </fieldset>
+    {:else}
+      <fieldset>
+        <legend>Enter your Data!</legend>
+
+        <p>
+          We would kindly ask you to enter your name, e-mail-address and a password. This way we can record you as the original holder of this coin.
+          We promise you, that we will never ever publish your personal data _anywhere_! We might however use your e-mail-address to update you about what is going on with this coin. 
+          If you don't want this: we're working hard on a detailed concept. Let us know what you think!
+        </p>
+
+        <label>
+          <span>Original holder's name</span>
+          <input bind:value={recipientName} type="text" placeholder="Your name" />
+        </label>
+
+        <label>
+          <span>Original holder's e-mail address</span>
+
+          <input
+            bind:value={recipientEmail}
+            type="text"
+            placeholder="Your email" />
+        </label>
+
+        <label>
+          <span>Original holder's password</span>
+
+          <input
+            bind:value={recipientPassword}
+            type="password"/>
+        </label>
+
+        <label>
+          <span>Original holder's password (again!)</span>
+          <input
+            bind:value={recipientPasswordAgain}
+            type="password"/>
+        </label>
+      </fieldset>
+      {#if password_match == false}
+        <span class="error">Password mismatch!</span>
+      {/if}
+      {#if error_submitting == true}
+      <span class="error">Something went wrong - retry, reload or contact us if it persists</span>
+      {/if}
+    {/if}
 
     <Paging {prevStep} {nextStep} />
   {:else if step === 2}
-    <fieldset>
-      <legend>Handover Entry</legend>
+    {#if travels > 0}
+      <fieldset>
+        <legend>Handover Entry</legend>
 
+        <p>
+          Now it's time to enter the name of the person
+          <strong>receiving the coin</strong>, as well as their password and other
+          data
+        </p>
+
+        <label>
+          <span>Receiving person's name</span>
+          <input bind:value={recipientName} type="text" placeholder="Your name" />
+        </label>
+
+        <label>
+          <span>Receiving person's e-mail address</span>
+
+          <input
+            bind:value={recipientEmail}
+            type="text"
+            placeholder="Your name" />
+        </label>
+
+        <label>
+          <span>Receiving person's password</span>
+
+          <input
+            bind:value={recipientPassword}
+            type="password"
+            placeholder="Your name" />
+        </label>
+
+        <label>
+          <span>Receiving person's password (again!)</span>
+          <input
+            bind:value={recipientPasswordAgain}
+            type="password"
+            placeholder="Your name" />
+        </label>
+      </fieldset>
+      {#if password_match == false}
+        <span class="error">Password mismatch!</span>
+      {/if}
+      {#if error_submitting == true}
+        <span class="error">Something went wrong - retry, reload or contact us if it persists</span>
+      {/if}
+
+      <Paging {prevStep} {nextStep} />
+    {:else} 
+    <fieldset>
       <p>
-        Now it's time to enter the name of the person
-        <strong>receiving the coin</strong>, as well as their password and other
-        data
+        Thank you! You are now all set to hand over this coin to another person! 
+        This coin, by the way, carries the id {coin.id}. 
       </p>
 
-      <label>
-        <span>Receiving person's name</span>
-        <input bind:value={recipientName} type="text" placeholder="Your name" />
-      </label>
-
-      <label>
-        <span>Receiving person's e-mail address</span>
-
-        <input
-          bind:value={recipientEmail}
-          type="text"
-          placeholder="Your name" />
-      </label>
-
-      <label>
-        <span>Receiving person's password</span>
-
-        <input
-          bind:value={recipientPassword}
-          type="password"
-          placeholder="Your name" />
-      </label>
-
-      <label>
-        <span>Receiving person's password (again!)</span>
-        <input
-          bind:value={recipientPassword2}
-          type="password"
-          placeholder="Your name" />
-      </label>
     </fieldset>
-
-    <Paging {prevStep} {nextStep} />
+    {/if}
+    
   {:else if step === 3}
     <fieldset>
       <legend>Handover Story</legend>
@@ -199,12 +312,10 @@
     {:else if step === 4}
     <fieldset>
       <p>
-        Now please tell us your story. It would be very nice of you if you could
-        allow the phone to retrieve your location data!
+        Thank you! {recipientName} is now all set to hand over this coin to another person! 
+        This coin, by the way, carries the id {coin.id}. 
       </p>
 
     </fieldset>
-
-    <Paging {prevStep} {nextStep} />
     {/if}
 </form>
