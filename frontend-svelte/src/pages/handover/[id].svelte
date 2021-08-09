@@ -10,6 +10,12 @@
     let prevId
     let nextId
     let text
+    let prevLat = 0
+    let prevLon = 0
+    function onClick(handover_id) { 
+    history.replaceState({}, null, `/handover/${handover_id}`)
+    
+    }
 
     $afterPageLoad(() => {
         id = parseInt($params.id, 10)
@@ -22,6 +28,21 @@
             prevId = handover.prevId
             nextId = handover.nextId
             text = handover.text
+            console.log(handover)
+            api.get(`/coins/${handover.coinId}/handovers`).then((hl_res) => {
+                let polyFill = hl_res?.map((val) => [val.lat, val.lon])
+                console.log(polyFill)
+                console.log(polyFill[0])
+                for (const ho of hl_res) { 
+                    L.marker([ho.lat, ho.lon], {icon: mapMarker}).addTo(myMap).on('click', () => onClick(ho.id))
+                    if (prevLat != 0) {
+                        var polyLine = L.polyline([[prevLat, prevLon], [ho.lat, ho.lon]], {color:'red', weight: 5}).addTo(window.myMap)
+                    }
+                    prevLat = ho.lat
+                    prevLon = ho.lon
+
+                }
+            })
         })
     })
 </script>
