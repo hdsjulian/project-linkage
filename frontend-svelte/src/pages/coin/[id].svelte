@@ -11,9 +11,8 @@ import api from "../../api";
   let recipientName
   let giverName
   let travels
-  let lat
-  let lon
-  let lon2
+  let lat = 52.520815
+  let lon = 13.4094191
   let timestamp
   let text
   let handoverList
@@ -29,43 +28,46 @@ import api from "../../api";
     api.get(`/coins/${id}`).then((res) => { 
       coin = res.data?.coin
       handover = coin?.handover
-      text = handover?.text
+      console.log(coin)
       console.log(handover)
-      travels = coin?.travels
-      recipientName = handover?.recipient.name
-      giverName = handover.giver?.name
-      timestamp = new Date(handover.timestamp * 1000).toLocaleDateString("de-DE")
-      lat = handover.lat.toFixed(4)
-      lon = handover.lon.toFixed(4)
-      console.log(lat)
-      myMap.setView([lat, lon], 10)
-      api.get(`/coins/${id}/handovers`).then((hl_res) => {
-        let polyFill = hl_res?.map((val) => [val.lat, val.lon])
-        console.log(polyFill)
-        console.log(polyFill[0])
-        for (const line of hl_res) { 
-          L.marker([line.lat, line.lon], {icon: mapMarker}).addTo(myMap).on('click', () => onClick(line.id))
+      if (handover) {
+        timestamp = new Date(handover.timestamp * 1000).toLocaleDateString("de-DE")
+        text = handover?.text
+        recipientName = handover?.recipient.name
+        giverName = handover?.giver?.name
+        lat = handover.lat.toFixed(4)
+        lon = handover.lon.toFixed(4)
+        api.get(`/coins/${id}/handovers`).then((hl_res) => {
+          let polyFill = hl_res?.map((val) => [val.lat, val.lon])
+          console.log(polyFill)
+          console.log(polyFill[0])
+          for (const line of hl_res) { 
+            L.marker([line.lat, line.lon], {icon: mapMarker}).addTo(myMap).on('click', () => onClick(line.id))
 
-        }
-        var polyLine = L.polyline([polyFill[0], polyFill[2]], {color:'red', weight: 5}).addTo(window.myMap)
-      })
+          }
+          var polyLine = L.polyline([polyFill[0], polyFill[2]], {color:'red', weight: 5}).addTo(window.myMap)
+        })
+
+      }
+      travels = coin?.travels
+      myMap.setView([lat, lon], 10)
+      prevId = coin?.prev_id
+      nextId = coin?.next_id
     })
       
 
       //var polygon = L.polygon(polyFill).addTo(window.myMap);
 
 
+    console.log("llll")
 
-    prevId = id > 1 ? id - 1 : 1
-    nextId = id + 1
   })
 
 </script>
-{#if coin}
-ID: {id}
-
+{#if (coin && handover)}
+  ID: {id}
 <dl>
-  <dt>Traveless</dt>
+  <dt>Travels</dt>
   <dd>{travels}</dd>
   <dt>Currently held by</dt>
   <dd>{recipientName}</dd>

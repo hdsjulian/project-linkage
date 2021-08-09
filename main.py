@@ -116,11 +116,41 @@ def read_coin(coin_id: int, db: Session=Depends(get_db)):
     db_coin = crud.get_coin(db, coin_id=coin_id)
     if db_coin is None:
         raise HTTPException(status_code=404, detail="Coin not found")
-    db_handover = crud.get_handover_by_coin(db, coin_id, limit=1)[0]
-    db_coin.handover=db_handover
-    db_coin.handover.coin=db_coin
-    db_coin.handover.recipient = crud.get_user(db, db_coin.handover.recipient_id)
-    db_coin.handover.giver = crud.get_user(db, db_coin.handover.giver_id)
+    handovers = crud.get_handovers(db)
+    coin_ids = []
+    for h in handovers:
+        coin_ids.append(h.coin_id)
+    if (coin_id in coin_ids): 
+        index = coin_ids.index(coin_id)
+    else: 
+        index = 0
+    print(coin_ids)
+    if index == 0: 
+        print("a")
+        db_coin.prev_id = coin_ids[-1]
+        db_coin.next_id = coin_ids[1]
+    elif index == len(coin_ids)-1:
+        print("b")
+        db_coin.prev_id = coin_ids[0]
+        db_coin.next_id = coin_ids[index-2]
+    else:
+        print(index)
+        db_coin.prev_id = coin_ids[index-1]
+        db_coin.next_id = coin_ids[index+1]
+
+    db_handover = crud.get_handover_by_coin(db, coin_id, limit=1) 
+    if db_handover is not None and db_handover != []: 
+        db_handover = db_handover[0]
+        db_coin.handover=db_handover
+        db_coin.handover.coin=db_coin
+        db_coin.handover.recipient = crud.get_user(db, db_coin.handover.recipient_id)
+        db_coin.handover.giver = crud.get_user(db, db_coin.handover.giver_id)
+
+        
+
+    else: 
+        db_handover = {}
+    
     
     return {'data': {'coin': db_coin}}
 
@@ -132,7 +162,6 @@ def read_coins(skip: int = 0, limit: int = 120, db: Session = Depends(get_db)):
 @api_app.get("/coins/{coin_id}/handovers/", response_model=List[schemas.HandoverStripped])
 def get_handovers_for_coin(coin_id: int, db: Session=Depends(get_db)):
     handovers = crud.get_handovers_by_coin(db, coin_id)
-    print (handovers[0].lat)
     return handovers
 
 

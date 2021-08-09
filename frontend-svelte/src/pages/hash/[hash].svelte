@@ -13,7 +13,7 @@
   let recipientName = ""
   let recipientPasswordAgain = ""
   let step = 0
-  let handoverText = "Your Story"
+  let handoverText = ""
   let result 
   let lat = 52.520815
   let lon = 13.4094191
@@ -341,8 +341,7 @@
 
         <label>
           <span>Your Story</span>
-
-          <textarea bind:value={handoverText} />
+         <textarea bind:value={handoverText} />
         </label>
       </fieldset>
       <Paging {prevStep} {nextStep} />
