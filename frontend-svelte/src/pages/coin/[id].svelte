@@ -18,6 +18,11 @@ import api from "../../api";
   let text
   let handoverList
 
+  function onClick(handover_id) { 
+   history.replaceState({}, null, `/handover/{handover_id}`)
+   
+  }
+
   $afterPageLoad(() => {
     id = parseInt($params.id, 10)
     api.get(`/coins/${id}`).then((res) => { 
@@ -31,16 +36,25 @@ import api from "../../api";
       timestamp = new Date(handover.timestamp * 1000).toLocaleDateString("de-DE")
       lat = handover.lat.toFixed(4)
       lon = handover.lon.toFixed(4)
+      console.log(lat)
+      myMap.setView([lat, lon], 10)
+      api.get(`/coins/${id}/handovers`).then((hl_res) => {
+        let polyFill = hl_res?.map((val) => [val.lat, val.lon])
+        console.log(polyFill)
+        console.log(polyFill[0])
+        for (const line of hl_res) { 
+          L.marker([line.lat, line.lon], {icon: mapMarker}).addTo(myMap).on('click', onClick(line.id))
+
+        }
+        var polyLine = L.polyline([polyFill[0], polyFill[2]], {color:'red', weight: 5}).addTo(window.myMap)
+      })
     })
-    window.myMap.setView([lat, lon], 11)
-    api.get(`/coins/${id}/handovers)`).then((hl_res) => {
-      let polyFill = res?.map((val) => [val.lat, val.lon])
-      console.log(polyFill)
+      
 
-      var polygon = L.polygon(polyFill).addTo(window.myMap);
+      //var polygon = L.polygon(polyFill).addTo(window.myMap);
 
 
-    })
+
     prevId = id > 1 ? id - 1 : 1
     nextId = id + 1
   })
@@ -50,7 +64,7 @@ import api from "../../api";
 ID: {id}
 
 <dl>
-  <dt>Travels</dt>
+  <dt>Traveless</dt>
   <dd>{travels}</dd>
   <dt>Currently held by</dt>
   <dd>{recipientName}</dd>
@@ -61,7 +75,7 @@ ID: {id}
   <dt>Handed over on</dt>
   <dd>{timestamp}</dd>
   <dt>at Lat:Lon</dt>
-  <dd>{lon}:{lat}</dd>
+  <dd>{lat}:{lon}</dd>
   {#if text != ""}
   <dt class = "fullwidth">What they had to say to each other</dt>
   <dd class = "fullwidth">{text}</dd>

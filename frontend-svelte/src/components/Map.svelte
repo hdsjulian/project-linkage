@@ -10,7 +10,7 @@
   onMount(async () => {
     map = L.map("map", {
       center: [51.505, -0.09],
-      zoom: 13,
+      zoom: 19,
       zoomControl: false,
       attributionControl: true,
       accessToken: LEAFLET_ACCESS_TOKEN,
@@ -23,6 +23,14 @@
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map)
+    window.myMap = map
+    var mapMarker = L.icon({
+      iconUrl: '/image/map/pin.svg', 
+      iconSize: [40, 40], 
+      iconAnchor: [20,20], 
+    })
+    window.mapMarker = mapMarker
+
   })
 
   // Example function that interacts with the map:
