@@ -62,7 +62,7 @@ def get_handovers_by_user(db:Session, user_id: int):
 
 def get_handovers(db: Session):
     subquery = db.query(func.max(models.Handover.id)).group_by(models.Handover.coin_id)
-    result = db.query(models.Handover.id, models.Handover.lat, models.Handover.lon, models.Handover.predecessor_id).filter(models.Handover.id.in_(subquery))
+    result = db.query(models.Handover.coin_id, models.Handover.id, models.Handover.lat, models.Handover.lon, models.Handover.predecessor_id).filter(models.Handover.id.in_(subquery))
     return result.all()
 
 def create_handover(db: Session, handover: schemas.HandoverCreate):
