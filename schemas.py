@@ -73,6 +73,8 @@ class HandoverData(CamelModel):
 
 class CoinReturn(Coin):
     handover: Optional[HandoverReturn]=None
+    prev_id: Optional[str] = None
+    next_id: Optional[str] = None
 
 class CoinCoinReturn(CamelModel):
     coin: CoinReturn

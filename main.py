@@ -137,7 +137,7 @@ def read_coin(coin_id: int, db: Session=Depends(get_db)):
         print(index)
         db_coin.prev_id = coin_ids[index-1]
         db_coin.next_id = coin_ids[index+1]
-
+    
     db_handover = crud.get_handover_by_coin(db, coin_id, limit=1) 
     if db_handover is not None and db_handover != []: 
         db_handover = db_handover[0]
