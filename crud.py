@@ -52,6 +52,9 @@ def get_handover(db: Session, handover_id: int):
     return result
 
 def get_handovers_by_coin(db:Session, coin_id: int, skip: int=0, limit: int=100):
+    return db.query(models.Handover.lat, models.Handover.lon, models.Handover.id, models.Handover.predecessor_id).filter(models.Handover.coin_id == coin_id).order_by(desc(models.Handover.id)).offset(skip).limit(limit).all()
+
+def get_handover_by_coin(db:Session, coin_id: int, skip: int=0, limit: int=100):
     return db.query(models.Handover).filter(models.Handover.coin_id == coin_id).order_by(desc(models.Handover.id)).offset(skip).limit(limit).all()
 
 def get_handovers_by_user(db:Session, user_id: int):
@@ -60,7 +63,6 @@ def get_handovers_by_user(db:Session, user_id: int):
 def get_handovers(db: Session):
     subquery = db.query(func.max(models.Handover.id)).group_by(models.Handover.coin_id)
     result = db.query(models.Handover).filter(models.Handover.id.in_(subquery))
-    print (result)
     return result.all()
 
 def create_handover(db: Session, handover: schemas.HandoverCreate):

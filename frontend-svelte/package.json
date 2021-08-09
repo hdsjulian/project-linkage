@@ -13,8 +13,8 @@
     "check": "yarn prettier -c frontend-svelte"
   },
   "engines": {
-    "node": "14.17.4",
-    "yarn": "1.22.11"
+    "node": "16.6.1",
+    "yarn": "1.22.10"
   },
   "routify": {
     "routifyDir": "frontend-svelte/.routify",
