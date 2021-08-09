@@ -189,7 +189,10 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
         index = 0
     if index == 0: 
         db_handover.prev_id = handover_ids[-1]
-        db_handover.next_id = handover_ids[1]
+        if (len(handover_ids) == 1):
+            db_handover.next_id = handover_ids[0]
+        else: 
+            db_handover.next_id = handover_ids[1]
     elif index == len(handover_ids)-1:
         db_handover.prev_id = handover_ids[0]
         db_handover.next_id = handover_ids[index-2]
