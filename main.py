@@ -43,13 +43,14 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     return db_user
 
 @api_app.post("/verify_user/")
-def check_user_password(verificationItem: schemas.HandoverVerification, db: Session = Depends(get_db)):
+def check_user_password(verificationItem: schemas.HandoverVerification, db: Session = Depends(get_db), username: str = Depends(require_current_user)):
     db_coin = crud.get_coin_by_hash(db, verificationItem.hash)
     if (db_coin is None):
         return {'is_verified': False}
     handover = crud.get_handovers_by_coin(db, db_coin.id, limit = 1)
     if (len(handover) == 0):
         return {'is_verified': "No Handover found"}
+    # Password should be set from credentials.password from basic auth header. Then, will always succeed
     db_user = crud.check_user_password(db = db, user_id = handover[0].recipient_id, hashed_password = verificationItem.password)
     if (db_user is None):
         return {'is_verified': False}
