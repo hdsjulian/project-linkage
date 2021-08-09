@@ -202,7 +202,7 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
 
     return returnStuff
 
-@api_app.get("/handovers/", response_model=List[schemas.Handover])
+@api_app.get("/handovers/", response_model=List[schemas.HandoverStripped])
 def read_handovers(db: Session=Depends(get_db)):
     handovers = crud.get_handovers(db)
     return handovers
