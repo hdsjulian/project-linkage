@@ -13,30 +13,40 @@ import api from "../../api";
   let travels
   let lat
   let lon
+  let lon2
   let timestamp
   let text
-
+  let handoverList
 
   $afterPageLoad(() => {
     id = parseInt($params.id, 10)
     api.get(`/coins/${id}`).then((res) => { 
-      coin = res.data.coin
-      handover = coin.handover
-      text = handover.text != null? handover.text : null
+      coin = res.data?.coin
+      handover = coin?.handover
+      text = handover?.text
       console.log(handover)
-      travels = coin.travels
-      recipientName = handover.recipient.name
-      giverName = handover.giver != null ? handover.giver.name : null
+      travels = coin?.travels
+      recipientName = handover?.recipient.name
+      giverName = handover.giver?.name
       timestamp = new Date(handover.timestamp * 1000).toLocaleDateString("de-DE")
       lat = handover.lat.toFixed(4)
       lon = handover.lon.toFixed(4)
-      console.log(handover)
+    })
+    window.myMap.setView([lat, lon], 11)
+    api.get(`/coins/${id}/handovers)`).then((hl_res) => {
+      let polyFill = res?.map((val) => [val.lat, val.lon])
+      console.log(polyFill)
+
+      var polygon = L.polygon(polyFill).addTo(window.myMap);
+
+
     })
     prevId = id > 1 ? id - 1 : 1
     nextId = id + 1
   })
-</script>
 
+</script>
+{#if coin}
 ID: {id}
 
 <dl>
@@ -50,14 +60,13 @@ ID: {id}
   {/if}
   <dt>Handed over on</dt>
   <dd>{timestamp}</dd>
-  <dt>at Lon:Lat</dt>
+  <dt>at Lat:Lon</dt>
   <dd>{lon}:{lat}</dd>
   {#if text != ""}
   <dt class = "fullwidth">What they had to say to each other</dt>
   <dd class = "fullwidth">{text}</dd>
   {/if}
 </dl>
-
 <nav class="paging">
   <ul class="paging__list">
     <li class="previous">
@@ -69,3 +78,7 @@ ID: {id}
     </li>
   </ul>
 </nav>
+{:else}
+  <p>Coin not found!</p>
+{/if}
+
