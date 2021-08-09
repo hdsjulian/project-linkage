@@ -35,6 +35,7 @@ import api from "../../api";
         text = handover?.text
         recipientName = handover?.recipient.name
         giverName = handover?.giver?.name
+        console.log(handover.lat)
         lat = handover.lat.toFixed(4)
         lon = handover.lon.toFixed(4)
         api.get(`/coins/${id}/handovers`).then((hl_res) => {
