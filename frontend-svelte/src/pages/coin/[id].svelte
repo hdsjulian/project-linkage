@@ -19,7 +19,8 @@ import api from "../../api";
   let handoverList
 
   function onClick(handover_id) { 
-   history.replaceState({}, null, `/handover/{handover_id}`)
+    console.log(handover_id)
+   history.replaceState({}, null, `/handover/${handover_id}`)
    
   }
 
@@ -43,7 +44,7 @@ import api from "../../api";
         console.log(polyFill)
         console.log(polyFill[0])
         for (const line of hl_res) { 
-          L.marker([line.lat, line.lon], {icon: mapMarker}).addTo(myMap).on('click', onClick(line.id))
+          L.marker([line.lat, line.lon], {icon: mapMarker}).addTo(myMap).on('click', () => onClick(line.id))
 
         }
         var polyLine = L.polyline([polyFill[0], polyFill[2]], {color:'red', weight: 5}).addTo(window.myMap)

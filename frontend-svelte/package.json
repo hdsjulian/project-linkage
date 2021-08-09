@@ -1,0 +1,47 @@
+{
+  "name": "project-linkage-001",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "routify -b && yarn run-p build:*",
+    "build:css": "yarn sass app/DAS_framework/css/app.scss frontend-svelte/public/build/app.css",
+    "build:js": "cd frontend-svelte; rollup -c",
+    "dev": "yarn run-p dev:*",
+    "dev:api": "yarn json-server --watch frontend-svelte/db.json",
+    "dev:frontend": "cd frontend-svelte; rollup -c -w",
+    "dev:routify": "routify",
+    "start": "cd frontend-svelte; sirv public --no-clear --single",
+    "check": "yarn prettier -c frontend-svelte"
+  },
+  "engines": {
+    "node": "16.6.1",
+    "yarn": "1.22.10"
+  },
+  "routify": {
+    "routifyDir": "frontend-svelte/.routify",
+    "pages": "frontend-svelte/src/pages",
+    "sourceDir": "frontend-svelte/public",
+    "dynamicImports": false
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-replace": "^3.0.0",
+    "@roxi/routify": "^2.18.2",
+    "json-server": "^0.16.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2",
+    "prettier-plugin-svelte": "^2.3.1",
+    "rollup": "^2.55.1",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-svelte": "^7.1.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.37.0",
+    "svelte": "^3.41.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "leaflet": "^1.7.1",
+    "sirv-cli": "^1.0.12"
+  }
+}
