@@ -2,7 +2,6 @@ from sqlalchemy.orm import Session, aliased
 import models, schemas
 from sqlalchemy import distinct, desc, func
 
-
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
@@ -35,6 +34,7 @@ def update_user(db: Session, user:schemas.User):
     return user
 
 def check_user_password(db: Session, user_id: int, hashed_password: str):
+    # TEMP: if this should only return validated users, require_current_user()?
     db_user = db.query(models.User).filter(models.User.id == user_id, models.User.hashed_password == hashed_password).first()
     return db_user
 

@@ -1,7 +1,8 @@
 from os import pread
 from typing import List
 from datetime import datetime
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Request, status
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
@@ -11,6 +12,7 @@ import sys
 
 models.Base.metadata.create_all(bind=engine)
 
+security = HTTPBasic()
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
 app.mount('/api', api_app)
@@ -159,3 +161,32 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
 def read_handovers(db: Session=Depends(get_db)):
     handovers = crud.get_handovers(db)
     return handovers
+
+
+TEST_AUTH_USER = "testing@project-linkage.net"
+TEST_AUTH_PASS = "linkage"
+
+# Use find_current_user() to see if auth is valid.
+# Otherwise, use require_current_user() to validate protected routes.
+#
+def find_current_user(credentials: HTTPBasicCredentials = Depends(security)):
+    # TEMP: test auth with static creds before linking to db
+    correct_user = secrets.compare_digest(credentials.username, TEST_AUTH_USER)
+    correct_pass = secrets.compare_digest(credentials.password, TEST_AUTH_PASS)
+    if not (correct_username and correct_password):
+        # In many circumstances we don't require auth, but if present additional
+        # attributes or capabilities may be provided. If None, we have no auth.
+        return None
+    return credentials.username
+
+def require_current_user(credentials: HTTPBasicCredentials = Depends(security)):
+    correct_user = secrets.compare_digest(credentials.username, TEST_AUTH_USER)
+    correct_pass = secrets.compare_digest(credentials.password, TEST_AUTH_PASS)
+    if not (correct_username and correct_password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    return credentials.username
+
