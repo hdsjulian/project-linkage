@@ -15,7 +15,6 @@ app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
 app.mount('/api', api_app)
 app.mount('/build', StaticFiles(directory="frontend-svelte/public/build", html=True), name="build")
-app.mount('/js', StaticFiles(directory="frontend-svelte/public/js", html=True), name="js")
 app.mount('/image', StaticFiles(directory="frontend-svelte/public/image", html=True), name="image")
 app.mount('/font', StaticFiles(directory="frontend-svelte/public/font", html=True), name="font")
 
