@@ -22,7 +22,9 @@
       <dt>For coin</dt>
       <dd>{handover.coin.id}</dd>
       <dt>Given from</dt>
+      {#if handover.giver != null}
       <dd>{handover.giver.name}</dd>
+      {/if}
       <dt>Given to</dt>
       <dd>{handover.recipient.name}</dd>
       <dt>Handed over on</dt>
