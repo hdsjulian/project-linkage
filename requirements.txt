@@ -12,4 +12,4 @@ psycopg2==2.9.1
 fastapi_camelcase==1.0.2
 aiofiles==0.7.0
 passlib==1.7.4
-bcrypt=3.2.0
+bcrypt==3.2.0
