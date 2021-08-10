@@ -28,8 +28,8 @@
             handover = res.data?.handover
             myMap.setView([handover.lat, handover.lon], 10)
             timestamp = new Date(handover.timestamp * 1000).toLocaleDateString("de-DE")
-            lat = handover.lat
-            lon = handover.lon
+            lat = handover.lat.toFixed(3)
+            lon = handover.lon.toFixed(3)
             prevId = handover.prevId
             nextId = handover.nextId
             text = handover.text

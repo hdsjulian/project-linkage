@@ -35,8 +35,8 @@ import api from "../../api";
         text = handover?.text
         recipientName = handover?.recipient.name
         giverName = handover?.giver?.name
-        lat = handover.lat.toFixed(4)
-        lon = handover.lon.toFixed(4)
+        lat = handover.lat.toFixed(3)
+        lon = handover.lon.toFixed(3)
         api.get(`/coins/${id}/handovers`).then((hl_res) => {
           let polyFill = hl_res?.map((val) => [val.lat, val.lon])
           let iterator = 0
