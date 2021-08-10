@@ -13,6 +13,8 @@
     <dd>Fainie Mao</dd>
     <dt>Additional Design</dt>
     <dd>Erica Esserman</dd> 
+    <dt>Conceptual Support</dt>
+    <dd>Lisa Tschorn</dd>
     <dt>Emotional Support</dt>
     <dd>Nina and Sarah</dd>
   </dl>
