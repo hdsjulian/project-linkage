@@ -30,20 +30,24 @@
             <li class="nav__item">
               <a on:click={toggleMenu} use:$url href="/">About</a>
             </li>
-            <li class="nav__item">
+<!--            <li class="nav__item">
               <a on:click={toggleMenu} use:$url href="/coin">Coins</a>
             </li>
             <li class="nav__item">
               <a on:click={toggleMenu} use:$url href="/handover">Handovers</a>
             </li>
+-->
             <li class="nav__item">
               <a on:click={toggleMenu} use:$url href="/profile">Profile</a>
             </li>
             <li class="nav__item">
-              <a on:click={toggleMenu} use:$url href="/contact">Contact</a>
+              <a on:click={toggleMenu} use:$url href="/team">Team</a>
             </li>
             <li class="nav__item">
               <a on:click={toggleMenu} use:$url href="/legal">Legal</a>
+            </li>
+            <li class="nav__item">
+              <a on:click={toggleMenu} use:$url href="/faq">FAQ</a>
             </li>
             <li class="nav__item">
               <a on:click={toggleMenu} use:$url href="/privacy">Privacy </a>

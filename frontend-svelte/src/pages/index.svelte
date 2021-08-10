@@ -39,6 +39,7 @@
 
 <section class="about" id="about">
   <h4>Project Linkage is an experiment about human trust</h4>
+  <strong>IMPORTANT!</strong> this is an art project. We will never abuse any entered data for commercial purposes. 
   <p>
     A number of initial participants received coins with an individual QR code on the back. They have five basic tasks:
   </p>

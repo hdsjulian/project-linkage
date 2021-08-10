@@ -1,6 +1,11 @@
 from sqlalchemy.orm import Session, aliased
 import models, schemas
 from sqlalchemy import distinct, desc, func
+from passlib.context import CryptContext
+import os
+SECRET_KEY = os.environ.get('SECRET_KEY')
+ALGORITHM = "HS256"
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def verify_password(plain_password, hashed_password):
@@ -20,15 +25,14 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
 def create_user(db: Session, user: schemas.UserCreate):
-    fake_hashed_password = user["hashed_password"] + "notreallyhashed"
-    fake_hashed_password = user["hashed_password"]
+    hashed_password = get_password_hash(user["hashed_password"])
     db_user = db.query(models.User).filter(models.User.email == user["email"]).all()
     if (len(db_user)==0):
-        db_user = models.User(email=user["email"], name=user["name"], hashed_password=fake_hashed_password)
+        db_user = models.User(email=user["email"], name=user["name"], hashed_password=hashed_password)
         db.add(db_user)
     else: 
         db_user = db_user[0]
-        db_user.hashed_password = fake_hashed_password
+        db_user.hashed_password = hashed_password
         db_user.name = user["name"]
     db.commit()
     db.refresh(db_user)
@@ -41,6 +45,7 @@ def update_user(db: Session, user:schemas.User):
     return user
 
 def check_user_password(db: Session, user_id: int, hashed_password: str):
+    hashed_password = get_password_hash(hashed_password)
     db_user = db.query(models.User).filter(models.User.id == user_id, models.User.hashed_password == hashed_password).first()
     return db_user
 
