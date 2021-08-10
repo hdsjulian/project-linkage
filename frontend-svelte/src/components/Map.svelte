@@ -9,7 +9,7 @@
 
   onMount(async () => {
     map = L.map("map", {
-      center: [51.505, -0.09],
+      center: [52.520815, -13.4094191],
       zoom: 19,
       zoomControl: false,
       attributionControl: true,

@@ -14,6 +14,7 @@
     let prevLon = 0
     let markers = []
     let index = 0
+    let isNew = new URLSearchParams(window.location.search).has("newHandover")
 
   function onClick(handover_id) { 
 
@@ -32,13 +33,10 @@
             prevId = handover.prevId
             nextId = handover.nextId
             text = handover.text
-            console.log(handover)
             api.get(`/coins/${handover.coinId}/handovers`).then((hl_res) => {
                 let iterator = 0
                 myMap.eachLayer((layer) => {
                     if (iterator > 0) {
-                        console.log("iterator "+iterator) 
-                        console.log(layer)
                         layer.remove();
                     }
                     iterator +=1
@@ -46,7 +44,6 @@
                 for (const ho of hl_res) { 
                     markers.push(L.marker([ho.lat, ho.lon], {icon: mapMarker}).addTo(myMap).on('click', () => onClick(ho.id, index)))
                     if (prevLat != 0) {
-                        console.log ("poly line "+prevLat+" prevLon "+prevLon+" holat "+ho.lat+" holon "+ho.lon)
                         var polyLine = L.polyline([[prevLat, prevLon], [ho.lat, ho.lon]], {color:'red', weight: 5}).addTo(window.myMap)
                     }
                     index +=1 
@@ -57,11 +54,23 @@
                 prevLat = 0;
                 prevLon = 0;
             })
-            console.log(markers)
         })
     })
 </script>
 {#if handover}
+    {#if isNew == true}
+        {#if handover.giver != null}
+            <p>
+                Thank you! {handover.recipient.name} is now all set to hand over this coin to another person! 
+                This coin, by the way, carries the id {handover.coin.id} and you can keep track of its path <a href="/coin/{handover.coin.id}">here</a>. 
+            </p>
+        {:else}
+            <p>
+                Thank you! {handover.recipient.name} is now all set to hand over this coin to another person! 
+                This coin, by the way, carries the id {handover.coin.id} and you can keep track of its path <a href="/coin/{handover.oin.id}">here</a>. 
+            </p>
+        {/if}
+    {/if}
     <dl>
       <dt>Handover number</dt>
       <dd>{handover.id}</dd>
@@ -76,8 +85,12 @@
       <dt>Handed over on</dt>
       <dd>{timestamp}</dd>
       <dt>at Lon:Lat</dt>
-      <dd>{lat}:{lon}</dd>
+      <dd>{lat}:{lon}</dd> 
+      {#if handover.giver == null}
+      <dt class = "fullwidth">How they received the coin</dt>
+      {:else}
       <dt class = "fullwidth">What they had to say to each other</dt>
+      {/if}
       <dd class = "fullwidth">{text}</dd>
     </dl>
 

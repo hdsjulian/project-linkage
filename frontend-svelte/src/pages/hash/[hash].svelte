@@ -22,10 +22,11 @@
   let coin
   let error_submitting = false
   let error_position = false
+  let email_correct = true
+  let name_correct = true
   function setLocation(position) {
     lat = position.coords.latitude
     lon = position.coords.longitude
-    console.log(lat)
   }
   function locationError(error) {
     if (error.code == error.PERMISSION_DENIED) {
@@ -33,53 +34,27 @@
     }
   }
 
-  const nextStep = () => {
-    if (travels > 0) { 
-      if (step == 1) { 
-        checkPass()
-      }
-      else if (step == 2) {
-        password_match = checkPasswordMatch()
-        step +=1;
+  const nextStep = async() => {
+    if (step == 1) {
+      password_match = checkPasswordMatch()
+      email_correct = checkEmail()
+      name_correct = checkName() 
+      if (password_match == true && email_correct == true && name_correct == true) {
         navigator.geolocation.getCurrentPosition(setLocation, locationError)
-      }
-      else if (step == 3) {
-        if (submitHandover() != false) {
-          step +=1
-        }
-        else {
-          error_submitting = true
-        }
-      }
-      else {
-        step += 1
-      }
-      console.log(step)
-    }
-    else { 
-      if (step == 0) {
-        navigator.geolocation.getCurrentPosition(setLocation, locationError)
-        console.log(lat)
-
-      }
-      if (step == 1) {
-        password_match = checkPasswordMatch()
-        if (password_match == true) {
-          step+=1
-        }
-      }
-      else if (step ==2) {
-        if (submitHandover() != false) {
-            step += 1
-          }
-        else {
-          error_submitting = true
-        }
-
-      }
-      else { 
         step +=1
       }
+    }
+    else if (step == 2) {
+      const isHandoverSubmitted = await submitHandover()
+      if (isHandoverSubmitted) {
+        history.replaceState({}, null, `/handover/${handover_id}`)
+      }
+      else {
+        error_submitting = true
+      }
+    }
+    else {
+      step += 1
     }
   }
 
@@ -87,7 +62,7 @@
     step -= 1
   }
 
-  const checkPass = async () => {
+ /* const checkPass = async () => {
     console.log("Checking Pass")
     result = await (api.post("/verify_user/", { "hash": hash, "password": giverPassword }))
     console.log(result.is_verified)
@@ -99,7 +74,34 @@
       wrong_pass = false
       step += 1
     }
+  }*/
+
+const checkPasswordMatch = () => {
+  if (recipientPassword == recipientPasswordAgain){
+    return true
   }
+  else {
+      return false
+  }
+}
+
+const checkEmail = () => {
+  if (recipientEmail == "") {
+    return false
+  }
+  else {
+    return true
+  }
+}
+
+const checkName = () => {
+  if (recipientName == "") {
+    return false
+  }
+  else {
+    return true
+  }
+}
 
   const submitHandover = async() => {
     result = await(api.post("/submit_handover/", {
@@ -113,31 +115,21 @@
       "lat": lat, 
       "lon": lon
     }))
-      if (result.is_saved == true) {
+    if (result.is_saved == true) {
         handover_id = result.handover_id
-        console.log(handover_id)
-        return handover_id
+        return true
       }
       else {
         return false
       }
     }
-  const checkPasswordMatch = () => {
-    if (recipientPassword == recipientPasswordAgain){
-      return true
-    }
-    else {
-        return false
-    }
 
-  }
 
   $afterPageLoad(() => {
-    console.log($params.hash)
+    myMap.setView([lat,lon], 6)
     hash = $params.hash
     api.get(`/hash/${hash}`).then((res) => {
       travels = res.data.coin.travels == null? 0: res.data.coin.travels
-      console.log(travels)
       coin = res.data.coin
     })
       //if there is a handover, get handover and display form. if not, just display form and display instructions
@@ -184,36 +176,9 @@
     {/if}
     <button on:click={nextStep}>Continue</button>
   {:else if step === 1}
-    {#if travels > 0}
-      <fieldset>
-        <legend>Giving Person's Password</legend>
+  <fieldset>
+    {#if travels  == 0}
 
-        <p>
-          Now please enter the <strong>giving person's</strong> secret - We need
-          to make sure that you didn't just find this coin somewhere. If you did,
-          or if you forgot your password, please
-          <a use:$url href="/contact">contact</a>
-          us (we're working on a reset password function)!
-        </p>
-        <p>
-          <strong>IMPORTANT!</strong> - in the next step we will ask you to allow the browser to give us your location. <strong>Please say yes!</strong>>
-        </p>
-
-        <label>
-          <span>Giving person's password</span>
-
-          <input
-            bind:value={giverPassword}
-            type="password"
-            placeholder="Your name" />
-        </label>
-        {#if wrong_pass === true}
-          <span class="error">Password is wrong! If you can't remember your password, please contact us!</span>
-        {/if}
-
-      </fieldset>
-    {:else}
-      <fieldset>
         <legend>Enter your Data!</legend>
 
         <p>
@@ -253,19 +218,7 @@
             bind:value={recipientPasswordAgain}
             type="password"/>
         </label>
-      </fieldset>
-      {#if password_match == false}
-        <span class="error">Password mismatch!</span>
-      {/if}
-      {#if error_submitting == true}
-      <span class="error">Something went wrong - retry, reload or contact us if it persists</span>
-      {/if}
-    {/if}
-
-    <Paging {prevStep} {nextStep} />
-  {:else if step === 2}
-    {#if travels > 0}
-      <fieldset>
+    {:else}
         <legend>Handover Entry</legend>
 
         <p>
@@ -306,17 +259,24 @@
             type="password"
             placeholder="Your name" />
         </label>
-      </fieldset>
-      {#if password_match == false}
-        <span class="error">Password mismatch!</span>
-      {/if}
-      {#if error_submitting == true}
-        <span class="error">Something went wrong - retry, reload or contact us if it persists</span>
-      {/if}
-
       
-    {:else} 
+    {/if}
+  {#if password_match == false}
+    <span class="error">Password mismatch!</span>
+  {/if}
+  {#if email_correct == false}
+    <span class="error">Please enter a valid email address!</span>
+  {/if}
+  {#if name_correct == false}
+    <span class="error">Please enter a valid name!</span>
+  {/if}
+  </fieldset>
+  <Paging {prevStep} {nextStep} />
+
+
+  {:else if step == 2} 
     <fieldset>
+    {#if travels == 0}
       <p>
         Thank you! Now almost set to hand over this coin to another person! 
         Please let the world know how you received this coin!
@@ -326,12 +286,7 @@
 
         <textarea bind:value={handoverText} />
       </label>
-    </fieldset>
-    {/if}
-    <Paging {prevStep} {nextStep} />
-  {:else if step === 3}
-    {#if travels > 0}
-      <fieldset>
+    {:else} 
         <legend>Handover Story</legend>
 
         <p>
@@ -343,24 +298,12 @@
           <span>Your Story</span>
          <textarea bind:value={handoverText} />
         </label>
+        {#if error_submitting == true}
+        <span class="error">Something went wrong - retry, reload or contact us if it persists</span>
+        {/if}    
+      {/if}
       </fieldset>
       <Paging {prevStep} {nextStep} />
-      {:else}
-      <fieldset>
-        <p>
-          Thank you! {recipientName} is now all set to hand over this coin to another person! 
-          This coin, by the way, carries the id {coin.id} and you can see its path <a href="/coin/{coin.id}">here</a>. 
-        </p>
-    
-      </fieldset>
-      {/if}
-  {:else if step === 4}
-  <fieldset>
-    <p>
-      Thank you! {recipientName} is now all set to hand over this coin to another person! 
-      This coin, by the way, carries the id {coin.id} and you can see its path <a href="/coin/{coin.id}">here</a>. 
-    </p>
-
-  </fieldset>
   {/if}
 </form>
+

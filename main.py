@@ -58,17 +58,13 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
     db_coin = crud.get_coin_by_hash(db, enterHandoverItem.hash)
     if (db_coin is None):
         return {'is_verified': False}
-    last_handover = crud.get_handovers_by_coin(db, db_coin.id, limit=1)
+    last_handover = crud.get_handover_by_coin(db, db_coin.id, limit=1)
     if (len(last_handover)) == 0:
         enterHandoverItem.predecessor_id = None
     else: 
         enterHandoverItem.predecessor_id = last_handover[0].id
     if (enterHandoverItem.predecessor_id is not None):
-        giver = crud.check_user_password(db=db, user_id = last_handover[0].recipient_id, hashed_password = enterHandoverItem.giver_password)
-        if (giver is None):
-            return {'is_verified': False}
-        else:
-            giver_id = giver.id
+        giver_id = last_handover[0].giver_id
     else: 
         giver_id = None
         
@@ -92,6 +88,8 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
         "coin_id": db_coin.id
     }
     db_handover = crud.create_handover(db, handover)
+    print("new handover")
+    print (db_handover.id)
     db_coin.travels += 1
     db.commit()
     return {'is_saved': True, "handover_id": db_handover.id }  

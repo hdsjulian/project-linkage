@@ -22,8 +22,14 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
 def create_user(db: Session, user: schemas.UserCreate):
     fake_hashed_password = user["hashed_password"] + "notreallyhashed"
     fake_hashed_password = user["hashed_password"]
-    db_user = models.User(email=user["email"], name=user["name"], hashed_password=fake_hashed_password)
-    db.add(db_user)
+    db_user = db.query(models.User).filter(models.User.email == user["email"]).all()
+    if (len(db_user)==0):
+        db_user = models.User(email=user["email"], name=user["name"], hashed_password=fake_hashed_password)
+        db.add(db_user)
+    else: 
+        db_user = db_user[0]
+        db_user.hashed_password = fake_hashed_password
+        db_user.name = user["name"]
     db.commit()
     db.refresh(db_user)
     return db_user
@@ -52,7 +58,7 @@ def get_handover(db: Session, handover_id: int):
     return result
 
 def get_handovers_by_coin(db:Session, coin_id: int, skip: int=0, limit: int=100):
-    return db.query(models.Handover.lat, models.Handover.lon, models.Handover.id, models.Handover.predecessor_id).filter(models.Handover.coin_id == coin_id).order_by(desc(models.Handover.id)).offset(skip).limit(limit).all()
+    return db.query(models.Handover.lat, models.Handover.lon, models.Handover.id, models.Handover.predecessor_id, models.Handover.recipient_id).filter(models.Handover.coin_id == coin_id).order_by(desc(models.Handover.id)).offset(skip).limit(limit).all()
 
 def get_handover_by_coin(db:Session, coin_id: int, skip: int=0, limit: int=100):
     return db.query(models.Handover).filter(models.Handover.coin_id == coin_id).order_by(desc(models.Handover.id)).offset(skip).limit(limit).all()
