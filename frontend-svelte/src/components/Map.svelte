@@ -33,21 +33,6 @@
 
   })
 
-  // Example function that interacts with the map:
-  const unZoom = () => map.setView([0, 0], 0)
 </script>
 
 <figure id="map" style="z-index: 0" />
-
-<!-- Example button to interact with the map -->
-<button on:click={unZoom}>unZoom</button>
-
-<!-- Throwaway style, just for the example -->
-<style>
-  button {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    z-index: 100;
-  }
-</style>
