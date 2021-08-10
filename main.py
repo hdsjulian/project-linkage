@@ -137,7 +137,7 @@ def read_coin(coin_id: int, db: Session=Depends(get_db)):
         print(index)
         db_coin.prev_id = coin_ids[index-1]
         db_coin.next_id = coin_ids[index+1]
-    
+
     db_handover = crud.get_handover_by_coin(db, coin_id, limit=1) 
     if db_handover is not None and db_handover != []: 
         db_handover = db_handover[0]
@@ -170,8 +170,6 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
     db_handover = crud.get_handover(db, handover_id=handover_id)
     if db_handover is None:
         raise HTTPException(status_code=404, detail="Handover not found")
-    print(db_handover.coin_id)
-    print("--------------")
     db_recipient = crud.get_user(db, user_id=db_handover.recipient_id)
     db_coin = crud.get_coin(db, db_handover.coin_id)
     if db_handover.giver_id is not None:
@@ -181,11 +179,33 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
     db_handover.giver = db_giver
     db_handover.recipient = db_recipient
     db_handover.coin = db_coin
+    handovers = crud.get_handovers_by_coin(db, coin_id = db_coin.id)
+    handover_ids = []
+    for h in handovers:
+        handover_ids.append(h.id)
+    if (handover_id in handover_ids): 
+        index = handover_ids.index(handover_id)
+    else: 
+        index = 0
+    if index == 0: 
+        db_handover.prev_id = handover_ids[-1]
+        if (len(handover_ids) == 1):
+            db_handover.next_id = handover_ids[0]
+        else: 
+            db_handover.next_id = handover_ids[1]
+    elif index == len(handover_ids)-1:
+        db_handover.prev_id = handover_ids[0]
+        db_handover.next_id = handover_ids[index-2]
+    else:
+        db_handover.prev_id = handover_ids[index-1]
+        db_handover.next_id = handover_ids[index+1]
+
+
     returnStuff = {'data': {'handover': db_handover}}
 
     return returnStuff
 
-@api_app.get("/handovers/", response_model=List[schemas.Handover])
+@api_app.get("/handovers/", response_model=List[schemas.HandoverStripped])
 def read_handovers(db: Session=Depends(get_db)):
     handovers = crud.get_handovers(db)
     return handovers

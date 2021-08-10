@@ -64,6 +64,9 @@ class HandoverReturn(Handover):
     giver: Optional[User] = None
     recipient:  Optional[User]=None
     coin: Optional[Coin] = None
+    next_id: Optional[int] = None
+    prev_id: Optional[int] = None
+    coin_id: Optional[int] = None
 
 class HandoverHandoverReturn(CamelModel):
     handover: HandoverReturn

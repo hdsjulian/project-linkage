@@ -6,12 +6,43 @@
     let id
     let lat
     let lon
+    let timestamp
+    let prevId
+    let nextId
+    let text
+    let prevLat = 0
+    let prevLon = 0
+    function onClick(handover_id) { 
+    history.replaceState({}, null, `/handover/${handover_id}`)
+    
+    }
 
     $afterPageLoad(() => {
         id = parseInt($params.id, 10)
         api.get(`/handovers/${id}`).then((res) => { 
             handover = res.data?.handover
             myMap.setView([handover.lat, handover.lon], 10)
+            timestamp = new Date(handover.timestamp * 1000).toLocaleDateString("de-DE")
+            lat = handover.lat
+            lon = handover.lon
+            prevId = handover.prevId
+            nextId = handover.nextId
+            text = handover.text
+            console.log(handover)
+            api.get(`/coins/${handover.coinId}/handovers`).then((hl_res) => {
+                let polyFill = hl_res?.map((val) => [val.lat, val.lon])
+                console.log(polyFill)
+                console.log(polyFill[0])
+                for (const ho of hl_res) { 
+                    L.marker([ho.lat, ho.lon], {icon: mapMarker}).addTo(myMap).on('click', () => onClick(ho.id))
+                    if (prevLat != 0) {
+                        var polyLine = L.polyline([[prevLat, prevLon], [ho.lat, ho.lon]], {color:'red', weight: 5}).addTo(window.myMap)
+                    }
+                    prevLat = ho.lat
+                    prevLon = ho.lon
+
+                }
+            })
         })
     })
 </script>
@@ -21,26 +52,33 @@
       <dd>{handover.id}</dd>
       <dt>For coin</dt>
       <dd>{handover.coin.id}</dd>
-      <dt>Given from</dt>
       {#if handover.giver != null}
+      <dt>Given from</dt>
       <dd>{handover.giver.name}</dd>
       {/if}
       <dt>Given to</dt>
       <dd>{handover.recipient.name}</dd>
       <dt>Handed over on</dt>
-      <dd>2021-08-31 14:56:17</dd>
+      <dd>{timestamp}</dd>
       <dt>at Lon:Lat</dt>
-      <dd>{handover.lat}:{handover.lon}</dd>
-      <dt>What they had to say to each other</dt>
-      <dd>
-        {handover.text}
-      </dd>
+      <dd>{lat}:{lon}</dd>
+      <dt class = "fullwidth">What they had to say to each other</dt>
+      <dd class = "fullwidth">{text}</dd>
     </dl>
-{/if}
+
   <nav class="paging">
     <ul class="paging__list">
-      <li class="previous"><a>Previous</a></li>
-      <li class="next"><a>Afterwards</a></li>
+      {#if prevId < handover.id}
+      <li class="previous"><a use:$url href={`/handover/${prevId}`}>Previous</a></li>
+      {:else}
+      <li class="previous"><a use:$url href={`/handover/${prevId}`}>Last</a></li>      
+      {/if}
+      {#if nextId > handover.id}
+      <li class="next"><a use:$url href={`/handover/${nextId}`}>Next</a></li>
+      {:else}
+      <li class="next"><a use:$url href={`/handover/${nextId}`}>First</a>
+      {/if}
+      
     </ul>
   </nav>
-  
+  {/if}
