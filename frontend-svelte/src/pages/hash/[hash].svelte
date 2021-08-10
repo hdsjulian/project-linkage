@@ -148,9 +148,9 @@ const checkName = () => {
   {#if step === 0}
     {#if travels == 0}
       <p>
-        <strong>Welcome!</strong>
+        <strong>Congratulations!</strong>
 
-        You are the first person to use this coin!
+        You have received this coin as part of Project linkage - an art project about trust! 
 
         <strong>
           Please read the instructions <strong>carefully</strong> and then click
@@ -158,18 +158,23 @@ const checkName = () => {
         </strong>
       </p>
       <p>
-        <strong>IMPORTANT!</strong> - in the next step we will ask you to allow the browser to give us your location. <strong>Please say yes!</strong>
+       <strong>IMPORTANT!</strong> this is an art project. We will collect data but we will never abuse it for commercial purposes. 
+        We will, however, kindly ask you for your email address and your geolocation as well as a name. This is important for the project to work!
       </p>
 
       <Rules />
     {:else}
       <strong>Welcome!</strong>
 
-      This coin has changed hands {travels} times so far!
+      This coin has changed hands {travels} times so far 
 
       <p>
-        We assume you want to hand it over to a friend? Please make sure you
-        read the instructions again before you continue!
+        We assume you received this coin from your friend? If not, please contact us! Please make sure you
+        read the instructions again before you continue! 
+      </p>
+      <p>
+        <strong>IMPORTANT!</strong> this is an art project. We will collect data but we will never abuse it for commercial purposes. 
+        We will, however, kindly ask you for your email address and your geolocation as well as a name. This is important for the project to work!
       </p>
 
       <Rules /> 
