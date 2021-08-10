@@ -24,6 +24,8 @@
   let error_position = false
   let email_correct = true
   let name_correct = true
+  let prevLat = 0
+  let prevLon = 0
   function setLocation(position) {
     lat = position.coords.latitude
     lon = position.coords.longitude
@@ -131,7 +133,32 @@ const checkName = () => {
     api.get(`/hash/${hash}`).then((res) => {
       travels = res.data.coin.travels == null? 0: res.data.coin.travels
       coin = res.data.coin
+      console.log(coin)
+      api.get(`/coins/${coin.id}/handovers/`).then((hl_res) => {
+        if (hl_res.length > 0) {
+          myMap.setView([hl_res[0].lat, hl_res[0].lon], 10)
+        }
+        let polyFill = hl_res?.map((val) => [val.lat, val.lon])
+        let iterator = 0
+        myMap.eachLayer((layer) => {
+            if (iterator > 1) { 
+                layer.remove();
+            }
+            iterator +=1
+        });
+        for (const line of hl_res) { 
+          L.marker([line.lat, line.lon], {icon: mapMarker}).addTo(myMap)
+          if (prevLat != 0) {
+              var polyLine = L.polyline([[prevLat, prevLon], [line.lat, line.lon]], {color:'red', weight: 5}).addTo(window.myMap)
+          }
+          prevLat = line.lat
+          prevLon = line.lon
+        }
+
+      })      
     })
+    console.log(coin)
+
       //if there is a handover, get handover and display form. if not, just display form and display instructions
       
       //travels = coin.travels
@@ -141,6 +168,7 @@ const checkName = () => {
       //lat = handover.lat
       //lon = handover.lon
       //console.log(coin)
+    myMap.setView([lat, lon], 10)
   })
 </script>
 
@@ -205,7 +233,7 @@ const checkName = () => {
 
           <input
             bind:value={recipientEmail}
-            type="text"
+            type="email"
             placeholder="Your email" />
         </label>
 
@@ -244,7 +272,7 @@ const checkName = () => {
 
           <input
             bind:value={recipientEmail}
-            type="text"
+            type="email"
             placeholder="Your name" />
         </label>
 
