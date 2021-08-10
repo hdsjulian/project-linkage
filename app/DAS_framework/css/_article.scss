@@ -1,7 +1,6 @@
 @use "use" as *;
 
 .article {
-	@include transition(all, $duration, $easing);
 	@include mq(medium) {
 		position: fixed;
 		inset: $u $u $u auto;

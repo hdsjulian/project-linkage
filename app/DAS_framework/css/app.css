@@ -3168,9 +3168,6 @@ dl dd.fullwidth {
 }
 
 .article {
-  transition: all 1s cubic-bezier(0.2, 0, 0.6, 1);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
   padding: 1.5rem;
   overflow: auto;
   background-color: whitesmoke;
