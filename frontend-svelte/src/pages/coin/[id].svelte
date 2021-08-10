@@ -16,11 +16,12 @@ import api from "../../api";
   let timestamp
   let text
   let handoverList
+  let prevLat = 0
+  let prevLon = 0
 
   function onClick(handover_id) { 
-    console.log(handover_id)
    history.replaceState({}, null, `/handover/${handover_id}`)
-   
+     
   }
 
   $afterPageLoad(() => {
@@ -28,9 +29,8 @@ import api from "../../api";
     api.get(`/coins/${id}`).then((res) => { 
       coin = res.data?.coin
       handover = coin?.handover
-      console.log(coin)
-      console.log(handover)
       if (handover) {
+        
         timestamp = new Date(handover.timestamp * 1000).toLocaleDateString("de-DE")
         text = handover?.text
         recipientName = handover?.recipient.name
@@ -39,13 +39,22 @@ import api from "../../api";
         lon = handover.lon.toFixed(4)
         api.get(`/coins/${id}/handovers`).then((hl_res) => {
           let polyFill = hl_res?.map((val) => [val.lat, val.lon])
-          console.log(polyFill)
-          console.log(polyFill[0])
+          let iterator = 0
+          myMap.eachLayer((layer) => {
+              if (iterator > 1) { 
+                  layer.remove();
+              }
+              iterator +=1
+          });
           for (const line of hl_res) { 
             L.marker([line.lat, line.lon], {icon: mapMarker}).addTo(myMap).on('click', () => onClick(line.id))
-
+            if (prevLat != 0) {
+                var polyLine = L.polyline([[prevLat, prevLon], [line.lat, line.lon]], {color:'red', weight: 5}).addTo(window.myMap)
+            }
+            prevLat = line.lat
+            prevLon = line.lon
           }
-          var polyLine = L.polyline([polyFill[0], polyFill[2]], {color:'red', weight: 5}).addTo(window.myMap)
+         
         })
 
       }
@@ -59,7 +68,6 @@ import api from "../../api";
       //var polygon = L.polygon(polyFill).addTo(window.myMap);
 
 
-    console.log("llll")
 
   })
 
