@@ -36,6 +36,7 @@ class Handover(HandoverBase):
 
 class UserBase(BaseModel):
     name: str
+    passhash: str
 
 class UserCreate(UserBase):
     email: str

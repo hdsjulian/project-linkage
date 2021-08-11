@@ -28,6 +28,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
 @app.get("/{full_path:path}")
 async def read_index(request: Request, full_path: str):
     sys.stdout.flush()
@@ -42,7 +43,7 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     return db_user
 
 @api_app.post("/verify_user/")
-def check_user_password(verificationItem: schemas.HandoverVerification, db: Session = Depends(get_db), username: str = Depends(require_current_user)):
+def check_user_password(verificationItem: schemas.HandoverVerification, db: Session = Depends(get_db), username: str = Depends(require_current_user), credentials: HTTPBasicCredentials = Depends(security)):
     db_coin = crud.get_coin_by_hash(db, verificationItem.hash)
     if (db_coin is None):
         return {'is_verified': False}
@@ -50,11 +51,18 @@ def check_user_password(verificationItem: schemas.HandoverVerification, db: Sess
     if (len(handover) == 0):
         return {'is_verified': "No Handover found"}
     # Password should be set from credentials.password from basic auth header. Then, will always succeed
-    db_user = crud.check_user_password(db = db, user_id = handover[0].recipient_id, hashed_password = verificationItem.password)
+    db_user = crud.check_user_password(db = db, user_id = handover[0].recipient_id, hashed_password = credentials.password)
     if (db_user is None):
         return {'is_verified': False}
     else:
         return {'is_verified': True}
+
+@api_app.post("/create_user/")
+def create_user(user_create: schemas.UserCreate, db: Session = Depends(get_db), response_model=schemas.User):
+    user = crud.create_user(db, user_create)
+    if (user == None):
+        return {'error': "Unable to create user"}
+    return user
 
 @api_app.post("/submit_handover")
 def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depends(get_db)):
@@ -212,25 +220,29 @@ def read_handovers(db: Session=Depends(get_db)):
     return handovers
 
 
-TEST_AUTH_USER = "testing@project-linkage.net"
-TEST_AUTH_PASS = "linkage"
-
 # Use find_current_user() to see if auth is valid.
 # Otherwise, use require_current_user() to validate protected routes.
 #
-def find_current_user(credentials: HTTPBasicCredentials = Depends(security)):
-    # TEMP: test auth with static creds before linking to db
-    correct_user = secrets.compare_digest(credentials.username, TEST_AUTH_USER)
-    correct_pass = secrets.compare_digest(credentials.password, TEST_AUTH_PASS)
-    if not (correct_username and correct_password):
+def find_current_user(credentials: HTTPBasicCredentials = Depends(security), db: Session = Depends(get_db)):
+    db_user = crud.get_user(db, user_id=credentials.username)
+    if db_user is None:
+        return None
+    correct_pass = secrets.compare_digest(credentials.password, db_user.passhash)
+    if not (correct_password):
         # In many circumstances we don't require auth, but if present additional
         # attributes or capabilities may be provided. If None, we have no auth.
         return None
     return credentials.username
 
-def require_current_user(credentials: HTTPBasicCredentials = Depends(security)):
-    correct_user = secrets.compare_digest(credentials.username, TEST_AUTH_USER)
-    correct_pass = secrets.compare_digest(credentials.password, TEST_AUTH_PASS)
+def require_current_user(credentials: HTTPBasicCredentials = Depends(security), db: Session = Depends(get_db)):
+    db_user = crud.get_user(db, user_id=credentials.username)
+    if db_user is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    correct_pass = secrets.compare_digest(credentials.password, db_user.passhash)
     if not (correct_username and correct_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
