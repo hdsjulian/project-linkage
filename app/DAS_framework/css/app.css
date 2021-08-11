@@ -3032,7 +3032,8 @@ dl dd.fullwidth {
   -webkit-flex: 1 1 40%;
           flex: 1 1 40%;
 }
-.paging a {
+.paging a,
+.paging button {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -3072,25 +3073,30 @@ dl dd.fullwidth {
   min-width: 0;
   width: 100%;
 }
-.paging a:hover {
+.paging a:hover,
+.paging button:hover {
   background-color: var(--brand--color);
   color: var(--brand--night);
 }
-.paging a:focus {
+.paging a:focus,
+.paging button:focus {
   background-color: var(--brand--light);
   color: var(--brand--mute);
 }
-.paging a [class*=icon] {
+.paging a [class*=icon],
+.paging button [class*=icon] {
   width: 2rem;
   height: 2rem;
   display: inline-table;
   vertical-align: middle;
 }
-.paging a [class*=icon] svg {
+.paging a [class*=icon] svg,
+.paging button [class*=icon] svg {
   width: 100%;
   height: 100%;
 }
-.paging a[disabled] {
+.paging a[disabled],
+.paging button[disabled] {
   background-color: #c7c7c7;
 }
 .paging .next {
@@ -3169,7 +3175,7 @@ dl dd.fullwidth {
 @media (min-width: 885px) and (min-height: 299px) {
   .article {
     position: fixed;
-    inset: 1rem 1rem auto auto;
+    inset: 1rem 1rem 1rem auto;
     max-block-size: calc(100vh - 3rem);
     inline-size: 42ch;
   }

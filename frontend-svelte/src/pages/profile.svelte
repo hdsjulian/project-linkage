@@ -11,6 +11,7 @@
 <form class="form">
 {#if step === 0}
     <fieldset>
+        <h2 class="error">THIS DOES NOT WORK YET</h2>
         <legend>Enter your email and password</legend>
         <p>In order to access and edit your profile or to edit handovers, please enter your email and password
         </p>

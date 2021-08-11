@@ -3,7 +3,7 @@
 .article {
 	@include mq(medium) {
 		position: fixed;
-		inset: $u $u auto auto;
+		inset: $u $u $u auto;
 		max-block-size: calc(100vh - #{$u * 3});
 		inline-size: $line-width;
 	}

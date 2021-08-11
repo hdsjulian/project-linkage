@@ -64,6 +64,9 @@ class HandoverReturn(Handover):
     giver: Optional[User] = None
     recipient:  Optional[User]=None
     coin: Optional[Coin] = None
+    next_id: Optional[int] = None
+    prev_id: Optional[int] = None
+    coin_id: Optional[int] = None
 
 class HandoverHandoverReturn(CamelModel):
     handover: HandoverReturn
@@ -73,6 +76,8 @@ class HandoverData(CamelModel):
 
 class CoinReturn(Coin):
     handover: Optional[HandoverReturn]=None
+    prev_id: Optional[str] = None
+    next_id: Optional[str] = None
 
 class CoinCoinReturn(CamelModel):
     coin: CoinReturn
@@ -106,3 +111,9 @@ class EnterHandover(CamelModel):
     predecessor_id: Optional[int] = None
     giver_id: Optional[int] = None
     recipient_id: Optional[int] = None
+
+class HandoverStripped(CamelModel):
+    lat: float
+    lon: float
+    id: int
+    predecessor_id: Optional[int] = None

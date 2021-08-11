@@ -1,8 +1,10 @@
 <h1>Privacy</h1>
 
 <small>
-  <h2>foo</h2>
-  <h3>foo</h3>
+  <h2>This is incomplete</h2>
+  <p>We promise you more to come very very soon.</p>
+</small>
+<!--  <h3>foo</h3>
   <p>
     It is a long established fact that a reader will be distracted by the
     readable content of a page when looking at its layout. The point of using
@@ -34,3 +36,5 @@
     sometimes by accident, sometimes on purpose.
   </p>
 </small>
+
+-->

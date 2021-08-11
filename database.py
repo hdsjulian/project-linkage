@@ -9,7 +9,7 @@ SQLALCHEMY_DATABASE_URL = os.environ.get('DATABASE_URI') or 'sqlite:///' + os.pa
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL 
+    SQLALCHEMY_DATABASE_URL, 
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

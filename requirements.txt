@@ -2,3 +2,6 @@ pydantic==1.8.2
 SQLAlchemy==1.4.22
 fastapi_camelcase==1.0.2
 fastapi==0.68.0
+aiofiles==0.7.0
+passlib==1.7.4
+bcrypt==3.2.0
