@@ -24,8 +24,10 @@
 	&__sort {
 		margin-inline-end: auto;
 	}
-	input {
+	input, textarea, button {
 		text-transform: none;
+	}
+	input {
 		~ span {
 			padding-left: $u;
 		}

@@ -2399,6 +2399,11 @@ summary::-webkit-details-marker {
   position: absolute;
 }
 
+summary {
+  display: block;
+  cursor: pointer;
+  color: var(--brand--dark);
+}
 summary:before {
   display: inline-block;
   content: "❯";
@@ -2417,12 +2422,16 @@ summary:focus {
   -moz-appearance: none !important;
 }
 
+details[open] {
+  -webkit-margin-after: 1rem;
+          margin-block-end: 1rem;
+}
 details[open] summary ~ *:nth-child(2) {
   margin-top: 0.5rem;
 }
 details[open] summary ~ * {
-  -webkit-animation: fadeIn 2s cubic-bezier(0.2, 0, 0.6, 1);
-          animation: fadeIn 2s cubic-bezier(0.2, 0, 0.6, 1);
+  -webkit-animation: fadeIn 1s cubic-bezier(0.2, 0, 0.6, 1);
+          animation: fadeIn 1s cubic-bezier(0.2, 0, 0.6, 1);
 }
 details[open] summary:before {
   -webkit-transform: rotate(90deg);
@@ -2627,7 +2636,7 @@ dl dd.fullwidth {
   -webkit-margin-end: auto;
           margin-inline-end: auto;
 }
-.form input {
+.form input, .form textarea, .form button {
   text-transform: none;
 }
 .form input ~ span {
@@ -2674,7 +2683,7 @@ dl dd.fullwidth {
   -webkit-margin-end: auto;
           margin-inline-end: auto;
 }
-.wpcf7 input {
+.wpcf7 input, .wpcf7 textarea, .wpcf7 button {
   text-transform: none;
 }
 .wpcf7 input ~ span {

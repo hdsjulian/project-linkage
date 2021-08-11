@@ -756,6 +756,9 @@ summary::-webkit-details-marker {
 	position: absolute;
 }
 summary {
+	display: block;
+	cursor: pointer;
+	color: $link-color;
 	&:before {
 		display: inline-block;
 		content: "❯";
@@ -773,12 +776,13 @@ summary {
 }
 details {
 	&[open] {
+		margin-block-end: $u;
 		summary {
 			~ *:nth-child(2) {
 				margin-top: $u/2;
 			}
 			~ * {
-				animation: fadeIn $duration * 2 $easing;
+				animation: fadeIn $duration $easing;
 			}
 			&:before {
 				transform: rotate(90deg);
