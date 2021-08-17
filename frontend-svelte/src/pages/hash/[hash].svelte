@@ -246,11 +246,11 @@ const checkName = () => {
         </label>
 
         <label>
-          <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published for the purpose of this website and are published.</span>
           <input
-            bind:value={recipientPasswordAgain}
-            type="checkbox"/>
-        </label>
+          bind:value={recipientPasswordAgain}
+          type="checkbox"/>
+      </label> <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published for the purpose of this website and are published.</span>
+
     {:else}
         <legend>Handover Entry</legend>
 
@@ -287,10 +287,10 @@ const checkName = () => {
 
 
         <label>
-          <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published for the purpose of this website and are published.</span>
           <input
-            bind:value={recipientPasswordAgain}
-            type="checkbox"/>
+          bind:value={recipientPasswordAgain}
+          type="checkbox"/> <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published for the purpose of this website and are published.</span>
+
         </label>
       
     {/if}
