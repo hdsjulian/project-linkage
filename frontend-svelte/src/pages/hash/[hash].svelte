@@ -249,7 +249,7 @@ const checkName = () => {
           <input
           bind:value={recipientPasswordAgain}
           type="checkbox"/>
-          <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published for the purpose of this website and are published.</span>
+          <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published.</span>
         </label> 
 
     {:else}
@@ -290,8 +290,7 @@ const checkName = () => {
         <label>
           <input
           bind:value={recipientPasswordAgain}
-          type="checkbox"/> <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published for the purpose of this website and are published.</span>
-
+          type="checkbox"/> <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published.</span>
         </label>
       
     {/if}
