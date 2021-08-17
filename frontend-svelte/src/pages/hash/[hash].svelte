@@ -285,12 +285,12 @@ const checkName = () => {
             placeholder="Your name" />
         </label>
 
+
         <label>
-          <span>Receiving person's password (again!)</span>
+          <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published for the purpose of this website and are published.</span>
           <input
             bind:value={recipientPasswordAgain}
-            type="password"
-            placeholder="Your name" />
+            type="checkbox"/>
         </label>
       
     {/if}
