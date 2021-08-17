@@ -68,15 +68,12 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
     else: 
         giver_id = None
         
-    if (enterHandoverItem.recipient_password_again == enterHandoverItem.recipient_password):
-        user = {
-            "hashed_password": enterHandoverItem.recipient_password,
-            "email": enterHandoverItem.recipient_email,
-            "name": enterHandoverItem.recipient_name
-        }
-        db_user = crud.create_user(db, user)
-    else: 
-        return {'is_verified': "password mismatch"}
+    user = {
+        "hashed_password": enterHandoverItem.recipient_password,
+        "email": enterHandoverItem.recipient_email,
+        "name": enterHandoverItem.recipient_name
+    }
+    db_user = crud.create_user(db, user)
     handover = {
         "text": enterHandoverItem.text, 
         "lat": enterHandoverItem.lat, 
