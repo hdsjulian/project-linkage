@@ -11,7 +11,8 @@
   let recipientPassword = ""
   let recipientEmail = ""
   let recipientName = ""
-  let recipientPasswordAgain = ""
+  let dataProtection
+  let data_protection_checked = true;
   let step = 0
   let handoverText = ""
   let result 
@@ -38,10 +39,11 @@
 
   const nextStep = async() => {
     if (step == 1) {
-      password_match = checkPasswordMatch()
+      data_protection_checked = checkDataProtection()
       email_correct = checkEmail()
       name_correct = checkName() 
-      if (password_match == true && email_correct == true && name_correct == true) {
+
+      if (data_protection_checked == true && email_correct == true && name_correct == true) {
         navigator.geolocation.getCurrentPosition(setLocation, locationError)
         step +=1
       }
@@ -85,6 +87,10 @@ const checkPasswordMatch = () => {
   else {
       return false
   }
+}
+
+const checkDataProtection = () => {
+  return dataProtection
 }
 
 const checkEmail = () => {
@@ -246,8 +252,8 @@ const checkName = () => {
         </label>
 
         <label>
-          <input
-          bind:value={recipientPasswordAgain}
+          <input 
+          bind:checked={dataProtection}
           type="checkbox"/>
           <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published.</span>
         </label> 
@@ -288,14 +294,14 @@ const checkName = () => {
 
 
         <label>
-          <input
-          bind:value={recipientPasswordAgain}
+          <input 
+          bind:checked={dataProtection}
           type="checkbox"/> <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published.</span>
         </label>
       
     {/if}
-  {#if password_match == false}
-    <span class="error">Password mismatch!</span>
+  {#if data_protection_checked == false}
+    <span class="error">You need to accept the data proection clause!</span>
   {/if}
   {#if email_correct == false}
     <span class="error">Please enter a valid email address!</span>
