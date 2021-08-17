@@ -246,10 +246,10 @@ const checkName = () => {
         </label>
 
         <label>
-          <span>Original holder's password (again!)</span>
+          <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published for the purpose of this website and are published.</span>
           <input
             bind:value={recipientPasswordAgain}
-            type="password"/>
+            type="checkbox"/>
         </label>
     {:else}
         <legend>Handover Entry</legend>
