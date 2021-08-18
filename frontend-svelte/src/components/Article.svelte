@@ -6,7 +6,5 @@
   </div>
 </header>
 <article class="article">
-
-
   <slot />
 </article>
