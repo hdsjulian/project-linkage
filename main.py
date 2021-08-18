@@ -19,6 +19,7 @@ if (os.environ.get('HTTPS_ENABLED') == True):
     app.add_middleware(HTTPSRedirectMiddleware)
     api_app.add_middleware(HTTPSRedirectMiddleware)
 else:
+    print("blah di blub")
     print  (os.environ.get('HTTPS_ENABLED'))
     sys.stdout.flush()
 app.mount('/api', api_app)
