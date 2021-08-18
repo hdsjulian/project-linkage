@@ -30,7 +30,7 @@ app.mount('/font', StaticFiles(directory="frontend-svelte/public/font", html=Tru
 
 
 def p(*args):
-  print args[0] % (len(args) > 1 and args[1:] or [])
+  print (args[0] % (len(args) > 1 and args[1:] or []))
   sys.stdout.flush()
 
 
