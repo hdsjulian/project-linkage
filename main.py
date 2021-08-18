@@ -20,6 +20,9 @@ if (os.environ.get('HTTPS_ENABLED') == True):
     sys.stdout.flush()
     app.add_middleware(HTTPSRedirectMiddleware)
     api_app.add_middleware(HTTPSRedirectMiddleware)
+else:
+    print("HTTPS NOT ENABLED")
+    sys.stdout.flush()
 app.mount('/api', api_app)
 app.mount('/build', StaticFiles(directory="frontend-svelte/public/build", html=True), name="build")
 app.mount('/image', StaticFiles(directory="frontend-svelte/public/image", html=True), name="image")
