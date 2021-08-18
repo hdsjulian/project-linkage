@@ -17,6 +17,7 @@ app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
 if (os.environ.get('HTTPS_ENABLD') == True): 
     print("HTTPS ENABLED")
+    sys.stdout.flush()
     app.add_middleware(HTTPSRedirectMiddleware)
     api_app.add_middleware(HTTPSRedirectMiddleware)
 app.mount('/api', api_app)
