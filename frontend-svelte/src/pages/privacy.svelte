@@ -1,7 +1,6 @@
 <h1>Privacy / Datenschutz</h1>
 
 <small>
-  <h2>Data Protection</h2>
   <p>Deutsche Version <a href="#de">hier</a></p>
 </small>
 <small>
