@@ -15,7 +15,7 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
-if (os.environ.get('HTTPS_ENABLD') == True): 
+if (os.environ.get('HTTPS_ENABLED') == True): 
     print("HTTPS ENABLED")
     sys.stdout.flush()
     app.add_middleware(HTTPSRedirectMiddleware)
