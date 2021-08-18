@@ -16,11 +16,11 @@
   const toggleMenu = () => (checked = !checked)
 </script>
 
-<Map />
-<div class="blub"></div>
-
   <BurgerSvg />
 
+
+  <div class="page__outer">
+    <div class="page__inner">
   <header class="page-header" id="page-header">
     <div class="page-menu menu">
       <div class="menu-toggle">
@@ -73,9 +73,10 @@
       </div>
     </div>
   </header>
-  <div class="page__outer">
-    <div class="page__inner">
       <main class="page-main">
+      <nav class="map">
+      <Map />
+      </nav>
         <Article>
               <header class="article__header">
         <h1 class="a11y">Project Linkage</h1>
