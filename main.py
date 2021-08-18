@@ -1,4 +1,5 @@
 from os import pread
+import os
 from typing import List
 from datetime import datetime
 from fastapi import Depends, FastAPI, HTTPException, Request
@@ -14,8 +15,11 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
-app.add_middleware(HTTPSRedirectMiddleware)
-api_app.add_middleware(HTTPSRedirectMiddleware)
+if (os.environ.get('HTTPS_ENABLED') == True): 
+    app.add_middleware(HTTPSRedirectMiddleware)
+    api_app.add_middleware(HTTPSRedirectMiddleware)
+else:
+    sys.stdout.flush()
 app.mount('/api', api_app)
 app.mount('/build', StaticFiles(directory="frontend-svelte/public/build", html=True), name="build")
 app.mount('/image', StaticFiles(directory="frontend-svelte/public/image", html=True), name="image")
