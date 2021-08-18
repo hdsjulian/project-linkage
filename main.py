@@ -13,21 +13,25 @@ import sys
 
 models.Base.metadata.create_all(bind=engine)
 
+
+
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
-if (os.environ.get('HTTPS_ENABLED') == True): 
+if (os.environ.get('HTTPS_ENABLED') == "True"): 
     app.add_middleware(HTTPSRedirectMiddleware)
     api_app.add_middleware(HTTPSRedirectMiddleware)
 else:
-    print("blah di blub")
-    print  (os.environ.get('HTTPS_ENABLED'))
-    sys.stdout.flush()
+    p("bla die blub")
+    p(os.environ.get('HTTPS_ENABLED'))
 app.mount('/api', api_app)
 app.mount('/build', StaticFiles(directory="frontend-svelte/public/build", html=True), name="build")
 app.mount('/image', StaticFiles(directory="frontend-svelte/public/image", html=True), name="image")
 app.mount('/font', StaticFiles(directory="frontend-svelte/public/font", html=True), name="font")
 
 
+def p(*args):
+  print args[0] % (len(args) > 1 and args[1:] or [])
+  sys.stdout.flush()
 
 
 def get_db():
