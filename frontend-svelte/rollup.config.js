@@ -5,6 +5,13 @@ import resolve from "@rollup/plugin-node-resolve"
 import livereload from "rollup-plugin-livereload"
 import { terser } from "rollup-plugin-terser"
 import css from "rollup-plugin-css-only"
+import { getFrontendEnvVars } from "./utils/getFrontendEnvVars"
+import { getReplacements } from "./utils/getReplacements"
+import { printEnv } from "./utils/printEnv"
+
+const frontendEnvVars = getFrontendEnvVars()
+printEnv(frontendEnvVars)
+const replacements = getReplacements(frontendEnvVars)
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -48,9 +55,7 @@ export default {
         dev: !production,
       },
     }),
-    replace({
-      "process.env.API_URL": `"${process.env.API_URL}"`,
-    }),
+    replace(replacements),
     // we'll extract any component CSS out into
     // a separate file - better for performance
     css({ output: "bundle.css" }),
