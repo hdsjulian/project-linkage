@@ -24,14 +24,14 @@
 	&__sort {
 		margin-inline-end: auto;
 	}
-	input, textarea, button {
+	input, textarea, button, [type="checkbox"] ~ span, [type="radio"] ~ span {
 		text-transform: none;
 	}
 	input {
 		~ span {
 			padding-left: $u;
 		}
-		&:invalid {
+		&:invalid, .error, .error & {
 			color: $negative-color;
 			~ span {
 				color: $negative-color;
@@ -39,7 +39,7 @@
 		}
 		&:disabled {
 			color: $muted-color;
-			~ span {
+			~ span { 
 				color: $muted-color;
 			}
 		}

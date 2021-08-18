@@ -2636,16 +2636,16 @@ dl dd.fullwidth {
   -webkit-margin-end: auto;
           margin-inline-end: auto;
 }
-.form input, .form textarea, .form button {
+.form input, .form textarea, .form button, .form [type=checkbox] ~ span, .form [type=radio] ~ span {
   text-transform: none;
 }
 .form input ~ span {
   padding-left: 1rem;
 }
-.form input:invalid {
+.form input:invalid, .form input .error, .error .form input {
   color: #bf4040;
 }
-.form input:invalid ~ span {
+.form input:invalid ~ span, .form input .error ~ span, .error .form input ~ span {
   color: #bf4040;
 }
 .form input:disabled {
@@ -2683,16 +2683,16 @@ dl dd.fullwidth {
   -webkit-margin-end: auto;
           margin-inline-end: auto;
 }
-.wpcf7 input, .wpcf7 textarea, .wpcf7 button {
+.wpcf7 input, .wpcf7 textarea, .wpcf7 button, .wpcf7 [type=checkbox] ~ span, .wpcf7 [type=radio] ~ span {
   text-transform: none;
 }
 .wpcf7 input ~ span {
   padding-left: 1rem;
 }
-.wpcf7 input:invalid {
+.wpcf7 input:invalid, .wpcf7 input .error, .error .wpcf7 input {
   color: #bf4040;
 }
-.wpcf7 input:invalid ~ span {
+.wpcf7 input:invalid ~ span, .wpcf7 input .error ~ span, .error .wpcf7 input ~ span {
   color: #bf4040;
 }
 .wpcf7 input:disabled {
@@ -3137,8 +3137,8 @@ dl dd.fullwidth {
   }
 }
 
-.error,
-.is-error {
+* .error,
+* .is-error, .error *, .is-error * {
   color: #bf4040;
 }
 
