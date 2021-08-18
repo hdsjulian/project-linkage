@@ -19,12 +19,10 @@ def p(*args):
 
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
-if (os.environ.get('HTTPS_ENABLED') == True): 
+if (os.environ.get('HTTPS_ENABLED') == "True"): 
     app.add_middleware(HTTPSRedirectMiddleware)
     api_app.add_middleware(HTTPSRedirectMiddleware)
-else:
-    p("bla die blub")
-    p(os.environ.get('HTTPS_ENABLED'))
+
 app.mount('/api', api_app)
 app.mount('/build', StaticFiles(directory="frontend-svelte/public/build", html=True), name="build")
 app.mount('/image', StaticFiles(directory="frontend-svelte/public/image", html=True), name="image")
