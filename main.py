@@ -17,7 +17,7 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
-if (os.environ.get('HTTPS_ENABLED') == "True"): 
+if (os.environ.get('HTTPS_ENABLED') == True): 
     app.add_middleware(HTTPSRedirectMiddleware)
     api_app.add_middleware(HTTPSRedirectMiddleware)
 else:
