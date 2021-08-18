@@ -13,7 +13,9 @@ import sys
 
 models.Base.metadata.create_all(bind=engine)
 
-
+def p(*args):
+  print (args[0] % (len(args) > 1 and args[1:] or []))
+  sys.stdout.flush()
 
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
@@ -29,9 +31,7 @@ app.mount('/image', StaticFiles(directory="frontend-svelte/public/image", html=T
 app.mount('/font', StaticFiles(directory="frontend-svelte/public/font", html=True), name="font")
 
 
-def p(*args):
-  print (args[0] % (len(args) > 1 and args[1:] or []))
-  sys.stdout.flush()
+
 
 
 def get_db():
