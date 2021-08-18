@@ -11,7 +11,8 @@
   let recipientPassword = ""
   let recipientEmail = ""
   let recipientName = ""
-  let recipientPasswordAgain = ""
+  let dataProtection
+  let data_protection_checked = true;
   let step = 0
   let handoverText = ""
   let result 
@@ -38,10 +39,11 @@
 
   const nextStep = async() => {
     if (step == 1) {
-      password_match = checkPasswordMatch()
+      data_protection_checked = checkDataProtection()
       email_correct = checkEmail()
       name_correct = checkName() 
-      if (password_match == true && email_correct == true && name_correct == true) {
+
+      if (data_protection_checked == true && email_correct == true && name_correct == true) {
         navigator.geolocation.getCurrentPosition(setLocation, locationError)
         step +=1
       }
@@ -87,6 +89,10 @@ const checkPasswordMatch = () => {
   }
 }
 
+const checkDataProtection = () => {
+  return dataProtection
+}
+
 const checkEmail = () => {
   if (recipientEmail == "") {
     return false
@@ -110,7 +116,6 @@ const checkName = () => {
       "hash": hash, 
       "giver_password": giverPassword, 
       "recipient_password": recipientPassword,
-      "recipient_password_again": recipientPasswordAgain,
       "recipient_name": recipientName, 
       "text": handoverText, 
       "recipient_email": recipientEmail, 
@@ -188,6 +193,7 @@ const checkName = () => {
       <p>
        <strong>IMPORTANT!</strong> this is an art project. We will collect data but we will never abuse it for commercial purposes. 
         We will, however, kindly ask you for your email address and your geolocation as well as a name. This is important for the project to work!
+        See more in the <a href="/privacy">privacy policy</a>
       </p>
 
       <Rules />
@@ -202,7 +208,7 @@ const checkName = () => {
       </p>
       <p>
         <strong>IMPORTANT!</strong> this is an art project. We will collect data but we will never abuse it for commercial purposes. 
-        We will, however, kindly ask you for your email address and your geolocation as well as a name. This is important for the project to work!
+        We will, however, kindly ask you for your email address and your geolocation as well as a name. This is important for the project to work! See more in the <a href="/privacy">privacy policy</a>
       </p>
 
       <Rules /> 
@@ -246,11 +252,12 @@ const checkName = () => {
         </label>
 
         <label>
-          <span>Original holder's password (again!)</span>
-          <input
-            bind:value={recipientPasswordAgain}
-            type="password"/>
-        </label>
+          <input 
+          bind:checked={dataProtection}
+          type="checkbox"/>
+          <span>I consent that the entered data including my location and the story I enter within the next step will be used for this art project. Name, location and story will be published. Email address will be used to inform you about ... You can withdraw your consent any time for the future. For details please refer to the <a href="/privacy">privacy policy</a> </span>
+        </label> 
+
     {:else}
         <legend>Handover Entry</legend>
 
@@ -285,17 +292,17 @@ const checkName = () => {
             placeholder="Your name" />
         </label>
 
+
         <label>
-          <span>Receiving person's password (again!)</span>
-          <input
-            bind:value={recipientPasswordAgain}
-            type="password"
-            placeholder="Your name" />
+          <input 
+          bind:checked={dataProtection}
+          type="checkbox"/>
+           <span>I consent that the entered data including my location and the story I enter within the next step will be used for this art project. Name, location and story will be published. Email address will be used to inform you about ... You can withdraw your consent any time for the future. For details please refer to the <a href="/privacy">privacy policy</a></span>
         </label>
       
     {/if}
-  {#if password_match == false}
-    <span class="error">Password mismatch!</span>
+  {#if data_protection_checked == false}
+    <span class="error">You need to accept the data proection clause!</span>
   {/if}
   {#if email_correct == false}
     <span class="error">Please enter a valid email address!</span>

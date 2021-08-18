@@ -14,7 +14,7 @@
     <dt>Additional Design</dt>
     <dd>Erica Esserman</dd> 
     <dt>Conceptual Support</dt>
-    <dd>Lisa Tschorn</dd>
+    <dd><a href="https://www.lisatschorn.eu">Lisa Tschorn</a></dd>
     <dt>Emotional Support</dt>
     <dd>Nina and Sarah</dd>
   </dl>
