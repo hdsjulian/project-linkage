@@ -1,6 +1,6 @@
 <h1>LEGAL</h1>
 <h2>Data Protection</h2>
-<p>This website is still in beta mode. A proper data protection declaration will follow next week. 
+<p>See the <a href="/privacy">privacy declaration</a> here.
 <strong>IMPORTANT</strong> We will only collect data for the purpose of this art project. 
 We will never give anyone your e-mail address. In case you have any questions contact me: julian [at] phinn [.d.o.t.] de
 </p>
