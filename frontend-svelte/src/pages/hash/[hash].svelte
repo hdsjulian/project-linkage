@@ -116,7 +116,6 @@ const checkName = () => {
       "hash": hash, 
       "giver_password": giverPassword, 
       "recipient_password": recipientPassword,
-      "recipient_password_again": recipientPasswordAgain,
       "recipient_name": recipientName, 
       "text": handoverText, 
       "recipient_email": recipientEmail, 
@@ -194,6 +193,7 @@ const checkName = () => {
       <p>
        <strong>IMPORTANT!</strong> this is an art project. We will collect data but we will never abuse it for commercial purposes. 
         We will, however, kindly ask you for your email address and your geolocation as well as a name. This is important for the project to work!
+        See more in the <a href="/privacy">privacy policy</a>
       </p>
 
       <Rules />
@@ -208,7 +208,7 @@ const checkName = () => {
       </p>
       <p>
         <strong>IMPORTANT!</strong> this is an art project. We will collect data but we will never abuse it for commercial purposes. 
-        We will, however, kindly ask you for your email address and your geolocation as well as a name. This is important for the project to work!
+        We will, however, kindly ask you for your email address and your geolocation as well as a name. This is important for the project to work! See more in the <a href="/privacy">privacy policy</a>
       </p>
 
       <Rules /> 
@@ -255,7 +255,7 @@ const checkName = () => {
           <input 
           bind:checked={dataProtection}
           type="checkbox"/>
-          <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published.</span>
+          <span>I consent that the entered data including my location and the story I enter within the next step will be used for this art project. Name, location and story will be published. Email address will be used to inform you about ... You can withdraw your consent any time for the future. For details please refer to the <a href="/privacy">privacy policy</a> </span>
         </label> 
 
     {:else}
@@ -296,7 +296,8 @@ const checkName = () => {
         <label>
           <input 
           bind:checked={dataProtection}
-          type="checkbox"/> <span>I accept that the entered data including location data is recorded for the purpose of this website and my name and location data is published.</span>
+          type="checkbox"/>
+           <span>I consent that the entered data including my location and the story I enter within the next step will be used for this art project. Name, location and story will be published. Email address will be used to inform you about ... You can withdraw your consent any time for the future. For details please refer to the <a href="/privacy">privacy policy</a></span>
         </label>
       
     {/if}
