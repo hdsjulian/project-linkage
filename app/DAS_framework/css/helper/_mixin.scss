@@ -5,6 +5,15 @@
 	backface-visibility: hidden;
 	perspective: 1000;
 }
+@mixin inset($t: auto, $r: auto, $b: auto, $l: auto) {
+	inset: $t $r $b $l;
+		@supports not (inset: 0 0 0 0) {
+			top: $t;
+			right: $r;
+			bottom: $b;
+			left: $l;
+		}
+}
 @mixin user-select($value: none) {
 	-webkit-user-select: $value; // Safari 3.1+
 	-moz-user-select: $value; // Firefox 2+

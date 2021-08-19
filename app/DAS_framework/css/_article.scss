@@ -3,7 +3,7 @@
 .article {
 	@include mq(medium) {
 		position: fixed;
-		inset: $u $u $u auto;
+		@include inset($u, $u, $u, auto);
 		max-block-size: calc(100vh - #{$u * 3});
 		inline-size: $line-width;
 	}
@@ -27,16 +27,17 @@
 		transition: none;
 		position: absolute;
 		z-index: z(modal);
-		inset: calc(#{$phi-major} * 100vh + #{$u * 1.65}) $u/2 auto auto;
+		@include inset(calc(#{$phi-major} * 100vh + #{$u * 1.65}), $u/2, auto, auto);
 		@include mq(medium) {
 			position: fixed;
-			inset: $u * 2.5 $u * 3.5 auto auto;
+			top: $u * 2.5;
+			right: $u * 3.5;
 		}
 	}
 	&__header {
 		position: fixed;
 		z-index: z(fixed);
-		inset: 0 0 auto auto;
+		@include inset(0, 0, auto, auto);
 		.logo {
 			inline-size: $line-width/2;
 		}
