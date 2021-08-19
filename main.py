@@ -1,9 +1,11 @@
 from os import pread
+import os
 from typing import List
 from datetime import datetime
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 from sqlalchemy.orm import Session
 import crud, models, schemas
 from database import SessionLocal, engine
@@ -11,12 +13,22 @@ import sys
 
 models.Base.metadata.create_all(bind=engine)
 
+def p(*args):
+  print (args[0] % (len(args) > 1 and args[1:] or []))
+  sys.stdout.flush()
+
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
+if (os.environ.get('HTTPS_ENABLED') == "True"): 
+    app.add_middleware(HTTPSRedirectMiddleware)
+    api_app.add_middleware(HTTPSRedirectMiddleware)
+
 app.mount('/api', api_app)
 app.mount('/build', StaticFiles(directory="frontend-svelte/public/build", html=True), name="build")
 app.mount('/image', StaticFiles(directory="frontend-svelte/public/image", html=True), name="image")
 app.mount('/font', StaticFiles(directory="frontend-svelte/public/font", html=True), name="font")
+
+
 
 
 
@@ -68,15 +80,12 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
     else: 
         giver_id = None
         
-    if (enterHandoverItem.recipient_password_again == enterHandoverItem.recipient_password):
-        user = {
-            "hashed_password": enterHandoverItem.recipient_password,
-            "email": enterHandoverItem.recipient_email,
-            "name": enterHandoverItem.recipient_name
-        }
-        db_user = crud.create_user(db, user)
-    else: 
-        return {'is_verified': "password mismatch"}
+    user = {
+        "hashed_password": enterHandoverItem.recipient_password,
+        "email": enterHandoverItem.recipient_email,
+        "name": enterHandoverItem.recipient_name
+    }
+    db_user = crud.create_user(db, user)
     handover = {
         "text": enterHandoverItem.text, 
         "lat": enterHandoverItem.lat, 
