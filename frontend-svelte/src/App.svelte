@@ -15,16 +15,16 @@
   <div class="page__outer">
     <div class="page__inner">
       <main class="page-main">
-
         <Article>
-              <header class="article__header">
-        <h1 class="a11y">Projects Linkage</h1>
-          <div class="figure logo">
-        <img alt="Project Linkage logo" src="/image/logo/project-linkage.svg" />
-        </div>
-      </header>
+          <header class="article__header">
+            <h1 class="a11y">Projects Linkage</h1>
+            <div class="figure logo">
+              <img
+                alt="Project Linkage logo"
+                src="/image/logo/project-linkage.svg" />
+            </div>
+          </header>
           <Router {routes} />
-          
         </Article>
       </main>
     </div>
