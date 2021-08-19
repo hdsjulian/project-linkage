@@ -30,7 +30,7 @@
             <li class="nav__item">
               <a on:click={toggleMenu} use:$url href="/">About</a>
             </li>
-<!--            <li class="nav__item">
+            <!--            <li class="nav__item">
               <a on:click={toggleMenu} use:$url href="/coin">Coins</a>
             </li>
             <li class="nav__item">
