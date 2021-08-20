@@ -96,11 +96,7 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
         "timestamp": int(datetime.timestamp(datetime.utcnow())),
         "coin_id": db_coin.id
     }
-    print("attempting new handover")
-    sys.stdout.flush()
     db_handover = crud.create_handover(db, handover)
-    print("new handover")
-    print (db_handover.id)
     db_coin.travels += 1
     db.commit()
     return {'is_saved': True, "handover_id": db_handover.id }  
