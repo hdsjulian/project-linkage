@@ -19,7 +19,7 @@ def p(*args):
 
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
-if (os.environ.get('HTTPS_ENABLED') == "True"): 
+if (os.environ.get('HTTPS_ENABLED') != "False"): 
     app.add_middleware(HTTPSRedirectMiddleware)
     api_app.add_middleware(HTTPSRedirectMiddleware)
 
@@ -97,8 +97,6 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
         "coin_id": db_coin.id
     }
     db_handover = crud.create_handover(db, handover)
-    print("new handover")
-    print (db_handover.id)
     db_coin.travels += 1
     db.commit()
     return {'is_saved': True, "handover_id": db_handover.id }  
