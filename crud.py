@@ -77,9 +77,17 @@ def get_handovers(db: Session):
     return result.all()
 
 def create_handover(db: Session, handover: schemas.HandoverCreate):
+    print ("trying here")
+    sys.stdout.flush()
     db_handover = models.Handover(text=handover["text"], predecessor_id=handover["predecessor_id"], recipient_id=handover["recipient_id"], giver_id = handover["giver_id"], lat=handover["lat"], lon=handover["lon"], timestamp = handover["timestamp"], coin_id=handover["coin_id"])
+    print ("trying there")
+    sys.stdout.flush()
     db.add(db_handover)
+    print ("trying everywhere")
+    sys.stdout.flush()
     db.commit()
+    print ("and again")
+    sys.stdout.flush()
     db.refresh(db_handover)
     return db_handover
 
