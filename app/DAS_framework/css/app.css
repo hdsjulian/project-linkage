@@ -2621,6 +2621,10 @@ dl dd.fullwidth {
   margin: 1rem 0;
   padding: 1rem;
 }
+.form fieldset a {
+  color: var(--brand--mute);
+  text-decoration: underline;
+}
 .form legend {
   background-color: var(--brand--color);
   padding: 1rem 1rem;
@@ -2667,6 +2671,10 @@ dl dd.fullwidth {
   background-color: var(--brand--color);
   margin: 1rem 0;
   padding: 1rem;
+}
+.wpcf7 fieldset a {
+  color: var(--brand--mute);
+  text-decoration: underline;
 }
 .wpcf7 legend {
   background-color: var(--brand--color);

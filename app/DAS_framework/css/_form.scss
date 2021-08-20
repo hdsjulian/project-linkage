@@ -9,6 +9,10 @@
 		background-color: $brand--color;
 		margin: $u 0;
 		padding: $u;
+		a {
+			color: $brand--mute;
+			text-decoration: underline;
+		}
 	}
 	legend {
 		@extend h5;
