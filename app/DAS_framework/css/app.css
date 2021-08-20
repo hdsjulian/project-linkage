@@ -2139,14 +2139,14 @@ input::-moz-focus-inner {
 
 [type=checkbox] {
   -webkit-appearance: checkbox;
-     -moz-appearance: checkbox;
-          appearance: checkbox;
+  -moz-appearance: checkbox;
+       appearance: checkbox;
 }
 
 [type=radio] {
   -webkit-appearance: radio;
-     -moz-appearance: radio;
-          appearance: radio;
+  -moz-appearance: radio;
+       appearance: radio;
 }
 
 table {
@@ -2723,7 +2723,7 @@ dl dd.fullwidth {
 .page-footer {
   position: fixed;
   z-index: 1400;
-  @include inset(auto ,auto, 0, 1rem);
+  inset: auto auto 0 1rem;
   margin: auto;
   padding: 1rem;
   background-color: white;

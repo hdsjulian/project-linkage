@@ -533,9 +533,11 @@ input::-moz-focus-inner {
 	box-sizing: border-box;
 }
 [type="checkbox"] {
+	-webkit-appearance: checkbox;
 	appearance: checkbox;
 }
 [type="radio"] {
+	-webkit-appearance: radio;
 	appearance: radio;
 }
 // ==========================================================
