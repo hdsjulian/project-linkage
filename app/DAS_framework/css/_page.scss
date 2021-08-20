@@ -23,7 +23,7 @@
 	&-footer {
 		position: fixed;
 		z-index: z(fixed);
-		inset: auto auto 0 $u;
+		@include inset(auto, auto, 0, $u);
 		margin: auto;
 		padding: $u;
 		background-color: $white;

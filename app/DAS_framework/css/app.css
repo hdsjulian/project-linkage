@@ -2723,16 +2723,32 @@ dl dd.fullwidth {
 .page-footer {
   position: fixed;
   z-index: 1400;
-  inset: auto auto 0 1rem;
+  @include inset(auto ,auto, 0, 1rem);
   margin: auto;
   padding: 1rem;
   background-color: white;
+}
+@supports not (inset: 0 0 0 0) {
+  .page-footer {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 1rem;
+  }
 }
 
 .menu {
   position: fixed;
   inset: 0 auto auto 0;
   z-index: 1500;
+}
+@supports not (inset: 0 0 0 0) {
+  .menu {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+  }
 }
 .menu-toggle #menu-toggle:checked ~ .menu-toggle__object {
   pointer-events: all;
@@ -2754,8 +2770,16 @@ dl dd.fullwidth {
   content: "";
   position: fixed;
   z-index: 1400 -1;
-  inset: 0;
+  inset: 0 0 0 0;
   background-color: rgba(92, 92, 92, 0.9);
+}
+@supports not (inset: 0 0 0 0) {
+  .menu-toggle #menu-toggle:checked ~ .menu-toggle__hook:after {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
 }
 .menu-toggle__hook {
   cursor: pointer;
@@ -2779,9 +2803,18 @@ dl dd.fullwidth {
   background-color: var(--brand--night);
   cursor: pointer;
 }
+@supports not (inset: 0 0 0 0) {
+  .menu-toggle__hook-icon {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+  }
+}
 @media (min-width: 885px) and (min-height: 299px) {
   .menu-toggle__hook-icon {
-    inset: 1rem auto auto 1rem;
+    top: 1rem;
+    left: 1rem;
   }
 }
 .menu-toggle__hook-icon svg {
@@ -2808,9 +2841,18 @@ dl dd.fullwidth {
   opacity: 0;
   background-color: whitesmoke;
 }
+@supports not (inset: 0 0 0 0) {
+  .menu-toggle__object {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+  }
+}
 @media (min-width: 885px) and (min-height: 299px) {
   .menu-toggle__object {
-    inset: 1rem auto auto 1rem;
+    top: 1rem;
+    left: 1rem;
   }
 }
 
@@ -3120,7 +3162,15 @@ dl dd.fullwidth {
   .map {
     position: fixed;
     z-index: 0;
-    inset: 0;
+    inset: 0 0 0 0;
+  }
+  @supports not (inset: 0 0 0 0) {
+    .map {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
   }
 }
 
@@ -3188,6 +3238,14 @@ dl dd.fullwidth {
     max-block-size: calc(100vh - 3rem);
     inline-size: 42ch;
   }
+  @supports not (inset: 0 0 0 0) {
+    .article {
+      top: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      left: auto;
+    }
+  }
 }
 @media (min-width: 885px) and (min-height: 299px) {
   .article {
@@ -3209,10 +3267,19 @@ dl dd.fullwidth {
   z-index: 1500;
   inset: calc(0.6180339887 * 100vh + 1.65rem) 0.5rem auto auto;
 }
+@supports not (inset: 0 0 0 0) {
+  .article__close {
+    top: calc(0.6180339887 * 100vh + 1.65rem);
+    right: 0.5rem;
+    bottom: auto;
+    left: auto;
+  }
+}
 @media (min-width: 885px) and (min-height: 299px) {
   .article__close {
     position: fixed;
-    inset: 2.5rem 3.5rem auto auto;
+    top: 2.5rem;
+    right: 3.5rem;
   }
 }
 .article__header {
@@ -3222,6 +3289,14 @@ dl dd.fullwidth {
   block-size: 5rem;
   padding: 1rem;
   background-color: whitesmoke;
+}
+@supports not (inset: 0 0 0 0) {
+  .article__header {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+  }
 }
 .article__header .logo {
   inline-size: 21ch;
