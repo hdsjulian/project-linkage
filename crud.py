@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session, aliased
 import models, schemas
 from sqlalchemy import distinct, desc, func
 from passlib.context import CryptContext
-import os
+import sys, os
 SECRET_KEY = os.environ.get('SECRET_KEY')
 ALGORITHM = "HS256"
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
