@@ -1508,6 +1508,12 @@ abbr[title],
   background-color: var(--brand--night);
   color: var(--brand--color);
 }
+@supports not (padding-inline: 0) {
+  .cta {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
 .cta:hover {
   background-color: var(--brand--color);
   color: var(--brand--night);
@@ -1974,6 +1980,12 @@ button {
   color: var(--brand--color);
   box-shadow: none;
   width: auto;
+}
+@supports not (padding-inline: 0) {
+  button {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 button:hover {
   background-color: var(--brand--color);
@@ -2521,9 +2533,7 @@ li {
   max-width: 42ch;
   -webkit-margin-after: 2px;
           margin-block-end: 2px;
-  padding: 0.5rem;
-  -webkit-padding-start: 4ch;
-          padding-inline-start: 4ch;
+  padding: 0.5rem 0.5rem 0.5rem 4ch;
   --text-indent: -3ch;
   text-indent: var(--text-indent);
   background-color: var(--brand--color);
@@ -3132,6 +3142,13 @@ dl dd.fullwidth {
   min-width: 0;
   width: 100%;
 }
+@supports not (padding-inline: 0) {
+  .paging a,
+.paging button {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
 .paging a:hover,
 .paging button:hover {
   background-color: var(--brand--color);
@@ -3313,8 +3330,22 @@ dl dd.fullwidth {
   .article__header {
     position: -webkit-sticky;
     position: sticky;
-    inset-block: 0;
+    inset: 0 auto 0 auto auto;
     padding-inline: 0;
+  }
+  @supports not (inset: 0 0 0 0) {
+    .article__header {
+      top: 0;
+      right: auto;
+      bottom: 0 auto;
+      left: auto;
+    }
+  }
+  @supports not (padding-inline: 0) {
+    .article__header {
+      padding-right: 0;
+      padding-left: 0;
+    }
   }
 }
 

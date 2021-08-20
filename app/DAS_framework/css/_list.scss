@@ -58,8 +58,7 @@
 	}
 	max-width: $line-width;
 	margin-block-end: $stroke;
-	padding: $u/2;
-	padding-inline-start: 4ch;
+	padding: $u/2 $u/2 $u/2 4ch;
 	--text-indent: -3ch;
 	text-indent: var(--text-indent);
 	background-color: $brand--color;

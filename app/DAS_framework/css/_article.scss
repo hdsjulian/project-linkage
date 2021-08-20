@@ -46,8 +46,12 @@
 		background-color: $egg;
 		@include mq(medium) {
 			position: sticky;
-			inset-block: 0;
+			@include inset(0, auto, 0 auto);
 			padding-inline: 0;
+			@supports not (padding-inline: 0) {
+				padding-right: 0;
+				padding-left: 0;
+			}
 		}
 	}
 }

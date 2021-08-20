@@ -4,6 +4,10 @@
 	user-select: none;
 	display: inline-block;
 	padding-inline: $u;
+	@supports not (padding-inline: 0) {
+		padding-left: $u;
+		padding-right: $u;
+	}
 	position: relative;
 	max-width: $line-width;
 	font-size: $fs0;
