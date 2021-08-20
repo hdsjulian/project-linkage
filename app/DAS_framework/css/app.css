@@ -2566,7 +2566,6 @@ ol {
           padding-block-start: 1rem;
   -webkit-padding-after: 1rem;
           padding-block-end: 1rem;
-  background-color: var(--brand--light);
 }
 @supports not (padding-block: 0) {
   ul,
