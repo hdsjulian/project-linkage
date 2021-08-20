@@ -16,6 +16,9 @@
 	@include emphasis;
 	@include blur;
 	padding-block: $u/2;
+	@supports not (padding-block: 0) {
+		padding: $u/2 auto;
+	}
 
 	&__list {
 		@include flex;

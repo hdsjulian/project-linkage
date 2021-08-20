@@ -17,6 +17,10 @@
 	margin-block: $u/2;
 	margin-inline-start: 0;
 	margin-inline-end: $u;
+	@supports not (margin-block: 0) {
+		margin: $u/2 $u $u/2 0;
+	}
+
 	text-align: inherit;
 	@include transition;
 	cursor: pointer;

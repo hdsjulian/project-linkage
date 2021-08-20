@@ -18,8 +18,12 @@
 		@extend h5;
 		background-color: $brand--color;
 		padding: $u $u * 1;
-		margin-inline-end: auto;
-		margin-inline-start: $u * -1;
+		margin-inline: auto $u * -1;;
+		@supports not (margin-inline: 0) {
+			margin-right: auto;
+			margin-left: $u * -1;
+		}
+	
 	}
 	label {
 		margin: $u * 2 0;

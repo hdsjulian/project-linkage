@@ -1514,6 +1514,11 @@ abbr[title],
     padding-right: 1rem;
   }
 }
+@supports not (margin-block: 0) {
+  .cta {
+    margin: 0.5rem 1rem 0.5rem 0;
+  }
+}
 .cta:hover {
   background-color: var(--brand--color);
   color: var(--brand--night);
@@ -1770,8 +1775,7 @@ blockquote > p:last-of-type:lang(en):after, q:lang(en):after {
 }
 
 blockquote {
-  margin-inline: 0;
-  margin-block: 2rem;
+  margin: 2rem 0;
   padding-block: 4rem;
   font-size: 1rem;
   --module-background-color: var(--brand--mute);
@@ -1780,6 +1784,12 @@ blockquote {
   --webkit-font-smoothing: antialiased;
   --moz-osx-font-smoothing: grayscale;
   font-style: italic;
+}
+@supports not (padding-block: 0) {
+  blockquote {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
 }
 
 blockquote > p:first-of-type:before {
@@ -1985,6 +1995,11 @@ button {
   button {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+@supports not (margin-block: 0) {
+  button {
+    margin: 0.5rem 1rem 0.5rem 0;
   }
 }
 button:hover {
@@ -2282,6 +2297,20 @@ h6:first-child,
   -webkit-margin-before: 0;
           margin-block-start: 0;
 }
+@supports not ((-webkit-margin-before: 0) or (margin-block-start: 0)) {
+  h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+.form legend:first-child,
+.wpcf7 legend:first-child,
+h6:first-child,
+.form label:first-child,
+.wpcf7 label:first-child {
+    margin-top: 0;
+  }
+}
 
 @media (min-width: 885px) and (min-height: 299px) {
   h1,
@@ -2330,6 +2359,17 @@ h6,
   font-size: 1rem;
   -webkit-margin-after: 0.5rem;
           margin-block-end: 0.5rem;
+}
+@supports not ((-webkit-margin-after: 0) or (margin-block-end: 0)) {
+  h4,
+h5,
+.form legend,
+.wpcf7 legend,
+h6,
+.form label,
+.wpcf7 label {
+    margin-bottom: 0.5rem;
+  }
 }
 
 h6, .form label, .wpcf7 label {
@@ -2515,18 +2555,25 @@ iframe {
 }
 ul,
 ol {
+  counter-reset: counter--li;
   -webkit-margin-after: 1rem;
           margin-block-end: 1rem;
-  counter-reset: counter--li;
-  -webkit-padding-before: 1rem;
-          padding-block-start: 1rem;
-  -webkit-padding-after: 1rem;
-          padding-block-end: 1rem;
   -webkit-margin-start: 0;
           margin-inline-start: 0;
   -webkit-margin-end: 0;
           margin-inline-end: 0;
+  -webkit-padding-before: 1rem;
+          padding-block-start: 1rem;
+  -webkit-padding-after: 1rem;
+          padding-block-end: 1rem;
   background-color: var(--brand--light);
+}
+@supports not (padding-block: 0) {
+  ul,
+ol {
+    margin: auto 0 1rem;
+    padding: 1rem auto;
+  }
 }
 
 li {
@@ -2537,6 +2584,11 @@ li {
   --text-indent: -3ch;
   text-indent: var(--text-indent);
   background-color: var(--brand--color);
+}
+@supports not ((-webkit-margin-after: 0) or (margin-block-end: 0)) {
+  li {
+    margin-bottom: 2px;
+  }
 }
 li:not(:last-child) {
   box-shadow: 0 2px 0 0 whitesmoke;
@@ -2638,10 +2690,13 @@ dl dd.fullwidth {
 .form legend {
   background-color: var(--brand--color);
   padding: 1rem 1rem;
-  -webkit-margin-end: auto;
-          margin-inline-end: auto;
-  -webkit-margin-start: -1rem;
-          margin-inline-start: -1rem;
+  margin-inline: auto -1rem;
+}
+@supports not (margin-inline: 0) {
+  .form legend {
+    margin-right: auto;
+    margin-left: -1rem;
+  }
 }
 .form label {
   margin: 2rem 0;
@@ -2689,10 +2744,13 @@ dl dd.fullwidth {
 .wpcf7 legend {
   background-color: var(--brand--color);
   padding: 1rem 1rem;
-  -webkit-margin-end: auto;
-          margin-inline-end: auto;
-  -webkit-margin-start: -1rem;
-          margin-inline-start: -1rem;
+  margin-inline: auto -1rem;
+}
+@supports not (margin-inline: 0) {
+  .wpcf7 legend {
+    margin-right: auto;
+    margin-left: -1rem;
+  }
 }
 .wpcf7 label {
   margin: 2rem 0;
@@ -3147,6 +3205,12 @@ dl dd.fullwidth {
 .paging button {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+@supports not (margin-block: 0) {
+  .paging a,
+.paging button {
+    margin: 0.5rem 1rem 0.5rem 0;
   }
 }
 .paging a:hover,
