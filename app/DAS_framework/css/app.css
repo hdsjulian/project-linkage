@@ -1508,6 +1508,17 @@ abbr[title],
   background-color: var(--brand--night);
   color: var(--brand--color);
 }
+@supports not (padding-inline: 0) {
+  .cta {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+@supports not (margin-block: 0) {
+  .cta {
+    margin: 0.5rem 1rem 0.5rem 0;
+  }
+}
 .cta:hover {
   background-color: var(--brand--color);
   color: var(--brand--night);
@@ -1764,8 +1775,7 @@ blockquote > p:last-of-type:lang(en):after, q:lang(en):after {
 }
 
 blockquote {
-  margin-inline: 0;
-  margin-block: 2rem;
+  margin: 2rem 0;
   padding-block: 4rem;
   font-size: 1rem;
   --module-background-color: var(--brand--mute);
@@ -1774,6 +1784,12 @@ blockquote {
   --webkit-font-smoothing: antialiased;
   --moz-osx-font-smoothing: grayscale;
   font-style: italic;
+}
+@supports not (padding-block: 0) {
+  blockquote {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
 }
 
 blockquote > p:first-of-type:before {
@@ -1975,6 +1991,17 @@ button {
   box-shadow: none;
   width: auto;
 }
+@supports not (padding-inline: 0) {
+  button {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+@supports not (margin-block: 0) {
+  button {
+    margin: 0.5rem 1rem 0.5rem 0;
+  }
+}
 button:hover {
   background-color: var(--brand--color);
   color: var(--brand--night);
@@ -2139,14 +2166,14 @@ input::-moz-focus-inner {
 
 [type=checkbox] {
   -webkit-appearance: checkbox;
-     -moz-appearance: checkbox;
-          appearance: checkbox;
+  -moz-appearance: checkbox;
+       appearance: checkbox;
 }
 
 [type=radio] {
   -webkit-appearance: radio;
-     -moz-appearance: radio;
-          appearance: radio;
+  -moz-appearance: radio;
+       appearance: radio;
 }
 
 table {
@@ -2270,6 +2297,20 @@ h6:first-child,
   -webkit-margin-before: 0;
           margin-block-start: 0;
 }
+@supports not ((-webkit-margin-before: 0) or (margin-block-start: 0)) {
+  h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+.form legend:first-child,
+.wpcf7 legend:first-child,
+h6:first-child,
+.form label:first-child,
+.wpcf7 label:first-child {
+    margin-top: 0;
+  }
+}
 
 @media (min-width: 885px) and (min-height: 299px) {
   h1,
@@ -2318,6 +2359,17 @@ h6,
   font-size: 1rem;
   -webkit-margin-after: 0.5rem;
           margin-block-end: 0.5rem;
+}
+@supports not ((-webkit-margin-after: 0) or (margin-block-end: 0)) {
+  h4,
+h5,
+.form legend,
+.wpcf7 legend,
+h6,
+.form label,
+.wpcf7 label {
+    margin-bottom: 0.5rem;
+  }
 }
 
 h6, .form label, .wpcf7 label {
@@ -2503,30 +2555,39 @@ iframe {
 }
 ul,
 ol {
+  counter-reset: counter--li;
   -webkit-margin-after: 1rem;
           margin-block-end: 1rem;
-  counter-reset: counter--li;
-  -webkit-padding-before: 1rem;
-          padding-block-start: 1rem;
-  -webkit-padding-after: 1rem;
-          padding-block-end: 1rem;
   -webkit-margin-start: 0;
           margin-inline-start: 0;
   -webkit-margin-end: 0;
           margin-inline-end: 0;
-  background-color: var(--brand--light);
+  -webkit-padding-before: 1rem;
+          padding-block-start: 1rem;
+  -webkit-padding-after: 1rem;
+          padding-block-end: 1rem;
+}
+@supports not (padding-block: 0) {
+  ul,
+ol {
+    margin: auto 0 1rem;
+    padding: 1rem auto;
+  }
 }
 
 li {
   max-width: 42ch;
   -webkit-margin-after: 2px;
           margin-block-end: 2px;
-  padding: 0.5rem;
-  -webkit-padding-start: 4ch;
-          padding-inline-start: 4ch;
+  padding: 0.5rem 0.5rem 0.5rem 4ch;
   --text-indent: -3ch;
   text-indent: var(--text-indent);
   background-color: var(--brand--color);
+}
+@supports not ((-webkit-margin-after: 0) or (margin-block-end: 0)) {
+  li {
+    margin-bottom: 2px;
+  }
 }
 li:not(:last-child) {
   box-shadow: 0 2px 0 0 whitesmoke;
@@ -2621,13 +2682,20 @@ dl dd.fullwidth {
   margin: 1rem 0;
   padding: 1rem;
 }
+.form fieldset a {
+  color: var(--brand--mute);
+  text-decoration: underline;
+}
 .form legend {
   background-color: var(--brand--color);
   padding: 1rem 1rem;
-  -webkit-margin-end: auto;
-          margin-inline-end: auto;
-  -webkit-margin-start: -1rem;
-          margin-inline-start: -1rem;
+  margin-inline: auto -1rem;
+}
+@supports not (margin-inline: 0) {
+  .form legend {
+    margin-right: auto;
+    margin-left: -1rem;
+  }
 }
 .form label {
   margin: 2rem 0;
@@ -2668,13 +2736,20 @@ dl dd.fullwidth {
   margin: 1rem 0;
   padding: 1rem;
 }
+.wpcf7 fieldset a {
+  color: var(--brand--mute);
+  text-decoration: underline;
+}
 .wpcf7 legend {
   background-color: var(--brand--color);
   padding: 1rem 1rem;
-  -webkit-margin-end: auto;
-          margin-inline-end: auto;
-  -webkit-margin-start: -1rem;
-          margin-inline-start: -1rem;
+  margin-inline: auto -1rem;
+}
+@supports not (margin-inline: 0) {
+  .wpcf7 legend {
+    margin-right: auto;
+    margin-left: -1rem;
+  }
 }
 .wpcf7 label {
   margin: 2rem 0;
@@ -2723,7 +2798,7 @@ dl dd.fullwidth {
 .page-footer {
   position: fixed;
   z-index: 1400;
-  @include inset(auto ,auto, 0, 1rem);
+  inset: auto auto 0 1rem;
   margin: auto;
   padding: 1rem;
   background-color: white;
@@ -3124,6 +3199,19 @@ dl dd.fullwidth {
   min-width: 0;
   width: 100%;
 }
+@supports not (padding-inline: 0) {
+  .paging a,
+.paging button {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+@supports not (margin-block: 0) {
+  .paging a,
+.paging button {
+    margin: 0.5rem 1rem 0.5rem 0;
+  }
+}
 .paging a:hover,
 .paging button:hover {
   background-color: var(--brand--color);
@@ -3305,8 +3393,22 @@ dl dd.fullwidth {
   .article__header {
     position: -webkit-sticky;
     position: sticky;
-    inset-block: 0;
+    inset: 0 auto 0 auto auto;
     padding-inline: 0;
+  }
+  @supports not (inset: 0 0 0 0) {
+    .article__header {
+      top: 0;
+      right: auto;
+      bottom: 0 auto;
+      left: auto;
+    }
+  }
+  @supports not (padding-inline: 0) {
+    .article__header {
+      padding-right: 0;
+      padding-left: 0;
+    }
   }
 }
 

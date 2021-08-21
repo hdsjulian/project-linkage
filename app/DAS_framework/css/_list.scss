@@ -3,12 +3,16 @@
 // LIST ###
 
 %list {
-	margin-block-end: $u;
 	counter-reset: counter--li;
-	padding-block-start: $u;
-	padding-block-end: $u;
+	margin-block-end: $u;
 	margin-inline-start: 0;
 	margin-inline-end: 0;
+	padding-block-start: $u;
+	padding-block-end: $u;
+	@supports not (padding-block: 0) {
+		margin: auto 0 $u ;
+		padding: $u auto;
+	}
 	//	&--flex {
 	//		*:hover > & {
 	//			a {
@@ -46,7 +50,7 @@
 	//		}
 	//	}
 
-	background-color: $brand--light;
+//	background-color: $brand--light;
 }
 
 %list__item {
@@ -58,8 +62,10 @@
 	}
 	max-width: $line-width;
 	margin-block-end: $stroke;
-	padding: $u/2;
-	padding-inline-start: 4ch;
+	@supports not (margin-block-end: 0) {
+		margin-bottom: $stroke;
+	}
+	padding: $u/2 $u/2 $u/2 4ch;
 	--text-indent: -3ch;
 	text-indent: var(--text-indent);
 	background-color: $brand--color;
