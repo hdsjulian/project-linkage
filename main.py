@@ -187,7 +187,9 @@ def get_coins_for_handover(handover_id: int, db: Session=Depends(get_db)):
                 handover_id = handover.id
                 isset = True
     if next_coin_handover_id == 0:
-        next_coin_handover_id = handovers[0].coin_id
+        next_coin_handover_id = handovers[0].id
+    if prev_coin_handover_id == 0:
+        prev_coin_handover_id =handovers[-1].id
     return {"data":{"handover_id": handover_id, "prev_coin_handover_id": prev_coin_handover_id, "next_coin_handover_id":next_coin_handover_id}}
 
 
