@@ -1,112 +1,135 @@
 <script>
-    import { url, params, afterPageLoad } from "@roxi/routify"
-    import { dataset_dev } from "svelte/internal";
-    import api from "../../api";
-    let handover
-    let id
-    let lat
-    let lon
-    let timestamp
-    let prevId
-    let nextId
-    let text
-    let prevLat = 0
-    let prevLon = 0
-    let markers = []
-    let index = 0
-    let isNew = new URLSearchParams(window.location.search).has("newHandover")
+  import { url, params, afterPageLoad } from "@roxi/routify"
+  import { dataset_dev } from "svelte/internal"
+  import api from "../../api"
+  let handover
+  let id
+  let lat
+  let lon
+  let timestamp
+  let prevId
+  let nextId
+  let text
+  let prevLat = 0
+  let prevLon = 0
+  let markers = []
+  let index = 0
+  let isNew = new URLSearchParams(window.location.search).has("newHandover")
 
-  function onClick(handover_id) { 
-
-   history.replaceState({}, null, `/handover/${handover_id}`)
-     
+  function onClick(handover_id) {
+    history.replaceState({}, null, `/handover/${handover_id}`)
   }
 
-    $afterPageLoad(() => {
-        id = parseInt($params.id, 10)
-        api.get(`/handovers/${id}`).then((res) => { 
-            handover = res.data?.handover
-            myMap.setView([handover.lat, handover.lon], 10)
-            timestamp = new Date(handover.timestamp * 1000).toLocaleDateString("de-DE")
-            lat = handover.lat.toFixed(3)
-            lon = handover.lon.toFixed(3)
-            prevId = handover.prevId
-            nextId = handover.nextId
-            text = handover.text
-            api.get(`/coins/${handover.coinId}/handovers`).then((hl_res) => {
-                let iterator = 0
-                myMap.eachLayer((layer) => {
-                    if (iterator > 0) {
-                        layer.remove();
-                    }
-                    iterator +=1
-                });
-                for (const ho of hl_res) { 
-                    markers.push(L.marker([ho.lat, ho.lon], {icon: mapMarker}).addTo(myMap).on('click', () => onClick(ho.id, index)))
-                    if (prevLat != 0) {
-                        var polyLine = L.polyline([[prevLat, prevLon], [ho.lat, ho.lon]], {color:'red', weight: 5}).addTo(window.myMap)
-                    }
-                    index +=1 
-                    prevLat = ho.lat
-                    prevLon = ho.lon
-
-                }
-                prevLat = 0;
-                prevLon = 0;
-            })
+  $afterPageLoad(() => {
+    id = parseInt($params.id, 10)
+    console.log(process.env.FRONTEND_APP_API_URL)
+    api.get(`/handovers/${id}`).then((res) => {
+      console.log(res)
+      handover = res.data?.handover
+      myMap.setView([handover.lat, handover.lon], 10)
+      timestamp = new Date(handover.timestamp * 1000).toLocaleDateString(
+        "de-DE"
+      )
+      lat = handover.lat.toFixed(3)
+      lon = handover.lon.toFixed(3)
+      prevId = handover.prevId
+      nextId = handover.nextId
+      text = handover.text
+      api.get(`/coins/${handover.coinId}/handovers`).then((hl_res) => {
+        let iterator = 0
+        myMap.eachLayer((layer) => {
+          if (iterator > 0) {
+            layer.remove()
+          }
+          iterator += 1
         })
+        for (const ho of hl_res) {
+          markers.push(
+            L.marker([ho.lat, ho.lon], { icon: mapMarker })
+              .addTo(myMap)
+              .on("click", () => onClick(ho.id, index))
+          )
+          if (prevLat != 0) {
+            var polyLine = L.polyline(
+              [
+                [prevLat, prevLon],
+                [ho.lat, ho.lon],
+              ],
+              { color: "red", weight: 5 }
+            ).addTo(window.myMap)
+          }
+          index += 1
+          prevLat = ho.lat
+          prevLon = ho.lon
+        }
+        prevLat = 0
+        prevLon = 0
+      })
     })
+  })
 </script>
+
 {#if handover}
-    {#if isNew == true}
-        {#if handover.giver != null}
-            <p>
-                Thank you! {handover.recipient.name} is now all set to hand over this coin to another person! 
-                This coin, by the way, carries the id {handover.coin.id} and you can keep track of its path <a href="/coin/{handover.coin.id}">here</a>. 
-            </p>
-        {:else}
-            <p>
-                Thank you! {handover.recipient.name} is now all set to hand over this coin to another person! 
-                This coin, by the way, carries the id {handover.coin.id} and you can keep track of its path <a href="/coin/{handover.oin.id}">here</a>. 
-            </p>
-        {/if}
+  {#if isNew == true}
+    {#if handover.giver != null}
+      <p>
+        Thank you! {handover.recipient.name} is now all set to hand over this coin
+        to another person! This coin, by the way, carries the id {handover.coin
+          .id} and you can keep track of its path
+        <a href="/coin/{handover.coin.id}">here</a>.
+      </p>
+    {:else}
+      <p>
+        Thank you! {handover.recipient.name} is now all set to hand over this coin
+        to another person! This coin, by the way, carries the id {handover.coin
+          .id} and you can keep track of its path
+        <a href="/coin/{handover.oin.id}">here</a>.
+      </p>
     {/if}
-    <dl>
-      <dt>Handover number</dt>
-      <dd>{handover.id}</dd>
-      <dt>For coin</dt>
-      <dd>{handover.coin.id}</dd>
-      {#if handover.giver != null}
+  {/if}
+  <dl>
+    <dt>Handover number</dt>
+    <dd>{handover.id}</dd>
+    <dt>For coin</dt>
+    <dd>{handover.coin.id}</dd>
+    {#if handover.giver != null}
       <dt>Given from</dt>
       <dd>{handover.giver.name}</dd>
-      {/if}
-      <dt>Given to</dt>
-      <dd>{handover.recipient.name}</dd>
-      <dt>Handed over on</dt>
-      <dd>{timestamp}</dd>
-      <dt>at Lon:Lat</dt>
-      <dd>{lat}:{lon}</dd> 
-      {#if handover.giver == null}
-      <dt class = "fullwidth">How they received the coin</dt>
-      {:else}
-      <dt class = "fullwidth">What they had to say to each other</dt>
-      {/if}
-      <dd class = "fullwidth">{text}</dd>
-    </dl>
-
-  <nav class="paging">
-    <ul class="paging__list">
-      {#if prevId < handover.id}
-      <li class="previous"><a use:$url href={`/handover/${prevId}`}>Previous</a></li>
-      {:else}
-      <li class="previous"><a use:$url href={`/handover/${prevId}`}>Last</a></li>      
-      {/if}
-      {#if nextId > handover.id}
-      <li class="next"><a use:$url href={`/handover/${nextId}`}>Next</a></li>
-      {:else}
-      <li class="next"><a use:$url href={`/handover/${nextId}`}>First</a>
-      {/if}
-      
-    </ul>
-  </nav>
+    {/if}
+    <dt>Given to</dt>
+    <dd>{handover.recipient.name}</dd>
+    <dt>Handed over on</dt>
+    <dd>{timestamp}</dd>
+    <dt>at Lon:Lat</dt>
+    <dd>{lat}:{lon}</dd>
+    {#if handover.giver == null}
+      <dt class="fullwidth">How they received the coin</dt>
+    {:else}
+      <dt class="fullwidth">What they had to say to each other</dt>
+    {/if}
+    <dd class="fullwidth">{text}</dd>
+  </dl>
+  {#if prevId !== nextId}
+    <nav class="paging">
+      <ul class="paging__list">
+        {#if prevId < handover.id}
+          <li class="previous">
+            <a use:$url href={`/handover/${prevId}`}>Previous</a>
+          </li>
+        {:else}
+          <li class="previous">
+            <a use:$url href={`/handover/${prevId}`}>Last</a>
+          </li>
+        {/if}
+        {#if nextId > handover.id}
+          <li class="next">
+            <a use:$url href={`/handover/${nextId}`}>Next</a>
+          </li>
+        {:else}
+          <li class="next">
+            <a use:$url href={`/handover/${nextId}`}>First</a>
+          </li>{/if}
+      </ul>
+    </nav>
   {/if}
+{/if}
