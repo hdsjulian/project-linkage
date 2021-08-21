@@ -19,6 +19,8 @@ def p(*args):
 
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
+print(os.environ.get('HTTPS_ENABLED'))
+print ("blubl")
 if (os.environ.get('HTTPS_ENABLED') != "False"): 
     app.add_middleware(HTTPSRedirectMiddleware)
     api_app.add_middleware(HTTPSRedirectMiddleware)
@@ -168,6 +170,25 @@ def read_coins(skip: int = 0, limit: int = 120, db: Session = Depends(get_db)):
 def get_handovers_for_coin(coin_id: int, db: Session=Depends(get_db)):
     handovers = crud.get_handovers_by_coin(db, coin_id)
     return handovers
+@api_app.get("/handovers/{handover_id}/coins", response_model=schemas.CoinListData)
+def get_coins_for_handover(handover_id: int, db: Session=Depends(get_db)):
+    handovers = crud.get_handovers(db)
+    prev_coin_handover_id = 0
+    next_coin_handover_id = 0
+    isset = False
+    for handover in handovers:
+        if isset == True: 
+            next_coin_handover_id = handover.id
+            break
+        elif isset == False:
+            if handover.id != handover_id:
+                prev_coin_handover_id = handover.id
+            elif handover.id == handover_id:
+                handover_id = handover.id
+                isset = True
+    if next_coin_handover_id == 0:
+        next_coin_handover_id = handovers[0].coin_id
+    return {"data":{"handover_id": handover_id, "prev_coin_handover_id": prev_coin_handover_id, "next_coin_handover_id":next_coin_handover_id}}
 
 
 @api_app.get("/handovers/{handover_id}", response_model=schemas.HandoverData)

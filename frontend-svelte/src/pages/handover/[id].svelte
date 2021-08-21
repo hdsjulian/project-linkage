@@ -9,6 +9,9 @@
   let timestamp
   let prevId
   let nextId
+  let prevCoin
+  let nextCoin
+
   let text
   let prevLat = 0
   let prevLon = 0
@@ -65,11 +68,27 @@
         prevLat = 0
         prevLon = 0
       })
+      api.get(`/handovers/${id}/coins`).then((res) => {
+        nextCoin = res.data?.nextCoinHandoverId
+        prevCoin = res.data?.prevCoinHandoverId
+        console.log(nextCoin)
+      })
     })
   })
 </script>
 
 {#if handover}
+  <nav class="paging">
+    <ul class="paging__list">
+      <li class="previous">
+        <a use:$url href={`/handover/${prevCoin}`}>Previous Coin</a>
+      </li>
+      <li class="next">
+        <a use:$url href={`/handover/${nextCoin}`}>Next Coin</a>
+      </li>
+    </ul>
+  </nav>
+
   {#if isNew == true}
     {#if handover.giver != null}
       <p>

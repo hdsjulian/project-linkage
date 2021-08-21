@@ -85,7 +85,13 @@ class CoinCoinReturn(CamelModel):
 class CoinData(CamelModel):
     data: CoinCoinReturn
 
+class CoinList(CamelModel):
+    handover_id: int
+    prev_coin_handover_id: int
+    next_coin_handover_id: int
 
+class CoinListData(CamelModel):
+    data: CoinList
 
 class Token(BaseModel):
     access_token: str
