@@ -30,6 +30,7 @@
     prevLon = 0
   let isCheckedLocation,
     willChooseLocation = false
+  let manualMarker = false
   function setLocation() {
     if (isCheckedLocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -103,16 +104,22 @@
   }
   const chooseLocation = () => {
     willChooseLocation = true
-    console.log("click")
-    myMap.on("click", addMarker)
+    manualMarker=myMap.on("click", addMarker)
   }
 
   function addMarker(e) {
     // Add marker to map at click location; add popup window
-    console.log("marker")
-    var newMarker = L.marker(e.latlng, { icon: mapMarker }).addTo(myMap)
-    lat = e.latlng.Lat
+    if (manualMarker !== false)  {
+      let layerCount = 0
+      myMap.eachLayer((layer) => {
+        layerCount += 1
+        })
+      myMap.removeLayer(manualMarker)
+    }
+    manualMarker = L.marker(e.latlng, { icon: mapMarker }).addTo(myMap)
+    lat = e.latlng.lat
     lon = e.latlng.lng
+    return manualMarker
   }
 
   const checkDataProtection = () => {
@@ -136,16 +143,17 @@
   }
 
   const submitHandover = async () => {
-    result = await api.post("/submit_handover/", {
-      hash: hash,
-      giver_password: giverPassword,
-      recipient_password: recipientPassword,
-      recipient_name: recipientName,
-      text: handoverText,
-      recipient_email: recipientEmail,
-      lat: lat,
-      lon: lon,
-    })
+    let handoverSubmission = {
+      hash: hash, 
+      recipient_password: recipientPassword, 
+      recipient_name: recipientName, 
+      text: handoverText, 
+      recipient_email: recipientEmail, 
+      lat: lat, 
+      lon: lon
+      }
+
+    result = await api.post("/submit_handover/", handoverSubmission)
     if (result.is_saved == true) {
       handover_id = result.handover_id
       return true
@@ -157,12 +165,9 @@
   $afterPageLoad(() => {
     myMap.setView([lat, lon], 6)
     hash = $params.hash
-    console.log(hash)
     api.get(`/hash/${hash}`).then((res) => {
       travels = res.data.coin.travels == null ? 0 : res.data.coin.travels
-      console.log()
       coin = res.data.coin
-      console.log(coin)
       api.get(`/coins/${coin.id}/handovers/`).then((hl_res) => {
         if (hl_res.length > 0) {
           myMap.setView([hl_res[0].lat, hl_res[0].lon], 10)
@@ -191,7 +196,6 @@
         }
       })
     })
-    console.log(coin)
 
     //if there is a handover, get handover and display form. if not, just display form and display instructions
 

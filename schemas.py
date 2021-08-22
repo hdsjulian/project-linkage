@@ -112,7 +112,6 @@ class EnterHandover(CamelModel):
     lat: float
     lon: float
     text: str
-    giver_password: str
     predecessor_id: Optional[int] = None
     giver_id: Optional[int] = None
     recipient_id: Optional[int] = None
