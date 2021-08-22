@@ -381,7 +381,7 @@
           bind:checked={isCheckedLocation}
           on:change={setLocation}
           type="checkbox" />
-        <span> I want the browser to choose my location </span>
+        <span> I want the browser to choose my location (When you mark this checkbox as checked, please click "Allow" when your browser asks you to share your location) </span>
       </label>
       <p>
         <span
