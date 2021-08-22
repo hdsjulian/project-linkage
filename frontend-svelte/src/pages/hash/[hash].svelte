@@ -386,8 +386,9 @@
       <p>
         <span
           ><button on:click={chooseLocation} type="button" class="full"
-            >I want to choose my own location</button
+            >I want to choose my own location by setting a marker on the map</button
           ></span>
+          (Tap on this button, then tap on the map to set a marker)
       </p>
       {#if error_submitting == true}
         <span class="error"
