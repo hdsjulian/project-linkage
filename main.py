@@ -78,10 +78,9 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
     else: 
         enterHandoverItem.predecessor_id = last_handover[0].id
     if (enterHandoverItem.predecessor_id is not None):
-        giver_id = last_handover[0].giver_id
+        giver_id = last_handover[0].recipient_id
     else: 
         giver_id = None
-        
     user = {
         "hashed_password": enterHandoverItem.recipient_password,
         "email": enterHandoverItem.recipient_email,
