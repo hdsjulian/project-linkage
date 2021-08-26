@@ -118,10 +118,10 @@
   const submitHandover = async () => {
     let handoverSubmission = {
       hash,
-      recipient_password: recipientPassword,
-      recipient_name: recipientName,
+      recipientPassword,
+      recipientName,
       text: handoverText,
-      recipient_email: recipientEmail,
+      recipientEmail,
       lat,
       lon,
     }
