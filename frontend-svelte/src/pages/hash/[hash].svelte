@@ -95,20 +95,16 @@
       return false
     }
   }
+
   const chooseLocation = () => {
     willChooseLocation = true
     manualMarker = myMap.on("click", addMarker)
   }
 
-  function addMarker(e) {
+  const addMarker = (e) => {
     // Add marker to map at click location; add popup window
-    if (manualMarker !== false) {
-      let layerCount = 0
-      myMap.eachLayer((layer) => {
-        layerCount += 1
-      })
-      myMap.removeLayer(manualMarker)
-    }
+    if (manualMarker) myMap.removeLayer(manualMarker)
+
     manualMarker = L.marker(e.latlng, { icon: mapMarker }).addTo(myMap)
     lat = e.latlng.lat
     lon = e.latlng.lng
@@ -121,13 +117,13 @@
 
   const submitHandover = async () => {
     let handoverSubmission = {
-      hash: hash,
+      hash,
       recipient_password: recipientPassword,
       recipient_name: recipientName,
       text: handoverText,
       recipient_email: recipientEmail,
-      lat: lat,
-      lon: lon,
+      lat,
+      lon,
     }
 
     result = await api.post("/submit_handover/", handoverSubmission)
@@ -159,8 +155,8 @@
         })
         for (const line of handovers) {
           L.marker([line.lat, line.lon], { icon: mapMarker }).addTo(myMap)
-          if (prevLat != 0) {
-            var polyLine = L.polyline(
+          if (prevLat !== 0) {
+            let polyLine = L.polyline(
               [
                 [prevLat, prevLon],
                 [line.lat, line.lon],
