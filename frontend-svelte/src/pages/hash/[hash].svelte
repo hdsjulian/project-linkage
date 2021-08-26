@@ -1,9 +1,8 @@
 <script>
-  import { url, params, afterPageLoad } from "@roxi/routify"
+  import { params, afterPageLoad } from "@roxi/routify"
   import Rules from "../rules.svelte"
   import Paging from "../../components/Paging.svelte"
   import api from "../../api"
-  import { each } from "svelte/internal"
 
   const BERLIN_LAT = 52.520815
   const BERLIN_LON = 13.4094191
@@ -16,7 +15,6 @@
   let recipientEmail = ""
   let recipientName = ""
   let isConsented
-  // let isDataProtectionChecked = true
   let step = 0
   let handoverText = ""
   let result
@@ -39,28 +37,30 @@
 
   let formErrors = []
 
-  function setLocation() {
-    if (isCheckedLocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        lat = position.coords.latitude
-        lon = position.coords.longitude
-      }, locationError)
-    }
+  const locationError = (error) => {
+    if (error.code !== error.PERMISSION_DENIED) return
+    isErrorPosition = true
   }
 
-  function locationError(error) {
-    if (error.code == error.PERMISSION_DENIED) {
-      isErrorPosition = true
-    }
+  const setLocation = () => {
+    if (!isCheckedLocation) return
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      lat = position.coords.latitude
+      lon = position.coords.longitude
+    }, locationError)
   }
 
   const nextStep = async () => {
-    if (step == 1) {
+    if (step === 1) {
       formErrors = []
+
       if (!checkIsNameFilled())
         formErrors = [...formErrors, "Please enter a valid name!"]
+
       if (!checkIsEmailFilled())
         formErrors = [...formErrors, "Please enter a valid email address!"]
+
       if (!checkIsPasswordValid())
         formErrors = [
           ...formErrors,
@@ -73,13 +73,13 @@
         ]
 
       if (formErrors.length === 0) step += 1
-    } else if (step == 2) {
+    } else if (step === 2) {
       if (lat !== 0 && lon !== 0) {
         step += 1
       } else {
         isErrorLocation = true
       }
-    } else if (step == 3) {
+    } else if (step === 3) {
       const isHandoverSubmitted = await submitHandover()
       if (isHandoverSubmitted) {
         history.replaceState({}, null, `/handover/${handoverId}`)
@@ -91,9 +91,7 @@
     }
   }
 
-  const prevStep = () => {
-    step -= 1
-  }
+  const prevStep = () => (step -= 1)
 
   const chooseLocation = () => {
     willChooseLocation = true
@@ -186,7 +184,7 @@
 
 <form class="form">
   {#if step === 0}
-    {#if travels == 0}
+    {#if travels === 0}
       <p>
         <strong>Congratulations!</strong>
 
@@ -230,7 +228,7 @@
     <button on:click={nextStep}>Continue</button>
   {:else if step === 1}
     <fieldset>
-      {#if travels == 0}
+      {#if travels === 0}
         <legend>Enter your Data!</legend>
 
         <p>
@@ -241,7 +239,7 @@
           you about what is going on with this coin. If you don't want this:
           we're working hard on a detailed concept. Let us know what you think!
         </p>
-        {#if isErrorPosition == true}
+        {#if isErrorPosition}
           <span class="error"
             >Unfortunately you didn't allow us to set your location. We will
             automatically set it to Berlin</span>
@@ -288,7 +286,7 @@
           <strong>receiving the coin</strong>, as well as their password and
           other data
         </p>
-        {#if isErrorPosition == true}
+        {#if isErrorPosition}
           <span class="error"
             >Unfortunately you didn't allow us to set your location. We will
             automatically set it to Berlin</span>
@@ -337,7 +335,7 @@
       {/each}
     </fieldset>
     <Paging {prevStep} {nextStep} />
-  {:else if step == 2}
+  {:else if step === 2}
     <fieldset>
       <legend>Your Location</legend>
 
@@ -363,15 +361,15 @@
           ></span>
         (Tap on this button, then tap on the map to set a marker)
       </p>
-      {#if isErrorSubmitting == true}
+      {#if isErrorSubmitting}
         <span class="error"
           >Something went wrong - retry, reload or contact us if it persists</span>
       {/if}
     </fieldset>
     <Paging {prevStep} {nextStep} />
-  {:else if step == 3}
+  {:else if step === 3}
     <fieldset>
-      {#if travels == 0}
+      {#if travels === 0}
         <p>
           Thank you! Now almost set to hand over this coin to another person!
           Please let the world know how you received this coin!
@@ -393,7 +391,7 @@
           <span>Your Story</span>
           <textarea bind:value={handoverText} />
         </label>
-        {#if isErrorSubmitting == true}
+        {#if isErrorSubmitting}
           <span class="error"
             >Something went wrong - retry, reload or contact us if it persists</span>
         {/if}
