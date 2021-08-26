@@ -3,37 +3,42 @@
   import Rules from "../rules.svelte"
   import Paging from "../../components/Paging.svelte"
   import api from "../../api"
+  import { each } from "svelte/internal"
 
   const BERLIN_LAT = 52.520815
   const BERLIN_LON = 13.4094191
+  const MIN_PASSWORD_LENGTH = 6
 
   let hash
   let travels
-  let handover_id = 1
-  let giverPassword = ""
+  let handoverId
   let recipientPassword = ""
   let recipientEmail = ""
   let recipientName = ""
   let isConsented
-  let data_protection_checked = true
+  // let isDataProtectionChecked = true
   let step = 0
   let handoverText = ""
   let result
-  let defaultLat = BERLIN_LAT,
-    defaultLon = BERLIN_LON,
-    lat = 0,
-    lon = 0
   let coin
-  let error_submitting = false,
-    error_position = false,
-    error_location = false
-  let email_correct = true
-  let name_correct = true
-  let prevLat = 0,
-    prevLon = 0
-  let isCheckedLocation,
-    willChooseLocation = false
-  let manualMarker = false
+  let manualMarker
+
+  let defaultLat = BERLIN_LAT
+  let defaultLon = BERLIN_LON
+  let lat = 0
+  let lon = 0
+  let prevLat = 0
+  let prevLon = 0
+
+  let isErrorSubmitting = false
+  let isErrorPosition = false
+  let isErrorLocation = false
+
+  let isCheckedLocation
+  let willChooseLocation = false
+
+  let formErrors = []
+
   function setLocation() {
     if (isCheckedLocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -45,28 +50,41 @@
 
   function locationError(error) {
     if (error.code == error.PERMISSION_DENIED) {
-      error_position = true
+      isErrorPosition = true
     }
   }
 
   const nextStep = async () => {
     if (step == 1) {
-      const isNextStepAllowed =
-        checkIsConsented() && checkIsEmailFilled() && checkIsNameFilled()
+      formErrors = []
+      if (!checkIsNameFilled())
+        formErrors = [...formErrors, "Please enter a valid name!"]
+      if (!checkIsEmailFilled())
+        formErrors = [...formErrors, "Please enter a valid email address!"]
+      if (!checkIsPasswordValid())
+        formErrors = [
+          ...formErrors,
+          `Please use a password of min ${MIN_PASSWORD_LENGTH} characters`,
+        ]
+      if (!checkIsConsented())
+        formErrors = [
+          ...formErrors,
+          "You need to accept the data proection clause!",
+        ]
 
-      if (isNextStepAllowed) step += 1
+      if (formErrors.length === 0) step += 1
     } else if (step == 2) {
       if (lat !== 0 && lon !== 0) {
         step += 1
       } else {
-        error_location = true
+        isErrorLocation = true
       }
     } else if (step == 3) {
       const isHandoverSubmitted = await submitHandover()
       if (isHandoverSubmitted) {
-        history.replaceState({}, null, `/handover/${handover_id}`)
+        history.replaceState({}, null, `/handover/${handoverId}`)
       } else {
-        error_submitting = true
+        isErrorSubmitting = true
       }
     } else {
       step += 1
@@ -75,28 +93,6 @@
 
   const prevStep = () => {
     step -= 1
-  }
-
-  /* const checkPass = async () => {
-    console.log("Checking Pass")
-    result = await (api.post("/verify_user/", { "hash": hash, "password": giverPassword }))
-    console.log(result.is_verified)
-    if (result.is_verified == false) {
-      console.log("blub:")
-      wrong_pass = true
-    }
-    else {
-      wrong_pass = false
-      step += 1
-    }
-  }*/
-
-  const checkPasswordMatch = () => {
-    if (recipientPassword == recipientPasswordAgain) {
-      return true
-    } else {
-      return false
-    }
   }
 
   const chooseLocation = () => {
@@ -117,6 +113,8 @@
   const checkIsConsented = () => isConsented
   const checkIsEmailFilled = () => !!recipientEmail
   const checkIsNameFilled = () => !!recipientName
+  const checkIsPasswordValid = () =>
+    recipientPassword.length >= MIN_PASSWORD_LENGTH
 
   const submitHandover = async () => {
     let handoverSubmission = {
@@ -131,7 +129,7 @@
 
     result = await api.post("/submit_handover/", handoverSubmission)
     if (!result.is_saved) return false
-    handover_id = result.handover_id
+    handoverId = result.handover_id
     return true
   }
 
@@ -243,7 +241,7 @@
           you about what is going on with this coin. If you don't want this:
           we're working hard on a detailed concept. Let us know what you think!
         </p>
-        {#if error_position == true}
+        {#if isErrorPosition == true}
           <span class="error"
             >Unfortunately you didn't allow us to set your location. We will
             automatically set it to Berlin</span>
@@ -290,7 +288,7 @@
           <strong>receiving the coin</strong>, as well as their password and
           other data
         </p>
-        {#if error_position == true}
+        {#if isErrorPosition == true}
           <span class="error"
             >Unfortunately you didn't allow us to set your location. We will
             automatically set it to Berlin</span>
@@ -333,15 +331,10 @@
             ></span>
         </label>
       {/if}
-      {#if data_protection_checked == false}
-        <span class="error">You need to accept the data proection clause!</span>
-      {/if}
-      {#if email_correct == false}
-        <span class="error">Please enter a valid email address!</span>
-      {/if}
-      {#if name_correct == false}
-        <span class="error">Please enter a valid name!</span>
-      {/if}
+
+      {#each formErrors as error}
+        <div><span class="error">{error}</span></div>
+      {/each}
     </fieldset>
     <Paging {prevStep} {nextStep} />
   {:else if step == 2}
@@ -370,7 +363,7 @@
           ></span>
         (Tap on this button, then tap on the map to set a marker)
       </p>
-      {#if error_submitting == true}
+      {#if isErrorSubmitting == true}
         <span class="error"
           >Something went wrong - retry, reload or contact us if it persists</span>
       {/if}
@@ -400,7 +393,7 @@
           <span>Your Story</span>
           <textarea bind:value={handoverText} />
         </label>
-        {#if error_submitting == true}
+        {#if isErrorSubmitting == true}
           <span class="error"
             >Something went wrong - retry, reload or contact us if it persists</span>
         {/if}
