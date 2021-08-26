@@ -1,178 +1,150 @@
 <script>
-  import { url, params, afterPageLoad } from "@roxi/routify"
+  import { params, afterPageLoad } from "@roxi/routify"
   import Rules from "../rules.svelte"
   import Paging from "../../components/Paging.svelte"
   import api from "../../api"
 
+  const BERLIN_LAT = 52.520815
+  const BERLIN_LON = 13.4094191
+  const MIN_PASSWORD_LENGTH = 6
+
   let hash
   let travels
-  let handover_id = 1
-  let giverPassword = ""
+  let handoverId
   let recipientPassword = ""
   let recipientEmail = ""
   let recipientName = ""
-  let dataProtection
-  let data_protection_checked = true
+  let isConsented
   let step = 0
   let handoverText = ""
   let result
-  let fixedLat = 52.520815,
-    fixedLon = 13.4094191,
-    lat = 0,
-    lon = 0
   let coin
-  let error_submitting = false,
-    error_position = false,
-    error_location = false
-  let email_correct = true
-  let name_correct = true
-  let prevLat = 0,
-    prevLon = 0
-  let isCheckedLocation,
-    willChooseLocation = false
-  let manualMarker = false
-  function setLocation() {
-    if (isCheckedLocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        lat = position.coords.latitude
-        lon = position.coords.longitude
-      }, locationError)
-    }
+  let manualMarker
+
+  let defaultLat = BERLIN_LAT
+  let defaultLon = BERLIN_LON
+  let lat = 0
+  let lon = 0
+  let prevLat = 0
+  let prevLon = 0
+
+  let isErrorSubmitting = false
+  let isErrorPosition = false
+  let isErrorLocation = false
+
+  let isCheckedLocation
+  let willChooseLocation = false
+
+  let formErrors = []
+
+  const locationError = (error) => {
+    if (error.code !== error.PERMISSION_DENIED) return
+    isErrorPosition = true
   }
 
-  function locationError(error) {
-    if (error.code == error.PERMISSION_DENIED) {
-      error_position = true
-    }
+  const setLocation = () => {
+    if (!isCheckedLocation) return
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      lat = position.coords.latitude
+      lon = position.coords.longitude
+    }, locationError)
   }
 
   const nextStep = async () => {
-    if (step == 1) {
-      data_protection_checked = checkDataProtection()
-      email_correct = checkEmail()
-      name_correct = checkName()
+    if (step === 1) {
+      formErrors = []
 
-      if (
-        data_protection_checked == true &&
-        email_correct == true &&
-        name_correct == true
-      ) {
-        step += 1
-      }
-    } else if (step == 2) {
+      if (!checkIsNameFilled())
+        formErrors = [...formErrors, "Please enter a valid name!"]
+
+      if (!checkIsEmailFilled())
+        formErrors = [...formErrors, "Please enter a valid email address!"]
+
+      if (!checkIsPasswordValid())
+        formErrors = [
+          ...formErrors,
+          `Please use a password of min ${MIN_PASSWORD_LENGTH} characters`,
+        ]
+      if (!checkIsConsented())
+        formErrors = [
+          ...formErrors,
+          "You need to accept the data proection clause!",
+        ]
+
+      if (formErrors.length === 0) step += 1
+    } else if (step === 2) {
       if (lat !== 0 && lon !== 0) {
         step += 1
       } else {
-        error_location = true
+        isErrorLocation = true
       }
-    } else if (step == 3) {
+    } else if (step === 3) {
       const isHandoverSubmitted = await submitHandover()
       if (isHandoverSubmitted) {
-        history.replaceState({}, null, `/handover/${handover_id}`)
+        history.replaceState({}, null, `/handover/${handoverId}`)
       } else {
-        error_submitting = true
+        isErrorSubmitting = true
       }
     } else {
       step += 1
     }
   }
 
-  const prevStep = () => {
-    step -= 1
-  }
+  const prevStep = () => (step -= 1)
 
-  /* const checkPass = async () => {
-    console.log("Checking Pass")
-    result = await (api.post("/verify_user/", { "hash": hash, "password": giverPassword }))
-    console.log(result.is_verified)
-    if (result.is_verified == false) {
-      console.log("blub:")
-      wrong_pass = true
-    }
-    else {
-      wrong_pass = false
-      step += 1
-    }
-  }*/
-
-  const checkPasswordMatch = () => {
-    if (recipientPassword == recipientPasswordAgain) {
-      return true
-    } else {
-      return false
-    }
-  }
   const chooseLocation = () => {
     willChooseLocation = true
-    manualMarker=myMap.on("click", addMarker)
+    manualMarker = myMap.on("click", addMarker)
   }
 
-  function addMarker(e) {
+  const addMarker = (e) => {
     // Add marker to map at click location; add popup window
-    if (manualMarker !== false)  {
-      let layerCount = 0
-      myMap.eachLayer((layer) => {
-        layerCount += 1
-        })
-      myMap.removeLayer(manualMarker)
-    }
+    if (manualMarker) myMap.removeLayer(manualMarker)
+
     manualMarker = L.marker(e.latlng, { icon: mapMarker }).addTo(myMap)
     lat = e.latlng.lat
     lon = e.latlng.lng
     return manualMarker
   }
 
-  const checkDataProtection = () => {
-    return dataProtection
-  }
-
-  const checkEmail = () => {
-    if (recipientEmail == "") {
-      return false
-    } else {
-      return true
-    }
-  }
-
-  const checkName = () => {
-    if (recipientName == "") {
-      return false
-    } else {
-      return true
-    }
-  }
+  const checkIsConsented = () => isConsented
+  const checkIsEmailFilled = () => !!recipientEmail
+  const checkIsNameFilled = () => !!recipientName
+  const checkIsPasswordValid = () =>
+    recipientPassword.length >= MIN_PASSWORD_LENGTH
 
   const submitHandover = async () => {
     let handoverSubmission = {
-      hash: hash, 
-      recipient_password: recipientPassword, 
-      recipient_name: recipientName, 
-      text: handoverText, 
-      recipient_email: recipientEmail, 
-      lat: lat, 
-      lon: lon
-      }
+      hash,
+      recipientPassword,
+      recipientName,
+      text: handoverText,
+      recipientEmail,
+      lat,
+      lon,
+    }
 
     result = await api.post("/submit_handover/", handoverSubmission)
-    if (result.is_saved == true) {
-      handover_id = result.handover_id
-      return true
-    } else {
-      return false
-    }
+    if (!result.is_saved) return false
+    handoverId = result.handover_id
+    return true
   }
 
   $afterPageLoad(() => {
-    myMap.setView([lat, lon], 6)
+    myMap.setView([defaultLat, defaultLon], 6)
     hash = $params.hash
+
     api.get(`/hash/${hash}`).then((res) => {
-      travels = res.data.coin.travels == null ? 0 : res.data.coin.travels
+      //throw error if hash not found (res is empty Array)
+      travels = res.data.coin.travels === null ? 0 : res.data.coin.travels
       coin = res.data.coin
-      api.get(`/coins/${coin.id}/handovers/`).then((hl_res) => {
-        if (hl_res.length > 0) {
-          myMap.setView([hl_res[0].lat, hl_res[0].lon], 10)
+
+      api.get(`/coins/${coin.id}/handovers/`).then((handovers) => {
+        if (handovers.length > 0) {
+          myMap.setView([handovers[0].lat, handovers[0].lon], 10)
         }
-        let polyFill = hl_res?.map((val) => [val.lat, val.lon])
+        let polyFill = handovers?.map((val) => [val.lat, val.lon])
         let iterator = 0
         myMap.eachLayer((layer) => {
           if (iterator > 1) {
@@ -180,10 +152,10 @@
           }
           iterator += 1
         })
-        for (const line of hl_res) {
+        for (const line of handovers) {
           L.marker([line.lat, line.lon], { icon: mapMarker }).addTo(myMap)
-          if (prevLat != 0) {
-            var polyLine = L.polyline(
+          if (prevLat !== 0) {
+            let polyLine = L.polyline(
               [
                 [prevLat, prevLon],
                 [line.lat, line.lon],
@@ -206,13 +178,13 @@
     //lat = handover.lat
     //lon = handover.lon
     //console.log(coin)
-    myMap.setView([fixedLat, fixedLon], 10)
+    myMap.setView([defaultLat, defaultLon], 10)
   })
 </script>
 
 <form class="form">
   {#if step === 0}
-    {#if travels == 0}
+    {#if travels === 0}
       <p>
         <strong>Congratulations!</strong>
 
@@ -256,7 +228,7 @@
     <button on:click={nextStep}>Continue</button>
   {:else if step === 1}
     <fieldset>
-      {#if travels == 0}
+      {#if travels === 0}
         <legend>Enter your Data!</legend>
 
         <p>
@@ -267,7 +239,7 @@
           you about what is going on with this coin. If you don't want this:
           we're working hard on a detailed concept. Let us know what you think!
         </p>
-        {#if error_position == true}
+        {#if isErrorPosition}
           <span class="error"
             >Unfortunately you didn't allow us to set your location. We will
             automatically set it to Berlin</span>
@@ -296,7 +268,7 @@
         </label>
 
         <label>
-          <input bind:checked={dataProtection} type="checkbox" />
+          <input bind:checked={isConsented} type="checkbox" />
           <span>
             I consent that the entered data including my location and the story
             I enter within the next step will be used for this art project.
@@ -314,7 +286,7 @@
           <strong>receiving the coin</strong>, as well as their password and
           other data
         </p>
-        {#if error_position == true}
+        {#if isErrorPosition}
           <span class="error"
             >Unfortunately you didn't allow us to set your location. We will
             automatically set it to Berlin</span>
@@ -346,7 +318,7 @@
         </label>
 
         <label>
-          <input bind:checked={dataProtection} type="checkbox" />
+          <input bind:checked={isConsented} type="checkbox" />
           <span
             >I consent that the entered data including my location and the story
             I enter within the next step will be used for this art project.
@@ -357,18 +329,13 @@
             ></span>
         </label>
       {/if}
-      {#if data_protection_checked == false}
-        <span class="error">You need to accept the data proection clause!</span>
-      {/if}
-      {#if email_correct == false}
-        <span class="error">Please enter a valid email address!</span>
-      {/if}
-      {#if name_correct == false}
-        <span class="error">Please enter a valid name!</span>
-      {/if}
+
+      {#each formErrors as error}
+        <div><span class="error">{error}</span></div>
+      {/each}
     </fieldset>
     <Paging {prevStep} {nextStep} />
-  {:else if step == 2}
+  {:else if step === 2}
     <fieldset>
       <legend>Your Location</legend>
 
@@ -381,24 +348,28 @@
           bind:checked={isCheckedLocation}
           on:change={setLocation}
           type="checkbox" />
-        <span> I want the browser to choose my location (When you mark this checkbox as checked, please click "Allow" when your browser asks you to share your location) </span>
+        <span>
+          I want the browser to choose my location (When you mark this checkbox
+          as checked, please click "Allow" when your browser asks you to share
+          your location)
+        </span>
       </label>
       <p>
         <span
           ><button on:click={chooseLocation} type="button" class="full"
             >I want to choose my own location by setting a marker on the map</button
           ></span>
-          (Tap on this button, then tap on the map to set a marker)
+        (Tap on this button, then tap on the map to set a marker)
       </p>
-      {#if error_submitting == true}
+      {#if isErrorSubmitting}
         <span class="error"
           >Something went wrong - retry, reload or contact us if it persists</span>
       {/if}
     </fieldset>
     <Paging {prevStep} {nextStep} />
-  {:else if step == 3}
+  {:else if step === 3}
     <fieldset>
-      {#if travels == 0}
+      {#if travels === 0}
         <p>
           Thank you! Now almost set to hand over this coin to another person!
           Please let the world know how you received this coin!
@@ -420,7 +391,7 @@
           <span>Your Story</span>
           <textarea bind:value={handoverText} />
         </label>
-        {#if error_submitting == true}
+        {#if isErrorSubmitting}
           <span class="error"
             >Something went wrong - retry, reload or contact us if it persists</span>
         {/if}
