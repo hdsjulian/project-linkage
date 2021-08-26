@@ -4,6 +4,9 @@
   import Paging from "../../components/Paging.svelte"
   import api from "../../api"
 
+  const BERLIN_LAT = 52.520815
+  const BERLIN_LON = 13.4094191
+
   let hash
   let travels
   let handover_id = 1
@@ -16,8 +19,8 @@
   let step = 0
   let handoverText = ""
   let result
-  let defaultLat = 52.520815,
-    defaultLon = 13.4094191,
+  let defaultLat = BERLIN_LAT,
+    defaultLon = BERLIN_LON,
     lat = 0,
     lon = 0
   let coin
