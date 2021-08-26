@@ -11,13 +11,13 @@
   let recipientPassword = ""
   let recipientEmail = ""
   let recipientName = ""
-  let dataProtection
+  let isConsented
   let data_protection_checked = true
   let step = 0
   let handoverText = ""
   let result
-  let fixedLat = 52.520815,
-    fixedLon = 13.4094191,
+  let defaultLat = 52.520815,
+    defaultLon = 13.4094191,
     lat = 0,
     lon = 0
   let coin
@@ -48,17 +48,10 @@
 
   const nextStep = async () => {
     if (step == 1) {
-      data_protection_checked = checkDataProtection()
-      email_correct = checkEmail()
-      name_correct = checkName()
+      const isNextStepAllowed =
+        checkIsConsented() && checkIsEmailFilled() && checkIsNameFilled()
 
-      if (
-        data_protection_checked == true &&
-        email_correct == true &&
-        name_correct == true
-      ) {
-        step += 1
-      }
+      if (isNextStepAllowed) step += 1
     } else if (step == 2) {
       if (lat !== 0 && lon !== 0) {
         step += 1
@@ -104,16 +97,16 @@
   }
   const chooseLocation = () => {
     willChooseLocation = true
-    manualMarker=myMap.on("click", addMarker)
+    manualMarker = myMap.on("click", addMarker)
   }
 
   function addMarker(e) {
     // Add marker to map at click location; add popup window
-    if (manualMarker !== false)  {
+    if (manualMarker !== false) {
       let layerCount = 0
       myMap.eachLayer((layer) => {
         layerCount += 1
-        })
+      })
       myMap.removeLayer(manualMarker)
     }
     manualMarker = L.marker(e.latlng, { icon: mapMarker }).addTo(myMap)
@@ -122,57 +115,41 @@
     return manualMarker
   }
 
-  const checkDataProtection = () => {
-    return dataProtection
-  }
-
-  const checkEmail = () => {
-    if (recipientEmail == "") {
-      return false
-    } else {
-      return true
-    }
-  }
-
-  const checkName = () => {
-    if (recipientName == "") {
-      return false
-    } else {
-      return true
-    }
-  }
+  const checkIsConsented = () => isConsented
+  const checkIsEmailFilled = () => !!recipientEmail
+  const checkIsNameFilled = () => !!recipientName
 
   const submitHandover = async () => {
     let handoverSubmission = {
-      hash: hash, 
-      recipient_password: recipientPassword, 
-      recipient_name: recipientName, 
-      text: handoverText, 
-      recipient_email: recipientEmail, 
-      lat: lat, 
-      lon: lon
-      }
+      hash: hash,
+      recipient_password: recipientPassword,
+      recipient_name: recipientName,
+      text: handoverText,
+      recipient_email: recipientEmail,
+      lat: lat,
+      lon: lon,
+    }
 
     result = await api.post("/submit_handover/", handoverSubmission)
-    if (result.is_saved == true) {
-      handover_id = result.handover_id
-      return true
-    } else {
-      return false
-    }
+    if (!result.is_saved) return false
+    handover_id = result.handover_id
+    return true
   }
 
   $afterPageLoad(() => {
-    myMap.setView([lat, lon], 6)
+    myMap.setView([defaultLat, defaultLon], 6)
     hash = $params.hash
+
     api.get(`/hash/${hash}`).then((res) => {
-      travels = res.data.coin.travels == null ? 0 : res.data.coin.travels
+      //throw error if hash not found (res is empty Array)
+      travels = res.data.coin.travels === null ? 0 : res.data.coin.travels
       coin = res.data.coin
-      api.get(`/coins/${coin.id}/handovers/`).then((hl_res) => {
-        if (hl_res.length > 0) {
-          myMap.setView([hl_res[0].lat, hl_res[0].lon], 10)
+
+      api.get(`/coins/${coin.id}/handovers/`).then((handovers) => {
+        if (handovers.length > 0) {
+          myMap.setView([handovers[0].lat, handovers[0].lon], 10)
         }
-        let polyFill = hl_res?.map((val) => [val.lat, val.lon])
+        let polyFill = handovers?.map((val) => [val.lat, val.lon])
         let iterator = 0
         myMap.eachLayer((layer) => {
           if (iterator > 1) {
@@ -180,7 +157,7 @@
           }
           iterator += 1
         })
-        for (const line of hl_res) {
+        for (const line of handovers) {
           L.marker([line.lat, line.lon], { icon: mapMarker }).addTo(myMap)
           if (prevLat != 0) {
             var polyLine = L.polyline(
@@ -206,7 +183,7 @@
     //lat = handover.lat
     //lon = handover.lon
     //console.log(coin)
-    myMap.setView([fixedLat, fixedLon], 10)
+    myMap.setView([defaultLat, defaultLon], 10)
   })
 </script>
 
@@ -296,7 +273,7 @@
         </label>
 
         <label>
-          <input bind:checked={dataProtection} type="checkbox" />
+          <input bind:checked={isConsented} type="checkbox" />
           <span>
             I consent that the entered data including my location and the story
             I enter within the next step will be used for this art project.
@@ -346,7 +323,7 @@
         </label>
 
         <label>
-          <input bind:checked={dataProtection} type="checkbox" />
+          <input bind:checked={isConsented} type="checkbox" />
           <span
             >I consent that the entered data including my location and the story
             I enter within the next step will be used for this art project.
@@ -381,14 +358,18 @@
           bind:checked={isCheckedLocation}
           on:change={setLocation}
           type="checkbox" />
-        <span> I want the browser to choose my location (When you mark this checkbox as checked, please click "Allow" when your browser asks you to share your location) </span>
+        <span>
+          I want the browser to choose my location (When you mark this checkbox
+          as checked, please click "Allow" when your browser asks you to share
+          your location)
+        </span>
       </label>
       <p>
         <span
           ><button on:click={chooseLocation} type="button" class="full"
             >I want to choose my own location by setting a marker on the map</button
           ></span>
-          (Tap on this button, then tap on the map to set a marker)
+        (Tap on this button, then tap on the map to set a marker)
       </p>
       {#if error_submitting == true}
         <span class="error"
