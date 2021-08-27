@@ -128,7 +128,9 @@ This `.env` file is specific to your own local environment. Feel free to change 
 
 For development, use the command:
 
-[TODO]
+```
+uvicorn --port 5001 --host 127.0.0.1 main:app --reload
+```
 
 # Running the frontend locally
 
