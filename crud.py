@@ -20,7 +20,6 @@ def get_user(db: Session, user_id: int):
 def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 
-
 def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
@@ -89,6 +88,11 @@ def update_handover(db:Session, handover:schemas.Handover):
     db.refresh(handover)
     return handover
 
+def set_coin_question(db:Session, coin_id: int, question: str):
+    db_coin = db.query(models.Coin).filter(models.Coin.id == coin_id).first()
+    db_coin.question = question
+    db.commit()
+    return db_coin
 
 
  

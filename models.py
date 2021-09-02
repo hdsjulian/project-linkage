@@ -16,6 +16,7 @@ class Coin(Base):
     __tablename__ = "coins"
     id = Column(Integer, primary_key=True, index=True)
     hash = Column(String, unique=True)
+    question = Column(Text)
     travels = Column(Integer)
     handovers = relationship('Handover', backref='coin')
 
@@ -25,6 +26,7 @@ class Handover(Base):
     lat = Column(Float)
     lon = Column(Float)
     text = Column(Text)
+    answer = Column(Text)
     coin_id = Column(Integer, ForeignKey('coins.id'))
     timestamp = Column(Integer, index=True, default = datetime.utcnow)
     predecessor_id = Column(Integer, ForeignKey("handovers.id"))

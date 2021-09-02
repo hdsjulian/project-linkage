@@ -81,6 +81,8 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
         giver_id = last_handover[0].recipient_id
     else: 
         giver_id = None
+    if giver_id == None: 
+        db_coin = crud.set_coin_question(db, db_coin.id, enterHandoverItem.question)
     user = {
         "hashed_password": enterHandoverItem.recipient_password,
         "email": enterHandoverItem.recipient_email,

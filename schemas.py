@@ -19,7 +19,8 @@ class Article(ArticleBase):
 class HandoverBase(CamelModel):
     lat: float
     lon: float
-    text: str
+    text: Optional[str] = None
+    answer: Optional[str] = None
     timestamp: int
     predecessor_id: Optional[int] = None
     recipient_id: int
@@ -48,6 +49,7 @@ class User(UserBase):
 
 class CoinBase(BaseModel):
     travels: Optional[int] = 0
+    question: Optional[str] = ""
     
 class CoinCreate(CoinBase):
     hash: str
@@ -111,7 +113,9 @@ class EnterHandover(CamelModel):
     hash: str
     lat: float
     lon: float
-    text: str
+    text: Optional[str]
+    question: Optional[str]
+    answer: Optional[str]
     predecessor_id: Optional[int] = None
     giver_id: Optional[int] = None
     recipient_id: Optional[int] = None
