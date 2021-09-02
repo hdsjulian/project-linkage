@@ -6,10 +6,17 @@
 		@include inset($u, $u, $u, auto);
 		max-block-size: calc(100vh - #{$u * 3});
 		inline-size: $line-width;
+		&.fullwidth {
+			inline-size: calc(100vw - #{$u * 9});
+		}
 	}
 	padding: $u * 1.5;
 	@include mq(medium) {
 		padding-block: 0;
+		@supports not (padding-block: 0) {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
 	}
 	overflow: auto;
 	background-color: $egg;
