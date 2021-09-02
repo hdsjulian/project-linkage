@@ -3334,10 +3334,19 @@ dl dd.fullwidth {
       left: auto;
     }
   }
+  .article.fullwidth {
+    inline-size: calc(100vw - 9rem);
+  }
 }
 @media (min-width: 885px) and (min-height: 299px) {
   .article {
     padding-block: 0;
+  }
+  @supports not (padding-block: 0) {
+    .article {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 }
 .article > section {
