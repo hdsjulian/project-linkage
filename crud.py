@@ -76,7 +76,7 @@ def get_handovers(db: Session):
     return result.all()
 
 def create_handover(db: Session, handover: schemas.HandoverCreate):
-    db_handover = models.Handover(text=handover["text"], predecessor_id=handover["predecessor_id"], recipient_id=handover["recipient_id"], giver_id = handover["giver_id"], lat=handover["lat"], lon=handover["lon"], timestamp = handover["timestamp"], coin_id=handover["coin_id"])
+    db_handover = models.Handover(text=handover["text"], predecessor_id=handover["predecessor_id"], recipient_id=handover["recipient_id"], giver_id = handover["giver_id"], lat=handover["lat"], lon=handover["lon"], timestamp = handover["timestamp"], coin_id=handover["coin_id"], answer=handover["answer"])
     db.add(db_handover)
     db.commit()
     db.refresh(db_handover)

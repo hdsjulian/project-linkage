@@ -399,7 +399,7 @@
           And please answer the question your friend asked you: 
         </p>
         <label>
-          <span>The Question</span>
+          <span>The Question: {coin.question}</span>
           <textarea bind:value={handoverAnswer} />
         </label>
 

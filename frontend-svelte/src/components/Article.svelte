@@ -1,4 +1,4 @@
 
-<article class="article fullwidth">
+<article class="article">
   <slot />
 </article>
