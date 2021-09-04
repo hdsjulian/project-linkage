@@ -116,7 +116,7 @@
     <dd>{handover.id}</dd>
     <dt>For coin</dt>
     <dd>{handover.coin.id}</dd>
-    {#if handover.giver != null}
+    {#if handover.giver !== null}
       <dt>Given from</dt>
       <dd>{handover.giver.name}</dd>
     {/if}
@@ -129,13 +129,14 @@
     {#if handover.giver == null}
       <dt class="fullwidth">Their Question:</dt>
       <dd class="fullwidth">{question}</dd>
+      <dt class="fullwidth">What they had to say</dt>
+      <dd class="fullwidth">{text}</dd>
     {:else}
       <dt class="fullwidth">Their answer to {question}</dt>
       <dd class="fullwidth">{answer}</dd>
       <dt class="fullwidth">What they had to say to each other</dt>
       <dd class="fullwidth">{text}</dd>
     {/if}
-    
   </dl>
   {#if prevId !== nextId}
     <nav class="paging">

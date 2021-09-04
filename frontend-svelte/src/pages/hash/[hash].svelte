@@ -125,8 +125,8 @@
       recipientEmail,
       lat,
       lon,
-      question: handoverQuestion, 
-      answer: handoverAnswer
+      question: handoverQuestion,
+      answer: handoverAnswer,
     }
     console.log(handoverSubmission)
 
@@ -375,34 +375,48 @@
   {:else if step === 3}
     <fieldset>
       {#if travels === 0}
+        <legend>Question and story</legend>
         <p>
-          Thank you! Now almost set to hand over this coin to another person! 
-          Every coin comes with a question that every recipient is asked to answer. Please ask your question to the world!
+          Thank you! Now almost set to hand over this coin to another person!
+          Every coin comes with a question that every recipient is asked to
+          answer. Please ask your question to the world!
         </p>
         <label>
           <span>Your Question</span>
 
-          <input bind:value={handoverQuestion} type="text" placeholder="Your Question" />
+          <input
+            bind:value={handoverQuestion}
+            type="text"
+            placeholder="Your Question" />
         </label>
-      {:else}
-        <legend>Handover Story</legend>
 
         <p>
-          Now please tell us the story about how you received your coin. About your conversation with your friend
+          Now please tell the world something about your story. How did you
+          receive the coin? What do you think about the project? How would you
+          like to see the coin travel? Anything more about your question?
         </p>
 
         <label>
           <span>Your Story</span>
           <textarea bind:value={handoverText} />
         </label>
+      {:else}
+        <legend>Handover Story</legend>
+
         <p>
-          And please answer the question your friend asked you: 
+          Now please tell us the story about how you received your coin. About
+          your conversation with your friend
         </p>
+
+        <label>
+          <span>Your Story</span>
+          <textarea bind:value={handoverText} />
+        </label>
+        <p>And please answer the question your friend asked you:</p>
         <label>
           <span>The Question: {coin.question}</span>
           <textarea bind:value={handoverAnswer} />
         </label>
-
 
         {#if isErrorSubmitting}
           <span class="error"
