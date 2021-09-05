@@ -20,7 +20,6 @@ def p(*args):
 app = FastAPI(title="Main App")
 api_app=FastAPI(title="Api App")
 print(os.environ.get('HTTPS_ENABLED'))
-print ("blubl")
 if (os.environ.get('HTTPS_ENABLED') != "False"): 
     app.add_middleware(HTTPSRedirectMiddleware)
     api_app.add_middleware(HTTPSRedirectMiddleware)
@@ -211,6 +210,8 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
     db_handover.recipient = db_recipient
     db_handover.coin = db_coin
     handovers = crud.get_handovers_by_coin(db, coin_id = db_coin.id)
+    print(handovers)
+    sys.stdout.flush()
     handover_ids = []
     for h in handovers:
         handover_ids.append(h.id)
@@ -218,6 +219,11 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
         index = handover_ids.index(handover_id)
     else: 
         index = 0
+    print("index")
+    print(index)
+    print("len dings")
+    print(len(handover_ids)-1)
+    sys.stdout.flush()
     if index == 0: 
         db_handover.prev_id = handover_ids[-1]
         if (len(handover_ids) == 1):
