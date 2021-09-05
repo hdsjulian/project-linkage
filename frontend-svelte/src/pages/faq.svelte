@@ -1,3 +1,10 @@
+<script>
+  if (!document.getElementById("mapwrapper").classList.contains("is-hidden")) {
+    document.getElementById("article").classList.add("fullwidth")
+    document.getElementById("mapwrapper").classList.add("is-hidden")
+  }
+</script>
+
 
     <h1>Frequently Asked Questions</h1>
 

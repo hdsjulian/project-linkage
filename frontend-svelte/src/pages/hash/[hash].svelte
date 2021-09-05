@@ -145,8 +145,6 @@
       console.log("blaaa")
       document.getElementById("article").classList.add("fullwidth")
       document.getElementById("mapwrapper").classList.add("is-hidden")
-    } else {
-      console.log("bloooo")
     }
     myMap.setView([defaultLat, defaultLon], 6)
     hash = $params.hash

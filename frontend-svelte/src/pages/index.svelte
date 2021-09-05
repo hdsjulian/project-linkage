@@ -17,6 +17,10 @@
   
   }
   $afterPageLoad(() => {
+  if (document.getElementById("mapwrapper").classList.contains("is-hidden")) {
+    document.getElementById("article").classList.remove("fullwidth")
+    document.getElementById("mapwrapper").classList.remove("is-hidden")
+  }
     api.get(`/handovers`).then((res) => {
       let iterator = 0
       myMap.eachLayer((layer) => {

@@ -26,6 +26,10 @@
   }
 
   $afterPageLoad(() => {
+    if (document.getElementById("mapwrapper").classList.contains("is-hidden")) {
+      document.getElementById("article").classList.remove("fullwidth")
+      document.getElementById("mapwrapper").classList.remove("is-hidden")
+    }
     id = parseInt($params.id, 10)
     console.log(process.env.FRONTEND_APP_API_URL)
     api.get(`/handovers/${id}`).then((res) => {
