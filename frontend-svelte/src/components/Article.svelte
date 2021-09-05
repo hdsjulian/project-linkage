@@ -1,4 +1,4 @@
 
-<article class="article">
+<article id="article" class="article">
   <slot />
 </article>
