@@ -43,6 +43,8 @@
       lon = handover.lon.toFixed(3)
       prevId = handover.prevId
       nextId = handover.nextId
+      console.log("---")
+      console.log(prevId)
       text = handover.text
       console.log(handover.coin)
       question = handover.coin.question
@@ -84,8 +86,6 @@
       })
     })
   })
-  console.log("---")
-  console.log(prevId)
 </script>
 
 {#if handover}
