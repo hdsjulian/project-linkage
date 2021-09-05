@@ -97,6 +97,8 @@
 
   const chooseLocation = () => {
     willChooseLocation = true
+    document.getElementById("article").classList.remove("fullwidth")
+    document.getElementById("mapwrapper").classList.remove("is-hidden")
     manualMarker = myMap.on("click", addMarker)
   }
 
@@ -137,6 +139,15 @@
   }
 
   $afterPageLoad(() => {
+    if (
+      !document.getElementById("mapwrapper").classList.contains("is-hidden")
+    ) {
+      console.log("blaaa")
+      document.getElementById("article").classList.add("fullwidth")
+      document.getElementById("mapwrapper").classList.add("is-hidden")
+    } else {
+      console.log("bloooo")
+    }
     myMap.setView([defaultLat, defaultLon], 6)
     hash = $params.hash
 
