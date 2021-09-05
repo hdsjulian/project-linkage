@@ -1,3 +1,16 @@
+<script>
+  import { params, afterPageLoad } from "@roxi/routify"
+
+  let lat
+  let lon
+$afterPageLoad(() => {
+  document.getElementById("article").classList.add("fullwidth")
+  document.getElementById("map").classList.add("is-hidden")
+  console.log("foo")
+    })
+
+</script>
+
 <h1>LEGAL</h1>
 <h2>Data Protection</h2>
 <p>
