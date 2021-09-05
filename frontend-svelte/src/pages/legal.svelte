@@ -5,7 +5,7 @@
   let lon
 $afterPageLoad(() => {
   document.getElementById("article").classList.add("fullwidth")
-  document.getElementById("mapwrapper").classList.add("is-hidden")
+  //document.getElementById("mapwrapper").classList.add("is-hidden")
   console.log("foo")
     })
 
