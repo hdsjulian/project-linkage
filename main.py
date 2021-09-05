@@ -99,7 +99,6 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
         "coin_id": db_coin.id,
         "answer": enterHandoverItem.answer
     }
-    print(handover)
     db_handover = crud.create_handover(db, handover)
     db_coin.travels += 1
     db.commit()
@@ -133,17 +132,13 @@ def read_coin(coin_id: int, db: Session=Depends(get_db)):
         index = coin_ids.index(coin_id)
     else: 
         index = 0
-    print(coin_ids)
     if index == 0: 
-        print("a")
         db_coin.prev_id = coin_ids[-1]
         db_coin.next_id = coin_ids[1]
     elif index == len(coin_ids)-1:
-        print("b")
         db_coin.prev_id = coin_ids[0]
         db_coin.next_id = coin_ids[index-2]
     else:
-        print(index)
         db_coin.prev_id = coin_ids[index-1]
         db_coin.next_id = coin_ids[index+1]
 
@@ -210,25 +205,13 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
     db_handover.recipient = db_recipient
     db_handover.coin = db_coin
     handovers = crud.get_handovers_by_coin(db, coin_id = db_coin.id)
-    print(handovers)
-    sys.stdout.flush()
     handover_ids = []
     for h in handovers:
         handover_ids.append(h.id)
     if (handover_id in handover_ids): 
-        print("solution a")
         index = handover_ids.index(handover_id)
     else: 
-        print("solution b")
-        print(handover_id)
         index = 0
-    print("hids")
-    print(handover_ids)    
-    print("index")
-    print(index)
-    print("len dings")
-    print(len(handover_ids)-1)
-    sys.stdout.flush()
     if index == 0: 
         db_handover.prev_id = handover_ids[-1]
         if (len(handover_ids) < 3):
@@ -241,12 +224,6 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
     else:
         db_handover.prev_id = handover_ids[index-1]
         db_handover.next_id = handover_ids[index+1]
-    print("prev")
-    print(db_handover.prev_id)
-    print("next")
-    print(db_handover.next_id)
-
-
     returnStuff = {'data': {'handover': db_handover}}
 
     return returnStuff
