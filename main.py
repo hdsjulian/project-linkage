@@ -216,8 +216,11 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
     for h in handovers:
         handover_ids.append(h.id)
     if (handover_id in handover_ids): 
+        print("solution a")
         index = handover_ids.index(handover_id)
     else: 
+        print("solution b")
+        print(handover_id)
         index = 0
     print("hids")
     print(handover_ids)    
