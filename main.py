@@ -231,9 +231,9 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
     sys.stdout.flush()
     if index == 0: 
         db_handover.prev_id = handover_ids[-1]
-        if (len(handover_ids) == 1):
+        if (len(handover_ids) < 3):
             db_handover.next_id = handover_ids[0]
-        else: 
+        else:  
             db_handover.next_id = handover_ids[1]
     elif index == len(handover_ids)-1:
         db_handover.prev_id = handover_ids[0]
@@ -241,6 +241,10 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
     else:
         db_handover.prev_id = handover_ids[index-1]
         db_handover.next_id = handover_ids[index+1]
+    print("prev")
+    print(db_handover.prev_id)
+    print("next")
+    print(db_handover.next_id)
 
 
     returnStuff = {'data': {'handover': db_handover}}
