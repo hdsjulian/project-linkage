@@ -84,6 +84,8 @@
       })
     })
   })
+  console.log("---")
+  console.log(prevId)
 </script>
 
 {#if handover}
@@ -142,6 +144,7 @@
       <dd class="fullwidth">{text}</dd>
     {/if}
   </dl>
+
   {#if prevId !== nextId}
     <nav class="paging">
       <ul class="paging__list">
