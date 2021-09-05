@@ -34,5 +34,6 @@
   })
 
 </script>
-
+<nav class="map" id="mapwrapper">
 <figure id="map" style="z-index: 0" />
+</nav>
