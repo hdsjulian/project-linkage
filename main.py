@@ -219,6 +219,8 @@ def read_handover(handover_id: int, db: Session=Depends(get_db)):
         index = handover_ids.index(handover_id)
     else: 
         index = 0
+    print("hids")
+    print(handover_ids)    
     print("index")
     print(index)
     print("len dings")
