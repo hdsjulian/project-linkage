@@ -13,6 +13,8 @@
   let nextCoin
 
   let text
+  let answer
+  let question
   let prevLat = 0
   let prevLon = 0
   let markers = []
@@ -38,6 +40,9 @@
       prevId = handover.prevId
       nextId = handover.nextId
       text = handover.text
+      console.log(handover.coin)
+      question = handover.coin.question
+      answer = handover.answer
       api.get(`/coins/${handover.coinId}/handovers`).then((hl_res) => {
         let iterator = 0
         myMap.eachLayer((layer) => {
@@ -111,7 +116,7 @@
     <dd>{handover.id}</dd>
     <dt>For coin</dt>
     <dd>{handover.coin.id}</dd>
-    {#if handover.giver != null}
+    {#if handover.giver !== null}
       <dt>Given from</dt>
       <dd>{handover.giver.name}</dd>
     {/if}
@@ -122,11 +127,16 @@
     <dt>at Lon:Lat</dt>
     <dd>{lat}:{lon}</dd>
     {#if handover.giver == null}
-      <dt class="fullwidth">How they received the coin</dt>
+      <dt class="fullwidth">Their Question:</dt>
+      <dd class="fullwidth">{question}</dd>
+      <dt class="fullwidth">What they had to say</dt>
+      <dd class="fullwidth">{text}</dd>
     {:else}
+      <dt class="fullwidth">Their answer to {question}</dt>
+      <dd class="fullwidth">{answer}</dd>
       <dt class="fullwidth">What they had to say to each other</dt>
+      <dd class="fullwidth">{text}</dd>
     {/if}
-    <dd class="fullwidth">{text}</dd>
   </dl>
   {#if prevId !== nextId}
     <nav class="paging">

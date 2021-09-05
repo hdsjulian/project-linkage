@@ -12,3 +12,5 @@ export default {
 
   delete: (resource) => axios.delete(`${API_URL}${resource}`),
 }
+console.log("i have been loaded.")
+console.log(API_URL)

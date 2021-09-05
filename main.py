@@ -70,7 +70,7 @@ def check_user_password(verificationItem: schemas.HandoverVerification, db: Sess
 @api_app.post("/submit_handover")
 def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depends(get_db)):
     db_coin = crud.get_coin_by_hash(db, enterHandoverItem.hash)
-    if (db_coin is None):
+    if (db_coin == None):
         return {'is_verified': False}
     last_handover = crud.get_handover_by_coin(db, db_coin.id, limit=1)
     if (len(last_handover)) == 0:
@@ -81,6 +81,8 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
         giver_id = last_handover[0].recipient_id
     else: 
         giver_id = None
+    if giver_id == None: 
+        db_coin = crud.set_coin_question(db, db_coin.id, enterHandoverItem.question)
     user = {
         "hashed_password": enterHandoverItem.recipient_password,
         "email": enterHandoverItem.recipient_email,
@@ -95,8 +97,10 @@ def submit_handover(enterHandoverItem: schemas.EnterHandover, db: Session=Depend
         "recipient_id": db_user.id,
         "predecessor_id": enterHandoverItem.predecessor_id, 
         "timestamp": int(datetime.timestamp(datetime.utcnow())),
-        "coin_id": db_coin.id
+        "coin_id": db_coin.id,
+        "answer": enterHandoverItem.answer
     }
+    print(handover)
     db_handover = crud.create_handover(db, handover)
     db_coin.travels += 1
     db.commit()
