@@ -1,4 +1,6 @@
 <script>
+  import { url, params, afterPageLoad } from "@roxi/routify"
+
   $afterPageLoad(() => {
     if (
       !document.getElementById("mapwrapper").classList.contains("is-hidden")
