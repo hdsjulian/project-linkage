@@ -3,12 +3,14 @@
 
   let lat
   let lon
-$afterPageLoad(() => {
-  document.getElementById("article").classList.add("fullwidth")
-  document.getElementById("mapwrapper").classList.add("is-hidden")
-  console.log("foo")
-    })
-
+  $afterPageLoad(() => {
+    if (
+      !document.getElementById("mapwrapper").classList.contains("is-hidden")
+    ) {
+      document.getElementById("article").classList.add("fullwidth")
+      document.getElementById("mapwrapper").classList.add("is-hidden")
+    }
+  })
 </script>
 
 <h1>LEGAL</h1>
