@@ -10,7 +10,7 @@
 			inline-size: calc(100vw - #{$u * 9});
 		}
 	}
-	padding: $u * 1.5;
+	padding: $u*6 $u * 1.5 $u * 1.5;
 	@include mq(medium) {
 		padding-block: 0;
 		@supports not (padding-block: 0) {
