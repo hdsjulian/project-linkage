@@ -20,6 +20,10 @@
     <li>Enter your data on the following pages</li>
     <li>Write a little text about your conversation</li>
     <li>
+      Answer the question that is asked by the original coin holder (or if you
+      are the first person to pass on the coin, ask a question)
+    </li>
+    <li>
       Request that the person receiving this coin will pass it on with the same
       intent
     </li>
