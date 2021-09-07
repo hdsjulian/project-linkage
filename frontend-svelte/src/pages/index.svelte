@@ -1,7 +1,7 @@
 <script>
   import { url, params, afterPageLoad } from "@roxi/routify"
   import { dataset_dev } from "svelte/internal"
-  import Rules from "rules.svelte"
+  import Rules from "./rules.svelte"
 
   import api from "../api"
   let handover
