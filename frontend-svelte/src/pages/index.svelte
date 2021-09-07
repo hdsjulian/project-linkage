@@ -1,7 +1,7 @@
 <script>
   import { url, params, afterPageLoad } from "@roxi/routify"
   import { dataset_dev } from "svelte/internal"
-  import Rules from "./rules.svelte"
+  import Rules from "../rules.svelte"
 
   import api from "../api"
   let handover
@@ -42,4 +42,27 @@
   })
 </script>
 
-<Rules />
+<section class="about" id="about">
+  <h4>Project Linkage is an experiment about human trust</h4>
+  <strong>IMPORTANT!</strong> this is an art project. We will never abuse any
+  entered data for commercial purposes.
+  <p>
+    A number of initial participants received coins with an individual QR code
+    on the back. They have five basic tasks:
+  </p>
+  <ul>
+    <li>Hand this coin to a person they trust</li>
+    <li>Have a conversation about their mutual relationship</li>
+    <li>Scan the QR code and document the handover</li>
+    <li>
+      Answer the question that is asked by the original coin holder (or if you
+      are the first person to pass on the coin, ask a question)
+    </li>
+    <li>Write a short text about their conversation for everyone to read</li>
+    <li>Request that the receiving person repeats these five steps</li>
+  </ul>
+  <p>
+    Thus, we create chains based on human trust. And tell our stories. Click on
+    a map icon to check them out!
+  </p>
+</section>
